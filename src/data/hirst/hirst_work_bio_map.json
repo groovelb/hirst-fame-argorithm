@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "Work ↔ BioSpecimen Mapping",
+    "purpose": "hirst_works.json 의 Work.id 와 hirst-bio-specimen-data.js 의 artworks[].id 를 1:1로 잇는 명시 매핑. 두 데이터셋의 큐레이션 범위가 달라 자동 매칭이 21/36 수준에 그쳐, 고신뢰도만 수동으로 채택.",
+    "asOfDate": "2026-05-07"
+  },
+  "workToBio": {
+    "W005": "thousand-years-1990",
+    "W007": "tpid-1991",
+    "W008": "in-out-love-1991-orig",
+    "W011": "mother-child-divided-1993",
+    "W013": "away-flock-1994",
+    "W015": "some-comfort-gained-1996",
+    "W016": "this-little-piggy-1996",
+    "W023": "adam-eve-1999",
+    "W026": "doorways-kingdom-2007",
+    "W035": "for-love-of-god-2007",
+    "W036": "black-sheep-golden-horn-2009",
+    "W037": "golden-calf-2008",
+    "W038": "kingdom-2008"
+  }
+}

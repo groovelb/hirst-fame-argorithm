@@ -1,0 +1,461 @@
+{
+  "meta": {
+    "title": "Damien Hirst — Keyword Taxonomy (5 Axes × 12)",
+    "version": "1.0",
+    "purpose": "Curatorial vocabulary for tagging works and events. Each work receives weighted scores across 5 axes; keyword_tags reference these atoms.",
+    "axes_overview": {
+      "MORTALITY": {
+        "label": { "ko": "죽음의 인식론", "en": "Mortality / Epistemology of Death" },
+        "premise": { "ko": "경험으로 죽음을 인식하는 것의 불가능성. 박제·포름알데히드·바니타스 전통이 모두 이 명제 아래 모인다.", "en": "The impossibility of knowing death through experience. Taxidermy, formaldehyde, and the vanitas tradition all gather under this proposition." },
+        "y_polarity": "negative",
+        "signature_color": "#1C1C1C"
+      },
+      "SYSTEM": {
+        "label": { "ko": "분류·격자·산업", "en": "System / Taxonomy / Industry" },
+        "premise": { "ko": "Sol LeWitt 지시문 미술과 Warhol Factory 계보. 위임된 저자성과 산업적 마감으로 인식의 격자를 생산한다.", "en": "Sol LeWitt's instruction-based art meets Warhol's Factory. Delegated authorship and industrial finish produce the epistemic grid." },
+        "y_polarity": "near-zero-to-positive",
+        "signature_color": "#4A6FA5"
+      },
+      "FAITH": {
+        "label": { "ko": "신앙·의례·도상", "en": "Faith / Ritual / Iconography" },
+        "premise": { "ko": "가톨릭 양육 위에 재기입된 비교종교적 도상학. 약장은 제단, 만화경은 스테인드글라스, 만다라는 신성 기하학으로 작동한다.", "en": "Comparative religious iconography re-inscribed on a Catholic upbringing. The cabinet is altar, kaleidoscope is stained glass, mandala is sacred geometry." },
+        "y_polarity": "positive",
+        "signature_color": "#D4AF37"
+      },
+      "VALUE": {
+        "label": { "ko": "가치·시장·물질성", "en": "Value / Market / Materiality" },
+        "premise": { "ko": "시장에 대한 비평이 아닌, 시장 참여를 통한 비평. Koons 계보의 공모(complicity) 전략. 2008 Sotheby's 경매와 The Currency가 양 끝.", "en": "Not critique of the market but critique through market participation. Koons-lineage complicity. Sotheby's 2008 auction and The Currency form the poles." },
+        "y_polarity": "axis-orthogonal",
+        "signature_color": "#F39C12"
+      },
+      "FORM": {
+        "label": { "ko": "형식·매체·신체", "en": "Form / Medium / Body" },
+        "premise": { "ko": "기계·공장에서 손과 시간으로의 회귀. Veil의 점묘, Cherry Blossom의 임파스토는 회화적 신체의 복권.", "en": "Return from machine and factory to hand and time. Veils' pointillism and Cherry Blossoms' impasto restore the painterly body." },
+        "y_polarity": "positive",
+        "signature_color": "#FFB6C1"
+      }
+    }
+  },
+  "keywords": {
+    "mortality": {
+      "axis": "MORTALITY",
+      "label": { "ko": "죽음의 직시", "en": "mortality" },
+      "definition": { "ko": "죽음을 미적·개념적 대상으로 직시하는 행위. Hirst 전 작업의 중심 명제.", "en": "The act of confronting death as aesthetic and conceptual object. Central proposition of Hirst's entire oeuvre." },
+      "color": "#1C1C1C",
+      "category": "core"
+    },
+    "preservation": {
+      "axis": "MORTALITY",
+      "label": { "ko": "보존", "en": "preservation" },
+      "definition": { "ko": "포름알데히드·박제·진열장으로 부패를 정지시키려는 시도. 그 시도의 부분적 실패가 작품의 의미.", "en": "The attempt to arrest decay via formaldehyde, taxidermy, vitrine. The partial failure of that attempt is the work's meaning." },
+      "color": "#4A6FA5",
+      "category": "core"
+    },
+    "empirical-failure": {
+      "axis": "MORTALITY",
+      "label": { "ko": "경험적 인식의 실패", "en": "empirical failure" },
+      "definition": { "ko": "경험으로 죽음을 알 수 있다는 계몽주의적 약속의 좌초. Shark의 제목이 직접 말한다.", "en": "The collapse of the Enlightenment promise that experience can know death. Shark's title states it outright." },
+      "color": "#2C2C2C",
+      "category": "core"
+    },
+    "taxidermy": {
+      "axis": "MORTALITY",
+      "label": { "ko": "박제", "en": "taxidermy" },
+      "definition": { "ko": "생명의 외형을 영구화하려는 19세기 자연사 박물관의 기술. Hirst는 이를 미술의 매체로 전유.", "en": "The 19c natural history museum's technique for perpetuating the form of life. Hirst appropriates it as artistic medium." },
+      "color": "#5A4A3A",
+      "category": "medium"
+    },
+    "formaldehyde": {
+      "axis": "MORTALITY",
+      "label": { "ko": "포르말린", "en": "formaldehyde" },
+      "definition": { "ko": "방부 화학액. Hirst 최대 시각 시그니처(푸른 형광)이자 Natural History 시리즈의 매체적 핵심.", "en": "Embalming chemical. Hirst's most recognizable visual signature (blue glow) and the medium-core of the Natural History series." },
+      "color": "#5A8B8B",
+      "category": "medium"
+    },
+    "decomposition": {
+      "axis": "MORTALITY",
+      "label": { "ko": "부패·분해", "en": "decomposition" },
+      "definition": { "ko": "유기 물질의 시간적 해체. A Thousand Years의 소머리·파리·구더기 순환에서 가시화.", "en": "Temporal disintegration of organic matter. Made visible in A Thousand Years' cow head — fly — maggot cycle." },
+      "color": "#641E16",
+      "category": "process"
+    },
+    "life-cycle": {
+      "axis": "MORTALITY",
+      "label": { "ko": "생명 순환", "en": "life cycle" },
+      "definition": { "ko": "탄생-죽음-재탄생의 닫힌 순환을 작품 내부에서 실연. In and Out of Love의 부화하는 나비.", "en": "The closed cycle of birth-death-rebirth enacted within the work. In and Out of Love's hatching butterflies." },
+      "color": "#922B21",
+      "category": "process"
+    },
+    "memento-mori": {
+      "axis": "MORTALITY",
+      "label": { "ko": "메멘토 모리", "en": "memento mori" },
+      "definition": { "ko": "'죽음을 기억하라' — 중세·르네상스 도상 전통. For the Love of God에서 문자 그대로 실현.", "en": "\"Remember you must die\" — medieval/Renaissance iconographic tradition. Made literal in For the Love of God." },
+      "color": "#1C1C1C",
+      "category": "tradition"
+    },
+    "vanitas-tradition": {
+      "axis": "MORTALITY",
+      "label": { "ko": "바니타스 전통", "en": "vanitas tradition" },
+      "definition": { "ko": "17세기 네덜란드 정물화의 부의 무상함. Hirst는 이를 다이아몬드·비누·시계로 21c 자본주의화.", "en": "17c Dutch still-life on the futility of wealth. Hirst translates it into 21c capitalism via diamonds, soap, clocks." },
+      "color": "#4A235A",
+      "category": "tradition"
+    },
+    "grief": {
+      "axis": "MORTALITY",
+      "label": { "ko": "애도", "en": "grief" },
+      "definition": { "ko": "Mother and Child Divided의 어미-새끼 분리. Hirst의 모성 이미지가 가장 직접적인 정서로 등장.", "en": "Mother and Child Divided's mother-calf bisection. Hirst's most direct emotional register, focused on the maternal." },
+      "color": "#7A8088",
+      "category": "affect"
+    },
+    "sublime-terror": {
+      "axis": "MORTALITY",
+      "label": { "ko": "숭고적 공포", "en": "sublime terror" },
+      "definition": { "ko": "Burke적 숭고. 14피트 상어의 압도적 스케일이 미적 거리를 깨뜨리는 순간.", "en": "Burkean sublime. The 14-foot tiger shark's overwhelming scale collapses aesthetic distance." },
+      "color": "#1B2A41",
+      "category": "affect"
+    },
+    "specimen": {
+      "axis": "MORTALITY",
+      "label": { "ko": "표본", "en": "specimen" },
+      "definition": { "ko": "과학적 표본화의 인식 모드. 작품을 라벨·분류·진열장에 종속시키는 박물관 논리.", "en": "The epistemic mode of scientific specimenization. Subjects the work to museum logic of label, taxonomy, vitrine." },
+      "color": "#6B7B5A",
+      "category": "mode"
+    },
+    "grid": {
+      "axis": "SYSTEM",
+      "label": { "ko": "격자", "en": "grid" },
+      "definition": { "ko": "Spot Painting의 균등 격자. Rosalind Krauss의 모더니즘 격자 이론의 산업적 종착점.", "en": "Spot Painting's even grid. Industrial endpoint of Rosalind Krauss's modernist-grid theory." },
+      "color": "#FFFFFF",
+      "category": "structure"
+    },
+    "instruction-art": {
+      "axis": "SYSTEM",
+      "label": { "ko": "지시문 미술", "en": "instruction art" },
+      "definition": { "ko": "Sol LeWitt의 'the idea is the machine that makes the art' 계보. 작가는 규칙을 쓰고 조수가 실행.", "en": "Sol LeWitt's lineage: \"the idea is the machine that makes the art.\" The artist writes rules; assistants execute." },
+      "color": "#2C2C2C",
+      "category": "lineage"
+    },
+    "delegated-authorship": {
+      "axis": "SYSTEM",
+      "label": { "ko": "위임 저자성", "en": "delegated authorship" },
+      "definition": { "ko": "Hirst 본인이 그린 Spot은 ~5점, 나머지는 조수. Warhol Factory의 21c 확장이자 비평계 쟁점.", "en": "Of all Spots, Hirst painted ~5; the rest by assistants. A 21c extension of the Warhol Factory and a perennial critical flashpoint." },
+      "color": "#7A8088",
+      "category": "labor"
+    },
+    "factory-production": {
+      "axis": "SYSTEM",
+      "label": { "ko": "공장 생산", "en": "factory production" },
+      "definition": { "ko": "Hirst Studio의 산업화. Science Ltd 법인은 미술 생산을 기업 구조로 작동시킨다.", "en": "The industrialization of the Hirst Studio. Science Ltd operates art production as corporate structure." },
+      "color": "#5A4A3A",
+      "category": "labor"
+    },
+    "color-chart": {
+      "axis": "SYSTEM",
+      "label": { "ko": "색상 차트", "en": "color chart" },
+      "definition": { "ko": "Gerhard Richter의 Color Charts와 약병 라벨이 만나는 지점. Spot의 무작위 색 배치는 의미 거부의 의미.", "en": "Where Richter's Color Charts meet pharmaceutical labels. The Spot's random color placement is the meaning of meaning's refusal." },
+      "color": "#E74C3C",
+      "category": "structure"
+    },
+    "pharmaceutical-taxonomy": {
+      "axis": "SYSTEM",
+      "label": { "ko": "약학적 분류학", "en": "pharmaceutical taxonomy" },
+      "definition": { "ko": "각 Spot은 실제 약물 이름을 갖는다(Pharmaceuticals 시리즈). 약학적 분류는 현대의 라틴어.", "en": "Each Spot painting bears a real drug name (Pharmaceuticals series). Pharmacology is the contemporary Latin." },
+      "color": "#2ECC71",
+      "category": "structure"
+    },
+    "seriality": {
+      "axis": "SYSTEM",
+      "label": { "ko": "연작성", "en": "seriality" },
+      "definition": { "ko": "단일작이 아닌 무한 시리즈로 작동. Spot 1,400+점, Cherry Blossoms 107점.", "en": "Operates as infinite series, not single work. 1,400+ Spots; 107 Cherry Blossoms." },
+      "color": "#F39C12",
+      "category": "structure"
+    },
+    "permutation": {
+      "axis": "SYSTEM",
+      "label": { "ko": "순열", "en": "permutation" },
+      "definition": { "ko": "유한 요소의 가능한 모든 배치. 약장 진열의 알파벳 순서·약효 분류 같은 조합 논리.", "en": "All possible arrangements of finite elements. The combinatorial logic of medicine cabinets — alphabetical, by efficacy class." },
+      "color": "#A0937D",
+      "category": "logic"
+    },
+    "industrial-finish": {
+      "axis": "SYSTEM",
+      "label": { "ko": "산업적 마감", "en": "industrial finish" },
+      "definition": { "ko": "household gloss·자동차 도장·스테인리스. 손의 흔적을 지우는 마감 미학.", "en": "Household gloss, automotive paint, stainless steel. A finish aesthetic that erases the trace of the hand." },
+      "color": "#C0C0C0",
+      "category": "medium"
+    },
+    "catalogue": {
+      "axis": "SYSTEM",
+      "label": { "ko": "카탈로그", "en": "catalogue" },
+      "definition": { "ko": "박물관·약전·경매 카탈로그의 분류 충동을 작품 형식으로 흡수.", "en": "Absorbs the classifying impulse of museum, pharmacopoeia, and auction catalogue into the work's form itself." },
+      "color": "#8B7D6B",
+      "category": "logic"
+    },
+    "archive": {
+      "axis": "SYSTEM",
+      "label": { "ko": "아카이브", "en": "archive" },
+      "definition": { "ko": "Foucault의 아카이브 — 무엇이 기록되고 무엇이 누락되는가의 권력. Treasures의 위서적 아카이브화.", "en": "Foucault's archive — the power of what gets recorded and what is omitted. Treasures' apocryphal archivization." },
+      "color": "#5D574D",
+      "category": "logic"
+    },
+    "vitrine": {
+      "axis": "SYSTEM",
+      "label": { "ko": "진열장", "en": "vitrine" },
+      "definition": { "ko": "Joseph Beuys의 진열장 계보. 박물관 디스플레이를 매체로 격상. Natural History 전 시리즈의 형식적 핵심.", "en": "Joseph Beuys's vitrine lineage. Elevates museum display to medium. Formal core of the entire Natural History series." },
+      "color": "#7A8088",
+      "category": "medium"
+    },
+    "catholic-iconography": {
+      "axis": "FAITH",
+      "label": { "ko": "가톨릭 도상학", "en": "Catholic iconography" },
+      "definition": { "ko": "Hirst의 가톨릭 양육이 작품 표면 아래 일관되게 흐른다. 십자가·성심·성유물·미사 도상의 세속화.", "en": "Hirst's Catholic upbringing flows consistently beneath the surface — secularized cross, sacred heart, relic, Mass iconography." },
+      "color": "#922B21",
+      "category": "tradition"
+    },
+    "altar": {
+      "axis": "FAITH",
+      "label": { "ko": "제단", "en": "altar" },
+      "definition": { "ko": "약장은 제단. 약은 성체. 진열의 수직성과 대칭성이 의례 공간을 구축한다.", "en": "The medicine cabinet is altar. The pill is host. Verticality and symmetry of arrangement build a ritual space." },
+      "color": "#FFFFFF",
+      "category": "structure"
+    },
+    "stained-glass": {
+      "axis": "FAITH",
+      "label": { "ko": "스테인드글라스", "en": "stained glass" },
+      "definition": { "ko": "Butterfly Kaleidoscope 회화는 고딕 성당 장미창의 직접 재기입. 빛-나비 날개-신성의 등식.", "en": "Butterfly Kaleidoscope paintings are direct re-inscriptions of the Gothic rose window. Light = wing = divinity." },
+      "color": "#4A235A",
+      "category": "form"
+    },
+    "last-supper": {
+      "axis": "FAITH",
+      "label": { "ko": "최후의 만찬", "en": "Last Supper" },
+      "definition": { "ko": "1999년 The Last Supper 시리즈. 약 포장지에 'BEANS CHIPS'…음식·약·성찬의 환등기.", "en": "1999 The Last Supper series. On pharmaceutical packaging: \"BEANS CHIPS\"… a magic lantern of food, drug, and Eucharist." },
+      "color": "#641E16",
+      "category": "reference"
+    },
+    "stations-of-cross": {
+      "axis": "FAITH",
+      "label": { "ko": "십자가의 길", "en": "Stations of the Cross" },
+      "definition": { "ko": "14단계 수난 도상. Romance in the Age of Uncertainty(2003)의 12+1 진열장 구조와 공명.", "en": "The 14-stage Passion iconography. Resonates with Romance in the Age of Uncertainty's (2003) 12+1 vitrine structure." },
+      "color": "#1C1C1C",
+      "category": "reference"
+    },
+    "reliquary": {
+      "axis": "FAITH",
+      "label": { "ko": "성유물함", "en": "reliquary" },
+      "definition": { "ko": "Treasures의 가짜 해저 유물은 세속화된 성유물함. 위조된 진본성이 곧 신앙의 매커니즘.", "en": "Treasures' fictional seabed artifacts are secular reliquaries. Forged authenticity is the very mechanism of faith." },
+      "color": "#6B7B5A",
+      "category": "form"
+    },
+    "mandala": {
+      "axis": "FAITH",
+      "label": { "ko": "만다라", "en": "mandala" },
+      "definition": { "ko": "Mandala Paintings(2019–)는 나비 날개로 그린 불교 우주도. 가톨릭 외부의 신성 기하학으로 확장.", "en": "Mandala Paintings (2019–) are Buddhist cosmograms made of butterfly wings. Sacred geometry beyond Catholicism." },
+      "color": "#D4AF37",
+      "category": "form"
+    },
+    "mono-no-aware": {
+      "axis": "FAITH",
+      "label": { "ko": "모노노아와레", "en": "mono no aware" },
+      "definition": { "ko": "사물의 무상에 대한 정조. Hirst가 Cherry Blossoms 작가노트에서 직접 명시한 일본 미학.", "en": "The pathos of impermanence. The Japanese aesthetic Hirst explicitly cites in the Cherry Blossoms artist's note." },
+      "color": "#FFB6C1",
+      "category": "tradition"
+    },
+    "sacred-geometry": {
+      "axis": "FAITH",
+      "label": { "ko": "신성 기하학", "en": "sacred geometry" },
+      "definition": { "ko": "원·대칭·격자가 신성을 매개한다는 전제. Spot·Mandala·Kaleidoscope의 형식적 공통분모.", "en": "The premise that circle, symmetry, and grid mediate the sacred. Formal common denominator of Spot, Mandala, Kaleidoscope." },
+      "color": "#F39C12",
+      "category": "form"
+    },
+    "ritual-repetition": {
+      "axis": "FAITH",
+      "label": { "ko": "의례적 반복", "en": "ritual repetition" },
+      "definition": { "ko": "묵주·기도·미사의 반복. Spot의 무한 시리즈를 산업이 아닌 의례로 읽을 때 열리는 차원.", "en": "The repetition of rosary, prayer, Mass. The dimension that opens when one reads the Spot's infinite series not as industry but as rite." },
+      "color": "#A0937D",
+      "category": "mode"
+    },
+    "transubstantiation": {
+      "axis": "FAITH",
+      "label": { "ko": "성변화", "en": "transubstantiation" },
+      "definition": { "ko": "빵→그리스도의 몸. Pharmacy에서: 약→치료. 가톨릭 신비를 의약 신앙으로 번역.", "en": "Bread becomes the body of Christ. In Pharmacy: drug becomes cure. The Catholic mystery translated into pharmaceutical faith." },
+      "color": "#E74C3C",
+      "category": "concept"
+    },
+    "icon": {
+      "axis": "FAITH",
+      "label": { "ko": "이콘", "en": "icon" },
+      "definition": { "ko": "예배의 매개로서의 이미지. Sacred Heart·Empresses 시리즈가 비잔틴 이콘을 직접 호출.", "en": "Image as object of worship. Sacred Heart and Empresses series directly invoke the Byzantine icon." },
+      "color": "#D4AF37",
+      "category": "form"
+    },
+    "commodity-fetish": {
+      "axis": "VALUE",
+      "label": { "ko": "상품 물신", "en": "commodity fetish" },
+      "definition": { "ko": "Marx의 상품 물신성. 사용가치를 압도하는 교환가치의 미적 외양 — Hirst의 작품이 곧 그 외양.", "en": "Marx's commodity fetishism. The aesthetic appearance of exchange value overwhelming use value — Hirst's work is that very appearance." },
+      "color": "#F39C12",
+      "category": "concept"
+    },
+    "art-as-asset": {
+      "axis": "VALUE",
+      "label": { "ko": "자산으로서의 미술", "en": "art as asset" },
+      "definition": { "ko": "21c 미술시장에서 작품은 alternative asset class. Hirst는 이를 비평하지 않고 가속화한다.", "en": "In the 21c art market, the work is an alternative asset class. Hirst does not critique this — he accelerates it." },
+      "color": "#D4AF37",
+      "category": "concept"
+    },
+    "saatchi-effect": {
+      "axis": "VALUE",
+      "label": { "ko": "사치 효과", "en": "Saatchi effect" },
+      "definition": { "ko": "Charles Saatchi 컬렉터-후원자 모델. 1991 Shark 의뢰가 영국 현대미술 시장을 재구축.", "en": "Charles Saatchi's collector-patron model. The 1991 Shark commission restructured the British contemporary art market." },
+      "color": "#8B7D6B",
+      "category": "infrastructure"
+    },
+    "auction-as-artwork": {
+      "axis": "VALUE",
+      "label": { "ko": "작품으로서의 경매", "en": "auction as artwork" },
+      "definition": { "ko": "2008.9.15 Sotheby's <Beautiful Inside My Head Forever>. 갤러리 우회·작가 직거래 — 경매 행위 자체가 작품.", "en": "Sept 15, 2008 Sotheby's Beautiful Inside My Head Forever. Bypassing galleries, direct from artist — the auction act itself is the work." },
+      "color": "#641E16",
+      "category": "event"
+    },
+    "diamond-economy": {
+      "axis": "VALUE",
+      "label": { "ko": "다이아몬드 경제", "en": "diamond economy" },
+      "definition": { "ko": "다이아몬드는 조작된 희소성의 원형. For the Love of God은 그 조작 위에 vanitas를 덧씌운다.", "en": "The diamond is the archetype of manufactured scarcity. For the Love of God overlays vanitas on top of that manufacture." },
+      "color": "#C0C0C0",
+      "category": "concept"
+    },
+    "brand-author": {
+      "axis": "VALUE",
+      "label": { "ko": "브랜드 저자", "en": "brand-author" },
+      "definition": { "ko": "Damien Hirst는 작가가 아니라 브랜드. Murakami·Koons와 함께 21c 브랜드-저자성의 표본.", "en": "Damien Hirst is not artist but brand. With Murakami and Koons, a specimen of 21c brand-authorship." },
+      "color": "#2C2C2C",
+      "category": "concept"
+    },
+    "sotheby-2008": {
+      "axis": "VALUE",
+      "label": { "ko": "2008 소더비 사건", "en": "Sotheby's 2008" },
+      "definition": { "ko": "리먼 파산 당일(9.15) 시작된 이틀 경매. 단일 작가 £111M. 21c 미술시장사의 분기점.", "en": "Two-day auction beginning Sept 15, 2008 — the day Lehman fell. £111M for a single artist. A turning point in 21c art market history." },
+      "color": "#1C1C1C",
+      "category": "event"
+    },
+    "lehman-coincidence": {
+      "axis": "VALUE",
+      "label": { "ko": "리먼 동시성", "en": "Lehman coincidence" },
+      "definition": { "ko": "Sotheby's 경매와 리먼 파산의 같은 날 사건. 우연의 의미화가 작품 신화의 일부.", "en": "Sotheby's auction and Lehman's collapse on the same day. The semantic uptake of coincidence is part of the work's mythology." },
+      "color": "#641E16",
+      "category": "event"
+    },
+    "collector-spectacle": {
+      "axis": "VALUE",
+      "label": { "ko": "컬렉터 스펙터클", "en": "collector spectacle" },
+      "definition": { "ko": "Pinault·Saatchi·Cohen의 의뢰가 작품의 일부. 컬렉터 행위가 곧 미술사적 사건.", "en": "The commissions of Pinault, Saatchi, and Cohen are part of the work. The collector's act is an art-historical event." },
+      "color": "#8B6914",
+      "category": "infrastructure"
+    },
+    "nft-dematerialization": {
+      "axis": "VALUE",
+      "label": { "ko": "NFT 탈물질화", "en": "NFT dematerialization" },
+      "definition": { "ko": "The Currency(2021): 10,000 회화-NFT 쌍. 소유자가 둘 중 하나를 선택, 다른 하나는 소멸.", "en": "The Currency (2021): 10,000 painting-NFT pairs. Owners choose one; the other is annihilated." },
+      "color": "#FF6B35",
+      "category": "concept"
+    },
+    "physical-destruction": {
+      "axis": "VALUE",
+      "label": { "ko": "물리적 파괴", "en": "physical destruction" },
+      "definition": { "ko": "The Currency에서 디지털 선택자의 회화 4,851점이 Hirst 본인에 의해 소각. 가치 실험의 종결.", "en": "In The Currency, 4,851 paintings whose owners chose the digital are burned by Hirst himself. The terminal of the value experiment." },
+      "color": "#922B21",
+      "category": "act"
+    },
+    "provenance-fiction": {
+      "axis": "VALUE",
+      "label": { "ko": "유래의 허구", "en": "provenance fiction" },
+      "definition": { "ko": "Treasures의 아울루스 칼리디우스라는 가공의 해방 노예. 위조된 출처가 가치의 핵심임을 노출.", "en": "Treasures' fictional freedman Aulus Calidius. Exposes that fabricated provenance is the core of value." },
+      "color": "#5D574D",
+      "category": "concept"
+    },
+    "centrifugal-chance": {
+      "axis": "FORM",
+      "label": { "ko": "원심력적 우연", "en": "centrifugal chance" },
+      "definition": { "ko": "Spin Painting의 회전 캔버스에 떨어뜨리는 안료. Pollock 우연성의 카니발화.", "en": "Pigment dropped on the rotating canvas of Spin Painting. The carnivalization of Pollock's chance." },
+      "color": "#E74C3C",
+      "category": "process"
+    },
+    "gestural-return": {
+      "axis": "FORM",
+      "label": { "ko": "제스처의 회귀", "en": "gestural return" },
+      "definition": { "ko": "2017 Veils에서 위임 저자성을 깨고 손을 복권. Hirst 회화사의 분기점.", "en": "In 2017 Veils, breaks delegated authorship and reinstates the hand. A turning point in Hirst's painting history." },
+      "color": "#FFB6C1",
+      "category": "act"
+    },
+    "pointillism": {
+      "axis": "FORM",
+      "label": { "ko": "점묘법", "en": "pointillism" },
+      "definition": { "ko": "Veils의 두꺼운 점들. Spot의 산업적 격자가 신체로 회귀하여 점묘로 환생.", "en": "The thick dots of Veils. The Spot's industrial grid returns to the body and is reborn as pointillism." },
+      "color": "#F39C12",
+      "category": "technique"
+    },
+    "bonnard-reference": {
+      "axis": "FORM",
+      "label": { "ko": "보나르 참조", "en": "Bonnard reference" },
+      "definition": { "ko": "Veils 시리즈는 Pierre Bonnard 후기 회화의 색-입자 직접 인용.", "en": "The Veils series directly cites Pierre Bonnard's late paintings — color as particle." },
+      "color": "#FFB6C1",
+      "category": "reference"
+    },
+    "seurat-reference": {
+      "axis": "FORM",
+      "label": { "ko": "쇠라 참조", "en": "Seurat reference" },
+      "definition": { "ko": "Georges Seurat 점묘파를 회화 매체의 정당성으로 호출. 산업화된 손의 회복.", "en": "Invokes Seurat's Pointillism as legitimation of the painterly medium. The recovery of the industrialized hand." },
+      "color": "#2ECC71",
+      "category": "reference"
+    },
+    "kaleidoscope": {
+      "axis": "FORM",
+      "label": { "ko": "만화경", "en": "kaleidoscope" },
+      "definition": { "ko": "방사 대칭 구성. Butterfly·Mandala 시리즈의 형식적 모듈.", "en": "Radial symmetric composition. The formal module of the Butterfly and Mandala series." },
+      "color": "#D4AF37",
+      "category": "structure"
+    },
+    "butterfly-wing": {
+      "axis": "FORM",
+      "label": { "ko": "나비 날개", "en": "butterfly wing" },
+      "definition": { "ko": "안료가 아닌 실제 나비 날개를 재료로. 생명의 죽음으로 그리는 미.", "en": "Real butterfly wings as material, not pigment. Painting beauty with the death of life." },
+      "color": "#4A235A",
+      "category": "medium"
+    },
+    "cherry-pigment": {
+      "axis": "FORM",
+      "label": { "ko": "벚꽃 임파스토", "en": "cherry impasto" },
+      "definition": { "ko": "Cherry Blossoms의 두꺼운 핑크 임파스토. 캔버스에서 고체적 부피를 가진 색.", "en": "The thick pink impasto of Cherry Blossoms. Color that holds solid volume on the canvas." },
+      "color": "#FFB6C1",
+      "category": "technique"
+    },
+    "photorealism": {
+      "axis": "FORM",
+      "label": { "ko": "사진실재주의", "en": "photorealism" },
+      "definition": { "ko": "초기 Shark 사진과 Hirst의 매끈한 진열장 표면이 만드는 사진적 명료함.", "en": "The photographic clarity produced by early Shark photographs and the gleaming vitrine surfaces." },
+      "color": "#5A8B8B",
+      "category": "mode"
+    },
+    "hand-vs-machine": {
+      "axis": "FORM",
+      "label": { "ko": "손과 기계", "en": "hand vs machine" },
+      "definition": { "ko": "Hirst 작업 전체를 가로지르는 긴장. Spot(기계)·Veil(손)이 양극.", "en": "The tension running through all of Hirst's work. Spot (machine) and Veil (hand) form the poles." },
+      "color": "#7A8088",
+      "category": "concept"
+    },
+    "scale-shock": {
+      "axis": "FORM",
+      "label": { "ko": "스케일 쇼크", "en": "scale shock" },
+      "definition": { "ko": "Shark의 14피트 진열장, 다이아몬드 해골의 8,601개 다이아. 양적 압도가 곧 미적 매개.", "en": "Shark's 14-foot vitrine, the diamond skull's 8,601 stones. Quantitative overwhelm is itself the aesthetic mediator." },
+      "color": "#1B2A41",
+      "category": "mode"
+    },
+    "surface-finish": {
+      "axis": "FORM",
+      "label": { "ko": "표면 마감", "en": "surface finish" },
+      "definition": { "ko": "household gloss·자동차 도장·스테인리스. 마감은 의미가 아니라 마감 그 자체.", "en": "Household gloss, automotive paint, stainless steel. Finish is not meaning but finish itself." },
+      "color": "#C0C0C0",
+      "category": "medium"
+    }
+  }
+}

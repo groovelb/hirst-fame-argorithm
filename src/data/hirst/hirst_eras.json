@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "Damien Hirst — Worldview Eras (7)",
+    "version": "1.0",
+    "purpose": "허스트의 작업 인생을 7개 사상적 연대기로 구획. 각 Era는 핵심 명제·연도 범위·5축 가중치 평균(작품 axis_weights 평균)을 보유한다.",
+    "axis_keys": ["MORTALITY", "SYSTEM", "FAITH", "VALUE", "FORM"],
+    "asOfDate": "2026-05-07"
+  },
+  "eras": [
+    {
+      "id": "WV_PEDAGOGY",
+      "order": 1,
+      "slug": "pedagogy",
+      "name": { "ko": "교수법", "en": "Pedagogy" },
+      "yearStart": 1986,
+      "yearEnd": 1990,
+      "thesis": {
+        "ko": "큐레이션은 작품의 일부다 — 갤러리스트 이전에 큐레이터로 출발한다.",
+        "en": "Curation is part of the work — he begins as a curator before becoming a gallerist."
+      },
+      "summary": {
+        "ko": "Goldsmiths 시절. 〈Freeze〉(1988)를 직접 기획하며 첫 Spot Painting을 시도한다. 이 시기의 사상은 '무엇을 보여주는가'보다 '어떻게 보여주는가'에 가깝다.",
+        "en": "The Goldsmiths years. He curates 〈Freeze〉(1988) himself and produces his first Spot Painting. The proposition of this era leans toward 'how to display' rather than 'what to display.'"
+      },
+      "axisWeightsMean": {
+        "MORTALITY": 0.275,
+        "SYSTEM": 0.733,
+        "FAITH": 0.333,
+        "VALUE": 0.15,
+        "FORM": 0.383
+      },
+      "workCount": 6,
+      "eventCount": 10
+    },
+    {
+      "id": "WV_VITRINE",
+      "order": 2,
+      "slug": "vitrine",
+      "name": { "ko": "진열창", "en": "Vitrine" },
+      "yearStart": 1991,
+      "yearEnd": 1995,
+      "thesis": {
+        "ko": "죽음을 직접 볼 수 있는가? — 진열창은 죽음을 보존하지 못하고 다만 응시를 가능하게 한다.",
+        "en": "Can death be seen? — The vitrine cannot preserve death, only enable its gaze."
+      },
+      "summary": {
+        "ko": "〈물리적 불가능〉(1991)·〈Mother and Child Divided〉(1993)·〈Away from the Flock〉(1994). 포름알데히드 진열창이라는 형식이 발명되고 1995년 Turner Prize로 공인된다.",
+        "en": "〈The Physical Impossibility…〉(1991), 〈Mother and Child Divided〉(1993), 〈Away from the Flock〉(1994). The formaldehyde vitrine is invented as a form and certified by the Turner Prize in 1995."
+      },
+      "axisWeightsMean": {
+        "MORTALITY": 0.711,
+        "SYSTEM": 0.489,
+        "FAITH": 0.322,
+        "VALUE": 0.311,
+        "FORM": 0.533
+      },
+      "workCount": 9,
+      "eventCount": 8
+    },
+    {
+      "id": "WV_PHARMACOPOEIA",
+      "order": 3,
+      "slug": "pharmacopoeia",
+      "name": { "ko": "약장", "en": "Pharmacopoeia" },
+      "yearStart": 1992,
+      "yearEnd": 2000,
+      "thesis": {
+        "ko": "약은 신앙을 대체하는가? — 의약 캐비닛은 신앙의 분류표를 닮아 있다.",
+        "en": "Does medicine replace faith? — The pharmacy cabinet resembles the classification table of faith."
+      },
+      "summary": {
+        "ko": "Medicine Cabinet, Spot Painting의 격자, 〈Hymn〉, 레스토랑 〈Pharmacy〉(1998)까지. 약과 분류표라는 형식으로 신앙의 자리를 추궁한다.",
+        "en": "Medicine Cabinets, the Spot Painting grid, 〈Hymn〉, and the restaurant 〈Pharmacy〉(1998). The form of medicine and classification interrogates the place once held by faith."
+      },
+      "axisWeightsMean": {
+        "MORTALITY": 0.371,
+        "SYSTEM": 0.642,
+        "FAITH": 0.562,
+        "VALUE": 0.308,
+        "FORM": 0.504
+      },
+      "workCount": 12,
+      "eventCount": 5
+    },
+    {
+      "id": "WV_RELIQUARY",
+      "order": 4,
+      "slug": "reliquary",
+      "name": { "ko": "성물함", "en": "Reliquary" },
+      "yearStart": 2001,
+      "yearEnd": 2006,
+      "thesis": {
+        "ko": "성물은 시장에서도 작동하는가? — 다이아몬드 두개골은 신앙과 자본을 같은 표면에 놓는다.",
+        "en": "Does the relic still operate within the market? — The diamond skull lays faith and capital on the same surface."
+      },
+      "summary": {
+        "ko": "Butterfly Mandala, 〈Romance in the Age of Uncertainty〉, 〈The Tranquility of Solitude〉, 〈The Death of God〉. 종교적 도상과 표본대가 결합한다.",
+        "en": "Butterfly Mandalas, 〈Romance in the Age of Uncertainty〉, 〈The Tranquility of Solitude〉, 〈The Death of God〉. Religious iconography binds itself to the specimen table."
+      },
+      "axisWeightsMean": {
+        "MORTALITY": 0.595,
+        "SYSTEM": 0.54,
+        "FAITH": 0.8,
+        "VALUE": 0.355,
+        "FORM": 0.595
+      },
+      "workCount": 10,
+      "eventCount": 5
+    },
+    {
+      "id": "WV_VANITAS_SPECTACLE",
+      "order": 5,
+      "slug": "vanitas-spectacle",
+      "name": { "ko": "바니타스 스펙터클", "en": "Vanitas Spectacle" },
+      "yearStart": 2007,
+      "yearEnd": 2010,
+      "thesis": {
+        "ko": "스펙터클이 vanitas의 자리를 차지하는가? — 단일 작가 경매는 시장 자체를 작품으로 만든다.",
+        "en": "Does spectacle replace vanitas? — A single-artist auction turns the market itself into the work."
+      },
+      "summary": {
+        "ko": "〈For the Love of God〉(2007)·〈The Golden Calf〉(2008)·Sotheby's 〈Beautiful Inside My Head Forever〉(2008). vanitas 도상이 시장 스펙터클로 외화된다.",
+        "en": "〈For the Love of God〉(2007), 〈The Golden Calf〉(2008), Sotheby's 〈Beautiful Inside My Head Forever〉(2008). The vanitas trope is externalized as market spectacle."
+      },
+      "axisWeightsMean": {
+        "MORTALITY": 0.681,
+        "SYSTEM": 0.494,
+        "FAITH": 0.537,
+        "VALUE": 0.794,
+        "FORM": 0.581
+      },
+      "workCount": 8,
+      "eventCount": 8
+    },
+    {
+      "id": "WV_MYTHOPOEIA",
+      "order": 6,
+      "slug": "mythopoeia",
+      "name": { "ko": "신화 제작", "en": "Mythopoeia" },
+      "yearStart": 2011,
+      "yearEnd": 2017,
+      "thesis": {
+        "ko": "허구도 박물지가 될 수 있는가? — 발견되지 않은 침몰선의 유물은 진실의 형식을 빌린다.",
+        "en": "Can fiction become natural history? — Artifacts from a wreck that never existed borrow the form of truth."
+      },
+      "summary": {
+        "ko": "Tate 회고전(2012)과 〈Treasures from the Wreck of the Unbelievable〉(2017). 가짜 신화에 박물지의 권위 양식을 입혀 진실성과 시장 가치를 동시에 시험한다.",
+        "en": "The Tate retrospective (2012) and 〈Treasures from the Wreck of the Unbelievable〉(2017). A fabricated myth dressed in the authority of natural history tests truth-claim and market value at once."
+      },
+      "axisWeightsMean": {
+        "MORTALITY": 0.5,
+        "SYSTEM": 0.55,
+        "FAITH": 0.589,
+        "VALUE": 0.606,
+        "FORM": 0.689
+      },
+      "workCount": 9,
+      "eventCount": 7
+    },
+    {
+      "id": "WV_REPAINTING",
+      "order": 7,
+      "slug": "repainting",
+      "name": { "ko": "다시 그리기", "en": "Repainting" },
+      "yearStart": 2018,
+      "yearEnd": 2024,
+      "thesis": {
+        "ko": "다시 그릴 때 무엇이 남는가? — 회화로의 회귀는 손의 흔적을 시장에서 분리한다.",
+        "en": "What remains when one paints again? — The return to painting separates the trace of the hand from the market."
+      },
+      "summary": {
+        "ko": "〈Veils〉, 〈Cherry Blossoms〉, 〈Mandalas〉. 표본·캐비닛·도상에서 멀어져 손의 회화로 회귀한다. 형식(FORM)이 가장 우세한 시기.",
+        "en": "〈Veils〉, 〈Cherry Blossoms〉, 〈Mandalas〉. He recedes from specimen·cabinet·icon back into hand-painting. FORM dominates this era."
+      },
+      "axisWeightsMean": {
+        "MORTALITY": 0.333,
+        "SYSTEM": 0.381,
+        "FAITH": 0.767,
+        "VALUE": 0.481,
+        "FORM": 0.856
+      },
+      "workCount": 18,
+      "eventCount": 9
+    }
+  ]
+}

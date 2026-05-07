@@ -1,0 +1,998 @@
+{
+  "meta": {
+    "title": "Damien Hirst Timeline — Life & Worldview Events",
+    "artist": {
+      "name": "Damien Hirst",
+      "birth_name": "Damien Steven Hirst",
+      "birth": "1965-06-07",
+      "birth_place": "Bristol, England",
+      "based": "London / Devon"
+    },
+    "periods": [
+      { "id": "PEDAGOGY", "label": { "ko": "교육·기획기", "en": "Pedagogy & Organizing" }, "range": "1986–1990", "color_tendency": { "ko": "흑백, 약장 화이트, 산업 마감", "en": "Black-white, cabinet white, industrial finish" } },
+      { "id": "NATURAL_HISTORY", "label": { "ko": "자연사 진열장", "en": "Natural History Vitrines" }, "range": "1991–ongoing", "color_tendency": { "ko": "포르말린 블루, 회백색, 살구빛 살색", "en": "Formaldehyde blue, off-white, flesh tones" } },
+      { "id": "CABINET", "label": { "ko": "약장", "en": "Medicine Cabinets" }, "range": "1988–ongoing", "color_tendency": { "ko": "화이트 + 다색 약병 라벨", "en": "White + multi-colored pharmaceutical labels" } },
+      { "id": "SPOT", "label": { "ko": "스팟 페인팅(약학)", "en": "Spot Paintings (Pharmaceuticals)" }, "range": "1986–ongoing", "color_tendency": { "ko": "화이트 배경 + 무작위 다채색", "en": "White ground + random multi-color" } },
+      { "id": "SPIN", "label": { "ko": "스핀 페인팅", "en": "Spin Paintings" }, "range": "1992–ongoing", "color_tendency": { "ko": "원심형 다색 폭발", "en": "Centrifugal multi-color explosion" } },
+      { "id": "BUTTERFLY", "label": { "ko": "나비 시리즈", "en": "Butterfly Series" }, "range": "1991–ongoing", "color_tendency": { "ko": "검정 배경 + 채도 높은 날개색", "en": "Black ground + saturated wing color" } },
+      { "id": "VANITAS", "label": { "ko": "바니타스(다이아몬드 해골)", "en": "Vanitas (Diamond Skull)" }, "range": "2007–2010", "color_tendency": { "ko": "플래티넘, 다이아 화이트, 흑갈색", "en": "Platinum, diamond white, dark brown" } },
+      { "id": "TREASURES", "label": { "ko": "심해 보물 (가짜 고고학)", "en": "Treasures from the Wreck (Fictional Archaeology)" }, "range": "2008–2017", "color_tendency": { "ko": "녹청, 산호 핑크, 청동", "en": "Verdigris, coral pink, bronze" } },
+      { "id": "VEILS", "label": { "ko": "베일", "en": "Veils" }, "range": "2017–2018", "color_tendency": { "ko": "파스텔 임파스토, 보나르 색입자", "en": "Pastel impasto, Bonnard-like color particles" } },
+      { "id": "CHERRY", "label": { "ko": "벚꽃", "en": "Cherry Blossoms" }, "range": "2018–2021", "color_tendency": { "ko": "핑크·화이트 임파스토 + 푸른 하늘", "en": "Pink-white impasto + blue sky" } },
+      { "id": "CURRENCY", "label": { "ko": "더 커런시(NFT)", "en": "The Currency (NFT)" }, "range": "2021", "color_tendency": { "ko": "원형 다색 도트 + 종이 베이스", "en": "Circular multi-color dots + paper base" } },
+      { "id": "MANDALA", "label": { "ko": "만다라", "en": "Mandalas" }, "range": "2019–ongoing", "color_tendency": { "ko": "방사 대칭 다색 나비 날개", "en": "Radially symmetric multi-color butterfly wings" } },
+      { "id": "SACRED", "label": { "ko": "성심·이콘", "en": "Sacred Heart & Icons" }, "range": "2005–ongoing", "color_tendency": { "ko": "레드, 골드, 화이트", "en": "Red, gold, white" } }
+    ],
+    "worldview_periods": [
+      {
+        "id": "WV_PEDAGOGY",
+        "label": { "ko": "교육·기획·지시", "en": "Pedagogy / Curating / Instruction" },
+        "range": [1986, 1990],
+        "keywords": {
+          "ko": ["Goldsmiths", "Craig-Martin", "Freeze", "큐레이터-작가", "지시문 미술"],
+          "en": ["Goldsmiths", "Craig-Martin", "Freeze", "curator-artist", "instruction art"]
+        },
+        "band_colors": ["#2C2C2C"],
+        "band_thickness": "thin",
+        "blur_intensity": 0.3,
+        "dominant_axes": ["SYSTEM"]
+      },
+      {
+        "id": "WV_VITRINE",
+        "label": { "ko": "자연사 진열장", "en": "Natural History Vitrines" },
+        "range": [1991, 1995],
+        "keywords": {
+          "ko": ["Saatchi", "포름알데히드", "죽음의 인식론", "Mother and Child", "Turner Prize"],
+          "en": ["Saatchi", "formaldehyde", "epistemology of death", "Mother and Child", "Turner Prize"]
+        },
+        "band_colors": ["#5A8B8B", "#1B2A41"],
+        "band_thickness": "thick",
+        "blur_intensity": 0.7,
+        "dominant_axes": ["MORTALITY"]
+      },
+      {
+        "id": "WV_PHARMACOPOEIA",
+        "label": { "ko": "약학적 우주", "en": "Pharmaceutical Universe" },
+        "range": [1996, 2000],
+        "keywords": {
+          "ko": ["Pharmacy", "약=종교", "Sensation", "Last Supper", "산업 생산"],
+          "en": ["Pharmacy", "medicine = religion", "Sensation", "Last Supper", "industrial production"]
+        },
+        "band_colors": ["#FFFFFF", "#E74C3C"],
+        "band_thickness": "medium_thick",
+        "blur_intensity": 0.5,
+        "dominant_axes": ["SYSTEM", "FAITH"]
+      },
+      {
+        "id": "WV_RELIQUARY",
+        "label": { "ko": "신앙·유물·도상", "en": "Reliquary / Faith / Iconography" },
+        "range": [2001, 2007],
+        "keywords": {
+          "ko": ["Romance in the Age of Uncertainty", "Stations of the Cross", "Butterfly Kaleidoscope", "New Religion", "Virgin Mother"],
+          "en": ["Romance in the Age of Uncertainty", "Stations of the Cross", "Butterfly Kaleidoscope", "New Religion", "Virgin Mother"]
+        },
+        "band_colors": ["#922B21", "#D4AF37"],
+        "band_thickness": "medium_thick",
+        "blur_intensity": 0.6,
+        "dominant_axes": ["FAITH"]
+      },
+      {
+        "id": "WV_VANITAS_SPECTACLE",
+        "label": { "ko": "바니타스의 절정과 균열", "en": "Vanitas at Apex and Fracture" },
+        "range": [2008, 2010],
+        "keywords": {
+          "ko": ["For the Love of God", "Sotheby's 2008.9.15", "Lehman 동시성", "Wallace Collection 실패", "Angus Fairhurst 자살"],
+          "en": ["For the Love of God", "Sotheby's 2008.9.15", "Lehman coincidence", "Wallace Collection failure", "Angus Fairhurst suicide"]
+        },
+        "band_colors": ["#641E16", "#1C1C1C"],
+        "band_thickness": "thickest",
+        "blur_intensity": 0.85,
+        "dominant_axes": ["VALUE", "MORTALITY"]
+      },
+      {
+        "id": "WV_MYTHOPOEIA",
+        "label": { "ko": "신화 제조", "en": "Mythopoeia" },
+        "range": [2011, 2017],
+        "keywords": {
+          "ko": ["Tate 회고전", "Gagosian 11갤러리", "Newport Street", "Treasures Venice", "비평 실패의 자기 인정"],
+          "en": ["Tate retrospective", "Gagosian 11 galleries", "Newport Street", "Treasures Venice", "self-acknowledged critical failure"]
+        },
+        "band_colors": ["#6B7B5A", "#5D574D"],
+        "band_thickness": "thick",
+        "blur_intensity": 0.65,
+        "dominant_axes": ["VALUE", "FAITH"]
+      },
+      {
+        "id": "WV_REPAINTING",
+        "label": { "ko": "회화·찰나·탈물질", "en": "Repainting / Ephemeral / Dematerialization" },
+        "range": [2018, 2024],
+        "keywords": {
+          "ko": ["Veils", "Cherry Blossoms", "Cartier", "The Currency", "벚꽃 소각", "Mandala", "Sacred Heart"],
+          "en": ["Veils", "Cherry Blossoms", "Cartier", "The Currency", "burning ceremony", "Mandala", "Sacred Heart"]
+        },
+        "band_colors": ["#FFB6C1", "#FF6B35"],
+        "band_thickness": "medium",
+        "blur_intensity": 0.5,
+        "dominant_axes": ["FAITH", "FORM"]
+      }
+    ],
+    "worldview_trajectory": [
+      { "year": 1986, "y": 0.1, "label": { "ko": "Goldsmiths 입학", "en": "Enters Goldsmiths" } },
+      { "year": 1988, "y": 0.4, "label": { "ko": "Freeze 큐레이팅 — 자기-기획의 발명", "en": "Curates Freeze — invention of self-organizing" } },
+      { "year": 1989, "y": 0.3, "label": { "ko": "Goldsmiths 졸업", "en": "Graduates Goldsmiths" } },
+      { "year": 1990, "y": -0.2, "label": { "ko": "A Thousand Years — 첫 죽음 진열장", "en": "A Thousand Years — first death vitrine" } },
+      { "year": 1991, "y": -0.6, "label": { "ko": "Shark — Saatchi 의뢰, Mortality 강하", "en": "Shark — Saatchi commission, plunge into Mortality" } },
+      { "year": 1992, "y": -0.3, "label": { "ko": "Pharmacy 설치 — System 균형 회복", "en": "Pharmacy installation — System rebalances" } },
+      { "year": 1993, "y": -0.85, "label": { "ko": "Mother and Child Divided — 베니스, 정서적 최저", "en": "Mother and Child Divided — Venice, emotional nadir" } },
+      { "year": 1994, "y": -0.5, "label": { "ko": "Away from the Flock 훼손", "en": "Away from the Flock vandalized" } },
+      { "year": 1995, "y": 0.0, "label": { "ko": "Turner Prize, 첫 아들 Connor 출생", "en": "Turner Prize, first son Connor born" } },
+      { "year": 1997, "y": 0.4, "label": { "ko": "Sensation 전 (Royal Academy)", "en": "Sensation exhibition (Royal Academy)" } },
+      { "year": 1998, "y": 0.5, "label": { "ko": "Pharmacy 레스토랑 오픈", "en": "Pharmacy restaurant opens" } },
+      { "year": 2000, "y": 0.45, "label": { "ko": "Trinity, 둘째 아들 Cassius 출생", "en": "Trinity, second son Cassius born" } },
+      { "year": 2003, "y": 0.6, "label": { "ko": "Romance in the Age of Uncertainty — Faith 정점", "en": "Romance in the Age of Uncertainty — Faith zenith" } },
+      { "year": 2005, "y": 0.5, "label": { "ko": "New Religion, 셋째 아들 Cyrus 출생", "en": "New Religion, third son Cyrus born" } },
+      { "year": 2007, "y": 0.3, "label": { "ko": "For the Love of God 공개 — 양가성", "en": "For the Love of God unveiled — ambivalence" } },
+      { "year": 2008.25, "y": -0.7, "label": { "ko": "Angus Fairhurst 자살", "en": "Angus Fairhurst suicide" } },
+      { "year": 2008.7, "y": 0.8, "label": { "ko": "Sotheby's £111M — 시장 정점", "en": "Sotheby's £111M — market peak" } },
+      { "year": 2008.72, "y": -0.5, "label": { "ko": "리먼 파산 동시성", "en": "Lehman collapse, same day" } },
+      { "year": 2009, "y": -0.7, "label": { "ko": "Wallace Collection 비평적 실패", "en": "Wallace Collection critical failure" } },
+      { "year": 2010, "y": -0.6, "label": { "ko": "알코올 의존 인정, 금주 시작", "en": "Acknowledges alcohol dependency, sobriety begins" } },
+      { "year": 2012, "y": 0.5, "label": { "ko": "Tate 회고전, Gagosian 11갤러리 Spot", "en": "Tate retrospective, Gagosian 11-gallery Spot show" } },
+      { "year": 2015, "y": 0.6, "label": { "ko": "Newport Street Gallery 개관", "en": "Newport Street Gallery opens" } },
+      { "year": 2017, "y": -0.5, "label": { "ko": "Treasures 비평 실패", "en": "Treasures critically panned" } },
+      { "year": 2018, "y": 0.2, "label": { "ko": "Veils — 손의 회복", "en": "Veils — recovery of the hand" } },
+      { "year": 2020, "y": 0.0, "label": { "ko": "팬데믹 — Devon 작업실 고립", "en": "Pandemic — Devon studio isolation" } },
+      { "year": 2021, "y": 0.75, "label": { "ko": "Cherry Blossoms Cartier, Currency 발행", "en": "Cherry Blossoms Cartier, Currency launches" } },
+      { "year": 2022.8, "y": 0.3, "label": { "ko": "Currency 소각식 — 가치 실험 종결", "en": "Currency burning — value experiment closes" } },
+      { "year": 2024, "y": 0.55, "label": { "ko": "회화기 지속, Mandala·Sacred Heart 확장", "en": "Painting period sustained, Mandala/Sacred Heart expand" } }
+    ]
+  },
+  "events": [
+    {
+      "id": "E001",
+      "year": 1965,
+      "date": "1965-06-07",
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "출생", "en": "Birth" },
+      "description": {
+        "ko": "Bristol에서 출생. 본명 Damien Steven Hirst. 가톨릭 어머니 Mary Brennan(아일랜드계) 양육. 아버지는 자동차 정비공이었으나 어린 시절 떠남.",
+        "en": "Born in Bristol as Damien Steven Hirst. Raised by Catholic Irish mother Mary Brennan. Mechanic father left in early childhood."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["catholic-iconography"],
+      "emotional_valence": "neutral",
+      "significance": "high"
+    },
+    {
+      "id": "E002",
+      "year": 1977,
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "양아버지와의 별거 (12세 무렵)", "en": "Stepfather leaves (~age 12)" },
+      "description": {
+        "ko": "양아버지 Bill Hirst가 가정을 떠남. 어머니 Mary가 단독 양육. 가톨릭 종교적 분위기 속 성장.",
+        "en": "Stepfather Bill Hirst leaves the household. Mother Mary raises Damien alone in a Catholic religious atmosphere."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["catholic-iconography", "grief"],
+      "emotional_valence": "negative",
+      "significance": "low"
+    },
+    {
+      "id": "E003",
+      "year": 1981,
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "Leeds 영안실 방문 (16세) — 시신 드로잉", "en": "Leeds morgue visit (age 16) — drawing corpses" },
+      "description": {
+        "ko": "16세에 Leeds Medical School 영안실에 방문하여 시신을 드로잉. 후일 1991 'With Dead Head' 사진의 원천. Hirst 자연사 시리즈의 자전적 발원 장면.",
+        "en": "At 16, visits Leeds Medical School morgue to draw corpses. Source of the 1991 photograph 'With Dead Head.' Autobiographical primal scene of Hirst's Natural History series."
+      },
+      "worldview_shift": "MORTALITY",
+      "keyword_tags": ["mortality", "memento-mori", "specimen"],
+      "emotional_valence": "mixed",
+      "significance": "high"
+    },
+    {
+      "id": "E004",
+      "year": 1983,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "Jacob Kramer College Leeds 입학", "en": "Enters Jacob Kramer College, Leeds" },
+      "description": {
+        "ko": "1983–1984년 Leeds의 Jacob Kramer Foundation Course 수강. Goldsmiths 진학 전 단계.",
+        "en": "1983–1984 Foundation Course at Jacob Kramer in Leeds. Pre-Goldsmiths preparation."
+      },
+      "worldview_shift": "FORM",
+      "keyword_tags": [],
+      "emotional_valence": "positive",
+      "significance": "low"
+    },
+    {
+      "id": "E005",
+      "year": 1986,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "Goldsmiths 입학 — Michael Craig-Martin 사사", "en": "Enters Goldsmiths — studies under Michael Craig-Martin" },
+      "description": {
+        "ko": "Goldsmiths College 미술 학위 과정 입학(1986–1989). Michael Craig-Martin이 핵심 멘토. 개념미술과 지시문 기반 작업의 계보 흡수. 같은 동료들과 후일 YBA 형성.",
+        "en": "Enters Goldsmiths BA Fine Art (1986–1989). Michael Craig-Martin as core mentor. Absorbs the lineage of conceptual and instruction-based art. Cohort later becomes the YBA."
+      },
+      "worldview_shift": "SYSTEM",
+      "keyword_tags": ["instruction-art", "delegated-authorship", "grid"],
+      "emotional_valence": "positive",
+      "significance": "high"
+    },
+    {
+      "id": "E006",
+      "year": 1988,
+      "date": "1988-07-06",
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "Freeze 전시 큐레이팅 (Surrey Docks)", "en": "Curates Freeze (Surrey Docks)" },
+      "description": {
+        "ko": "런던 Docklands의 빈 항만 건물에서 Hirst가 직접 큐레이팅한 16인 학생 전시 'Freeze'(7.6–9.30). YBA의 사실상 출발점. Charles Saatchi, Norman Rosenthal 등 주요 평론가·컬렉터 방문. Hirst의 큐레이터-작가 정체성 확립.",
+        "en": "'Freeze' (Jul 6 – Sep 30): a 16-artist student exhibition curated by Hirst himself in an empty Docklands warehouse. De facto origin of the YBA. Visited by Saatchi, Norman Rosenthal, and others. Establishes Hirst's curator-artist identity."
+      },
+      "worldview_shift": "SYSTEM",
+      "keyword_tags": ["instruction-art", "saatchi-effect", "brand-author"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E007",
+      "year": 1988,
+      "category": "art",
+      "period": "CABINET",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "첫 Medicine Cabinet 'Sinner' 제작", "en": "Creates first Medicine Cabinet 'Sinner'" },
+      "description": {
+        "ko": "약장 시리즈의 출발점. 약병 라벨의 분류적 시각언어를 진열장 형식과 결합. 약=신앙 등식의 명시.",
+        "en": "Genesis of the cabinet series. Pharmaceutical label-taxonomy fused with vitrine form. First explicit statement of pharmaceutical = faith."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["altar", "pharmaceutical-taxonomy", "vitrine", "transubstantiation"],
+      "emotional_valence": "positive",
+      "significance": "high"
+    },
+    {
+      "id": "E008",
+      "year": 1989,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "Goldsmiths 졸업", "en": "Graduates Goldsmiths" },
+      "description": {
+        "ko": "Goldsmiths BA Fine Art 졸업. 졸업 시점 이미 Spot Painting·Medicine Cabinet 시리즈 시작.",
+        "en": "Graduates Goldsmiths BA Fine Art. By graduation, the Spot Painting and Medicine Cabinet series have already begun."
+      },
+      "worldview_shift": "SYSTEM",
+      "keyword_tags": ["grid", "altar"],
+      "emotional_valence": "positive",
+      "significance": "medium"
+    },
+    {
+      "id": "E009",
+      "year": 1990,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "Modern Medicine + Gambler 큐레이팅", "en": "Curates Modern Medicine + Gambler" },
+      "description": {
+        "ko": "Carl Freedman과 함께 Building One(런던 Bermondsey)에서 'Modern Medicine'(3월), 'Gambler'(7월) 두 전시 공동 큐레이팅. Gambler에서 'A Thousand Years' 전시.",
+        "en": "Co-curates with Carl Freedman 'Modern Medicine' (March) and 'Gambler' (July) at Building One, Bermondsey. 'A Thousand Years' is exhibited at Gambler."
+      },
+      "worldview_shift": "SYSTEM",
+      "keyword_tags": ["saatchi-effect", "brand-author"],
+      "emotional_valence": "very_positive",
+      "significance": "high"
+    },
+    {
+      "id": "E010",
+      "year": 1990,
+      "category": "career",
+      "period": "NATURAL_HISTORY",
+      "worldview_period": "WV_PEDAGOGY",
+      "title": { "ko": "Saatchi가 'A Thousand Years' 컬렉팅", "en": "Saatchi acquires 'A Thousand Years'" },
+      "description": {
+        "ko": "Charles Saatchi가 Gambler 전시에서 'A Thousand Years'를 구매. Hirst와 Saatchi의 역사적 관계 시작. 1991 Shark 의뢰의 직접 동인.",
+        "en": "Charles Saatchi purchases 'A Thousand Years' from the Gambler show. Beginning of the historic Hirst–Saatchi relationship. Direct cause of the 1991 Shark commission."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["saatchi-effect", "collector-spectacle"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E011",
+      "year": 1991,
+      "category": "career",
+      "period": "NATURAL_HISTORY",
+      "worldview_period": "WV_VITRINE",
+      "title": { "ko": "Saatchi 의뢰 — Shark 제작 (£50,000)", "en": "Saatchi commissions the Shark (£50,000)" },
+      "description": {
+        "ko": "Saatchi가 Hirst에게 £50,000을 제공하며 '내가 무엇이든 만들 수 있는 자유'를 줌. Hirst는 호주 어부에게 14피트 타이거 샤크를 의뢰. 'The Physical Impossibility of Death in the Mind of Someone Living' 제작.",
+        "en": "Saatchi gives Hirst £50,000 with 'freedom to make whatever I want.' Hirst commissions a 14-foot Australian tiger shark. 'The Physical Impossibility of Death in the Mind of Someone Living' is produced."
+      },
+      "worldview_shift": "MORTALITY",
+      "keyword_tags": ["mortality", "saatchi-effect", "scale-shock", "empirical-failure"],
+      "emotional_valence": "mixed",
+      "significance": "critical"
+    },
+    {
+      "id": "E012",
+      "year": 1991,
+      "category": "career",
+      "period": "BUTTERFLY",
+      "worldview_period": "WV_VITRINE",
+      "title": { "ko": "Woodstock Street 첫 개인전 'In and Out of Love'", "en": "First solo show at Woodstock Street: 'In and Out of Love'" },
+      "description": {
+        "ko": "런던 Woodstock Street의 빈 점포에서 첫 개인전. 살아있는 나비와 죽은 나비를 두 방으로 분리.",
+        "en": "First solo exhibition in an empty Woodstock Street storefront, London. Live butterflies and dead butterflies separated into two rooms."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["life-cycle", "butterfly-wing", "ritual-repetition"],
+      "emotional_valence": "positive",
+      "significance": "high"
+    },
+    {
+      "id": "E013",
+      "year": 1992,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_VITRINE",
+      "title": { "ko": "Young British Artists I (Saatchi Gallery)", "en": "Young British Artists I (Saatchi Gallery)" },
+      "description": {
+        "ko": "Saatchi Gallery 'Young British Artists I' 그룹전(3월). Shark 첫 공개. 영국 미술계에 YBA 라벨 정착.",
+        "en": "'Young British Artists I' group show at Saatchi Gallery (March). First public unveiling of the Shark. The YBA label takes hold in the British art scene."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["saatchi-effect", "brand-author", "vitrine"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E014",
+      "year": 1992,
+      "category": "art",
+      "period": "CABINET",
+      "worldview_period": "WV_VITRINE",
+      "title": { "ko": "Pharmacy 갤러리 설치 (Cohen Gallery NY)", "en": "Pharmacy installation (Cohen Gallery NY)" },
+      "description": {
+        "ko": "뉴욕 Cohen Gallery에서 'Pharmacy' 첫 공간 설치. 약장 시리즈가 룸 스케일로 확장. 1998년 동명 레스토랑의 직접 전조.",
+        "en": "First spatial installation of 'Pharmacy' at Cohen Gallery, NY. The cabinet series scales up to room size. Direct precursor to the eponymous 1998 restaurant."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["altar", "pharmaceutical-taxonomy", "transubstantiation"],
+      "emotional_valence": "positive",
+      "significance": "high"
+    },
+    {
+      "id": "E015",
+      "year": 1993,
+      "category": "career",
+      "period": "NATURAL_HISTORY",
+      "worldview_period": "WV_VITRINE",
+      "title": { "ko": "Venice Biennale Aperto, Premio 2000 수상", "en": "Venice Biennale Aperto, wins Premio 2000" },
+      "description": {
+        "ko": "베니스 비엔날레 Aperto 섹션에서 'Mother and Child Divided' 발표. Premio 2000 수상. Hirst의 국제적 정전화 결정 사건.",
+        "en": "Presents 'Mother and Child Divided' at the Aperto section of the Venice Biennale. Wins Premio 2000. Decisive event of Hirst's international canonization."
+      },
+      "worldview_shift": "MORTALITY",
+      "keyword_tags": ["mortality", "grief", "vitrine", "scale-shock"],
+      "emotional_valence": "mixed",
+      "significance": "critical"
+    },
+    {
+      "id": "E016",
+      "year": 1994,
+      "category": "life",
+      "period": "NATURAL_HISTORY",
+      "worldview_period": "WV_VITRINE",
+      "title": { "ko": "'Away from the Flock' 훼손 사건", "en": "'Away from the Flock' vandalized" },
+      "description": {
+        "ko": "Serpentine Gallery 전시 중, 한 학생이 'Away from the Flock'에 검은 잉크를 부어 훼손. 'Black Sheep'으로 개명 시도. Hirst가 복원 후 재전시. 미디어 화제성 확장.",
+        "en": "During the Serpentine show, a student pours black ink into 'Away from the Flock,' attempting to retitle it 'Black Sheep.' Hirst restores and re-exhibits the work. Media notoriety expands."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["preservation", "specimen"],
+      "emotional_valence": "negative",
+      "significance": "low"
+    },
+    {
+      "id": "E017",
+      "year": 1995,
+      "category": "career",
+      "period": "NATURAL_HISTORY",
+      "worldview_period": "WV_VITRINE",
+      "title": { "ko": "Turner Prize 수상", "en": "Wins Turner Prize" },
+      "description": {
+        "ko": "'Some Comfort Gained from the Acceptance of the Inherent Lies in Everything'으로 1995 Turner Prize 수상. 영국 미술계 정전화 완료.",
+        "en": "Wins the 1995 Turner Prize for 'Some Comfort Gained from the Acceptance of the Inherent Lies in Everything.' British canonization complete."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["mortality", "vitrine", "permutation", "saatchi-effect"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E018",
+      "year": 1995,
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_VITRINE",
+      "title": { "ko": "Maia Norman과의 동거, 첫 아들 Connor 출생", "en": "Lives with Maia Norman; first son Connor born" },
+      "description": {
+        "ko": "Maia Norman과 장기 동거 시작(공식 결혼은 안 함). 첫 아들 Connor 출생. 이후 두 아들(Cassius 2000, Cyrus 2005)을 더 두며 Devon 양육으로 점차 이동.",
+        "en": "Begins long-term cohabitation with Maia Norman (never formally marries). First son Connor born. Will have two more sons (Cassius 2000, Cyrus 2005), gradually shifting parenting to Devon."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": [],
+      "emotional_valence": "positive",
+      "significance": "medium"
+    },
+    {
+      "id": "E019",
+      "year": 1996,
+      "category": "career",
+      "period": "CABINET",
+      "worldview_period": "WV_PHARMACOPOEIA",
+      "title": { "ko": "Gagosian 첫 미국 개인전", "en": "First US solo show at Gagosian" },
+      "description": {
+        "ko": "뉴욕 Gagosian에서 'No Sense of Absolute Corruption'(1996.4.27–6.15). Larry Gagosian과의 본격 협업 시작. 미국 시장 진입.",
+        "en": "'No Sense of Absolute Corruption' at Gagosian New York (Apr 27 – Jun 15, 1996). Beginning of full Gagosian partnership. Entry into the US market."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["saatchi-effect", "brand-author", "art-as-asset"],
+      "emotional_valence": "very_positive",
+      "significance": "high"
+    },
+    {
+      "id": "E020",
+      "year": 1997,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PHARMACOPOEIA",
+      "title": { "ko": "Sensation 전 (Royal Academy)", "en": "Sensation exhibition (Royal Academy)" },
+      "description": {
+        "ko": "Royal Academy 'Sensation: Young British Artists from the Saatchi Collection'(9.18–12.28). YBA의 미술관 정전화 결정 사건. Hirst 다수 작품 출품.",
+        "en": "'Sensation: Young British Artists from the Saatchi Collection' at Royal Academy (Sep 18 – Dec 28). Decisive event of YBA's museum canonization. Multiple Hirst works exhibited."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["saatchi-effect", "brand-author", "vitrine"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E021",
+      "year": 1997,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_PHARMACOPOEIA",
+      "title": { "ko": "자전적 책 'I Want to Spend the Rest of My Life…' 출간", "en": "Publishes autobiographical book 'I Want to Spend the Rest of My Life…'" },
+      "description": {
+        "ko": "Booth-Clibborn Editions에서 Hirst의 거대 자전적 작가 도서 'I Want to Spend the Rest of My Life Everywhere, with Everyone, One to One, Always, Forever, Now' 출간. 작가-브랜드 의식의 정전화.",
+        "en": "Booth-Clibborn Editions publishes Hirst's massive autobiographical artist book 'I Want to Spend the Rest of My Life Everywhere, with Everyone, One to One, Always, Forever, Now.' Canonization of artist-as-brand consciousness."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["brand-author", "archive", "catalogue"],
+      "emotional_valence": "positive",
+      "significance": "medium"
+    },
+    {
+      "id": "E022",
+      "year": 1998,
+      "date": "1998-01-21",
+      "category": "career",
+      "period": "CABINET",
+      "worldview_period": "WV_PHARMACOPOEIA",
+      "title": { "ko": "Pharmacy 레스토랑 오픈 (Notting Hill)", "en": "Pharmacy restaurant opens (Notting Hill)" },
+      "description": {
+        "ko": "Notting Hill에 'Pharmacy' 레스토랑 오픈(1.21). Hirst의 작품이 가구·테이블웨어·인테리어 전체. 약학적 우주의 일상 거주 가능 형식.",
+        "en": "'Pharmacy' restaurant opens in Notting Hill (Jan 21). Hirst's works occupy furniture, tableware, full interior. Pharmaceutical universe in habitable form."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["altar", "pharmaceutical-taxonomy", "transubstantiation", "commodity-fetish"],
+      "emotional_valence": "very_positive",
+      "significance": "high"
+    },
+    {
+      "id": "E023",
+      "year": 2000,
+      "category": "career",
+      "period": "CABINET",
+      "worldview_period": "WV_PHARMACOPOEIA",
+      "title": { "ko": "Pharmacy 레스토랑 폐업, 둘째 아들 Cassius 출생", "en": "Pharmacy restaurant closes; second son Cassius born" },
+      "description": {
+        "ko": "Pharmacy 레스토랑 영업 종료. 비품·인테리어 일체는 차후 Sotheby's 경매 예정. 둘째 아들 Cassius 출생.",
+        "en": "Pharmacy restaurant closes; fixtures and interior reserved for a later Sotheby's auction. Second son Cassius born."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["commodity-fetish", "art-as-asset"],
+      "emotional_valence": "mixed",
+      "significance": "medium"
+    },
+    {
+      "id": "E024",
+      "year": 2002,
+      "date": "2002-10-19",
+      "category": "career",
+      "period": "CABINET",
+      "worldview_period": "WV_RELIQUARY",
+      "title": { "ko": "Pharmacy 비품 Sotheby's 경매 — $19.2M", "en": "Pharmacy fixtures auctioned at Sotheby's — $19.2M" },
+      "description": {
+        "ko": "Pharmacy 레스토랑 비품 일체를 Sotheby's London에서 경매(10.19). 367 lot, £11.1M 낙찰. 레스토랑 전체가 작품으로 분해·유통.",
+        "en": "Sotheby's London auctions all Pharmacy restaurant fixtures (Oct 19). 367 lots, £11.1M. The entire restaurant disassembled and circulated as artwork."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["auction-as-artwork", "art-as-asset", "commodity-fetish"],
+      "emotional_valence": "positive",
+      "significance": "high"
+    },
+    {
+      "id": "E025",
+      "year": 2003,
+      "category": "art",
+      "period": "CABINET",
+      "worldview_period": "WV_RELIQUARY",
+      "title": { "ko": "Romance in the Age of Uncertainty (White Cube)", "en": "Romance in the Age of Uncertainty (White Cube)" },
+      "description": {
+        "ko": "White Cube 개인전. 12 진열장 + 중앙 십자가 = 12사도 + 그리스도 구조. 신앙기의 형식적 정점.",
+        "en": "Solo show at White Cube. 12 vitrines + central cross = 12 Apostles + Christ structure. Formal apex of the reliquary period."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["stations-of-cross", "catholic-iconography", "altar", "ritual-repetition"],
+      "emotional_valence": "very_positive",
+      "significance": "high"
+    },
+    {
+      "id": "E026",
+      "year": 2004,
+      "category": "career",
+      "period": "NATURAL_HISTORY",
+      "worldview_period": "WV_RELIQUARY",
+      "title": { "ko": "Saatchi → Cohen, Shark $8M (Gagosian 중개)", "en": "Saatchi → Cohen, Shark for $8M (via Gagosian)" },
+      "description": {
+        "ko": "Charles Saatchi가 1991 Shark을 Steven A. Cohen에게 $8M에 양도(Larry Gagosian 중개). 원본 표본은 부패 진행 중. 2007년 새 상어 표본으로 교체. 진본성 논쟁 촉발.",
+        "en": "Charles Saatchi transfers the 1991 Shark to Steven A. Cohen for $8M (brokered by Larry Gagosian). The original specimen is decaying. In 2007 it is replaced with a new shark, igniting an authenticity debate."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["art-as-asset", "saatchi-effect", "preservation", "provenance-fiction"],
+      "emotional_valence": "mixed",
+      "significance": "critical"
+    },
+    {
+      "id": "E027",
+      "year": 2005,
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_RELIQUARY",
+      "title": { "ko": "셋째 아들 Cyrus 출생, Devon Toddington Manor 매입", "en": "Third son Cyrus born; acquires Toddington Manor in Devon" },
+      "description": {
+        "ko": "셋째 아들 Cyrus 출생. Gloucestershire/Devon의 폐허 저택 Toddington Manor 매입. 가족 양육과 작품 보관·작업의 거점화 시작.",
+        "en": "Third son Cyrus born. Acquires the derelict Toddington Manor in the Cotswolds. Beginning of its use as family base and storage/working site."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": [],
+      "emotional_valence": "positive",
+      "significance": "medium"
+    },
+    {
+      "id": "E028",
+      "year": 2005,
+      "category": "art",
+      "period": "SACRED",
+      "worldview_period": "WV_RELIQUARY",
+      "title": { "ko": "New Religion (All Hallows on the Wall church)", "en": "New Religion (All Hallows on the Wall church)" },
+      "description": {
+        "ko": "런던 All Hallows on the Wall 교회 내부에 'New Religion' 박스 세트 설치. 종교 공간 자체가 작품 매체.",
+        "en": "'New Religion' boxed-set installed inside the All Hallows on the Wall church, London. The religious space itself becomes the medium."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["catholic-iconography", "altar", "ritual-repetition", "icon", "reliquary"],
+      "emotional_valence": "very_positive",
+      "significance": "high"
+    },
+    {
+      "id": "E029",
+      "year": 2007,
+      "date": "2007-06-01",
+      "category": "art",
+      "period": "VANITAS",
+      "worldview_period": "WV_VANITAS_SPECTACLE",
+      "title": { "ko": "Beyond Belief 전 — For the Love of God 공개", "en": "Beyond Belief — For the Love of God unveiled" },
+      "description": {
+        "ko": "White Cube 'Beyond Belief'(6.1–7.7)에서 다이아몬드 해골 공개. 제작비 £14M, 가격 £50M. 컨소시엄(Hirst·White Cube·Frank Dunphy)에 매각. 가격 책정 자체가 작품 사건.",
+        "en": "Diamond skull unveiled at White Cube 'Beyond Belief' (Jun 1 – Jul 7). £14M production, £50M asking price. Sold to a consortium including Hirst, White Cube, and Frank Dunphy. The pricing itself is the work-event."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["vanitas-tradition", "diamond-economy", "memento-mori", "art-as-asset", "auction-as-artwork"],
+      "emotional_valence": "mixed",
+      "significance": "critical"
+    },
+    {
+      "id": "E030",
+      "year": 2008,
+      "date": "2008-03-29",
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_VANITAS_SPECTACLE",
+      "title": { "ko": "Angus Fairhurst 자살", "en": "Angus Fairhurst suicide" },
+      "description": {
+        "ko": "Goldsmiths 동기·Freeze 동료·평생 친구 Angus Fairhurst가 Bridgnorth 숲에서 목매 자살(3.29). Hirst의 가장 깊은 우정 중 하나의 종결. Sotheby's 경매 6개월 전.",
+        "en": "Angus Fairhurst — Goldsmiths peer, Freeze co-organizer, lifelong friend — hangs himself in a wood near Bridgnorth (Mar 29). Closure of one of Hirst's deepest friendships. Six months before Sotheby's."
+      },
+      "worldview_shift": "MORTALITY",
+      "keyword_tags": ["mortality", "grief"],
+      "emotional_valence": "very_negative",
+      "significance": "high"
+    },
+    {
+      "id": "E031",
+      "year": 2008,
+      "date": "2008-09-15",
+      "category": "art",
+      "period": "VANITAS",
+      "worldview_period": "WV_VANITAS_SPECTACLE",
+      "title": { "ko": "Sotheby's 'Beautiful Inside My Head Forever' 시작", "en": "Sotheby's 'Beautiful Inside My Head Forever' begins" },
+      "description": {
+        "ko": "Sotheby's London에서 Hirst 단일 작가 218 lot 경매 시작(9.15). 갤러리(White Cube, Gagosian) 우회 — 작가 직거래의 사상 최대 사례. 같은 날 아침 Lehman Brothers 파산 신청.",
+        "en": "Sotheby's London begins a 218-lot single-artist auction (Sep 15) — bypassing galleries (White Cube, Gagosian). The largest artist-direct sale ever. The same morning Lehman Brothers files for bankruptcy."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["auction-as-artwork", "sotheby-2008", "lehman-coincidence", "art-as-asset", "brand-author"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E032",
+      "year": 2008,
+      "date": "2008-09-15",
+      "category": "life",
+      "period": "VANITAS",
+      "worldview_period": "WV_VANITAS_SPECTACLE",
+      "title": { "ko": "Lehman Brothers 파산 (외부 사건)", "en": "Lehman Brothers bankruptcy (external event)" },
+      "description": {
+        "ko": "9.15 새벽 Lehman Brothers 파산 신청. 글로벌 금융위기 본격화. Sotheby's 경매와의 동일 날짜는 Hirst 작품의 신화로 흡수됨.",
+        "en": "Lehman Brothers files for bankruptcy in the early hours of Sep 15. The global financial crisis begins. The shared date is later absorbed into the mythology of Hirst's work."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["lehman-coincidence", "sotheby-2008"],
+      "emotional_valence": "very_negative",
+      "significance": "critical"
+    },
+    {
+      "id": "E033",
+      "year": 2008,
+      "date": "2008-09-16",
+      "category": "art",
+      "period": "VANITAS",
+      "worldview_period": "WV_VANITAS_SPECTACLE",
+      "title": { "ko": "Sotheby's 종료 — £111.5M (단일 작가 사상 최대)", "en": "Sotheby's closes — £111.5M (largest ever single-artist sale)" },
+      "description": {
+        "ko": "이틀 경매 종료(9.16). 218 lot 중 9 lot 유찰, 총 £111.5M(약 $200.7M) 낙찰. 단일 작가 경매 사상 최대 기록. The Golden Calf £10.3M 최고가.",
+        "en": "Two-day auction closes (Sep 16). 9 of 218 lots fail to sell; total of £111.5M (~$200.7M). Largest single-artist auction in history. The Golden Calf takes top price at £10.3M."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["auction-as-artwork", "sotheby-2008", "art-as-asset", "brand-author"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E034",
+      "year": 2009,
+      "category": "career",
+      "period": "VEILS",
+      "worldview_period": "WV_VANITAS_SPECTACLE",
+      "title": { "ko": "Wallace Collection 'No Love Lost' — 비평적 실패", "en": "Wallace Collection 'No Love Lost' — critical failure" },
+      "description": {
+        "ko": "Wallace Collection에서 25년 만의 직접 회화 25점 전시 'No Love Lost: Blue Paintings'(10.14–2010.1.24). 대다수 평론가가 혹평 — Adrian Searle, Tom Lubbock, Rachel Campbell-Johnston 등. 'Hirst가 회화로는 무능하다'는 일반적 평가.",
+        "en": "'No Love Lost: Blue Paintings' at the Wallace Collection (Oct 14, 2009 – Jan 24, 2010): 25 hand-painted canvases, the first in 25 years. Critically panned — Adrian Searle, Tom Lubbock, Rachel Campbell-Johnston. General verdict: Hirst is incompetent as a painter."
+      },
+      "worldview_shift": "FORM",
+      "keyword_tags": ["gestural-return", "hand-vs-machine"],
+      "emotional_valence": "very_negative",
+      "significance": "high"
+    },
+    {
+      "id": "E035",
+      "year": 2010,
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_VANITAS_SPECTACLE",
+      "title": { "ko": "알코올·코카인 의존 공개 인정, 금주 시작", "en": "Publicly acknowledges alcohol/cocaine dependency, sobriety begins" },
+      "description": {
+        "ko": "수년간의 알코올·코카인 의존을 공개적으로 인정. 금주 시작. 자녀 양육과 비평 실패 후의 자기 점검.",
+        "en": "Publicly acknowledges years of alcohol and cocaine dependency. Sobriety begins. Self-reckoning after parenting demands and the critical failure."
+      },
+      "worldview_shift": "MORTALITY",
+      "keyword_tags": ["mortality", "grief"],
+      "emotional_valence": "negative",
+      "significance": "high"
+    },
+    {
+      "id": "E036",
+      "year": 2010,
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_VANITAS_SPECTACLE",
+      "title": { "ko": "Maia Norman과 별거, Devon으로 양육 이동", "en": "Separates from Maia Norman; parenting shifts to Devon" },
+      "description": {
+        "ko": "Maia Norman과 사실상 별거(2010~2012 사이). 자녀 양육의 중심을 Devon으로 이동. 후일 Roxy/현 파트너 관계로 이행.",
+        "en": "De facto separation from Maia Norman (2010–2012). Center of parenting shifts to Devon. Later transitions to a relationship with current partner."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["grief"],
+      "emotional_valence": "negative",
+      "significance": "medium"
+    },
+    {
+      "id": "E037",
+      "year": 2012,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_MYTHOPOEIA",
+      "title": { "ko": "Tate Modern 첫 개인 회고전", "en": "First solo retrospective at Tate Modern" },
+      "description": {
+        "ko": "Tate Modern 'Damien Hirst'(4.4–9.9). Hirst 첫 영국 미술관 회고전. 73 작품. 비평·관객 모두에게 정전화의 공식 표지.",
+        "en": "'Damien Hirst' at Tate Modern (Apr 4 – Sep 9). Hirst's first British museum retrospective. 73 works. Official marker of canonization for both critics and audiences."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["archive", "catalogue", "brand-author"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E038",
+      "year": 2012,
+      "category": "career",
+      "period": "SPOT",
+      "worldview_period": "WV_MYTHOPOEIA",
+      "title": { "ko": "Gagosian 11갤러리 동시 Spot 회고전", "en": "Gagosian's 11-gallery simultaneous Spot retrospective" },
+      "description": {
+        "ko": "Gagosian Gallery가 전세계 11개 도시 갤러리에서 'The Complete Spot Paintings 1986–2011' 동시 개최(1.12–). 시리즈가 단일 작품의 위상으로 환산되는 미술시장사적 사건.",
+        "en": "Gagosian opens 'The Complete Spot Paintings 1986–2011' simultaneously across 11 city galleries worldwide (from Jan 12). An art-market event that translates a series into the status of a single work."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["seriality", "delegated-authorship", "factory-production", "art-as-asset", "brand-author"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E039",
+      "year": 2013,
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_MYTHOPOEIA",
+      "title": { "ko": "Newport Street Gallery 건축 시작 (Vauxhall)", "en": "Newport Street Gallery construction begins (Vauxhall)" },
+      "description": {
+        "ko": "런던 Vauxhall에 자가 컬렉션 공개를 위한 갤러리 건축 시작. Caruso St John 건축. Hirst의 컬렉터-큐레이터 정체성 회귀.",
+        "en": "Construction begins on Hirst's own collection-display gallery in Vauxhall, London. Architecture by Caruso St John. Return of Hirst's collector-curator identity."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["archive", "brand-author", "saatchi-effect"],
+      "emotional_valence": "positive",
+      "significance": "medium"
+    },
+    {
+      "id": "E040",
+      "year": 2015,
+      "date": "2015-10-08",
+      "category": "career",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_MYTHOPOEIA",
+      "title": { "ko": "Newport Street Gallery 개관", "en": "Newport Street Gallery opens" },
+      "description": {
+        "ko": "Newport Street Gallery 개관(10.8). John Hoyland 회고전으로 출발. Hirst가 컬렉터로서의 영향력을 제도화. 2016 Stirling Prize 수상.",
+        "en": "Newport Street Gallery opens (Oct 8) with a John Hoyland retrospective. Institutionalizes Hirst's influence as collector. Wins the 2016 Stirling Prize."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["archive", "saatchi-effect", "brand-author"],
+      "emotional_valence": "very_positive",
+      "significance": "high"
+    },
+    {
+      "id": "E041",
+      "year": 2017,
+      "date": "2017-04-09",
+      "category": "art",
+      "period": "TREASURES",
+      "worldview_period": "WV_MYTHOPOEIA",
+      "title": { "ko": "Treasures from the Wreck of the Unbelievable (Venice, Pinault)", "en": "Treasures from the Wreck of the Unbelievable (Venice, Pinault)" },
+      "description": {
+        "ko": "François Pinault 의뢰의 Punta della Dogana + Palazzo Grassi 동시 전(4.9–12.3). 10년·£50M 제작. 가공의 해방 노예 Aulus Calidius Amphilochus의 침몰선 신화.",
+        "en": "Simultaneous show at Punta della Dogana + Palazzo Grassi commissioned by François Pinault (Apr 9 – Dec 3). 10 years and £50M of production. Mythology of the fictional freedman Aulus Calidius Amphilochus and his shipwreck."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["provenance-fiction", "reliquary", "scale-shock", "archive", "collector-spectacle"],
+      "emotional_valence": "mixed",
+      "significance": "critical"
+    },
+    {
+      "id": "E042",
+      "year": 2017,
+      "category": "career",
+      "period": "TREASURES",
+      "worldview_period": "WV_MYTHOPOEIA",
+      "title": { "ko": "Treasures 비평계 만장 혹평", "en": "Treasures unanimously panned by critics" },
+      "description": {
+        "ko": "Jerry Saltz, Andrew Russeth, Adrian Searle 등 거의 만장 혹평. '돈으로 만든 시각적 자기과시', '가짜의 가짜', '21c 미술의 가장 비싼 실수'. Hirst의 야망 자체가 vanitas의 메타 실현.",
+        "en": "Near-universal panning by Jerry Saltz, Andrew Russeth, Adrian Searle, etc. \"Visual self-aggrandizement made of money,\" \"fake of a fake,\" \"the most expensive mistake in 21c art.\" Hirst's ambition itself becomes a meta-realization of vanitas."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["provenance-fiction", "vanitas-tradition", "brand-author"],
+      "emotional_valence": "very_negative",
+      "significance": "high"
+    },
+    {
+      "id": "E043",
+      "year": 2017,
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_MYTHOPOEIA",
+      "title": { "ko": "#MeToo 운동 미술계 확산, YBA 세대 재평가", "en": "#MeToo expands into the art world; YBA generation re-examined" },
+      "description": {
+        "ko": "2017년 가을부터 #MeToo 운동이 미술계로 확산. 1990s YBA 세대의 도발 미학·갤러리스트 권력·페미니즘 부재가 재평가 대상으로. Hirst의 위치도 비판적 맥락에서 재독.",
+        "en": "From autumn 2017, #MeToo expands into the art world. The 1990s YBA generation's provocation aesthetics, gallerist power, and lack of feminism are re-examined. Hirst's position is reread in this critical light."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["brand-author"],
+      "emotional_valence": "negative",
+      "significance": "medium"
+    },
+    {
+      "id": "E044",
+      "year": 2018,
+      "category": "art",
+      "period": "VEILS",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "Veil Paintings (Gagosian LA)", "en": "Veil Paintings (Gagosian LA)" },
+      "description": {
+        "ko": "Gagosian Beverly Hills 'The Veil Paintings'(3.1–4.14). 24 점 직접 회화. Bonnard·Seurat 명시. Wallace Collection 비평 실패의 9년 후 재시도. 평론 미온, 시장 반응 호의적.",
+        "en": "'The Veil Paintings' at Gagosian Beverly Hills (Mar 1 – Apr 14). 24 hand-painted canvases. Bonnard and Seurat explicitly cited. A nine-year-later retry of the Wallace Collection failure. Critically lukewarm but warmly received by the market."
+      },
+      "worldview_shift": "FORM",
+      "keyword_tags": ["gestural-return", "pointillism", "bonnard-reference", "seurat-reference", "hand-vs-machine"],
+      "emotional_valence": "positive",
+      "significance": "high"
+    },
+    {
+      "id": "E045",
+      "year": 2018,
+      "category": "art",
+      "period": "CHERRY",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "Cherry Blossoms 시리즈 시작", "en": "Cherry Blossoms series begins" },
+      "description": {
+        "ko": "Cherry Blossoms 회화 작업 개시. 3년간 107점 제작. mono no aware 명시 차용. 회화기의 정체성 좌표.",
+        "en": "Begins the Cherry Blossoms paintings. Produces 107 works over three years. Explicitly cites mono no aware. Identity coordinate of the painting period."
+      },
+      "worldview_shift": "FORM",
+      "keyword_tags": ["mono-no-aware", "cherry-pigment", "gestural-return", "hand-vs-machine"],
+      "emotional_valence": "very_positive",
+      "significance": "high"
+    },
+    {
+      "id": "E046",
+      "year": 2020,
+      "category": "life",
+      "period": "PEDAGOGY",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "팬데믹 — Devon 작업실 고립, BLM 운동 확산", "en": "Pandemic — Devon studio isolation; BLM expansion" },
+      "description": {
+        "ko": "코로나 팬데믹과 BLM 운동(5월 George Floyd 사후) 확산. Hirst는 Devon 작업실에 고립되어 Cherry Blossoms 작업 집중. 거대 스튜디오 기계의 일시적 정지.",
+        "en": "COVID-19 pandemic and post-Floyd BLM (May 2020). Hirst is isolated in his Devon studio, concentrating on Cherry Blossoms. Temporary stoppage of his vast studio machine."
+      },
+      "worldview_shift": "FORM",
+      "keyword_tags": ["hand-vs-machine", "mono-no-aware"],
+      "emotional_valence": "mixed",
+      "significance": "medium"
+    },
+    {
+      "id": "E047",
+      "year": 2021,
+      "date": "2021-07-06",
+      "category": "art",
+      "period": "CHERRY",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "Cherry Blossoms (Fondation Cartier 파리)", "en": "Cherry Blossoms (Fondation Cartier Paris)" },
+      "description": {
+        "ko": "Fondation Cartier pour l'Art Contemporain Paris(7.6–2022.1.2). 107 점 중 30+점 공개. 회화기의 제도적 정전화. Hirst 회화의 박물관 봉헌.",
+        "en": "Fondation Cartier pour l'Art Contemporain Paris (Jul 6, 2021 – Jan 2, 2022). 30+ of the 107 works shown. Institutional canonization of the painting period — Hirst's painting consecrated in the museum."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["mono-no-aware", "cherry-pigment", "gestural-return", "icon", "ritual-repetition"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E048",
+      "year": 2021,
+      "date": "2021-07-14",
+      "category": "art",
+      "period": "CURRENCY",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "The Currency NFT 발행 (10,000점)", "en": "The Currency NFT launches (10,000 works)" },
+      "description": {
+        "ko": "Heni 플랫폼에서 10,000 회화-NFT 쌍을 각 $2,000에 1차 판매(7.14). 1년 내 회화 또는 NFT 중 하나 선택, 미선택분은 소각/소멸. 2008 Sotheby's의 디지털 응답.",
+        "en": "Heni platform launches 10,000 painting–NFT pairs at $2,000 each (Jul 14). Each owner must choose painting or NFT within a year; the unchosen is destroyed/annihilated. Digital response to Sotheby's 2008."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["nft-dematerialization", "physical-destruction", "art-as-asset", "ritual-repetition", "seriality"],
+      "emotional_valence": "very_positive",
+      "significance": "critical"
+    },
+    {
+      "id": "E049",
+      "year": 2022,
+      "date": "2022-10-11",
+      "category": "art",
+      "period": "CURRENCY",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "Currency 소각식 — Newport Street Gallery", "en": "Currency burning ceremony — Newport Street Gallery" },
+      "description": {
+        "ko": "디지털을 선택한 소유자들의 회화 4,851점을 Hirst 본인이 Newport Street Gallery에서 소각(10.11–10.30). 가치 실험의 종결 의례.",
+        "en": "Hirst himself incinerates 4,851 paintings whose owners chose the digital, at Newport Street Gallery (Oct 11–30). Closing ritual of the value experiment."
+      },
+      "worldview_shift": "VALUE",
+      "keyword_tags": ["physical-destruction", "nft-dematerialization", "ritual-repetition", "art-as-asset", "vanitas-tradition"],
+      "emotional_valence": "mixed",
+      "significance": "critical"
+    },
+    {
+      "id": "E050",
+      "year": 2022,
+      "category": "art",
+      "period": "CHERRY",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "Forgiving and Forgetting (Cherry Blossoms, Gagosian Paris/NY)", "en": "Forgiving and Forgetting (Cherry Blossoms, Gagosian Paris/NY)" },
+      "description": {
+        "ko": "Gagosian Paris(6월), 이후 NY로 순회. 후기 임파스토. 시장 반응 매우 호의적, 평론 양가적.",
+        "en": "Gagosian Paris (June), then traveling to NY. Late impasto. Very warm market reception; critically ambivalent."
+      },
+      "worldview_shift": "FAITH",
+      "keyword_tags": ["mono-no-aware", "cherry-pigment", "gestural-return", "grief"],
+      "emotional_valence": "positive",
+      "significance": "medium"
+    },
+    {
+      "id": "E051",
+      "year": 2023,
+      "category": "art",
+      "period": "VEILS",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "Where the Land Meets the Sea (Phillips, Seascape 시리즈)", "en": "Where the Land Meets the Sea (Phillips, Seascape series)" },
+      "description": {
+        "ko": "Veils 점묘 기법을 풍경화로 확장한 Seascape 시리즈. 회화기의 풍경적 만년 변종.",
+        "en": "Seascape series extending the Veils' pointillist technique into landscape. Late-period landscape variant of the painting era."
+      },
+      "worldview_shift": "FORM",
+      "keyword_tags": ["pointillism", "bonnard-reference", "gestural-return"],
+      "emotional_valence": "positive",
+      "significance": "medium"
+    },
+    {
+      "id": "E052",
+      "year": 2024,
+      "category": "art",
+      "period": "VEILS",
+      "worldview_period": "WV_REPAINTING",
+      "title": { "ko": "Looking Forward to a Complete Suspension of Disbelief", "en": "Looking Forward to a Complete Suspension of Disbelief" },
+      "description": {
+        "ko": "Veils 만년작 표제. Coleridge의 미학 명제 'willing suspension of disbelief'를 인용. Treasures의 회고적 정당화.",
+        "en": "Late Veils titled with Coleridge's aesthetic proposition 'willing suspension of disbelief.' Retroactive justification of Treasures."
+      },
+      "worldview_shift": "FORM",
+      "keyword_tags": ["gestural-return", "pointillism", "bonnard-reference", "provenance-fiction"],
+      "emotional_valence": "positive",
+      "significance": "medium"
+    }
+  ]
+}
