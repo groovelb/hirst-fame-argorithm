@@ -85,12 +85,21 @@ export function computeVitrineGeometry(size = DEFAULT_TANK_SIZE) {
       inset: 0.06,
     },
 
-    /** 내부 좌우 수직 strut + 볼트 그리드 */
-    strut: {
-      width: shortSide * 0.11,
-      depth: shortSide * 0.06,
+    /** 내부 스틸 케이지 공통 재질 (struts/ribs/ridges 통일) */
+    rebar: {
       color: '#6b9b94',
       material: { metalness: 0.5, roughness: 0.5 },
+    },
+
+    /** 내부 4 코너 포스트 + 볼트 그리드
+     *  레퍼런스 구조: 측면 한가운데에 막대가 아니라, 박스 안쪽 4 코너에 정사각
+     *  단면 수직 포스트가 박혀 있음. 이렇게 해야:
+     *   - 정면 뷰: 좌/우 가장자리에 2 포스트 (상어 가운데 시야 클리어)
+     *   - 측면 뷰: 앞/뒤 가장자리에 2 포스트 (상어 가운데 시야 클리어)
+     *  depth: 정사각 단면 한 변의 길이 (x/z 방향 동일)
+     */
+    strut: {
+      depth: shortSide * 0.06,
       bolt: {
         count: 11,
         radius: shortSide * 0.012,
@@ -100,24 +109,18 @@ export function computeVitrineGeometry(size = DEFAULT_TANK_SIZE) {
       },
     },
 
-    /** 천장 안쪽 평행 ribs (z축 균등 분포, 카메라 사각에서 사다리꼴로 보임) */
+    /** 천장 안쪽 평행 ribs (스틸 빔, z축 균등 분포) */
     ceiling: {
       ribCount: 4,
-      /** 천장에서 아래로 돌출되는 양 (y두께) */
       ribDrop: shortSide * 0.04,
-      /** 각 rib의 z방향 길이 (얇은 슬랫) */
       ribDepth: d * 0.05,
-      color: '#f8f6f1',
-      material: { metalness: 0.0, roughness: 0.6 },
     },
 
-    /** 바닥 안쪽 가로 ridges (x축으로 긴 슬랫, z방향 균등 분포) */
+    /** 바닥 안쪽 가로 ridges (스틸 빔, z축 균등 분포) */
     floor: {
       ridgeCount: 3,
       ridgeHeight: shortSide * 0.025,
       ridgeDepth: d * 0.06,
-      color: '#f8f6f1',
-      material: { metalness: 0.0, roughness: 0.6 },
     },
 
     /** 상어 서스펜션 와이어 */

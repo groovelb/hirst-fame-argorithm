@@ -55,7 +55,7 @@ Damien Hirst의 대표작
 
 export const Default = {
   args: {
-    modelUrl: '/crysis_shark.glb',
+    modelUrl: '/shark_hirst_pose.glb',
     sharkScale: 0.3,
     tankSize: [6, 3, 2.4],
     isAutoRotate: true,

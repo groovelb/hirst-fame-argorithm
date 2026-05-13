@@ -71,7 +71,9 @@ function VitrineShell({ design }) {
     ];
   }
 
-  /** 5개 면의 panel matte 수집 (bottom은 plinth로 가려져 생략) */
+  /** 5개 면의 panel matte 수집 (bottom은 plinth로 가려져 생략)
+   *  좌/우 옆면과 동일하게 앞/뒤도 panel matte로 둘러싸 대칭성 유지.
+   */
   const facePanels = [
     ...buildFaceStrips('z', 1),
     ...buildFaceStrips('z', -1),

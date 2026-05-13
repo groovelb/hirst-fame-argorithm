@@ -33,7 +33,7 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
   return (
     <>
 
-      {/* Y축 감정 밴드 수평 가이드 라인 */}
+      {/* Y축 세계관 카테고리 행 구분선 */}
       { emotionBands.map((band) => (
         <Box
           key={ band.id }
@@ -43,10 +43,8 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
             top: band.y,
             width: totalWidth,
             height: '1px',
-            borderTop: '1px dashed',
-            borderColor: 'divider',
+            backgroundColor: 'rgba(246, 246, 236, 0.04)',
             pointerEvents: 'none',
-            opacity: 0.6,
           } }
         />
       )) }
@@ -86,9 +84,10 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
                     width: { xs: 42, sm: 48, md: 56 },
                     height: { xs: 42, sm: 48, md: 56 },
                     objectFit: 'contain',
-                    opacity: 0.78,
-                    mixBlendMode: 'screen',
-                    filter: 'drop-shadow(0 0 10px rgba(232, 244, 255, 0.12))',
+                    opacity: 1,
+                    mixBlendMode: 'normal',
+                    filter: 'none',
+                    backgroundColor: 'background.default',
                     userSelect: 'none',
                     flexShrink: 0,
                   } }
@@ -97,14 +96,14 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
               <Typography
                 variant="caption"
                 sx={ {
-                  color: 'rgba(246, 246, 236, 0.56)',
+                  color: 'rgba(246, 246, 236, 0.36)',
                   fontSize: { xs: '0.55rem', md: '0.6rem' },
                   fontWeight: 600,
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   userSelect: 'none',
                   whiteSpace: 'nowrap',
-                  textShadow: '0 0 8px rgba(10, 10, 10, 0.9)',
+                  textShadow: 'none',
                 } }
               >
                 { band.localeKey ? t(band.localeKey) : band.label }
@@ -122,7 +121,7 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
           top: axisY,
           width: totalWidth,
           height: '1px',
-          backgroundColor: 'text.disabled',
+          backgroundColor: 'action.disabled',
           pointerEvents: 'none',
         } }
       />
@@ -144,7 +143,7 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
             sx={ {
               width: '1px',
               height: tick.isMajor ? 12 : 8,
-              backgroundColor: tick.isMajor ? 'text.disabled' : 'action.disabled',
+              backgroundColor: tick.isMajor ? 'action.disabled' : 'divider',
               transform: 'translateY(-50%)',
             } }
           />
@@ -156,7 +155,7 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
               top: 14,
               left: '50%',
               transform: 'translateX(-50%)',
-              color: tick.isMajor ? 'text.secondary' : 'text.disabled',
+              color: tick.isMajor ? 'text.disabled' : 'action.disabled',
               fontWeight: tick.isMajor ? 600 : 400,
               fontSize: tick.isMajor ? '0.75rem' : '0.625rem',
               whiteSpace: 'nowrap',

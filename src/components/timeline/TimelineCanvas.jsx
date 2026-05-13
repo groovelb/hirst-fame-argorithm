@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useLocale } from '../../i18n';
 import { ColorDonutChart } from './ColorDonutChart.jsx';
 import { ColorDetailModal } from './ColorDetailModal.jsx';
@@ -289,6 +289,34 @@ function TimelineCanvas({
   );
   const selectedBioArtworks = bioArtworksByCategory[selectedBioCategory] ?? [];
 
+  /** viewport 중앙의 canvas X 좌표 — 작품 focus scale 계산용.
+      scrollProgress(0~1) × scrollDistance + viewportWidth/2 = 화면 중앙 좌표.
+      scrollProgress 미주입 시 fallback motion value 사용. */
+  const fallbackProgress = useMotionValue(0);
+  const sourceProgress = scrollProgress ?? fallbackProgress;
+  const scrollDistance = Math.max(0, totalWidth - (viewportWidth ?? 0));
+  const halfViewport = (viewportWidth ?? 0) / 2;
+  const viewportCenterX = useTransform(
+    sourceProgress,
+    (p) => p * scrollDistance + halfViewport,
+  );
+  /** focus falloff 반경 (legacy, 현재 미사용 — Voronoi 경계 방식으로 전환) */
+  const focusRadius = Math.max(halfViewport, 1);
+
+  /** Voronoi 경계용 — x 기준 정렬된 sibling 좌표 lookup.
+      각 work에 대해 좌·우 인접 작품의 x를 O(1) 조회. */
+  const sortedXById = useMemo(() => {
+    const sorted = [...positionedWorks].sort((a, b) => a.x - b.x);
+    const map = new Map();
+    sorted.forEach((w, i) => {
+      map.set(w.id, {
+        prevX: i > 0 ? sorted[i - 1].x : null,
+        nextX: i < sorted.length - 1 ? sorted[i + 1].x : null,
+      });
+    });
+    return map;
+  }, [positionedWorks]);
+
   return (
     <Box
       sx={ {
@@ -354,18 +382,24 @@ function TimelineCanvas({
       />
 
       {/* 작품 노드 (축 상단) */}
-      { positionedWorks.map((work) => (
-        <TimelineWorkItem
-          key={ work.id }
-          work={ work }
-          axisY={ axisY }
-          isActive={ activeId === work.id }
-          nodeScale={ nodeScale }
-          onMouseEnter={ () => onItemHover?.(work.id) }
-          onMouseLeave={ () => onItemLeave?.() }
-          onClick={ () => onItemHover?.(work.id) }
-        />
-      )) }
+      { positionedWorks.map((work) => {
+        const neighbors = sortedXById.get(work.id);
+        return (
+          <TimelineWorkItem
+            key={ work.id }
+            work={ work }
+            axisY={ axisY }
+            isActive={ activeId === work.id }
+            nodeScale={ nodeScale }
+            viewportCenterX={ viewportCenterX }
+            prevX={ neighbors?.prevX }
+            nextX={ neighbors?.nextX }
+            onMouseEnter={ () => onItemHover?.(work.id) }
+            onMouseLeave={ () => onItemLeave?.() }
+            onClick={ () => onItemHover?.(work.id) }
+          />
+        );
+      }) }
 
       {/* 이벤트 노드 (축 하단 — 이벤트 스트립 영역) */}
       { positionedEvents.map((event) => (

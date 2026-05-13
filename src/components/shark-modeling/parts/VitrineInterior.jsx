@@ -18,7 +18,7 @@ import { RENDER_ORDER } from '../vitrineDesign';
  * <VitrineInterior design={design} />
  */
 function VitrineInterior({ design }) {
-  const { box, frame, strut, ceiling, floor } = design;
+  const { box, frame, strut, ceiling, floor, rebar } = design;
   const { w, h, d } = box;
   const ft = frame.thickness;
 
@@ -27,17 +27,23 @@ function VitrineInterior({ design }) {
   const ih = h - ft;
   const id = d - ft;
 
-  /** strut 가로폭(z방향)은 안쪽 깊이를 넘지 않게 제한 */
-  const strutZ = Math.min(strut.width, id - 0.1);
-
-  /** strut 중심 x좌표: 유리 안쪽 면(±iw/2)에서 strut.depth/2 + 미세 여백만큼 안쪽 */
-  const strutCenterX = iw / 2 - strut.depth / 2 - 0.005;
+  /** 4 코너 포스트 위치: 안쪽 면에서 strut.depth/2 + 미세 여백만큼 안쪽 */
+  const postX = iw / 2 - strut.depth / 2 - 0.005;
+  const postZ = id / 2 - strut.depth / 2 - 0.005;
 
   /** 볼트 세로 균등 배치 */
   const boltMargin = ih * 0.05;
   const boltUsableH = ih - boltMargin * 2;
   const boltSpacing =
     strut.bolt.count > 1 ? boltUsableH / (strut.bolt.count - 1) : 0;
+
+  /** 4 코너: [x sign, z sign] */
+  const corners = [
+    [+1, +1],
+    [+1, -1],
+    [-1, +1],
+    [-1, -1],
+  ];
 
   /** 천장 ribs: z축 균등 분포, 천장 글래스 바로 아래에 매달림 */
   const ribY = ih / 2 - ceiling.ribDrop / 2 - 0.005;
@@ -51,7 +57,7 @@ function VitrineInterior({ design }) {
 
   return (
     <group renderOrder={RENDER_ORDER.innerStructure}>
-      {/** 천장 ribs - z축 균등 분포 */}
+      {/** 천장 스틸 ribs - z축 균등 분포 (rebar 재질로 strut과 통일) */}
       {Array.from({ length: ceiling.ribCount }).map((_, i) => {
         const zPos = -id / 2 + ribZSpacing * (i + 1);
         return (
@@ -62,12 +68,12 @@ function VitrineInterior({ design }) {
             receiveShadow
           >
             <boxGeometry args={[ribWidth, ceiling.ribDrop, ceiling.ribDepth]} />
-            <meshStandardMaterial color={ceiling.color} {...ceiling.material} />
+            <meshStandardMaterial color={rebar.color} {...rebar.material} />
           </mesh>
         );
       })}
 
-      {/** 바닥 ridges - z축 균등 분포 */}
+      {/** 바닥 스틸 ridges - z축 균등 분포 (rebar 재질) */}
       {Array.from({ length: floor.ridgeCount }).map((_, i) => {
         const zPos = -id / 2 + ridgeZSpacing * (i + 1);
         return (
@@ -78,34 +84,34 @@ function VitrineInterior({ design }) {
             receiveShadow
           >
             <boxGeometry args={[ridgeWidth, floor.ridgeHeight, floor.ridgeDepth]} />
-            <meshStandardMaterial color={floor.color} {...floor.material} />
+            <meshStandardMaterial color={rebar.color} {...rebar.material} />
           </mesh>
         );
       })}
 
-      {/** 좌우 strut + 볼트 그리드 */}
-      {[-1, 1].map((side) => {
-        const sx = side * strutCenterX;
-        /** strut의 센터를 향한 면 x좌표 */
-        const innerFaceX = side * (strutCenterX - strut.depth / 2);
-        /** 볼트 center는 그 면에서 센터 방향으로 bolt.depth/2만큼 돌출 */
-        const boltX = innerFaceX - side * (strut.bolt.depth / 2);
+      {/** 4 코너 수직 포스트 + 볼트 그리드
+       *  정사각 단면(strut.depth × strut.depth) × 풀 높이(ih).
+       *  각 포스트는 안쪽으로 향한 x면에만 볼트 1열.
+       */}
+      {corners.map(([sx, sz]) => {
+        const pcX = sx * postX;
+        const pcZ = sz * postZ;
+        /** 볼트는 포스트의 -sx 방향 면(센터 향한 면)에서 안쪽으로 돌출 */
+        const boltX = pcX - sx * (strut.depth / 2 + strut.bolt.depth / 2);
 
         return (
-          <group key={`strut-${side}`}>
-            {/** strut 본체 */}
-            <mesh position={[sx, 0, 0]} castShadow receiveShadow>
-              <boxGeometry args={[strut.depth, ih, strutZ]} />
-              <meshStandardMaterial color={strut.color} {...strut.material} />
+          <group key={`post-${sx}-${sz}`}>
+            <mesh position={[pcX, 0, pcZ]} castShadow receiveShadow>
+              <boxGeometry args={[strut.depth, ih, strut.depth]} />
+              <meshStandardMaterial color={rebar.color} {...rebar.material} />
             </mesh>
 
-            {/** 볼트 그리드 (세로 1열, count개) */}
             {Array.from({ length: strut.bolt.count }).map((_, i) => {
               const yPos = -ih / 2 + boltMargin + i * boltSpacing;
               return (
                 <mesh
-                  key={`bolt-${side}-${i}`}
-                  position={[boltX, yPos, 0]}
+                  key={`bolt-${sx}-${sz}-${i}`}
+                  position={[boltX, yPos, pcZ]}
                   rotation={[0, 0, Math.PI / 2]}
                   castShadow
                 >

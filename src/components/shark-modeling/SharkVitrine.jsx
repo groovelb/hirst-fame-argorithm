@@ -16,7 +16,7 @@ import VitrineGlass from './parts/VitrineGlass';
 import VitrineLiquid from './parts/VitrineLiquid';
 import VitrineInterior from './parts/VitrineInterior';
 
-const DEFAULT_SHARK_URL = '/crysis_shark.glb';
+const DEFAULT_SHARK_URL = '/shark_hirst_pose.glb';
 
 /**
  * SceneLoader - Suspense fallback (Canvas 내부에서만 사용)

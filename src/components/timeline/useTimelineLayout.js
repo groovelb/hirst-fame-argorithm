@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 /**
- * 세계관(Worldview) Y → 5단계 밴드 매핑
+ * 세계관(Worldview) Y → 5개 이산 카테고리 매핑
  * (+) TRANSCENDENCE: 미·승화·신성기하 — Cherry Blossoms, Veils, Mandalas, Sacred Heart
  * (+) SYSTEM: 분류·격자·산업 — Spot Paintings, Pharmacy
  * (0) RITUAL: 의례·찰나·순환 — Spin, Butterfly, Currency
@@ -16,12 +16,12 @@ const BANDS = [
   { id: 'MORTALITY', min: -1.0, max: -0.6 },
 ];
 
-/** 밴드별 축으로부터의 거리 비율 (0=축, 1=최상단) — 밴드 중앙 worldview_y를 -1~1 범위에서 선형 매핑 */
-const BAND_POSITIONS = Object.fromEntries(
-  BANDS.map((band) => {
-    const mid = (band.min + band.max) / 2;
-    return [band.id, (mid + 1) / 2];
-  })
+/** 밴드별 카테고리 행 위치 비율 (0=최상단, 1=최하단). min/max 중간값을 쓰지 않는다. */
+const BAND_ROW_RATIOS = Object.fromEntries(
+  BANDS.map((band, index) => [
+    band.id,
+    BANDS.length === 1 ? 0 : index / (BANDS.length - 1),
+  ])
 );
 
 /** 밴드 ID → locale 키 매핑 */
@@ -134,9 +134,9 @@ function useTimelineLayout({
           ? work.worldview_y
           : work.emotion_y;
       const band = toBand(yValue);
-      const bandRatio = BAND_POSITIONS[band];
+      const rowRatio = BAND_ROW_RATIOS[band];
       const jitter = seededJitter(work.id);
-      const rawY = scaleTop + scaleHeight * (1 - bandRatio) + jitter;
+      const rawY = scaleTop + scaleHeight * rowRatio + jitter;
       const y = Math.max(minNodeY, Math.min(maxNodeY, rawY));
       const x = yearToX(work.year) + subOffset;
 
@@ -159,13 +159,13 @@ function useTimelineLayout({
       .map((e) => ({ ...e, x: yearToX(e.year), y: axisY + 12, lane: 0 }))
       .sort((a, b) => a.x - b.x);
 
-    /** Y축 세계관 밴드 틱 데이터 */
+    /** Y축 세계관 카테고리 행 데이터 */
     const emotionBands = BANDS.map((band) => {
-      const ratio = BAND_POSITIONS[band.id];
+      const rowRatio = BAND_ROW_RATIOS[band.id];
       return {
         id: band.id,
         localeKey: BAND_LOCALE_KEYS[band.id],
-        y: scaleTop + scaleHeight * (1 - ratio),
+        y: scaleTop + scaleHeight * rowRatio,
       };
     });
 

@@ -47,7 +47,7 @@ function TimelineEventItem({
           width: 5,
           height: 5,
           borderRadius: '50%',
-          backgroundColor: 'text.secondary',
+          backgroundColor: 'text.disabled',
           transform: 'translate(-50%, -50%)',
           ml: '3px',
         } }
@@ -63,7 +63,7 @@ function TimelineEventItem({
           mt: '28px',
           fontWeight: isHigh ? 600 : 400,
           lineHeight: 1.3,
-          color: 'text.disabled',
+          color: 'action.disabled',
         } }
       >
         { localized(event.title) }
