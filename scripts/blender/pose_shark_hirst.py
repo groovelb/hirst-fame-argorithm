@@ -1,48 +1,57 @@
 """
-pose_shark_hirst.py — v2 힌지 회전 방식
+pose_shark_hirst.py — v6 Enhanced Method A (7-phase pipeline)
 
-이전(v1)의 문제:
-  - vertex를 직선으로 +y 끌어내림 → falloff 너무 약해 mouth가 거의 안 벌어짐
-  - teeth 전체를 평행이동 → 위·아래 이빨이 함께 떨어져 '틀니 분리' 현상
-
-v2 접근:
-  - 하악 vertex들을 가상 턱관절(hinge) 기준으로 X축 회전
-  - 회전 각도가 falloff에 비례 → 매끄러운 jaw drop, 메시 찢어짐 없음
-  - 이빨은 건들지 않음 → 벌어진 입 안쪽 윗니 위치에 자연스럽게 남음
-
-좌표계 (Blender LOCAL):
-  LOCAL Z: 머리(-4.88) ↔ 꼬리(+7.44)
-  LOCAL Y: 등(-3.09)   ↔ 배(+2.07)
-  LOCAL X: 좌우 ±2.22
+Phase 1: Lip Ring 식별 (teeth → body K-nearest)
+Phase 2: Upper/Lower 분리 (per-tooth y 비교)
+Phase 3: Geodesic BFS (mesh edge 위 hop 거리)
+Phase 4: Side 할당 (geodesic dist 비교)
+Phase 5: Hinge 회전 (입 뒤 corner = teeth z_max)
+Phase 6: Reversal check (seam pair 사후 검증)
+Phase 7: Laplacian smoothing (anchor 유지 + 주변 평활화)
 """
 
 import bpy
 import bmesh
 import math
 import sys
+from mathutils import kdtree
+from collections import defaultdict, deque
 
 # =========================================================================
-# 파라미터
+# Parameters
 # =========================================================================
 
 INPUT_PATH = '/Users/ddd/Desktop/daily vibe/hirst/public/crysis_shark.glb'
 OUTPUT_PATH = '/Users/ddd/Desktop/daily vibe/hirst/public/shark_hirst_pose.glb'
 
-# 가상 턱관절 위치 (LOCAL)
-HINGE_Z = -2.8       # 입 뒤쪽 끝 (회전축 위치)
-HINGE_Y = -0.2       # 입 윗부분 (회전축 y)
+K_NEAREST = 3                    # teeth→body 최근접 K개
+LIP_SEAM_TOLERANCE = 0.02        # |V.y - T.y| < eps → seam (분류 제외)
+MAX_INFLUENCE_HOP = 6            # geodesic 영향 최대 hop
+UPPER_JAW_ANGLE_DEG = -42        # 음수 = 상악 위로
+LOWER_JAW_ANGLE_DEG = +58        # 양수 = 하악 아래로
+HINGE_Z_OVERRIDE = -3.40         # 입 뒤 corner z (teeth z_max)
+SMOOTH_HOPS = 3                  # 평활화 hop 반경
+SMOOTH_ITERATIONS = 2
+SMOOTH_FACTOR = 0.35
+SEAM_PAIR_XZ_THRESHOLD = 0.08    # seam pair xz 인접 임계
+TEETH_FOLLOW_RATIO = 0.85        # 이빨이 jaw 회전 따라가는 비율
 
-# 하악 영역
-JAW_Z_HEAD = -4.88   # 머리 끝 (가장 먼 vertex 위치)
-JAW_Y_THRESH = -0.1  # 이 값보다 작은 y는 제외 (등쪽)
 
-# 회전 각도 (degrees) — 작품의 강한 벌림 재현
-JAW_MAX_ANGLE_DEG = 45
+# =========================================================================
+# Helpers
+# =========================================================================
 
-# 이빨 회전 (하악과 함께 부분적으로 따라가게)
-TEETH_ROT_X_DEG = 12   # 이빨도 살짝 따라 회전 (벌어진 입에 어색하지 않게)
-TEETH_DROP_Y = 0.15    # 살짝만 ventral
-TEETH_FORWARD_Z = 0.05 # 살짝만 뒤로 (jaw가 후퇴하니까)
+def smoothstep(t):
+    t = max(0.0, min(1.0, t))
+    return t * t * (3 - 2 * t)
+
+
+def rotate_yz(y, z, pivot_y, pivot_z, angle_rad):
+    yr = y - pivot_y
+    zr = z - pivot_z
+    c = math.cos(angle_rad)
+    s = math.sin(angle_rad)
+    return (yr * c - zr * s + pivot_y, yr * s + zr * c + pivot_z)
 
 
 # =========================================================================
@@ -53,112 +62,283 @@ print('\n=== Reset + Import ===')
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=INPUT_PATH)
 
-
-# =========================================================================
-# 1. 메시 식별
-# =========================================================================
-
-body = None
-teeth = None
-eye = None
+body = teeth = eye = None
 for obj in bpy.data.objects:
     if obj.type != 'MESH':
         continue
-    mat_name = ''
-    if obj.data.materials and obj.data.materials[0]:
-        mat_name = obj.data.materials[0].name.lower()
-    if 'teeth' in mat_name:
-        teeth = obj
-    elif 'eye' in mat_name:
-        eye = obj
-    elif 'shark' in mat_name:
-        body = obj
+    mn = obj.data.materials[0].name.lower() if obj.data.materials and obj.data.materials[0] else ''
+    if 'teeth' in mn: teeth = obj
+    elif 'eye' in mn: eye = obj
+    elif 'shark' in mn: body = obj
 
-if body is None or teeth is None:
-    print('ERROR', file=sys.stderr); sys.exit(1)
+if not (body and teeth and eye):
+    print('ERROR: meshes not identified', file=sys.stderr); sys.exit(1)
 
-print(f'body={body.name}, teeth={teeth.name}, eye={eye.name if eye else "-"}')
-
-
-# =========================================================================
-# 2. Body 하악 vertex 힌지 회전
-# =========================================================================
-
-print('\n=== Jaw hinge rotation ===')
-print(f'  hinge: (y={HINGE_Y}, z={HINGE_Z})  max angle: {JAW_MAX_ANGLE_DEG}°')
+print(f'body={body.name}, teeth={teeth.name}, eye={eye.name}')
 
 bpy.context.view_layer.objects.active = body
 body.select_set(True)
 bpy.ops.object.mode_set(mode='EDIT')
-
 bm = bmesh.from_edit_mesh(body.data)
 bm.verts.ensure_lookup_table()
+bm.edges.ensure_lookup_table()
 
-max_angle = math.radians(JAW_MAX_ANGLE_DEG)
-total_z_range = HINGE_Z - JAW_Z_HEAD  # = 2.08
+N = len(bm.verts)
 
-count = 0
+
+# =========================================================================
+# Phase 1: LIP_RING 식별
+# =========================================================================
+
+print('\n=== Phase 1: Lip Ring identification (K-nearest from teeth) ===')
+
+body_kd = kdtree.KDTree(N)
 for v in bm.verts:
-    # 힌지로부터 z 거리 (양수 = 머리쪽으로 떨어진 거리)
-    z_dist = HINGE_Z - v.co.z
-    if z_dist <= 0:
-        continue  # 힌지 뒤쪽(꼬리쪽)이라 회전 제외
-    # 등쪽(y<HINGE_Y-margin)은 제외 (상악은 그대로 유지)
-    if v.co.y < JAW_Y_THRESH:
+    body_kd.insert(v.co, v.index)
+body_kd.balance()
+
+lip_ring = set()
+for tv in teeth.data.vertices:
+    nearest = body_kd.find_n(tv.co, K_NEAREST)
+    for (_, idx, _) in nearest:
+        lip_ring.add(idx)
+
+print(f'  K={K_NEAREST}, LIP_RING size = {len(lip_ring)}')
+
+
+# =========================================================================
+# Phase 2: Upper / Lower 분리
+# =========================================================================
+
+print('\n=== Phase 2: Upper/Lower classification ===')
+
+teeth_kd = kdtree.KDTree(len(teeth.data.vertices))
+for i, v in enumerate(teeth.data.vertices):
+    teeth_kd.insert(v.co, i)
+teeth_kd.balance()
+
+lip_upper = set()
+lip_lower = set()
+for v_idx in lip_ring:
+    v_co = bm.verts[v_idx].co
+    (_, t_idx, _) = teeth_kd.find(v_co)
+    t_co = teeth.data.vertices[t_idx].co
+    dy = v_co.y - t_co.y
+    if dy < -LIP_SEAM_TOLERANCE:
+        lip_upper.add(v_idx)
+    elif dy > LIP_SEAM_TOLERANCE:
+        lip_lower.add(v_idx)
+    # else: seam, no rotation
+
+print(f'  upper={len(lip_upper)}, lower={len(lip_lower)}, seam={len(lip_ring) - len(lip_upper) - len(lip_lower)}')
+
+
+# =========================================================================
+# Phase 3: Geodesic BFS
+# =========================================================================
+
+print('\n=== Phase 3: Geodesic BFS ===')
+
+adj = defaultdict(list)
+for e in bm.edges:
+    a = e.verts[0].index
+    b = e.verts[1].index
+    adj[a].append(b)
+    adj[b].append(a)
+
+
+def bfs(sources):
+    dist = [float('inf')] * N
+    q = deque()
+    for s in sources:
+        dist[s] = 0
+        q.append(s)
+    while q:
+        u = q.popleft()
+        for nb in adj[u]:
+            if dist[nb] > dist[u] + 1:
+                dist[nb] = dist[u] + 1
+                q.append(nb)
+    return dist
+
+
+dist_upper = bfs(lip_upper)
+dist_lower = bfs(lip_lower)
+
+reachable_upper = sum(1 for d in dist_upper if d != float('inf'))
+reachable_lower = sum(1 for d in dist_lower if d != float('inf'))
+print(f'  reachable: upper={reachable_upper}, lower={reachable_lower}')
+
+
+# =========================================================================
+# Phase 4: Side 할당
+# =========================================================================
+
+print('\n=== Phase 4: Side assignment ===')
+
+sides = [None] * N  # 'upper'/'lower'/None
+for i in range(N):
+    du = dist_upper[i]
+    dl = dist_lower[i]
+    if du < dl:
+        sides[i] = 'upper'
+    elif du > dl:
+        sides[i] = 'lower'
+    # equal → None (corner, neutral)
+
+u_cnt = sides.count('upper')
+l_cnt = sides.count('lower')
+n_cnt = sides.count(None)
+print(f'  upper-side={u_cnt}, lower-side={l_cnt}, neutral={n_cnt}')
+
+
+# =========================================================================
+# Phase 5: Hinge + Rotation 적용
+# =========================================================================
+
+print('\n=== Phase 5: Rotation ===')
+
+# Hinge y = lip_ring 평균, Hinge z = 입 뒤 corner (override)
+hinge_y = sum(bm.verts[i].co.y for i in lip_ring) / len(lip_ring)
+hinge_z = HINGE_Z_OVERRIDE
+print(f'  hinge: y={hinge_y:.3f}, z={hinge_z:.3f}')
+
+# 원본 좌표 snapshot (Phase 6용)
+orig = {i: (v.co.x, v.co.y, v.co.z) for i, v in enumerate(bm.verts)}
+
+upper_rad = math.radians(UPPER_JAW_ANGLE_DEG)
+lower_rad = math.radians(LOWER_JAW_ANGLE_DEG)
+
+rotated = 0
+for i, v in enumerate(bm.verts):
+    side = sides[i]
+    if side is None:
         continue
-
-    # z 기반 smoothstep falloff (head 끝에 가까울수록 강한 회전)
-    z_norm = min(1.0, z_dist / total_z_range)
-    falloff_z = z_norm * z_norm * (3 - 2 * z_norm)
-
-    # y 기반 falloff (ventral에 가까울수록 강함, 입 위쪽은 약함)
-    y_dist = v.co.y - JAW_Y_THRESH
-    y_norm = min(1.0, y_dist / 1.0)  # 0~1
-    falloff_y = y_norm * y_norm * (3 - 2 * y_norm)
-
-    # 두 falloff 결합 (둘 다 충족해야 강한 회전)
-    falloff = falloff_z * (0.3 + 0.7 * falloff_y)  # y는 30% 베이스 + 70% 가변
-    angle = falloff * max_angle
-
-    if angle < 1e-5:
+    d = dist_upper[i] if side == 'upper' else dist_lower[i]
+    if d > MAX_INFLUENCE_HOP:
         continue
+    t = 1.0 - d / MAX_INFLUENCE_HOP
+    influence = smoothstep(t)
+    angle = (upper_rad if side == 'upper' else lower_rad) * influence
+    if abs(angle) < 1e-5:
+        continue
+    ny, nz = rotate_yz(v.co.y, v.co.z, hinge_y, hinge_z, angle)
+    v.co.y = ny
+    v.co.z = nz
+    rotated += 1
 
-    # 힌지(0, HINGE_Y, HINGE_Z) 기준 X축 회전
-    y_rel = v.co.y - HINGE_Y
-    z_rel = v.co.z - HINGE_Z
-    cos_a = math.cos(angle)
-    sin_a = math.sin(angle)
-    new_y_rel = y_rel * cos_a - z_rel * sin_a
-    new_z_rel = y_rel * sin_a + z_rel * cos_a
-    v.co.y = new_y_rel + HINGE_Y
-    v.co.z = new_z_rel + HINGE_Z
-    count += 1
+print(f'  rotated: {rotated} verts')
+
+
+# =========================================================================
+# Phase 6: Reversal check
+# =========================================================================
+
+print('\n=== Phase 6: Reversal check (seam pair) ===')
+
+seam_pairs = []
+upper_list = list(lip_upper)
+lower_list = list(lip_lower)
+
+for u_idx in upper_list:
+    ux, _, uz = orig[u_idx]
+    for l_idx in lower_list:
+        lx, _, lz = orig[l_idx]
+        dxz = ((ux - lx) ** 2 + (uz - lz) ** 2) ** 0.5
+        if dxz < SEAM_PAIR_XZ_THRESHOLD:
+            seam_pairs.append((u_idx, l_idx))
+
+reversed_pairs = 0
+edge_max_stretch = 0.0
+for (u, l) in seam_pairs:
+    uy_new = bm.verts[u].co.y
+    ly_new = bm.verts[l].co.y
+    if uy_new > ly_new:
+        reversed_pairs += 1
+    # edge length check
+    u_co_new = bm.verts[u].co
+    l_co_new = bm.verts[l].co
+    new_dist = ((u_co_new.x - l_co_new.x) ** 2 + (u_co_new.y - l_co_new.y) ** 2 + (u_co_new.z - l_co_new.z) ** 2) ** 0.5
+    u_co_old = orig[u]
+    l_co_old = orig[l]
+    old_dist = ((u_co_old[0] - l_co_old[0]) ** 2 + (u_co_old[1] - l_co_old[1]) ** 2 + (u_co_old[2] - l_co_old[2]) ** 2) ** 0.5
+    if old_dist > 1e-6:
+        stretch = new_dist / old_dist
+        edge_max_stretch = max(edge_max_stretch, stretch)
+
+print(f'  seam pairs: {len(seam_pairs)}')
+print(f'  reversed (upper.y > lower.y): {reversed_pairs}')
+print(f'  max stretch ratio: {edge_max_stretch:.2f}x')
+
+if reversed_pairs > 0:
+    print(f'  ⚠️  WARNING: {reversed_pairs} pairs reversed — consider reducing angles')
+
+
+# =========================================================================
+# Phase 7: Laplacian smoothing
+# =========================================================================
+
+print('\n=== Phase 7: Laplacian smoothing ===')
+
+smooth_indices = set()
+for i in range(N):
+    if i in lip_ring:
+        continue  # anchor, 고정
+    if min(dist_upper[i], dist_lower[i]) <= SMOOTH_HOPS:
+        smooth_indices.add(i)
+
+smooth_verts = [bm.verts[i] for i in smooth_indices]
+print(f'  smoothing {len(smooth_verts)} verts, {SMOOTH_ITERATIONS} iterations, factor={SMOOTH_FACTOR}')
+
+for it in range(SMOOTH_ITERATIONS):
+    bmesh.ops.smooth_vert(
+        bm,
+        verts=smooth_verts,
+        factor=SMOOTH_FACTOR,
+        use_axis_x=True,
+        use_axis_y=True,
+        use_axis_z=True,
+    )
 
 bmesh.update_edit_mesh(body.data)
 bpy.ops.mesh.normals_make_consistent(inside=False)
 bpy.ops.object.mode_set(mode='OBJECT')
-print(f'  rotated vertices: {count}')
 
 
 # =========================================================================
-# 3. Teeth 살짝만 따라가기 (틀니 분리 방지)
+# Teeth rotation (자기 자신 y 기준으로 upper/lower)
 # =========================================================================
 
-print('\n=== Teeth subtle follow ===')
-bpy.context.view_layer.objects.active = teeth
-bpy.ops.object.select_all(action='DESELECT')
-teeth.select_set(True)
+print('\n=== Teeth: split + follow ===')
 
-teeth.location.y += TEETH_DROP_Y
-teeth.location.z += TEETH_FORWARD_Z
-teeth.rotation_euler.x = math.radians(TEETH_ROT_X_DEG)
-bpy.ops.object.transform_apply(location=True, rotation=True, scale=False)
+t_upper = 0
+t_lower = 0
+for v in teeth.data.vertices:
+    dy = v.co.y - hinge_y
+    if dy < -0.005:
+        angle = upper_rad * TEETH_FOLLOW_RATIO
+        t_upper += 1
+    elif dy > 0.005:
+        angle = lower_rad * TEETH_FOLLOW_RATIO
+        t_lower += 1
+    else:
+        continue
+    ny, nz = rotate_yz(v.co.y, v.co.z, hinge_y, hinge_z, angle)
+    v.co.y = ny
+    v.co.z = nz
 
-print(f'  teeth: +y={TEETH_DROP_Y}, +z={TEETH_FORWARD_Z}, rot.x={TEETH_ROT_X_DEG}°')
+print(f'  teeth: upper={t_upper}, lower={t_lower}, follow ratio={TEETH_FOLLOW_RATIO}')
 
 
 # =========================================================================
-# 4. Export
+# Eye: 그대로
+# =========================================================================
+
+print('\n=== Eye: unchanged ===')
+
+
+# =========================================================================
+# Export
 # =========================================================================
 
 print('\n=== Export ===')

@@ -4,13 +4,13 @@ import Typography from '@mui/material/Typography';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { WorkImage } from './WorkImage.jsx';
 
-const IMAGE_WIDTH = 60;
-const IMAGE_HEIGHT = 80;
+const IMAGE_WIDTH = 96;
+const IMAGE_HEIGHT = 128;
 const YEAR_LABEL_HEIGHT = 18;
 /** focus(viewport 중앙 Voronoi cell 내) 작품의 이미지 scale */
-const MAX_FOCUS_SCALE = 3.6;
+const MAX_FOCUS_SCALE = 4.6;
 /** 비-focus 작품의 이미지 scale */
-const MIN_FOCUS_SCALE = 0.4;
+const MIN_FOCUS_SCALE = 0.55;
 
 /**
  * TimelineWorkItem — 타임라인 축 상단의 개별 작품 노드

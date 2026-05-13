@@ -324,44 +324,137 @@ function TimelineCanvas({
         width: totalWidth,
         height: viewportHeight,
         flexShrink: 0,
+        backgroundColor: 'background.default',
       } }
     >
-      {/* 좌상단 고정 타이틀 */}
+      {/* 좌상단 고정 타이틀 — 그로테스크 high-contrast serif, viewport-fixed */}
       <motion.div
         style={ {
           position: 'absolute',
-          left: 24,
-          top: 24,
+          left: 32,
+          top: 32,
           pointerEvents: 'none',
           zIndex: 5,
           x: scrollOffset,
         } }
       >
         <Typography
-          variant="h4"
           sx={ {
             display: 'block',
-            fontSize: '1.8rem',
-            fontWeight: 700,
+            fontFamily: '"Cinzel", "Trajan Pro", "IM Fell English", "Times New Roman", serif',
+            fontSize: { xs: '3rem', md: '4.5rem', lg: '6rem' },
+            fontWeight: 900,
+            fontStyle: 'normal',
+            lineHeight: 0.92,
             color: 'text.primary',
             letterSpacing: '0.04em',
+            textTransform: 'uppercase',
           } }
         >
           Damien Hirst
         </Typography>
         <Typography
           variant="caption"
-          sx={ { color: 'text.disabled', mt: 0.5 } }
+          sx={ {
+            display: 'block',
+            mt: 1.5,
+            fontFamily: '"IM Fell English SC", "IM Fell English", "Cinzel", serif',
+            fontSize: '0.78rem',
+            letterSpacing: '0.32em',
+            textTransform: 'uppercase',
+            color: 'text.disabled',
+          } }
         >
           1965 — present
         </Typography>
       </motion.div>
+
+      {/* 우측 고정 Trend Y축 라벨 (0~100 search index) */}
+      { trendData?.series && (
+        <motion.div
+          style={ {
+            position: 'absolute',
+            left: Math.max(0, (viewportWidth ?? 0) - 64),
+            top: 0,
+            height: axisY,
+            width: 56,
+            pointerEvents: 'none',
+            zIndex: 5,
+            x: scrollOffset,
+          } }
+        >
+          { [100, 75, 50, 25, 0].map((v) => {
+            /** TimelineTrendBackground와 동일한 TOP_PADDING.
+                상단 타이틀 영역과 겹치지 않도록 조정됨. */
+            const TOP_PADDING = 200;
+            const upperBudget = axisY - TOP_PADDING;
+            const y = axisY - (v / 100) * upperBudget;
+            return (
+              <Box
+                key={ v }
+                sx={ {
+                  position: 'absolute',
+                  top: y,
+                  left: 0,
+                  right: 0,
+                  transform: 'translateY(-50%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 0.75,
+                  justifyContent: 'flex-end',
+                  pr: 1,
+                } }
+              >
+                <Typography
+                  variant="caption"
+                  sx={ {
+                    fontSize: '0.625rem',
+                    color: 'text.disabled',
+                    fontVariantNumeric: 'tabular-nums',
+                    letterSpacing: '0.05em',
+                    userSelect: 'none',
+                  } }
+                >
+                  { v }
+                </Typography>
+                <Box
+                  sx={ {
+                    width: 6,
+                    height: '1px',
+                    backgroundColor: 'action.disabled',
+                  } }
+                />
+              </Box>
+            );
+          }) }
+          {/* 축 라벨 — search index */}
+          <Typography
+            variant="caption"
+            sx={ {
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              fontSize: '0.55rem',
+              fontWeight: 600,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: 'text.disabled',
+              opacity: 0.7,
+              writingMode: 'horizontal-tb',
+              userSelect: 'none',
+            } }
+          >
+            Search Index
+          </Typography>
+        </motion.div>
+      ) }
 
       {/* 트렌드 배경 — 축 위 라인 차트, X scale은 타임라인과 동일.
           scrollProgress + viewportWidth가 주어지면 우측 frontier reveal 트랜지션 적용 */}
       { trendData?.series && yearToX && (
         <TimelineTrendBackground
           series={ trendData.series }
+          peaks={ trendData.peaks }
           axisY={ axisY }
           totalWidth={ totalWidth }
           yearToX={ yearToX }

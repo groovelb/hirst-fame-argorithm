@@ -2,8 +2,9 @@ import React, { useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
-/** search index 100 = 캔버스 상단 패딩. 작품 영역의 최상단(Y 최대값)과 동일 좌표 */
-const TOP_PADDING = 40;
+/** search index 100 = 캔버스 상단 패딩. 상단 타이틀(Damien Hirst) 영역과 겹치지 않도록
+    충분한 여백 확보 (타이틀 영역 ≈ top 32 + 6rem 폰트 + sub 라벨 ≈ 160~170px). */
+const TOP_PADDING = 200;
 /** Catmull-Rom → Cubic Bezier 변환 tension (낮을수록 점에 더 타이트하게 붙음) */
 const BEZIER_TENSION = 1 / 6;
 
@@ -65,6 +66,7 @@ function buildBezierPath(pts) {
  */
 function TimelineTrendBackground({
   series,
+  peaks,
   axisY,
   totalWidth,
   yearToX,
@@ -100,6 +102,19 @@ function TimelineTrendBackground({
 
     return buildBezierPath(points);
   }, [series, axisY, yearToX]);
+
+  /** Peak 마커 좌표 계산 — line의 (x, y)와 정확히 동일 식 사용. */
+  const peakMarkers = useMemo(() => {
+    if (!peaks?.length || typeof yearToX !== 'function') return [];
+    const upperBudget = axisY - TOP_PADDING;
+    return peaks.map((p) => {
+      const [y, m] = p.date.split('-').map(Number);
+      const frac = y + (m - 1) / 12;
+      const px = yearToX(frac);
+      const py = axisY - (p.value / 100) * upperBudget;
+      return { ...p, px, py };
+    });
+  }, [peaks, axisY, yearToX]);
 
   /** scrollProgress (0~1) source 자체에 spring을 걸어 초기값이 source.get()=0으로
       안전하게 잡히게 함. (이전: useTransform 결과에 spring을 걸면 첫 평가 전 0으로
@@ -156,6 +171,99 @@ function TimelineTrendBackground({
         strokeLinejoin="round"
         strokeLinecap="round"
       />
+
+      {/* Peak 마커 — 트렌드 라인 위에 점 + value 라벨 + trigger 텍스트.
+          peak.value가 100인 경우 강조(빨강+큰 dot), 그 외는 흰색 점. */}
+      { peakMarkers.map((p) => {
+        const isMax = p.value >= 100;
+        const dotR = isMax ? 14 : 8;
+        const ringR = dotR + 10;
+        const markerColor = isMax ? '#E63946' : 'rgba(255,255,255,0.98)';
+        const stickLen = isMax ? 110 : 90;
+        const stickTop = Math.max(p.py - stickLen, 0);
+        return (
+          <g key={ `${p.date}-${p.value}` }>
+            {/* vertical stick */}
+            <line
+              x1={ p.px }
+              y1={ p.py - dotR - 4 }
+              x2={ p.px }
+              y2={ stickTop + 8 }
+              stroke={ markerColor }
+              strokeWidth={ isMax ? 2 : 1.4 }
+              strokeDasharray={ isMax ? 'none' : '3,3' }
+            />
+            {/* 외곽 링 (전 peak 공통, max는 더 강조) */}
+            <circle
+              cx={ p.px }
+              cy={ p.py }
+              r={ ringR }
+              fill="none"
+              stroke={ markerColor }
+              strokeWidth={ isMax ? 1.5 : 1 }
+              opacity={ isMax ? 0.55 : 0.35 }
+            />
+            { isMax && (
+              <circle
+                cx={ p.px }
+                cy={ p.py }
+                r={ ringR + 8 }
+                fill="none"
+                stroke={ markerColor }
+                strokeWidth={ 1 }
+                opacity={ 0.25 }
+              />
+            ) }
+            {/* peak point dot */}
+            <circle
+              cx={ p.px }
+              cy={ p.py }
+              r={ dotR }
+              fill={ markerColor }
+              stroke="#0A0A0A"
+              strokeWidth={ isMax ? 2 : 1.5 }
+            />
+            {/* value 라벨 — 매우 크게 */}
+            <text
+              x={ p.px }
+              y={ stickTop }
+              fill={ markerColor }
+              fontSize={ isMax ? 32 : 22 }
+              fontWeight={ 900 }
+              textAnchor="middle"
+              fontFamily='"Cinzel", "IM Fell English", serif'
+              letterSpacing="0.04em"
+            >
+              { p.value }
+            </text>
+            {/* trigger 라벨 */}
+            <text
+              x={ p.px }
+              y={ stickTop + (isMax ? 22 : 18) }
+              fill={ isMax ? markerColor : 'rgba(255,255,255,0.78)' }
+              fontSize={ isMax ? 14 : 12 }
+              fontWeight={ isMax ? 700 : 500 }
+              textAnchor="middle"
+              fontFamily='"IM Fell English", "Times New Roman", serif'
+              letterSpacing="0.06em"
+            >
+              { p.trigger }
+            </text>
+            {/* date 라벨 */}
+            <text
+              x={ p.px }
+              y={ stickTop + (isMax ? 40 : 34) }
+              fill="rgba(255,255,255,0.5)"
+              fontSize={ isMax ? 11 : 10 }
+              textAnchor="middle"
+              fontFamily='"IM Fell English", serif'
+              letterSpacing="0.18em"
+            >
+              { p.date }
+            </text>
+          </g>
+        );
+      }) }
     </motion.svg>
   );
 }

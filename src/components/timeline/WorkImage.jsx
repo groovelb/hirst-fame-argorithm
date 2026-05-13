@@ -54,11 +54,8 @@ function WorkImage({
         ...sx,
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'action.hover',
         overflow: 'hidden',
         position: 'relative',
-        border: '1px solid',
-        borderColor: 'divider',
         boxSizing: 'border-box',
       } }
     >

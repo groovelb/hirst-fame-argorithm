@@ -87,7 +87,7 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
                     opacity: 1,
                     mixBlendMode: 'normal',
                     filter: 'none',
-                    backgroundColor: 'background.default',
+                    backgroundColor: 'transparent',
                     userSelect: 'none',
                     flexShrink: 0,
                   } }
@@ -113,7 +113,27 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
         );
       }) }
 
-      {/* 수평 축선 */}
+      {/* 연도 vertical guide lines — 화면 height 전체로 확장한 grid */}
+      { yearTicks.map((tick) => (
+        <Box
+          key={ `vline-${tick.year}` }
+          sx={ {
+            position: 'absolute',
+            left: tick.x,
+            top: 0,
+            width: '1px',
+            height: viewportHeight,
+            backgroundColor: tick.isMajor
+              ? 'rgba(255, 255, 255, 0.06)'
+              : 'rgba(255, 255, 255, 0.022)',
+            transform: 'translateX(-0.5px)',
+            pointerEvents: 'none',
+            zIndex: 0,
+          } }
+        />
+      )) }
+
+      {/* 수평 축선 — 강조된 horizontal axis */}
       <Box
         sx={ {
           position: 'absolute',
@@ -121,50 +141,34 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
           top: axisY,
           width: totalWidth,
           height: '1px',
-          backgroundColor: 'action.disabled',
+          backgroundColor: 'rgba(255, 255, 255, 0.18)',
           pointerEvents: 'none',
+          zIndex: 1,
         } }
       />
 
-      {/* 연도 틱 + 라벨 */}
+      {/* 연도 라벨 */}
       { yearTicks.map((tick) => (
-        <Box
-          key={ tick.year }
+        <Typography
+          key={ `label-${tick.year}` }
+          variant="caption"
           sx={ {
             position: 'absolute',
             left: tick.x,
-            top: axisY,
-            transform: 'translateX(-0.5px)',
+            top: axisY + 8,
+            transform: 'translateX(-50%)',
+            color: tick.isMajor ? 'text.disabled' : 'action.disabled',
+            fontWeight: tick.isMajor ? 600 : 400,
+            fontSize: tick.isMajor ? '0.75rem' : '0.625rem',
+            whiteSpace: 'nowrap',
+            userSelect: 'none',
             pointerEvents: 'none',
+            fontFamily: '"IM Fell English", "Cinzel", "Times New Roman", serif',
+            letterSpacing: '0.05em',
           } }
         >
-          {/* 틱 마크 */}
-          <Box
-            sx={ {
-              width: '1px',
-              height: tick.isMajor ? 12 : 8,
-              backgroundColor: tick.isMajor ? 'action.disabled' : 'divider',
-              transform: 'translateY(-50%)',
-            } }
-          />
-          {/* 연도 라벨 */}
-          <Typography
-            variant="caption"
-            sx={ {
-              position: 'absolute',
-              top: 14,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              color: tick.isMajor ? 'text.disabled' : 'action.disabled',
-              fontWeight: tick.isMajor ? 600 : 400,
-              fontSize: tick.isMajor ? '0.75rem' : '0.625rem',
-              whiteSpace: 'nowrap',
-              userSelect: 'none',
-            } }
-          >
-            { tick.year }
-          </Typography>
-        </Box>
+          { tick.year }
+        </Typography>
       )) }
     </>
   );
