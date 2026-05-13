@@ -1,7 +1,7 @@
 ---
 status: draft
 phase: 2-ux-flow
-last_updated: 2026-05-07
+last_updated: 2026-05-14
 ---
 
 # Damien Hirst. UX Flow
@@ -15,9 +15,9 @@ last_updated: 2026-05-07
 ### 시나리오 1. 첫 방문자, 30초 안에 "허스트가 어떤 작가인지" 잡기
 
 - **사용자**: Hirst를 "포름알데히드 상어 만든 사람" 정도로만 아는 일반 관람객.
-- **목표**: 스크롤 한 번으로 그의 사상이 어떻게 변해왔는지 큰 그림을 본다.
-- **흐름**: 인트로 → 연대기 세그먼트를 위에서 아래로 쓸어내림 → 마지막 요약에서 "내가 본 7개 시기" 정리.
-- **다루는 데이터**: `Era` R, `Work` R (대표작 썸네일만), `KeywordAxis` R.
+- **목표**: 첫 화면의 monumental presence(작가 이름 + 상어)를 1초만에 흡수한 뒤, 스크롤로 사상이 어떻게 변해왔는지 큰 그림을 본다.
+- **흐름**: 랜딩 Hero(흰 배경, 거대 타이포로 작가 이름 sandwich + 중앙 상어 비트린) → 스크롤로 배경이 흰→검정으로 가라앉음 → 시간축(타임라인) 가로 통람 → 마지막 요약.
+- **다루는 데이터**: `Era` R, `Work` R (대표작 썸네일), `KeywordAxis` R.
 
 ### 시나리오 2. 큐레이터, 특정 연대기의 사상축 비중과 키워드 보기
 
@@ -118,17 +118,27 @@ last_updated: 2026-05-07
 
 ### 시나리오 1 단계별
 
-1. **인트로 진입** (Home > Intro)
-   - 사용자 행동: 첫 진입. 짧은 작가 소개 + "스크롤로 7개 시기를 따라가세요" 안내 카피.
-   - 발생하는 데이터: `Era` R (목록), `KeywordAxis` R (5축 라벨).
-   - 결과: 첫 Era 세그먼트로 스크롤 유도.
+1. **랜딩 Hero 진입** (Landing Page > Hero Section)
+   - 사용자 행동: 첫 진입. 흰 배경, 화면 위·아래로 `DAMIEN` / `HIRST`가 화면 폭을 가득 채우는 거대 타이포. 그 사이 중앙에 〈Physical Impossibility of Death〉 상어 비트린 3D 모델. 마우스/터치로 약간 회전 가능.
+   - 발생하는 데이터: 없음 (정적 시각 강조).
+   - 결과: "이 작가가 누구인지"의 monumental 인상을 1초만에 받음. 스크롤 유도.
 
-2. **연대기 세그먼트 통람** (Home > Era Section × 7)
-   - 사용자 행동: 위→아래로 스크롤하며 각 Era의 핵심 명제·대표작 1~3점·5축 도넛을 본다.
+2. **다크 트랜지션** (Landing Page > Hero Section: scroll-driven phase)
+   - 사용자 행동: 아래로 스크롤. 충분한 거리(약 200vh) 동안 페이지 배경이 흰색 → 검정으로 가라앉음. 거대 타이포·상어가 점차 사라지며 시간축으로 이행하는 호흡을 만든다.
+   - 발생하는 데이터: 없음.
+   - 결과: 검정 배경 위에 시간축이 등장할 준비 완료.
+
+3. **타임라인 캔버스 진입** (Landing Page > Timeline Canvas)
+   - 사용자 행동: 스크롤이 Hero 영역 끝에 도달하면 타임라인의 가로 스크롤이 시작된다. 세로 스크롤이 가로 이동으로 변환되어 7개 Era를 가로로 통람.
+   - 발생하는 데이터: `Era` R (목록), `KeywordAxis` R (5축 라벨).
+   - 결과: 첫 Era 진입.
+
+4. **연대기 세그먼트 통람** (Timeline Canvas > Era Section × 7)
+   - 사용자 행동: 가로 스크롤로 각 Era의 핵심 명제·대표작 1~3점·5축 도넛을 본다.
    - 발생하는 데이터: `Era` R, `Work` R (썸네일·연도·제목), `KeywordAxis` R (해당 Era의 가중치 평균).
    - 결과: 마지막 Era까지 도달.
 
-3. **요약/마무리** (Home > Outro)
+5. **요약/마무리** (Timeline Canvas > Outro)
    - 사용자 행동: 7개 시기 미니 카드 그리드 + "사상이 어떻게 이동했는가" 1줄 요약을 본다.
    - 발생하는 데이터: `Era` R.
    - 결과: 이탈 또는 미니맵으로 특정 Era 재방문.
@@ -187,11 +197,12 @@ last_updated: 2026-05-07
 
 | 페이지 | 경로 | 한 줄 설명 | 다루는 데이터 |
 |---|---|---|---|
-| Home | `/` | 단일 스크롤 컨테이너. 하위 섹션 전체를 호스팅 | `Era` `Work` `Event` `KeywordAxis` `SpeciesSummary` `BioSpecimenRecord` `Source` `Caveat` |
-| Intro | `/#intro` | 작가 소개 + 스크롤 안내 카피 | `Era` `KeywordAxis` |
-| Era Section | `/#era/:slug` | 7개 연대기 각각의 세그먼트(명제·대표작·도넛·사건 스트립) | `Era` `Work` `Event` `KeywordAxis` |
+| Landing Page | `/` | 단일 스크롤 컨테이너. Hero Section과 Timeline Canvas를 순차 호스팅하며 흰→검정 배경 트랜지션을 관장 | `Era` `Work` `Event` `KeywordAxis` `SpeciesSummary` `BioSpecimenRecord` `Source` `Caveat` |
+| Hero Section | `/#hero` | 첫 진입 화면. 거대 타이포(`DAMIEN` 상단 / `HIRST` 하단) + 중앙 상어 비트린. 약 200vh 거리에 걸쳐 흰→검정 배경 트랜지션을 발생시킴 | (없음, 정적 시각) |
+| Timeline Canvas | `/#timeline` | 가로 스크롤 영역. 세로 스크롤이 가로 이동으로 변환되어 7개 Era·이벤트·작품을 통람 | `Era` `Work` `Event` `KeywordAxis` |
+| Era Section | `/#era/:slug` | 7개 연대기 각각의 세그먼트(명제·대표작·도넛·사건 스트립). Timeline Canvas 안에 가로 배치 | `Era` `Work` `Event` `KeywordAxis` |
 | Bestiary Section | `/#bestiary` | 종 누적 도감 + 종-작품 연결 그리드 | `SpeciesSummary` `BioSpecimenRecord` `Work` |
-| Worldview Curve | `/#curve` | 5축 강도의 시간축 곡선 (기존 EmotionCurve 의미 재정의) | `KeywordAxis` `Era` |
+| Worldview Curve | `/#curve` | 5축 강도의 시간축 곡선 | `KeywordAxis` `Era` |
 | Era Nav | `/#nav` | 우측 스티키 미니맵/앵커 내비 | `Era` |
 | Work Modal | `/#work/:id` | 작품 상세 모달(매체·사용 종·소속 Era·출처 칩) | `Work` `BioSpecimenRecord` `Era` `Source` |
 | Outro | `/#outro` | 7개 시기 미니 그리드 + 사상 이동 1줄 요약 | `Era` |
@@ -224,6 +235,10 @@ last_updated: 2026-05-07
 
 | 컴포넌트 | 카테고리 | 한 줄 용도 |
 |---|---|---|
+| `LandingPage` | 14. Templates | 라우트 `/`의 최상위 페이지 템플릿. Hero Section과 Timeline Canvas를 순차 호스팅, 흰→검정 스크롤 트랜지션을 관장 |
+| `HeroSection` | 14. Templates | 약 200vh 영역. sticky inner에 거대 타이포 sandwich 레이아웃 + 중앙 상어 비트린을 합성하고, 자신의 스크롤 진행도를 외부에 노출 |
+| `HeroTypeBlock` | 1. Typography | Hero 상·하단의 거대 타이포(`DAMIEN` / `HIRST`). 기존 `FitText`를 헤드라인 변형으로 사용해 컨테이너 폭을 가득 채움 |
+| `PageBackgroundFader` | 11. Motion | 페이지 루트의 배경색을 스크롤 진행도에 따라 흰→검정으로 보간. Hero scroll progress 0~1을 입력으로 받아 motion value로 출력 |
 | `EraSegment` | 8. Layout | 1개 Era를 세로 1뷰포트 기준으로 호스팅하는 컨테이너. 명제·도넛·사건 스트립·대표작을 슬롯으로 배치 |
 | `EraThesisHeadline` | 1. Typography | Era 진입부에 노출되는 시기 명제(예: "약장은 신앙을 대체하는가") 강조 헤드라인 |
 | `EraEventStrip` | 5. Data Display | Era 내부의 가로 사건 타임라인. `Event` 카드를 좌→우 스크롤 |
@@ -245,3 +260,4 @@ last_updated: 2026-05-07
 - 5축: MORTALITY · SYSTEM · FAITH · VALUE · FORM. (택소노미 메타의 5축 라벨과 작품 `axis_weights` 키 기준.)
 - 컴포넌트 분류 인덱스: `.claude/skills/component-work/resources/taxonomy-index.md`.
 - 부록(분리): `appendix-screen-component-map.md` — Rothko 잔존 컴포넌트의 의미 재정의 매핑·데이터 바인딩 디테일.
+- 부록(분리): `appendix-landing-implementation.md` — Landing Page 구현 청사진 (컴포넌트 트리, 스크롤 트랜지션 phase 정의, FitText·SharkVitrine·HorizontalScrollContainer 통합, edge case).

@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { WorkImage } from './WorkImage.jsx';
+import { BRAND_DISPLAY, PRODUCT } from './typography.js';
 
 const IMAGE_WIDTH = 96;
 const IMAGE_HEIGHT = 128;
@@ -46,6 +47,7 @@ function TimelineWorkItem({
   work,
   axisY,
   isActive = false,
+  isDimmed = false,
   nodeScale = 1,
   viewportCenterX,
   prevX,
@@ -102,7 +104,8 @@ function TimelineWorkItem({
 
   return (
     <>
-      {/* 외부 컨테이너 — scale 적용 X. 레이아웃 anchor + hover 영역 */}
+      {/* 외부 컨테이너 — scale 적용 X. 레이아웃 anchor + hover 영역.
+          다른 작품 hover 시 isDimmed=true → opacity 낮춤 */}
       <Box
         onMouseEnter={ onMouseEnter }
         onMouseLeave={ onMouseLeave }
@@ -114,7 +117,9 @@ function TimelineWorkItem({
           width: scaledW,
           height: scaledH,
           cursor: 'pointer',
-          zIndex: isActive ? 10 : 2,
+          zIndex: isActive ? 30 : isDimmed ? 1 : 2,
+          opacity: isDimmed ? 0.12 : 1,
+          transition: 'opacity 0.28s ease',
           '&:hover .work-tooltip': {
             opacity: 1,
             visibility: 'visible',
@@ -130,10 +135,13 @@ function TimelineWorkItem({
             left: 0,
             width: '100%',
             textAlign: 'center',
+            fontFamily: PRODUCT,
+            fontWeight: 500,
             color: 'text.disabled',
-            fontSize: '0.6rem',
+            fontSize: '0.65rem',
             lineHeight: `${YEAR_LABEL_HEIGHT}px`,
             height: YEAR_LABEL_HEIGHT,
+            letterSpacing: '0.02em',
             userSelect: 'none',
             pointerEvents: 'none',
           } }
@@ -167,35 +175,39 @@ function TimelineWorkItem({
           />
         </motion.div>
 
-        {/* 호버 툴팁 — scale 영향 X */}
+        {/* 호버 정보 카드 — scale 영향 X, isActive시 항상 표시.
+            연도(BRAND, 큰 숫자) + 제목(BRAND) + 본문(PRODUCT) 분리. */}
         <Box
           className="work-tooltip"
           sx={ {
             position: 'absolute',
             left: '50%',
             ...(isFlipped
-              ? { top: scaledH + 8, transform: 'translateX(-50%)' }
-              : { top: -YEAR_LABEL_HEIGHT - 8, transform: 'translateX(-50%) translateY(-100%)' }
+              ? { top: scaledH + 14, transform: 'translateX(-50%)' }
+              : { top: -YEAR_LABEL_HEIGHT - 14, transform: 'translateX(-50%) translateY(-100%)' }
             ),
             opacity: 0,
             visibility: 'hidden',
-            transition: 'opacity 0.2s ease, visibility 0.2s ease',
-            backgroundColor: 'background.paper',
-            p: 1.5,
-            minWidth: 180,
-            maxWidth: 220,
-            boxShadow: (theme) => theme.customShadows?.md ?? theme.shadows[4],
-            zIndex: 20,
+            transition: 'opacity 0.22s ease, visibility 0.22s ease',
+            backgroundColor: 'rgba(10, 10, 10, 0.92)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            p: 2,
+            minWidth: 260,
+            maxWidth: 320,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+            zIndex: 40,
             pointerEvents: 'none',
           } }
         >
-          <Box sx={ { display: 'flex', gap: 0.5, mb: 1 } }>
+          {/* color blocks (시각 식별) */}
+          <Box sx={ { display: 'flex', gap: 0.5, mb: 1.5 } }>
             { work.color_blocks?.map((block, i) => (
               <Box
                 key={ i }
                 sx={ {
-                  width: 12,
-                  height: 12,
+                  width: 14,
+                  height: 14,
                   backgroundColor: block.color,
                   flexShrink: 0,
                 } }
@@ -203,28 +215,95 @@ function TimelineWorkItem({
             )) }
           </Box>
 
+          {/* 연도 — BRAND 큰 monumental 숫자 */}
           <Typography
-            variant="subtitle2"
-            sx={ { fontWeight: 600, lineHeight: 1.3, mb: 0.25 } }
+            sx={ {
+              fontFamily: BRAND_DISPLAY,
+              fontWeight: 900,
+              fontSize: '1.6rem',
+              lineHeight: 1,
+              letterSpacing: '0.04em',
+              color: 'text.primary',
+              mb: 0.75,
+            } }
+          >
+            { work.year }
+          </Typography>
+
+          {/* 작품 제목 — BRAND italic 같은 무게는 안 주되 serif로 */}
+          <Typography
+            sx={ {
+              fontFamily: BRAND_DISPLAY,
+              fontWeight: 500,
+              fontSize: '1.05rem',
+              lineHeight: 1.25,
+              letterSpacing: '0.01em',
+              color: 'text.primary',
+              mb: 1,
+            } }
           >
             { work.title }
           </Typography>
-          <Typography variant="caption" sx={ { color: 'text.secondary', display: 'block' } }>
-            { work.year } · { work.medium }
-          </Typography>
+
+          {/* medium — PRODUCT (정보성) */}
+          { work.medium && (
+            <Typography
+              sx={ {
+                fontFamily: PRODUCT,
+                fontSize: '0.78rem',
+                fontWeight: 400,
+                lineHeight: 1.45,
+                color: 'text.secondary',
+                display: 'block',
+                mb: work.collection || work.description ? 0.75 : 0,
+              } }
+            >
+              { work.medium }
+            </Typography>
+          ) }
+
+          {/* collection — PRODUCT */}
           { work.collection && (
             <Typography
-              variant="caption"
-              sx={ { color: 'text.disabled', display: 'block', mt: 0.25 } }
+              sx={ {
+                fontFamily: PRODUCT,
+                fontSize: '0.72rem',
+                fontWeight: 500,
+                lineHeight: 1.4,
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+                color: 'text.disabled',
+                display: 'block',
+                mb: work.description ? 0.75 : 0,
+              } }
             >
               { work.collection }
+            </Typography>
+          ) }
+
+          {/* description — PRODUCT body */}
+          { work.description && (
+            <Typography
+              sx={ {
+                fontFamily: PRODUCT,
+                fontSize: '0.78rem',
+                fontWeight: 400,
+                lineHeight: 1.5,
+                color: 'text.secondary',
+                display: 'block',
+                mt: 0.5,
+                opacity: 0.9,
+              } }
+            >
+              { work.description }
             </Typography>
           ) }
         </Box>
       </Box>
 
       {/* Connector(인디케이터) — 이미지 box 밖 별도 element.
-          baseline은 scale=1일 때 이미지 bottom~axis. scaleY로 길이 동기. */}
+          baseline은 scale=1일 때 이미지 bottom~axis. scaleY로 길이 동기.
+          isDimmed시 함께 흐려짐. */}
       { connectorBaseH > 0 && (
         <motion.div
           aria-hidden="true"
@@ -240,6 +319,8 @@ function TimelineWorkItem({
             pointerEvents: 'none',
             zIndex: 1,
             willChange: 'transform',
+            opacity: isDimmed ? 0.12 : 1,
+            transition: 'opacity 0.28s ease',
           } }
         />
       ) }
@@ -257,6 +338,8 @@ function TimelineWorkItem({
           transform: 'translateX(-50%)',
           pointerEvents: 'none',
           zIndex: 1,
+          opacity: isDimmed ? 0.12 : 1,
+          transition: 'opacity 0.28s ease',
         } }
       />
     </>

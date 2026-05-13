@@ -3,8 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import { defaultTheme as theme } from './styles/themes';
 import { LocaleProvider } from './i18n';
-import { LanguageToggle } from './components/navigation/LanguageToggle';
-import { RothkoTimeline as HirstTimeline } from './components/timeline';
+import { LandingPage } from './components/templates/LandingPage.jsx';
 import worksData from './data/hirst/hirst_works.json';
 import eventsData from './data/hirst/hirst_events.json';
 import bioData from './data/hirst/hirst-bio-specimen-data.js';
@@ -13,14 +12,13 @@ import trendData from '../data/hirst-trend-data.json';
 function App() {
   return (
     <LocaleProvider>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={ theme }>
         <CssBaseline />
-        <LanguageToggle />
-        <HirstTimeline
-          worksData={worksData}
-          eventsData={eventsData}
-          bioData={bioData}
-          trendData={trendData}
+        <LandingPage
+          worksData={ worksData }
+          eventsData={ eventsData }
+          bioData={ bioData }
+          trendData={ trendData }
         />
       </ThemeProvider>
     </LocaleProvider>

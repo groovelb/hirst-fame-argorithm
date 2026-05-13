@@ -19,26 +19,35 @@ Damien Hirst의 대표작
 — 포름알데히드 탱크에 보존된 타이거 상어 작품을
 \`three.js\` + \`@react-three/fiber\`로 재현한 인터랙티브 3D 컴포넌트.
 
-### 구성 요소
-- **상어 모델**: \`/public/crysis_shark.glb\` (glTF 2.0 binary)
-- **유리 비트린**: \`MeshPhysicalMaterial\` + \`transmission\` + \`ior 1.33\`로 포름알데히드 굴절 효과
-- **스틸 프레임**: 12개 엣지 실린더로 Hirst의 시그니처 케이스 재현
-- **부유 애니메이션**: 시간 기반 sin 함수로 미세한 떠있는 움직임
-- **OrbitControls**: 드래그로 회전, 스크롤로 줌
+### 컴포넌트 구조
+\`SharkVitrine\`은 \`SharkVitrineScene\`을 \`<Canvas>\` + \`<OrbitControls>\`로 감싼 형태.
+3D 씬만 외부 캔버스에 임베드하려면 \`SharkVitrineScene\` 사용.
 
-### 기술 스택
-- glTF 2.0 (\`.glb\`) — Three.js 공식 권장 포맷
-- \`useGLTF\` + \`useGLTF.preload\` 로 지연 로딩 최적화
-- \`<Suspense>\` + Loader UI
+### 시각 구성 (Phase 0~E)
+- **외부 panel matte 프레임**: 박스 6면 외곽 흰색 도장 슬랫
+- **plinth**: 박스 본체 아래 별도 받침대 (갭 라인 분리)
+- **유리 5면**: 얇은 transmission 시트 (IOR 1.52)
+- **포름알데히드 액체**: transmission 매질 (IOR 1.33) + 청록 attenuation
+- **내부 rebar 케이지**: 4 코너 strut + 천장 ribs + 바닥 ridges (스틸 #6b9b94)
+- **볼트 그리드**: 각 strut 안쪽에 11개 볼트
+- **상어 모델**: \`/shark_hirst_pose.glb\` (Blender headless 후처리 포즈)
+- **부유 애니메이션**: 시간 기반 sin 함수로 미세 떠 있는 움직임
+
+### 디자인 토큰 시스템
+\`vitrineDesign.js\`의 \`computeVitrineGeometry([w, h, d])\`가 박스 크기 하나로
+모든 sub-dimension·재질을 파생. shortSide 비례 기준이라 크기 바꿔도 일관 유지.
 
 ### Props
-- \`modelUrl\`: glTF 경로
-- \`sharkScale\`: 상어 모델 스케일
-- \`tankSize\`: \`[w, h, d]\` 탱크 크기
-- \`isAutoRotate\`: 카메라 자동 회전
-- \`hasControls\`: OrbitControls 활성화
-- \`background\`: 갤러리 배경색
-- \`height\`: 캔버스 높이
+- \`modelUrl\` (string): glTF 경로 (기본 \`/shark_hirst_pose.glb\`)
+- \`sharkScale\` (number): 상어 모델 스케일
+- \`tankSize\` ([w, h, d]): 탱크 크기
+- \`isFloating\` (boolean): 부유 애니메이션
+- \`isAutoRotate\` (boolean): 카메라 자동 회전
+- \`hasControls\` (boolean): OrbitControls 활성화
+- \`background\` (string): 갤러리 배경색
+- \`height\` (number): 캔버스 높이
+- \`cameraPosition\` ([x, y, z]): 초기 카메라 위치
+- \`cameraFov\` (number): 카메라 FOV
         `,
       },
     },
@@ -58,7 +67,7 @@ export const Default = {
     modelUrl: '/shark_hirst_pose.glb',
     sharkScale: 0.3,
     tankSize: [6, 3, 2.4],
-    isAutoRotate: true,
+    isAutoRotate: false,
     hasControls: true,
     background: '#e8e8e3',
     height: 600,
@@ -85,7 +94,7 @@ export const DarkRoom = {
   args: {
     ...Default.args,
     background: '#1a1a1a',
-    isAutoRotate: true,
+    isAutoRotate: false,
     height: 600,
   },
   parameters: {
@@ -102,7 +111,7 @@ export const Compact = {
     ...Default.args,
     sharkScale: 0.25,
     height: 400,
-    isAutoRotate: true,
+    isAutoRotate: false,
   },
   parameters: {
     docs: {
@@ -139,7 +148,7 @@ export const WithCaption = {
   ),
   args: {
     ...Default.args,
-    isAutoRotate: true,
+    isAutoRotate: false,
     height: 560,
   },
 };

@@ -6,6 +6,7 @@ import { useLocale } from '../../i18n';
 import { ColorDonutChart } from './ColorDonutChart.jsx';
 import { ColorDetailModal } from './ColorDetailModal.jsx';
 import { TimelineAxis } from './TimelineAxis.jsx';
+import { BRAND_DISPLAY, BRAND_LABEL, PRODUCT } from './typography.js';
 import { TimelineEventItem } from './TimelineEventItem.jsx';
 import { TimelineWorkItem } from './TimelineWorkItem.jsx';
 import { TimelineTrendBackground } from './TimelineTrendBackground.jsx';
@@ -341,7 +342,7 @@ function TimelineCanvas({
         <Typography
           sx={ {
             display: 'block',
-            fontFamily: '"Cinzel", "Trajan Pro", "IM Fell English", "Times New Roman", serif',
+            fontFamily: BRAND_DISPLAY,
             fontSize: { xs: '3rem', md: '4.5rem', lg: '6rem' },
             fontWeight: 900,
             fontStyle: 'normal',
@@ -358,7 +359,7 @@ function TimelineCanvas({
           sx={ {
             display: 'block',
             mt: 1.5,
-            fontFamily: '"IM Fell English SC", "IM Fell English", "Cinzel", serif',
+            fontFamily: BRAND_LABEL,
             fontSize: '0.78rem',
             letterSpacing: '0.32em',
             textTransform: 'uppercase',
@@ -408,10 +409,12 @@ function TimelineCanvas({
                 <Typography
                   variant="caption"
                   sx={ {
-                    fontSize: '0.625rem',
+                    fontFamily: PRODUCT,
+                    fontSize: '0.7rem',
+                    fontWeight: 500,
                     color: 'text.disabled',
                     fontVariantNumeric: 'tabular-nums',
-                    letterSpacing: '0.05em',
+                    letterSpacing: '0.02em',
                     userSelect: 'none',
                   } }
                 >
@@ -434,7 +437,8 @@ function TimelineCanvas({
               position: 'absolute',
               top: 8,
               right: 8,
-              fontSize: '0.55rem',
+              fontFamily: PRODUCT,
+              fontSize: '0.6rem',
               fontWeight: 600,
               letterSpacing: '0.18em',
               textTransform: 'uppercase',
@@ -477,12 +481,15 @@ function TimelineCanvas({
       {/* 작품 노드 (축 상단) */}
       { positionedWorks.map((work) => {
         const neighbors = sortedXById.get(work.id);
+        const isActive = activeId === work.id;
+        const isDimmed = activeId != null && !isActive;
         return (
           <TimelineWorkItem
             key={ work.id }
             work={ work }
             axisY={ axisY }
-            isActive={ activeId === work.id }
+            isActive={ isActive }
+            isDimmed={ isDimmed }
             nodeScale={ nodeScale }
             viewportCenterX={ viewportCenterX }
             prevX={ neighbors?.prevX }

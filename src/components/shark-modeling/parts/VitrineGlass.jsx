@@ -1,28 +1,27 @@
+import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 import { RENDER_ORDER } from '../vitrineDesign';
 
 /**
- * VitrineGlass - 얇은 유리 5면
+ * VitrineGlass - 얇은 유리 5면 + scroll-driven build-up.
  *
- * bottom 면은 plinth로 가려져 생략.
- * 각 패널은 얇은 box로 구성 → transmission ray-march 거리가 짧아 ghost 없음.
- *
- * 제거 이력:
- *  - 12개 검은 sealing 라인 — 레퍼런스에 없는 강한 검은 윤곽이
- *    후면을 통해 비치며 상어 얼굴 영역에 "내부 프레임"처럼 보임 → 제거.
+ * progress 0.2~0.7 구간에서 bottom-pivot scaleY 0→1로 vitrine이 차오름.
  *
  * Props:
  * @param {object} design - computeVitrineGeometry() 결과 [Required]
+ * @param {Object} progress - framer-motion MotionValue (0~1) [Optional]
  *
  * Example usage:
- * <VitrineGlass design={design} />
+ * <VitrineGlass design={ design } progress={ scrollYProgress } />
  */
-function VitrineGlass({ design }) {
+function VitrineGlass({ design, progress }) {
   const { box, frame, glass } = design;
   const { w, h, d } = box;
   const ft = frame.thickness;
   const gt = glass.thickness;
+  const groupRef = useRef();
 
-  /** 유리 인너 박스 크기 (프레임 안쪽으로 들어간) */
+  /** 유리 인너 박스 크기 */
   const iw = w - ft;
   const ih = h - ft;
   const id = d - ft;
@@ -41,26 +40,35 @@ function VitrineGlass({ design }) {
     { pos: [iw / 2, 0, 0], geo: [gt, ih, id] },
   ];
 
+  /** bottom-pivot scale (panel matte frame과 동일 식 + 동일 구간) */
+  useFrame(() => {
+    if (!groupRef.current) return;
+    const pVal = progress?.get?.() ?? 1;
+    const s = Math.max(0, Math.min(1, (pVal - 0.2) / 0.5));
+    groupRef.current.scale.y = s;
+    groupRef.current.position.y = -h / 2 + (h * s) / 2;
+  });
+
   return (
-    <group>
-      {panels.map((p, i) => (
-        <mesh key={`g-${i}`} position={p.pos} renderOrder={RENDER_ORDER.glass}>
-          <boxGeometry args={p.geo} />
+    <group ref={ groupRef }>
+      { panels.map((p, i) => (
+        <mesh key={ `g-${i}` } position={ p.pos } renderOrder={ RENDER_ORDER.glass }>
+          <boxGeometry args={ p.geo } />
           <meshPhysicalMaterial
-            transmission={glass.transmission}
-            thickness={glass.transmissionThickness}
-            roughness={glass.roughness}
-            ior={glass.ior}
-            attenuationColor={glass.attenuationColor}
-            attenuationDistance={glass.attenuationDistance}
-            color={glass.color}
-            clearcoat={glass.clearcoat}
-            clearcoatRoughness={glass.clearcoatRoughness}
+            transmission={ glass.transmission }
+            thickness={ glass.transmissionThickness }
+            roughness={ glass.roughness }
+            ior={ glass.ior }
+            attenuationColor={ glass.attenuationColor }
+            attenuationDistance={ glass.attenuationDistance }
+            color={ glass.color }
+            clearcoat={ glass.clearcoat }
+            clearcoatRoughness={ glass.clearcoatRoughness }
             transparent
-            opacity={glass.opacity}
+            opacity={ glass.opacity }
           />
         </mesh>
-      ))}
+      )) }
     </group>
   );
 }

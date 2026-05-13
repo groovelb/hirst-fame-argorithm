@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { useLocale } from '../../i18n';
+import { PRODUCT, BRAND_LABEL } from './typography.js';
 
 const BAND_IMAGE_SRC = {
   TRANSCENDENCE: '/images/hirst/grotesque-bitmap/transcendence-sacred-heart.png',
@@ -163,8 +164,8 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
             whiteSpace: 'nowrap',
             userSelect: 'none',
             pointerEvents: 'none',
-            fontFamily: '"IM Fell English", "Cinzel", "Times New Roman", serif',
-            letterSpacing: '0.05em',
+            fontFamily: PRODUCT,
+            letterSpacing: '0.02em',
           } }
         >
           { tick.year }

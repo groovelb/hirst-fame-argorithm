@@ -24,17 +24,22 @@ from collections import defaultdict, deque
 INPUT_PATH = '/Users/ddd/Desktop/daily vibe/hirst/public/crysis_shark.glb'
 OUTPUT_PATH = '/Users/ddd/Desktop/daily vibe/hirst/public/shark_hirst_pose.glb'
 
-K_NEAREST = 3                    # teeth→body 최근접 K개
-LIP_SEAM_TOLERANCE = 0.02        # |V.y - T.y| < eps → seam (분류 제외)
-MAX_INFLUENCE_HOP = 6            # geodesic 영향 최대 hop
-UPPER_JAW_ANGLE_DEG = -42        # 음수 = 상악 위로
-LOWER_JAW_ANGLE_DEG = +58        # 양수 = 하악 아래로
-HINGE_Z_OVERRIDE = -3.40         # 입 뒤 corner z (teeth z_max)
-SMOOTH_HOPS = 3                  # 평활화 hop 반경
-SMOOTH_ITERATIONS = 2
-SMOOTH_FACTOR = 0.35
-SEAM_PAIR_XZ_THRESHOLD = 0.08    # seam pair xz 인접 임계
-TEETH_FOLLOW_RATIO = 0.85        # 이빨이 jaw 회전 따라가는 비율
+LIP_DISTANCE_THRESHOLD = 0.12    # body vert가 이빨에서 이 거리 안이면 lip (K-NN 대신)
+K_NEAREST_FALLBACK = 1           # threshold로 못 찾으면 fallback K-NN
+LIP_SEAM_TOLERANCE = 0.02
+MAX_INFLUENCE_HOP = 3            # body 영향 반경 (2 → 3, mouth opening 키움)
+UPPER_JAW_ANGLE_DEG = -30
+LOWER_JAW_ANGLE_DEG = +45
+HINGE_Z_OVERRIDE = -3.40
+SMOOTH_HOPS = 2
+SMOOTH_ITERATIONS = 0            # 끔 — body lip을 본래 위치로 되돌리는 부작용 차단
+SMOOTH_FACTOR = 0.25
+SEAM_PAIR_XZ_THRESHOLD = 0.08
+TEETH_FOLLOW_RATIO = 1.0         # 각 치아를 강체로 회전 (full angle, 크기 보존)
+TEETH_KEEP_ORIGINAL = True       # True면 이빨 변형 일체 안 함 (원본 위치 그대로)
+# 안전 컷오프 — 머리 영역 밖은 절대 안 움직임
+SAFETY_Z_MAX = -3.0              # z > -3.0 인 vertex는 회전 제외 (펙토럴 핀 보호)
+SAFETY_Y_RANGE = (-0.7, +1.0)    # y가 이 범위 밖인 vertex는 회전 제외 (snout 윗부분/belly 보호)
 
 
 # =========================================================================
@@ -98,12 +103,18 @@ for v in bm.verts:
 body_kd.balance()
 
 lip_ring = set()
+fallback_count = 0
 for tv in teeth.data.vertices:
-    nearest = body_kd.find_n(tv.co, K_NEAREST)
-    for (_, idx, _) in nearest:
+    nearby = body_kd.find_range(tv.co, LIP_DISTANCE_THRESHOLD)
+    if not nearby:
+        # fallback: at least 1 nearest neighbor
+        nearby = body_kd.find_n(tv.co, K_NEAREST_FALLBACK)
+        fallback_count += 1
+    for (_, idx, _) in nearby:
         lip_ring.add(idx)
 
-print(f'  K={K_NEAREST}, LIP_RING size = {len(lip_ring)}')
+print(f'  threshold={LIP_DISTANCE_THRESHOLD}, fallback teeth={fallback_count}')
+print(f'  LIP_RING size = {len(lip_ring)}')
 
 
 # =========================================================================
@@ -210,9 +221,17 @@ upper_rad = math.radians(UPPER_JAW_ANGLE_DEG)
 lower_rad = math.radians(LOWER_JAW_ANGLE_DEG)
 
 rotated = 0
+skipped_safety = 0
 for i, v in enumerate(bm.verts):
     side = sides[i]
     if side is None:
+        continue
+    # 안전 컷오프: 머리 영역 밖, 펙토럴 핀, snout 윗부분, belly 등 보호
+    if v.co.z > SAFETY_Z_MAX:
+        skipped_safety += 1
+        continue
+    if v.co.y < SAFETY_Y_RANGE[0] or v.co.y > SAFETY_Y_RANGE[1]:
+        skipped_safety += 1
         continue
     d = dist_upper[i] if side == 'upper' else dist_lower[i]
     if d > MAX_INFLUENCE_HOP:
@@ -227,7 +246,7 @@ for i, v in enumerate(bm.verts):
     v.co.z = nz
     rotated += 1
 
-print(f'  rotated: {rotated} verts')
+print(f'  rotated: {rotated} verts (skipped {skipped_safety} by safety cutoff)')
 
 
 # =========================================================================
@@ -306,28 +325,65 @@ bpy.ops.object.mode_set(mode='OBJECT')
 
 
 # =========================================================================
-# Teeth rotation (자기 자신 y 기준으로 upper/lower)
+# Teeth rotation — TEETH_KEEP_ORIGINAL 플래그 제어
 # =========================================================================
 
-print('\n=== Teeth: split + follow ===')
+if TEETH_KEEP_ORIGINAL:
+    print('\n=== Teeth: KEPT ORIGINAL (원본 위치 유지, 변형 없음) ===')
+else:
+    print('\n=== Teeth: rigid per-tooth rotation ===')
 
-t_upper = 0
-t_lower = 0
-for v in teeth.data.vertices:
-    dy = v.co.y - hinge_y
-    if dy < -0.005:
-        angle = upper_rad * TEETH_FOLLOW_RATIO
-        t_upper += 1
-    elif dy > 0.005:
-        angle = lower_rad * TEETH_FOLLOW_RATIO
-        t_lower += 1
-    else:
-        continue
-    ny, nz = rotate_yz(v.co.y, v.co.z, hinge_y, hinge_z, angle)
-    v.co.y = ny
-    v.co.z = nz
+    # 1) face adjacency 구축
+    teeth_adj = defaultdict(set)
+    for face in teeth.data.polygons:
+        fverts = list(face.vertices)
+        for i in range(len(fverts)):
+            for j in range(i + 1, len(fverts)):
+                teeth_adj[fverts[i]].add(fverts[j])
+                teeth_adj[fverts[j]].add(fverts[i])
 
-print(f'  teeth: upper={t_upper}, lower={t_lower}, follow ratio={TEETH_FOLLOW_RATIO}')
+    # 2) connected components BFS
+    N_teeth = len(teeth.data.vertices)
+    visited_t = [False] * N_teeth
+    components = []
+    for start in range(N_teeth):
+        if visited_t[start]:
+            continue
+        comp = []
+        q = deque([start])
+        while q:
+            v = q.popleft()
+            if visited_t[v]:
+                continue
+            visited_t[v] = True
+            comp.append(v)
+            for nb in teeth_adj[v]:
+                if not visited_t[nb]:
+                    q.append(nb)
+        components.append(comp)
+
+    print(f'  teeth connected components: {len(components)}')
+
+    # 3) 강체 회전
+    upper_teeth = lower_teeth = skipped = 0
+    for comp in components:
+        cy = sum(teeth.data.vertices[i].co.y for i in comp) / len(comp)
+        if cy < hinge_y - 0.005:
+            angle = upper_rad * TEETH_FOLLOW_RATIO
+            upper_teeth += 1
+        elif cy > hinge_y + 0.005:
+            angle = lower_rad * TEETH_FOLLOW_RATIO
+            lower_teeth += 1
+        else:
+            skipped += 1
+            continue
+        for v_idx in comp:
+            v = teeth.data.vertices[v_idx]
+            ny, nz = rotate_yz(v.co.y, v.co.z, hinge_y, hinge_z, angle)
+            v.co.y = ny
+            v.co.z = nz
+
+    print(f'  upper teeth: {upper_teeth}, lower teeth: {lower_teeth}, neutral: {skipped}')
 
 
 # =========================================================================

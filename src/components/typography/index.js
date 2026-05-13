@@ -36,3 +36,6 @@ export { QuotedContainer } from './QuotedContainer.jsx';
 
 // EraThesisHeadline - Hirst Era 명제 헤드라인
 export { EraThesisHeadline } from './EraThesisHeadline.jsx';
+
+// HeroTypeBlock - Landing Hero의 거대 단어 타이포(FitText 헤드라인 변형)
+export { HeroTypeBlock } from './HeroTypeBlock.jsx';
