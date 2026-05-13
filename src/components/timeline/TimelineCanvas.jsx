@@ -8,6 +8,7 @@ import { ColorDetailModal } from './ColorDetailModal.jsx';
 import { TimelineAxis } from './TimelineAxis.jsx';
 import { TimelineEventItem } from './TimelineEventItem.jsx';
 import { TimelineWorkItem } from './TimelineWorkItem.jsx';
+import { TimelineTrendBackground } from './TimelineTrendBackground.jsx';
 import { WorkImage } from './WorkImage.jsx';
 
 /** hex → [r, g, b] (0~255) */
@@ -230,9 +231,13 @@ const EVENT_STRIP_H = 80;
  * @param {Object} scrollOffset - 화면 고정용 framer-motion MotionValue [Optional]
  * @param {number} nodeScale - 작품 노드 크기 스케일 (0~1) [Optional, 기본값: 1]
  * @param {Object} bioData - hirst-bio-specimen-data.js 의 default export (artworks/speciesSummary/sources/caveats) [Optional]
+ * @param {Object} trendData - hirst-trend-data.json의 trendData 객체 {series, peaks, ...} [Optional]
+ * @param {function} yearToX - 연도(소수 허용) → X 픽셀 매핑 함수, useTimelineLayout 제공 [Optional]
+ * @param {Object} scrollProgress - framer-motion MotionValue (0~1), trend reveal frontier 계산용 [Optional]
+ * @param {number} viewportWidth - 현재 뷰포트 너비 (px), trend reveal frontier 시작 좌표 [Optional]
  *
  * Example usage:
- * <TimelineCanvas {...layoutData} viewportHeight={800} bioData={ bioData } />
+ * <TimelineCanvas {...layoutData} viewportHeight={800} bioData={ bioData } trendData={ trendData } />
  */
 function TimelineCanvas({
   positionedWorks,
@@ -249,6 +254,10 @@ function TimelineCanvas({
   scrollOffset,
   nodeScale = 1,
   bioData,
+  trendData,
+  yearToX,
+  scrollProgress,
+  viewportWidth,
 }) {
   const activeWork = activeId
     ? positionedWorks.find((w) => w.id === activeId)
@@ -320,6 +329,19 @@ function TimelineCanvas({
         </Typography>
       </motion.div>
 
+      {/* 트렌드 배경 — 축 위 라인 차트, X scale은 타임라인과 동일.
+          scrollProgress + viewportWidth가 주어지면 우측 frontier reveal 트랜지션 적용 */}
+      { trendData?.series && yearToX && (
+        <TimelineTrendBackground
+          series={ trendData.series }
+          axisY={ axisY }
+          totalWidth={ totalWidth }
+          yearToX={ yearToX }
+          scrollProgress={ scrollProgress }
+          viewportWidth={ viewportWidth }
+        />
+      ) }
+
       {/* 축 + Y축 감정 틱 */}
       <TimelineAxis
         totalWidth={ totalWidth }
@@ -354,7 +376,9 @@ function TimelineCanvas({
         />
       )) }
 
-      {/* 하단 고정 패널 — 이벤트 스트립 아래, 4컬럼 에디토리얼 그리드 */}
+      {/* 하단 고정 패널 — 이벤트 스트립 아래, 4컬럼 에디토리얼 그리드
+          (현재 비활성: 상단 타임라인이 전체 화면을 사용하도록 화면에서 숨김.
+           컴포넌트는 유지하여 재사용 가능) */}
       <motion.div
         style={ {
           position: 'absolute',
@@ -362,7 +386,7 @@ function TimelineCanvas({
           top: panelTop,
           width: '100vw',
           height: panelHeight,
-          display: 'flex',
+          display: 'none',
           paddingTop: 0,
           pointerEvents: 'none',
           zIndex: 4,
@@ -428,7 +452,8 @@ function TimelineCanvas({
             height: '100%',
             display: { xs: 'none', md: 'flex' },
             flexDirection: 'column',
-            borderLeft: { md: '1px solid rgba(0, 0, 0, 0.06)' },
+            borderLeft: { md: '1px solid' },
+            borderColor: { md: 'divider' },
             overflow: 'hidden',
             pointerEvents: 'auto',
           } }
@@ -464,9 +489,9 @@ function TimelineCanvas({
                   textAlign: 'center',
                   cursor: 'pointer',
                   borderRadius: '4px 4px 0 0',
-                  backgroundColor: selectedBioCategory === id ? 'grey.100' : 'transparent',
+                  backgroundColor: selectedBioCategory === id ? 'action.selected' : 'transparent',
                   transition: 'background-color 0.15s',
-                  '&:hover': { backgroundColor: selectedBioCategory === id ? 'grey.100' : 'grey.50' },
+                  '&:hover': { backgroundColor: selectedBioCategory === id ? 'action.selected' : 'action.hover' },
                 } }
               >
                 <Typography
@@ -489,11 +514,11 @@ function TimelineCanvas({
               flex: 1,
               overflowY: 'auto',
               '&::-webkit-scrollbar': { width: 3 },
-              '&::-webkit-scrollbar-thumb': { backgroundColor: 'grey.300', borderRadius: 2 },
+              '&::-webkit-scrollbar-thumb': { backgroundColor: 'divider', borderRadius: 2 },
             } }
           >
             {/* 카테고리 요약: 작품 수 + 누적 마리수(검증 가능 분만) */}
-            <Box sx={ { px: { md: 3, lg: 5, xl: 7.5 }, py: { md: 1.5, lg: 2, xl: 2 }, backgroundColor: 'grey.50' } }>
+            <Box sx={ { px: { md: 3, lg: 5, xl: 7.5 }, py: { md: 1.5, lg: 2, xl: 2 }, backgroundColor: 'action.hover' } }>
               <Typography
                 variant="caption"
                 sx={ { color: 'text.secondary', lineHeight: 1.6 } }
@@ -523,7 +548,7 @@ function TimelineCanvas({
                     gap: 1.5,
                     py: 1,
                     borderBottom: '1px solid',
-                    borderColor: 'grey.100',
+                    borderColor: 'divider',
                     '&:last-child': { borderBottom: 'none' },
                   } }
                 >
@@ -562,8 +587,8 @@ function TimelineCanvas({
                               gap: 0.5,
                               px: 0.75,
                               py: 0.25,
-                              backgroundColor: sp.count != null ? 'grey.900' : 'grey.200',
-                              color: sp.count != null ? '#fff' : 'text.secondary',
+                              backgroundColor: sp.count != null ? 'text.primary' : 'action.disabledBackground',
+                              color: sp.count != null ? 'background.paper' : 'text.secondary',
                               borderRadius: '2px',
                               fontSize: '0.65rem',
                               lineHeight: 1.2,
@@ -634,7 +659,8 @@ function TimelineCanvas({
             height: '100%',
             display: { xs: 'none', md: 'flex' },
             flexDirection: 'column',
-            borderLeft: { md: '1px solid rgba(0, 0, 0, 0.06)' },
+            borderLeft: { md: '1px solid' },
+            borderColor: { md: 'divider' },
             overflow: 'hidden',
           } }
         >
@@ -653,7 +679,7 @@ function TimelineCanvas({
             sx={ {
               flex: 1,
               overflow: 'hidden',
-              backgroundColor: activeWork ? '#1a1a1a' : 'transparent',
+              backgroundColor: activeWork ? 'background.paper' : 'transparent',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -713,7 +739,8 @@ function TimelineCanvas({
             flexDirection: 'column',
             px: { md: 4, lg: 6, xl: 9 },
             py: { md: 2, lg: 3, xl: 4 },
-            borderLeft: { md: '1px solid rgba(0, 0, 0, 0.06)' },
+            borderLeft: { md: '1px solid' },
+            borderColor: { md: 'divider' },
             overflow: 'hidden',
           } }
         >
@@ -752,7 +779,7 @@ function TimelineCanvas({
                         >
                           { k }
                         </Typography>
-                        <Box sx={ { flex: 1, height: 4, backgroundColor: 'grey.100' } }>
+                        <Box sx={ { flex: 1, height: 4, backgroundColor: 'action.disabledBackground' } }>
                           <Box
                             sx={ {
                               width: `${Math.round(v * 100)}%`,
@@ -826,7 +853,7 @@ function TimelineCanvas({
                       sx={ {
                         px: 0.75,
                         py: 0.25,
-                        backgroundColor: 'grey.100',
+                        backgroundColor: 'action.hover',
                         color: 'text.secondary',
                         fontSize: '0.7rem',
                         fontFamily: 'monospace',

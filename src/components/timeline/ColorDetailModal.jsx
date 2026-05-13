@@ -55,7 +55,7 @@ function ColorDetailModal({ open, onClose, segment }) {
           },
         },
         backdrop: {
-          sx: { backgroundColor: 'rgba(0, 0, 0, 0.3)' },
+          sx: { backgroundColor: 'rgba(0, 0, 0, 0.6)' },
         },
       } }
     >
@@ -69,7 +69,7 @@ function ColorDetailModal({ open, onClose, segment }) {
             px: { xs: 3, md: 4 },
             py: { xs: 2.5, md: 3 },
             borderBottom: '1px solid',
-            borderColor: 'grey.100',
+            borderColor: 'divider',
           } }
         >
           <Box sx={ { display: 'flex', alignItems: 'center', gap: 2 } }>
@@ -103,7 +103,7 @@ function ColorDetailModal({ open, onClose, segment }) {
         </Box>
 
         {/* 감성 분포 */}
-        <Box sx={ { px: { xs: 3, md: 4 }, py: { xs: 2.5, md: 3 }, borderBottom: '1px solid', borderColor: 'grey.100' } }>
+        <Box sx={ { px: { xs: 3, md: 4 }, py: { xs: 2.5, md: 3 }, borderBottom: '1px solid', borderColor: 'divider' } }>
           <Typography
             variant="body2"
             sx={ { fontWeight: 600, mb: 1.5, color: 'text.secondary' } }
@@ -146,7 +146,7 @@ function ColorDetailModal({ open, onClose, segment }) {
                   gap: 0.5,
                   px: 1,
                   py: 0.25,
-                  backgroundColor: 'grey.50',
+                  backgroundColor: 'action.hover',
                   borderRadius: '2px',
                 } }
               >

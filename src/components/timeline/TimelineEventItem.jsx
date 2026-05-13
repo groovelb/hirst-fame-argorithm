@@ -3,9 +3,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useLocale } from '../../i18n';
 
-/** 마커 색상 */
-const DOT_COLOR = '#000';
-
 /**
  * TimelineEventItem — 타임라인 축 하단의 개별 이벤트 노드
  *
@@ -50,7 +47,7 @@ function TimelineEventItem({
           width: 5,
           height: 5,
           borderRadius: '50%',
-          backgroundColor: DOT_COLOR,
+          backgroundColor: 'text.secondary',
           transform: 'translate(-50%, -50%)',
           ml: '3px',
         } }

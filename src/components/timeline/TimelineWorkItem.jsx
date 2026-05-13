@@ -134,11 +134,11 @@ function TimelineWorkItem({
           opacity: 0,
           visibility: 'hidden',
           transition: 'opacity 0.2s ease, visibility 0.2s ease',
-          backgroundColor: '#fff',
+          backgroundColor: 'background.paper',
           p: 1.5,
           minWidth: 180,
           maxWidth: 220,
-          boxShadow: '0 0 16px rgba(0, 0, 0, 0.08)',
+          boxShadow: (theme) => theme.customShadows?.md ?? theme.shadows[4],
           zIndex: 20,
           pointerEvents: 'none',
         } }

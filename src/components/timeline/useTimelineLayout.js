@@ -69,7 +69,7 @@ function useTimelineLayout({
 }) {
   return useMemo(() => {
     const START_YEAR = 1986;
-    const END_YEAR = 2024;
+    const END_YEAR = 2026;
 
     const works = worksData?.works || [];
     const events = (eventsData?.events || []).filter((e) => e.year >= START_YEAR);
@@ -190,6 +190,8 @@ function useTimelineLayout({
       totalWidth,
       axisY,
       yearToX,
+      startYear: START_YEAR,
+      endYear: END_YEAR,
     };
   }, [worksData, eventsData, pxPerYear, viewportWidth, viewportHeight, axisRatio]);
 }

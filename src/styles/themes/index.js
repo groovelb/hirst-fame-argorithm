@@ -16,8 +16,8 @@ export const themes = {
 export const themeMeta = {
   default: {
     name: 'Default',
-    description: '프로젝트 기본 테마',
-    mode: 'light',
+    description: '프로젝트 기본 테마 (다크)',
+    mode: 'dark',
   },
 };
 

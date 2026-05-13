@@ -63,7 +63,7 @@ function TimelineMinimap({
         zIndex: 1100,
         width: MAP_W,
         height: MAP_H,
-        backgroundColor: 'rgba(250, 250, 250, 0.65)',
+        backgroundColor: 'rgba(20, 20, 20, 0.65)',
         backdropFilter: 'blur(4px)',
         borderRadius: '3px',
         cursor: 'pointer',
@@ -101,9 +101,9 @@ function TimelineMinimap({
           x: indicatorX,
           width: indicatorW,
           height: MAP_H,
-          backgroundColor: 'rgba(0, 0, 0, 0.07)',
-          borderLeft: '1px solid rgba(0, 0, 0, 0.18)',
-          borderRight: '1px solid rgba(0, 0, 0, 0.18)',
+          backgroundColor: 'rgba(255, 255, 255, 0.06)',
+          borderLeft: '1px solid rgba(255, 255, 255, 0.18)',
+          borderRight: '1px solid rgba(255, 255, 255, 0.18)',
           pointerEvents: 'none',
         } }
       />

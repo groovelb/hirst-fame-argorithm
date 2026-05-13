@@ -18,18 +18,20 @@ import { useTimelineLayout } from './useTimelineLayout.js';
  * @param {Object} worksData - works JSON 데이터 [Required]
  * @param {Object} eventsData - events JSON 데이터 (시기 밴드 등) [Required]
  * @param {Object} bioData - hirst-bio-specimen-data.js 의 default export (artworks/speciesSummary/sources/caveats) [Optional]
+ * @param {Object} trendData - hirst-trend-data.json 전체 객체 (trendData/peaks 포함) [Optional]
  * @param {number} pxPerYear - 연도당 픽셀 수 [Optional, 기본값: 250]
- * @param {string} backgroundColor - 배경색 [Optional, 기본값: '#FAFAFA']
+ * @param {string} backgroundColor - 배경색 [Optional, 기본값: theme.palette.background.default]
  *
  * Example usage:
- * <RothkoTimeline worksData={ works } eventsData={ events } bioData={ bioData } />
+ * <RothkoTimeline worksData={ works } eventsData={ events } bioData={ bioData } trendData={ trend } />
  */
 function RothkoTimeline({
   worksData,
   eventsData,
   bioData,
+  trendData,
   pxPerYear = 250,
-  backgroundColor = '#FAFAFA',
+  backgroundColor,
 }) {
   const [viewportWidth, setViewportWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1920
@@ -46,7 +48,8 @@ function RothkoTimeline({
   const isBelowLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const responsivePxPerYear = isBelowSm ? 120 : isBelowMd ? 160 : isBelowLg ? 200 : pxPerYear;
-  const axisRatio = isBelowSm ? 0.6 : 0.5;
+  /** 하단 패널 비활성 상태에서는 축을 화면 하단으로 내려 상단 타임라인을 풀스크린화 */
+  const axisRatio = isBelowSm ? 0.9 : 0.85;
   const nodeScale = isBelowSm ? 0.53 : isBelowMd ? 0.67 : isBelowLg ? 0.83 : 1.0;
 
   useEffect(() => {
@@ -105,7 +108,7 @@ function RothkoTimeline({
       onNavigate={ handleMinimapNavigate }
     />
     <HorizontalScrollContainer
-      backgroundColor={ backgroundColor }
+      backgroundColor={ backgroundColor ?? theme.palette.background.default }
       onScrollProgress={ handleScrollProgress }
     >
       <TimelineCanvas
@@ -123,6 +126,10 @@ function RothkoTimeline({
         scrollOffset={ scrollOffset }
         nodeScale={ nodeScale }
         bioData={ bioData }
+        trendData={ trendData?.trendData }
+        yearToX={ layout.yearToX }
+        scrollProgress={ scrollProgress }
+        viewportWidth={ viewportWidth }
       />
     </HorizontalScrollContainer>
     </>

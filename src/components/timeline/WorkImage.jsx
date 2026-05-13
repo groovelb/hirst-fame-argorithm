@@ -54,11 +54,11 @@ function WorkImage({
         ...sx,
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'grey.100',
+        backgroundColor: 'action.hover',
         overflow: 'hidden',
         position: 'relative',
         border: '1px solid',
-        borderColor: 'rgba(0, 0, 0, 0.12)',
+        borderColor: 'divider',
         boxSizing: 'border-box',
       } }
     >
@@ -74,7 +74,7 @@ function WorkImage({
           />
         ))
       ) : (
-        <Box sx={ { flex: 1, backgroundColor: 'grey.200' } } />
+        <Box sx={ { flex: 1, backgroundColor: 'action.disabledBackground' } } />
       ) }
 
       { showTitleInPlaceholder && work?.title && (

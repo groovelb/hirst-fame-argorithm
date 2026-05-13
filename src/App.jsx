@@ -8,17 +8,19 @@ import { RothkoTimeline as HirstTimeline } from './components/timeline';
 import worksData from './data/hirst/hirst_works.json';
 import eventsData from './data/hirst/hirst_events.json';
 import bioData from './data/hirst/hirst-bio-specimen-data.js';
+import trendData from '../data/hirst-trend-data.json';
 
 function App() {
   return (
     <LocaleProvider>
-      <ThemeProvider theme={ theme }>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <LanguageToggle />
         <HirstTimeline
-          worksData={ worksData }
-          eventsData={ eventsData }
-          bioData={ bioData }
+          worksData={worksData}
+          eventsData={eventsData}
+          bioData={bioData}
+          trendData={trendData}
         />
       </ThemeProvider>
     </LocaleProvider>

@@ -4,20 +4,18 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="only light" />
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="color-scheme" content="only dark" />
+    <meta name="theme-color" content="#0A0A0A" />
     <meta name="darkreader-lock" />
     <title>Damien Hirst — Worldview Timeline</title>
     <style>
-      /* Lock light mode at parse time — prevents Comet/Chromium auto-dark FOUC */
-      :root { color-scheme: only light; }
-      html, body { background-color: #FFFFFF; }
+      /* Lock dark mode at parse time — prevents FOUC */
+      :root { color-scheme: only dark; }
+      html, body { background-color: #0A0A0A; }
     </style>
     <script>
       // Earliest-possible force: before React, before MUI CssBaseline.
-      // 일부 Chromium 분기(Comet 등)는 메타 태그를 무시하고 auto-dark를 시도하므로
-      // documentElement에 직접 color-scheme을 박는다.
-      document.documentElement.style.colorScheme = 'only light';
+      document.documentElement.style.colorScheme = 'only dark';
     </script>
   </head>
   <body>

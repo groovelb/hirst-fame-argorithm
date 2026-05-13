@@ -1,5 +1,5 @@
 /**
- * Default Theme
+ * Default Theme (Dark)
  *
  * 프로젝트의 기본 디자인 토큰을 정의하는 표준 테마입니다.
  * 피그마의 Design Tokens / Variables와 동일한 역할입니다.
@@ -7,8 +7,8 @@
  * ## 핵심 철학
  * - **Sharp Corners**: borderRadius 0 (날카로운 모서리)
  * - **Dimmed Shadow**: offset 없이 blur만 사용하는 은은한 그림자
- * - **Pure White**: 깔끔한 흰색 배경
- * - **Brand Blue**: Primary 색상 #0000FF
+ * - **Deep Black**: 깔끔한 흑색 배경 (다크 테마)
+ * - **Brand Blue**: Primary 색상 #6666FF (다크에 맞춰 톤업)
  */
 
 import { createTheme } from '@mui/material/styles';
@@ -18,71 +18,71 @@ import { blueGrey, grey } from '@mui/material/colors';
 // 1. Color Tokens (색상 토큰)
 // ============================================================
 const palette = {
-  mode: 'light',
-  // 브랜드 색상
+  mode: 'dark',
+  // 브랜드 색상 (다크 배경 가독성을 위해 light/main을 한 단계 밝게)
   primary: {
-    light: '#6666FF',
-    main: '#0000FF',
-    dark: '#0000B2',
+    light: '#9999FF',
+    main: '#6666FF',
+    dark: '#0000FF',
     contrastText: '#FFFFFF',
   },
   secondary: {
-    light: blueGrey[700],
-    main: blueGrey[900],
-    dark: '#1a252b',
-    contrastText: '#FFFFFF',
+    light: blueGrey[200],
+    main: blueGrey[100],
+    dark: blueGrey[400],
+    contrastText: '#000000',
   },
 
-  // 상태 색상 (Feedback)
+  // 상태 색상 (Feedback) — 다크 톤에 맞춰 light 사용
   error: {
-    light: '#ef5350',
-    main: '#d32f2f',
+    light: '#ff8a80',
+    main: '#ef5350',
     dark: '#c62828',
-    contrastText: '#FFFFFF',
+    contrastText: '#000000',
   },
   warning: {
-    light: '#ff9800',
-    main: '#ed6c02',
-    dark: '#e65100',
-    contrastText: '#FFFFFF',
+    light: '#ffb74d',
+    main: '#ffa726',
+    dark: '#ed6c02',
+    contrastText: '#000000',
   },
   success: {
-    light: '#4caf50',
-    main: '#2e7d32',
-    dark: '#1b5e20',
-    contrastText: '#FFFFFF',
+    light: '#81c784',
+    main: '#66bb6a',
+    dark: '#2e7d32',
+    contrastText: '#000000',
   },
   info: {
-    light: '#03a9f4',
-    main: '#0288d1',
-    dark: '#01579b',
-    contrastText: '#FFFFFF',
+    light: '#4fc3f7',
+    main: '#29b6f6',
+    dark: '#0288d1',
+    contrastText: '#000000',
   },
 
   // 텍스트 색상
   text: {
-    primary: 'rgba(0, 0, 0, 0.87)',
-    secondary: 'rgba(0, 0, 0, 0.6)',
-    disabled: 'rgba(0, 0, 0, 0.38)',
+    primary: 'rgba(255, 255, 255, 0.92)',
+    secondary: 'rgba(255, 255, 255, 0.64)',
+    disabled: 'rgba(255, 255, 255, 0.38)',
   },
 
   // 배경 색상
   background: {
-    default: '#FFFFFF',
-    paper: '#FFFFFF',
+    default: '#0A0A0A',
+    paper: '#141414',
   },
 
   // 구분선
-  divider: 'rgba(0, 0, 0, 0.12)',
+  divider: 'rgba(255, 255, 255, 0.14)',
 
   // 액션 상태
   action: {
-    active: 'rgba(0, 0, 0, 0.54)',
-    hover: 'rgba(0, 0, 0, 0.04)',
-    selected: 'rgba(0, 0, 0, 0.08)',
-    disabled: 'rgba(0, 0, 0, 0.26)',
-    disabledBackground: 'rgba(0, 0, 0, 0.12)',
-    focus: 'rgba(0, 0, 0, 0.12)',
+    active: 'rgba(255, 255, 255, 0.72)',
+    hover: 'rgba(255, 255, 255, 0.08)',
+    selected: 'rgba(255, 255, 255, 0.14)',
+    disabled: 'rgba(255, 255, 255, 0.30)',
+    disabledBackground: 'rgba(255, 255, 255, 0.12)',
+    focus: 'rgba(255, 255, 255, 0.16)',
   },
 
   // Grey 스케일
@@ -245,10 +245,10 @@ const shape = {
 // ============================================================
 const customShadows = {
   none: 'none',
-  sm: '0 0 12px rgba(0, 0, 0, 0.06)',
-  md: '0 0 16px rgba(0, 0, 0, 0.08)',
-  lg: '0 0 20px rgba(0, 0, 0, 0.10)',
-  xl: '0 0 24px rgba(0, 0, 0, 0.12)',
+  sm: '0 0 12px rgba(0, 0, 0, 0.48)',
+  md: '0 0 16px rgba(0, 0, 0, 0.56)',
+  lg: '0 0 20px rgba(0, 0, 0, 0.64)',
+  xl: '0 0 24px rgba(0, 0, 0, 0.72)',
 };
 
 // ============================================================
@@ -382,20 +382,20 @@ defaultTheme.dashboard = {
   iconWeight: 400,
   cardBorderRadius: 0,
   cardColors: [
-    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
-    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
-    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
-    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
-    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
-    'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+    'linear-gradient(to bottom, #141414 0%, #141414 100%)',
+    'linear-gradient(to bottom, #141414 0%, #141414 100%)',
+    'linear-gradient(to bottom, #141414 0%, #141414 100%)',
+    'linear-gradient(to bottom, #141414 0%, #141414 100%)',
+    'linear-gradient(to bottom, #141414 0%, #141414 100%)',
+    'linear-gradient(to bottom, #141414 0%, #141414 100%)',
   ],
   subCardColors: [
-    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
-    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
-    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
-    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
-    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
-    'linear-gradient(to bottom, #FAFAFA 0%, #FAFAFA 100%)',
+    'linear-gradient(to bottom, #1C1C1C 0%, #1C1C1C 100%)',
+    'linear-gradient(to bottom, #1C1C1C 0%, #1C1C1C 100%)',
+    'linear-gradient(to bottom, #1C1C1C 0%, #1C1C1C 100%)',
+    'linear-gradient(to bottom, #1C1C1C 0%, #1C1C1C 100%)',
+    'linear-gradient(to bottom, #1C1C1C 0%, #1C1C1C 100%)',
+    'linear-gradient(to bottom, #1C1C1C 0%, #1C1C1C 100%)',
   ],
   textColor: palette.text.primary,
   textSecondary: palette.text.secondary,
@@ -405,25 +405,25 @@ defaultTheme.dashboard = {
   border: '1px solid transparent',
   borderColor: 'transparent',
   shadow: customShadows.lg,
-  subBorder: '1px solid rgba(0, 0, 0, 0.06)',
+  subBorder: '1px solid rgba(255, 255, 255, 0.08)',
   subShadow: '0 0 0 rgba(0, 0, 0, 0)',
   subBackdropFilter: 'blur(0px)',
   subBorderRadius: 0,
-  dividerColor: 'rgba(0, 0, 0, 0.12)',
+  dividerColor: 'rgba(255, 255, 255, 0.14)',
   progressHeight: 6,
-  progressTrackColor: 'rgba(0, 0, 0, 0.08)',
+  progressTrackColor: 'rgba(255, 255, 255, 0.12)',
   progressBarColor: palette.primary.main,
   progressGradient: false,
   progressBorderRadius: 0,
-  background: '#FFFFFF',
-  atmosphere: 'linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%)',
+  background: '#0A0A0A',
+  atmosphere: 'linear-gradient(to bottom, #0A0A0A 0%, #0A0A0A 100%)',
   atmosphereOpacity: 0,
   accentColor: palette.primary.main,
   accentColors: {
-    wind: '#4DB6AC',
-    humidity: '#FFB74D',
-    uvIndex: '#FF8A65',
-    pressure: '#64B5F6',
+    wind: '#80CBC4',
+    humidity: '#FFCC80',
+    uvIndex: '#FFAB91',
+    pressure: '#90CAF9',
   },
   blobs: null,
 };

@@ -4,6 +4,14 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { useLocale } from '../../i18n';
 
+const BAND_IMAGE_SRC = {
+  TRANSCENDENCE: '/images/hirst/grotesque-bitmap/transcendence-sacred-heart.png',
+  SYSTEM: '/images/hirst/grotesque-bitmap/system-medicine-cabinet.png',
+  RITUAL: '/images/hirst/grotesque-bitmap/ritual-vanitas-burning-money.png',
+  VANITAS: '/images/hirst/grotesque-bitmap/ritual-vanitas-burning-money.png',
+  MORTALITY: '/images/hirst/grotesque-bitmap/mortality-skull.png',
+};
+
 /**
  * TimelineAxis — 중앙 수평 축선 + 연도 틱 + 시기 배경 밴드 + Y축 감정 밴드 틱
  *
@@ -36,42 +44,75 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
             width: totalWidth,
             height: '1px',
             borderTop: '1px dashed',
-            borderColor: 'grey.200',
+            borderColor: 'divider',
             pointerEvents: 'none',
             opacity: 0.6,
           } }
         />
       )) }
 
-      {/* Y축 감정 밴드 라벨 (스크롤 시 화면 고정) */}
-      { emotionBands.map((band) => (
-        <motion.div
-          key={ `label-${band.id}` }
-          style={ {
-            position: 'absolute',
-            left: 20,
-            top: band.y,
-            transform: 'translateY(-50%)',
-            pointerEvents: 'none',
-            zIndex: 5,
-            x: scrollOffset,
-          } }
-        >
-          <Typography
-            variant="caption"
-            sx={ {
-              color: 'text.disabled',
-              fontSize: '0.6rem',
-              fontWeight: 500,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              userSelect: 'none',
+      {/* Y축 세계관 밴드 메타포 + 라벨 (스크롤 시 화면 고정) */}
+      { emotionBands.map((band) => {
+        const imageSrc = BAND_IMAGE_SRC[band.id];
+
+        return (
+          <motion.div
+            key={ `label-${band.id}` }
+            style={ {
+              position: 'absolute',
+              left: 18,
+              top: band.y,
+              transform: 'translateY(-50%)',
+              pointerEvents: 'none',
+              zIndex: 5,
+              x: scrollOffset,
             } }
           >
-            { band.localeKey ? t(band.localeKey) : band.label }
-          </Typography>
-        </motion.div>
-      )) }
+            <Box
+              sx={ {
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1.25,
+                height: 64,
+              } }
+            >
+              { imageSrc && (
+                <Box
+                  component="img"
+                  src={ imageSrc }
+                  alt=""
+                  aria-hidden="true"
+                  sx={ {
+                    width: { xs: 42, sm: 48, md: 56 },
+                    height: { xs: 42, sm: 48, md: 56 },
+                    objectFit: 'contain',
+                    opacity: 0.78,
+                    mixBlendMode: 'screen',
+                    filter: 'drop-shadow(0 0 10px rgba(232, 244, 255, 0.12))',
+                    userSelect: 'none',
+                    flexShrink: 0,
+                  } }
+                />
+              ) }
+              <Typography
+                variant="caption"
+                sx={ {
+                  color: 'rgba(246, 246, 236, 0.56)',
+                  fontSize: { xs: '0.55rem', md: '0.6rem' },
+                  fontWeight: 600,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  userSelect: 'none',
+                  whiteSpace: 'nowrap',
+                  textShadow: '0 0 8px rgba(10, 10, 10, 0.9)',
+                } }
+              >
+                { band.localeKey ? t(band.localeKey) : band.label }
+              </Typography>
+            </Box>
+          </motion.div>
+        );
+      }) }
 
       {/* 수평 축선 */}
       <Box
@@ -81,7 +122,7 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
           top: axisY,
           width: totalWidth,
           height: '1px',
-          backgroundColor: 'grey.400',
+          backgroundColor: 'text.disabled',
           pointerEvents: 'none',
         } }
       />
@@ -103,7 +144,7 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
             sx={ {
               width: '1px',
               height: tick.isMajor ? 12 : 8,
-              backgroundColor: tick.isMajor ? 'grey.500' : 'grey.300',
+              backgroundColor: tick.isMajor ? 'text.disabled' : 'action.disabled',
               transform: 'translateY(-50%)',
             } }
           />

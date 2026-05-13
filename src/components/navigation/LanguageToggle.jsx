@@ -37,12 +37,16 @@ function LanguageToggle() {
         fontSize: '0.75rem',
         fontWeight: 500,
         color: 'text.secondary',
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        backgroundColor: (theme) => theme.palette.mode === 'dark'
+          ? 'rgba(20, 20, 20, 0.8)'
+          : 'rgba(255, 255, 255, 0.8)',
         backdropFilter: 'blur(8px)',
         borderRadius: '4px',
         letterSpacing: '0.02em',
         '&:hover': {
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backgroundColor: (theme) => theme.palette.mode === 'dark'
+            ? 'rgba(28, 28, 28, 0.95)'
+            : 'rgba(255, 255, 255, 0.95)',
           color: 'text.primary',
         },
       } }
