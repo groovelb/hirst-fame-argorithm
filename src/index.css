@@ -1,3 +1,10 @@
+/* === Force light scheme — block Comet/Chromium auto-dark === */
+:root,
+html,
+body {
+  color-scheme: only light !important;
+}
+
 *,
 *::before,
 *::after {
@@ -13,10 +20,24 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #FFFFFF;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* prefers-color-scheme: dark 미디어 쿼리를 브라우저가 강제로 적용하더라도
+   페이지 베이스 색은 라이트로 유지. */
+@media (prefers-color-scheme: dark) {
+  :root,
+  html,
+  body {
+    color-scheme: only light !important;
+    background-color: #FFFFFF !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+  }
 }
