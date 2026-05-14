@@ -30,7 +30,7 @@ Damien Hirst의 대표작
 - **포름알데히드 액체**: transmission 매질 (IOR 1.33) + 청록 attenuation
 - **내부 rebar 케이지**: 4 코너 strut + 천장 ribs + 바닥 ridges (스틸 #6b9b94)
 - **볼트 그리드**: 각 strut 안쪽에 11개 볼트
-- **상어 모델**: \`/shark_hirst_pose.glb\` (Blender headless 후처리 포즈)
+- **상어 모델**: \`/crysis_shark.glb\` (Sketchfab, AllThingsSaurus, CC-BY-4.0)
 - **부유 애니메이션**: 시간 기반 sin 함수로 미세 떠 있는 움직임
 
 ### 디자인 토큰 시스템
@@ -38,7 +38,7 @@ Damien Hirst의 대표작
 모든 sub-dimension·재질을 파생. shortSide 비례 기준이라 크기 바꿔도 일관 유지.
 
 ### Props
-- \`modelUrl\` (string): glTF 경로 (기본 \`/shark_hirst_pose.glb\`)
+- \`modelUrl\` (string): glTF 경로 (기본 \`/crysis_shark.glb\`)
 - \`sharkScale\` (number): 상어 모델 스케일
 - \`tankSize\` ([w, h, d]): 탱크 크기
 - \`isFloating\` (boolean): 부유 애니메이션
@@ -64,7 +64,7 @@ Damien Hirst의 대표작
 
 export const Default = {
   args: {
-    modelUrl: '/shark_hirst_pose.glb',
+    modelUrl: '/crysis_shark.glb',
     sharkScale: 0.3,
     tankSize: [6, 3, 2.4],
     isAutoRotate: false,

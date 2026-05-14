@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
 import { LanguageToggle } from '../navigation/LanguageToggle.jsx';
-import { RothkoTimeline as HirstTimeline } from '../timeline/index.js';
+import { WorldviewTimeline as HirstTimeline } from '../timeline/index.js';
 import { HeroSection } from './HeroSection.jsx';
 
 /**
@@ -34,12 +34,34 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
   const fallbackProgress = useMotionValue(0);
   const [heroProgress, setHeroProgress] = useState(fallbackProgress);
 
-  /** Page background color — 흰 → 검정 보간 */
+  /** Page background — Hero 내내 흰색 유지, 수조 완성(0.9) 후 0.9~1.0 구간에서만 흰→검정 fade. */
   const pageBg = useTransform(
     heroProgress,
-    [0, 0.35, 0.85, 1],
-    ['#FFFFFF', '#FFFFFF', '#0A0A0A', '#0A0A0A'],
+    [0, 0.9, 1],
+    ['#FFFFFF', '#FFFFFF', '#0A0A0A'],
   );
+
+  /** Timeline 영역 fade-in — Timeline section의 자체 진입 progress 기반.
+      offset ['start end', 'start start']: timeline top이 viewport bottom→top 이동 구간.
+      큰 motion.div opacity 보간은 GPU 레이어를 들고 있는 동안 비용이 큼.
+      → 입력 [0.8, 1.0] 구간만 사용해 페이드 시간(=레이어 promotion 구간)을 viewport의 20%로 단축. */
+  const timelineRef = useRef(null);
+  const { scrollYProgress: timelineEnter } = useScroll({
+    target: timelineRef,
+    offset: ['start end', 'start start'],
+  });
+  const timelineFadeOpacity = useTransform(timelineEnter, [0.8, 1], [0, 1]);
+
+
+  /** Hero 영역에선 Minimap 숨김. progress >= 0.95에서 Timeline 진입으로 보이게.
+      boolean state로 mount/unmount 처리 → 매 frame re-render 회피. */
+  const [isHeroFinished, setIsHeroFinished] = useState(false);
+  useMotionValueEvent(heroProgress, 'change', (v) => {
+    setIsHeroFinished((prev) => {
+      const next = v >= 0.95;
+      return prev === next ? prev : next;
+    });
+  });
 
   return (
     <motion.div
@@ -51,14 +73,17 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
     >
       <LanguageToggle />
 
-      <HeroSection onHeroProgress={ setHeroProgress } />
+      <HeroSection onHeroProgress={ setHeroProgress } isPaused={ isHeroFinished } />
 
-      <HirstTimeline
-        worksData={ worksData }
-        eventsData={ eventsData }
-        bioData={ bioData }
-        trendData={ trendData }
-      />
+      <motion.div ref={ timelineRef } style={ { opacity: timelineFadeOpacity } }>
+        <HirstTimeline
+          worksData={ worksData }
+          eventsData={ eventsData }
+          bioData={ bioData }
+          trendData={ trendData }
+          hideMinimap={ !isHeroFinished }
+        />
+      </motion.div>
     </motion.div>
   );
 }

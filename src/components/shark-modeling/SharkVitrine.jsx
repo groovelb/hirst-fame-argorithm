@@ -19,7 +19,7 @@ import SharkVitrineScene, { DEFAULT_SHARK_URL } from './SharkVitrineScene';
  *   - 0.5~1.0: shark rotation.y π/2 → 0 (측면 → 정면)
  *
  * Props:
- * @param {string} modelUrl - glTF/GLB 파일 경로 [Optional, 기본값: '/shark_hirst_pose.glb']
+ * @param {string} modelUrl - glTF/GLB 파일 경로 [Optional, 기본값: '/crysis_shark.glb']
  * @param {number} sharkScale - 상어 모델 스케일 [Optional, 기본값: 0.3]
  * @param {[number, number, number]} tankSize - 탱크 크기 [w, h, d] [Optional, 기본값: [6, 3, 2.4]]
  * @param {boolean} isFloating - 상어 부유 애니메이션 [Optional, 기본값: true]
@@ -30,6 +30,7 @@ import SharkVitrineScene, { DEFAULT_SHARK_URL } from './SharkVitrineScene';
  * @param {[number, number, number]} cameraPosition - 초기 카메라 위치 [Optional, 기본값: [7, 2.5, 7]]
  * @param {number} cameraFov - 카메라 FOV [Optional, 기본값: 35]
  * @param {Object} progress - framer-motion MotionValue (0~1). scroll-driven build-up용 [Optional]
+ * @param {'always'|'demand'|'never'} frameloop - R3F 렌더 루프 모드. Hero 종료 후 'never'로 줘서 GPU 점유 차단 가능 [Optional, 기본값: 'always']
  *
  * Example usage:
  * <SharkVitrine />
@@ -53,6 +54,7 @@ function SharkVitrine({
   cameraPosition = [7, 2.5, 7],
   cameraFov = 35,
   progress,
+  frameloop = 'always',
 }) {
   const isTransparent = background === 'transparent';
 
@@ -72,6 +74,7 @@ function SharkVitrine({
         dpr={ [1, 2] }
         gl={ { antialias: true, alpha: isTransparent } }
         shadows
+        frameloop={ frameloop }
       >
         <SharkVitrineScene
           modelUrl={ modelUrl }

@@ -1,25 +1,21 @@
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
 import { RENDER_ORDER } from '../vitrineDesign';
 
 /**
- * VitrineGlass - 얇은 유리 5면 + scroll-driven build-up.
+ * VitrineGlass - 얇은 유리 5면 (정적).
  *
- * progress 0.2~0.7 구간에서 bottom-pivot scaleY 0→1로 vitrine이 차오름.
+ * NOTE: scroll-driven 등장은 SharkVitrineScene의 VitrineGroup이 통째로 처리.
  *
  * Props:
  * @param {object} design - computeVitrineGeometry() 결과 [Required]
- * @param {Object} progress - framer-motion MotionValue (0~1) [Optional]
  *
  * Example usage:
- * <VitrineGlass design={ design } progress={ scrollYProgress } />
+ * <VitrineGlass design={ design } />
  */
-function VitrineGlass({ design, progress }) {
+function VitrineGlass({ design }) {
   const { box, frame, glass } = design;
   const { w, h, d } = box;
   const ft = frame.thickness;
   const gt = glass.thickness;
-  const groupRef = useRef();
 
   /** 유리 인너 박스 크기 */
   const iw = w - ft;
@@ -40,17 +36,8 @@ function VitrineGlass({ design, progress }) {
     { pos: [iw / 2, 0, 0], geo: [gt, ih, id] },
   ];
 
-  /** bottom-pivot scale (panel matte frame과 동일 식 + 동일 구간) */
-  useFrame(() => {
-    if (!groupRef.current) return;
-    const pVal = progress?.get?.() ?? 1;
-    const s = Math.max(0, Math.min(1, (pVal - 0.2) / 0.5));
-    groupRef.current.scale.y = s;
-    groupRef.current.position.y = -h / 2 + (h * s) / 2;
-  });
-
   return (
-    <group ref={ groupRef }>
+    <group>
       { panels.map((p, i) => (
         <mesh key={ `g-${i}` } position={ p.pos } renderOrder={ RENDER_ORDER.glass }>
           <boxGeometry args={ p.geo } />

@@ -14,7 +14,7 @@ import VitrineGlass from './parts/VitrineGlass';
 import VitrineLiquid from './parts/VitrineLiquid';
 import VitrineInterior from './parts/VitrineInterior';
 
-export const DEFAULT_SHARK_URL = '/shark_hirst_pose.glb';
+export const DEFAULT_SHARK_URL = '/crysis_shark.glb';
 
 /**
  * SceneLoader - Suspense fallback
@@ -41,13 +41,36 @@ function RotatingRig({ progress, children }) {
   useFrame(() => {
     if (!groupRef.current) return;
     const pVal = progress?.get?.() ?? 0;
-    const p = Math.max(0, Math.min(1, (pVal - 0.5) / 0.5));
-    /** 회전 방향: 카메라 [0,0,9] + SharkModel head 방향 기준
-        head가 +X일 때 rotation.y = -π/2 적용 → head world = (1,0,0) → (0,0,1) = +Z
-        wait 그건 등이 보임. head -Z가 정면.
-        R(+π/2)·(1,0,0) = (0, 0, -1) = -Z → 정면. 그래서 +π/2가 맞음.
-        근데 head 방향이 다를 가능성 → 일단 음수로 시도, glb default가 -Z였다면 정답. */
+    /** Phase A (0 ~ 0.4): 회전 진행 0 → -π/2. 그 이후 정지. */
+    const p = Math.max(0, Math.min(1, pVal / 0.4));
     groupRef.current.rotation.y = -p * (Math.PI / 2);
+  });
+  return <group ref={ groupRef }>{ children }</group>;
+}
+
+/**
+ * VitrineGroup - 수조 전체(frame+plinth+gap+glass+liquid+interior+shadow)를 통째로 묶어
+ *   0.5~0.9 구간에서 bottom-pivot scaleY 0→1로 등장.
+ *   pivot은 plinth bottom y. scale=0이면 점으로 압축 → invisible. (회전 phase 동안 어떤 부분도 안 보임)
+ *
+ *   position.y = PIVOT_Y * (1 - s)  → s=0일 때 모든 자식이 (any.y → PIVOT_Y)로 압축, s=1일 때 원위치
+ */
+function VitrineGroup({ progress, tankSize, plinthHeight, children }) {
+  const groupRef = useRef();
+  const [, h] = tankSize;
+  const PIVOT_Y = -h / 2 - plinthHeight;
+  useFrame(() => {
+    if (!groupRef.current) return;
+    const pVal = progress?.get?.() ?? 1;
+    /** Phase C (0.65~0.9)에만 수조+물 등장. 그 전엔 group invisible (회전·zoom phase). */
+    if (pVal < 0.65) {
+      groupRef.current.visible = false;
+      return;
+    }
+    groupRef.current.visible = true;
+    const s = Math.max(0, Math.min(1, (pVal - 0.65) / 0.25));
+    groupRef.current.scale.y = s;
+    groupRef.current.position.y = PIVOT_Y * (1 - s);
   });
   return <group ref={ groupRef }>{ children }</group>;
 }
@@ -63,7 +86,7 @@ function RotatingRig({ progress, children }) {
  * - SharkModel은 자체 회전 없음 (root에서 회전).
  *
  * Props:
- * @param {string} modelUrl [Optional, 기본값: '/shark_hirst_pose.glb']
+ * @param {string} modelUrl [Optional, 기본값: '/crysis_shark.glb']
  * @param {number} sharkScale [Optional, 기본값: 0.3]
  * @param {[number, number, number]} tankSize [Optional, 기본값: [6, 3, 2.4]]
  * @param {boolean} isFloating [Optional, 기본값: true]
@@ -98,6 +121,19 @@ function SharkVitrineScene({
     camera.updateProjectionMatrix();
   }, [camera, cameraPosition, cameraFov]);
 
+  /** Phase B (0.4~0.65): camera zoom-in. z 11 → 6. 회전과 분리, 수조 등장 전. */
+  useFrame(() => {
+    if (!camera || !progress || !cameraPosition) return;
+    const pVal = progress.get?.() ?? 0;
+    const p = Math.max(0, Math.min(1, (pVal - 0.4) / 0.25));
+    const zStart = cameraPosition[2];
+    const zEnd = 6;
+    const z = zStart + (zEnd - zStart) * p;
+    camera.position.set(cameraPosition[0], cameraPosition[1], z);
+    camera.lookAt(0, 0, 0);
+    camera.updateProjectionMatrix();
+  });
+
   return (
     <>
       { !isTransparent && (
@@ -119,24 +155,33 @@ function SharkVitrineScene({
       <pointLight position={ [0, 0.5, 4] } intensity={ 0.5 } color={ '#ffffff' } distance={ 10 } />
       <pointLight position={ [0, -0.5, 0] } intensity={ 0.2 } color={ '#7fd4c6' } distance={ 5 } />
 
-      <Suspense fallback={ <SceneLoader /> }>
-        <RotatingRig progress={ progress }>
-          <VitrineShell design={ design } progress={ progress } />
-          <VitrineInterior design={ design } />
-          <SharkModel url={ modelUrl } scale={ sharkScale } isFloating={ isFloating } />
-          <VitrineLiquid design={ design } progress={ progress } />
-          <VitrineGlass design={ design } progress={ progress } />
-        </RotatingRig>
-        <Environment preset="studio" />
-      </Suspense>
+      {/* Visual center 보정 — 박스+plinth+ContactShadows 묶음의 mid-Y가 origin에 맞도록.
+          box top = +h/2 = +1.5
+          ContactShadows position y = -h/2 - plinth.height - 0.05 = -1.97 (그림자 fade로 더 아래)
+          midpoint ≈ (1.5 + -1.97) / 2 = -0.235 → +0.235 offset 적용. */}
+      <group position={ [0, (design.plinth.height + 0.05) / 2 + 0.025, 0] }>
+        <Suspense fallback={ <SceneLoader /> }>
+          <RotatingRig progress={ progress }>
+            {/* 회전 phase에는 SharkModel만 보이고 나머지(수조+물+plinth+그림자) 전부 invisible */}
+            <SharkModel url={ modelUrl } scale={ sharkScale } isFloating={ isFloating } />
 
-      <ContactShadows
-        position={ [0, -h / 2 - design.plinth.height - 0.05, 0] }
-        opacity={ 0.22 }
-        scale={ 14 }
-        blur={ 3.5 }
-        far={ 5 }
-      />
+            <VitrineGroup progress={ progress } tankSize={ tankSize } plinthHeight={ design.plinth.height }>
+              <VitrineShell design={ design } />
+              <VitrineInterior design={ design } />
+              <VitrineLiquid design={ design } />
+              <VitrineGlass design={ design } />
+              <ContactShadows
+                position={ [0, -h / 2 - design.plinth.height - 0.05, 0] }
+                opacity={ 0.22 }
+                scale={ 14 }
+                blur={ 3.5 }
+                far={ 5 }
+              />
+            </VitrineGroup>
+          </RotatingRig>
+          <Environment preset="studio" />
+        </Suspense>
+      </group>
     </>
   );
 }

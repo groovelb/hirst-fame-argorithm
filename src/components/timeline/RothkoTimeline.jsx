@@ -32,6 +32,7 @@ function RothkoTimeline({
   trendData,
   pxPerYear = 250,
   backgroundColor,
+  hideMinimap = false,
 }) {
   const [viewportWidth, setViewportWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1920
@@ -99,14 +100,16 @@ function RothkoTimeline({
 
   return (
     <>
-    <TimelineMinimap
-      positionedWorks={ layout.positionedWorks }
-      totalWidth={ layout.totalWidth }
-      axisY={ layout.axisY }
-      viewportWidth={ viewportWidth }
-      scrollProgress={ scrollProgress }
-      onNavigate={ handleMinimapNavigate }
-    />
+    { !hideMinimap && (
+      <TimelineMinimap
+        positionedWorks={ layout.positionedWorks }
+        totalWidth={ layout.totalWidth }
+        axisY={ layout.axisY }
+        viewportWidth={ viewportWidth }
+        scrollProgress={ scrollProgress }
+        onNavigate={ handleMinimapNavigate }
+      />
+    ) }
     <HorizontalScrollContainer
       backgroundColor={ backgroundColor ?? theme.palette.background.default }
       onScrollProgress={ handleScrollProgress }

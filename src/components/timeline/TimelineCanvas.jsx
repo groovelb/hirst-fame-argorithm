@@ -211,6 +211,11 @@ function buildAxisDonutData(works, t) {
 /** 이벤트 스트립 높이 — 축 바로 아래, 하단 패널 위 */
 const EVENT_STRIP_H = 80;
 
+/** 하단 4컬럼 에디토리얼 패널 활성화 플래그.
+    false면 트리 자체를 mount하지 않아 초기 cost/메모리/render 부담을 제거.
+    되살릴 때 true. */
+const SHOW_BOTTOM_PANEL = false;
+
 /**
  * TimelineCanvas — 전체 좌표계를 담는 절대 위치 캔버스
  *
@@ -492,6 +497,7 @@ function TimelineCanvas({
             isDimmed={ isDimmed }
             nodeScale={ nodeScale }
             viewportCenterX={ viewportCenterX }
+            focusRadius={ focusRadius }
             prevX={ neighbors?.prevX }
             nextX={ neighbors?.nextX }
             onMouseEnter={ () => onItemHover?.(work.id) }
@@ -510,9 +516,10 @@ function TimelineCanvas({
         />
       )) }
 
-      {/* 하단 고정 패널 — 이벤트 스트립 아래, 4컬럼 에디토리얼 그리드
-          (현재 비활성: 상단 타임라인이 전체 화면을 사용하도록 화면에서 숨김.
-           컴포넌트는 유지하여 재사용 가능) */}
+      {/* 하단 고정 패널 — 이벤트 스트립 아래, 4컬럼 에디토리얼 그리드.
+          현재 비활성: 트리 자체를 mount하지 않아 초기 비용/메모리 절감.
+          되살릴 땐 SHOW_BOTTOM_PANEL=true 로 토글. */}
+      { SHOW_BOTTOM_PANEL && (
       <motion.div
         style={ {
           position: 'absolute',
@@ -1030,6 +1037,7 @@ function TimelineCanvas({
           ) }
         </Box>
       </motion.div>
+      ) }
 
       {/* 색상 세그먼트 상세 모달 */}
       <ColorDetailModal

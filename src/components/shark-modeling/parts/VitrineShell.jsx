@@ -1,34 +1,19 @@
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-
 /**
- * VitrineShell - 외부 흰색 panel matte 프레임 + plinth
+ * VitrineShell - 외부 흰색 panel matte 프레임 + plinth (정적).
  *
- * - plinth(받침)는 항상 보임 (scroll progress 영향 X)
- * - panel matte frame은 progress 0.2~0.7 구간에서 bottom-pivot scaleY 0→1
+ * NOTE: scroll-driven 등장은 SharkVitrineScene의 VitrineGroup이 통째로 처리.
+ *   여기서는 mesh만 정의.
  *
  * Props:
  * @param {object} design - computeVitrineGeometry() 결과 [Required]
- * @param {Object} progress - framer-motion MotionValue (0~1), build-up용 [Optional]
  *
  * Example usage:
- * <VitrineShell design={ design } progress={ scrollYProgress } />
+ * <VitrineShell design={ design } />
  */
-function VitrineShell({ design, progress }) {
+function VitrineShell({ design }) {
   const { box, frame, plinth } = design;
   const { w, h, d } = box;
   const ft = frame.thickness;
-  const frameGroupRef = useRef();
-
-  /** panel matte frame을 progress 0.2~0.7 구간에서 bottom-pivot scaleY 0→1.
-      mesh center가 (0,0,0)이므로 scale=s 시 bottom 고정을 위해 position.y = -h/2 + h*s/2 */
-  useFrame(() => {
-    if (!frameGroupRef.current) return;
-    const pVal = progress?.get?.() ?? 1;
-    const s = Math.max(0, Math.min(1, (pVal - 0.2) / 0.5));
-    frameGroupRef.current.scale.y = s;
-    frameGroupRef.current.position.y = -h / 2 + (h * s) / 2;
-  });
 
   /**
    * 한 면의 외곽 4 strip 정의 (top/bottom/left/right)
@@ -95,17 +80,15 @@ function VitrineShell({ design, progress }) {
 
   return (
     <group>
-      {/** panel matte frame — scroll-driven bottom-pivot scale */}
-      <group ref={ frameGroupRef }>
-        {facePanels.map((p, i) => (
-          <mesh key={`panel-${i}`} position={p.pos} castShadow receiveShadow>
-            <boxGeometry args={p.geo} />
-            <meshStandardMaterial color={frame.color} {...frame.material} />
-          </mesh>
-        ))}
-      </group>
+      {/** panel matte frame */}
+      { facePanels.map((p, i) => (
+        <mesh key={ `panel-${i}` } position={ p.pos } castShadow receiveShadow>
+          <boxGeometry args={ p.geo } />
+          <meshStandardMaterial color={ frame.color } { ...frame.material } />
+        </mesh>
+      )) }
 
-      {/** 흰색 plinth — 항상 보임 */}
+      {/** 흰색 plinth */}
       <mesh
         position={[0, -h / 2 - plinth.height / 2 - plinth.gapHeight, 0]}
         castShadow

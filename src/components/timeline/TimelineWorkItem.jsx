@@ -1,9 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { WorkImage } from './WorkImage.jsx';
 import { BRAND_DISPLAY, PRODUCT } from './typography.js';
+
+/** framer-motion 가능한 MUI Box — sx + motion style 동시 사용 */
+const MotionBox = motion(Box);
 
 const IMAGE_WIDTH = 96;
 const IMAGE_HEIGHT = 128;
@@ -50,6 +53,7 @@ function TimelineWorkItem({
   isDimmed = false,
   nodeScale = 1,
   viewportCenterX,
+  focusRadius = 800,
   prevX,
   nextX,
   onMouseEnter,
@@ -73,43 +77,79 @@ function TimelineWorkItem({
   /** 도트/connector 중심 X */
   const centerX = work.x + scaledW / 2;
 
-  /** Voronoi 경계 — 양옆 작품 중간점. 이 사이에 viewportCenterX가 들어오면 focus. */
+  /** Voronoi 경계 — 양옆 작품 중간점. 이 사이에 viewportCenterX가 들어오면 focus.
+      hard step은 거칠어 보이므로 경계 ±BLEND_PX 구간에서 linear blend. */
   const leftBoundary = prevX != null ? (prevX + work.x) / 2 : -Infinity;
   const rightBoundary = nextX != null ? (work.x + nextX) / 2 : Infinity;
+  const BLEND_PX = 40;
 
-  /** focus 판정 — 한 번에 단 1개만 MAX, 나머지는 MIN. */
   const fallbackCenter = useMotionValue(work.x);
   const sourceCenter = viewportCenterX ?? fallbackCenter;
-  const targetScale = useTransform(sourceCenter, (cx) => {
-    return (cx >= leftBoundary && cx < rightBoundary)
-      ? MAX_FOCUS_SCALE
-      : MIN_FOCUS_SCALE;
+
+  /** focusScale — useSpring 제거. scroll 구동 값은 이미 부드러우므로 useTransform 만으로 충분.
+      경계 ±BLEND_PX 구간에서 MIN↔MAX 보간하여 snap 거칠음 해소. */
+  const focusScale = useTransform(sourceCenter, (cx) => {
+    if (cx < leftBoundary - BLEND_PX || cx >= rightBoundary + BLEND_PX) {
+      return MIN_FOCUS_SCALE;
+    }
+    if (cx >= leftBoundary && cx < rightBoundary) return MAX_FOCUS_SCALE;
+    const range = MAX_FOCUS_SCALE - MIN_FOCUS_SCALE;
+    if (cx < leftBoundary) {
+      const t = (cx - (leftBoundary - BLEND_PX)) / BLEND_PX;
+      return MIN_FOCUS_SCALE + range * t;
+    }
+    const t = (rightBoundary + BLEND_PX - cx) / BLEND_PX;
+    return MIN_FOCUS_SCALE + range * t;
   });
 
-  /** 진입/이탈 시점에만 부드러운 spring transition.
-      stiffness 높여 빠른 snap, damping으로 출렁임 억제. */
-  const focusScale = useSpring(targetScale, {
-    stiffness: 220,
-    damping: 26,
-    mass: 1,
-  });
-
-  /** Connector scaleY — 이미지 visual bottom = work.y + scaledH·s/2 추종.
-      newLen = baseline - scaledH·(s-1)/2 → scaleY = newLen / baseline. */
-  const connectorScaleY = useTransform(focusScale, (s) => {
-    if (connectorBaseH <= 0) return 1;
+  /** Entry: 단일 useTransform으로 line-draw progress와 image opacity를 동시 계산.
+      두 phase 0~0.5 / 0.5~1을 inline으로 처리해 motion-value 노드 3개 → 2개로 축소. */
+  const triggerRadius = Math.max(focusRadius, 1);
+  /** Connector scaleY (focus base × line draw progress)를 하나의 useTransform으로 통합.
+      transform-origin: '50% 100%' (axis dot bottom). */
+  const connectorScaleY = useTransform(sourceCenter, (cx) => {
+    const distance = work.x - cx;
+    const entry = distance <= 0
+      ? 1
+      : distance >= triggerRadius ? 0 : 1 - distance / triggerRadius;
+    const lineDraw = entry < 0.5 ? entry / 0.5 : 1;
+    if (connectorBaseH <= 0) return lineDraw;
+    /** focus scale 재계산 — Voronoi 결과를 inline (구독 추가 없이). */
+    let s;
+    if (cx < leftBoundary - BLEND_PX || cx >= rightBoundary + BLEND_PX) {
+      s = MIN_FOCUS_SCALE;
+    } else if (cx >= leftBoundary && cx < rightBoundary) {
+      s = MAX_FOCUS_SCALE;
+    } else {
+      const range = MAX_FOCUS_SCALE - MIN_FOCUS_SCALE;
+      s = cx < leftBoundary
+        ? MIN_FOCUS_SCALE + range * ((cx - (leftBoundary - BLEND_PX)) / BLEND_PX)
+        : MIN_FOCUS_SCALE + range * ((rightBoundary + BLEND_PX - cx) / BLEND_PX);
+    }
     const newLen = connectorBaseH - (scaledH * (s - 1)) / 2;
-    return Math.max(0, newLen / connectorBaseH);
+    const base = Math.max(0, newLen / connectorBaseH);
+    return base * lineDraw;
+  });
+
+  /** 이미지 opacity — Phase 2 (entry 0.5~1.0). */
+  const entryOpacity = useTransform(sourceCenter, (cx) => {
+    const distance = work.x - cx;
+    const entry = distance <= 0
+      ? 1
+      : distance >= triggerRadius ? 0 : 1 - distance / triggerRadius;
+    return entry < 0.5 ? 0 : (entry - 0.5) / 0.5;
   });
 
   return (
     <>
-      {/* 외부 컨테이너 — scale 적용 X. 레이아웃 anchor + hover 영역.
-          다른 작품 hover 시 isDimmed=true → opacity 낮춤 */}
-      <Box
+      {/* 외부 컨테이너 — Entry transition(opacity, translateY) + hover dim 결합 */}
+      <MotionBox
         onMouseEnter={ onMouseEnter }
         onMouseLeave={ onMouseLeave }
         onClick={ onClick }
+        style={ {
+          opacity: entryOpacity,
+        } }
         sx={ {
           position: 'absolute',
           left: work.x,
@@ -118,8 +158,8 @@ function TimelineWorkItem({
           height: scaledH,
           cursor: 'pointer',
           zIndex: isActive ? 30 : isDimmed ? 1 : 2,
-          opacity: isDimmed ? 0.12 : 1,
-          transition: 'opacity 0.28s ease',
+          filter: isDimmed ? 'opacity(0.12)' : 'none',
+          transition: 'filter 0.28s ease',
           '&:hover .work-tooltip': {
             opacity: 1,
             visibility: 'visible',
@@ -299,7 +339,7 @@ function TimelineWorkItem({
             </Typography>
           ) }
         </Box>
-      </Box>
+      </MotionBox>
 
       {/* Connector(인디케이터) — 이미지 box 밖 별도 element.
           baseline은 scale=1일 때 이미지 bottom~axis. scaleY로 길이 동기.

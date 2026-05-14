@@ -45,7 +45,8 @@ function HeroTypeBlock({
         fontFamily={ BRAND_DISPLAY }
         fontWeight={ 900 }
         maxFontSize={ 9999 }
-        letterSpacing={ 0.5 }
+        letterSpacing={ 1 }
+        wordSpacing={ 8 }
       />
     </Box>
   );

@@ -112,6 +112,8 @@ function HorizontalScrollContainer({
             height: '100%',
             paddingLeft: padding,
             paddingRight: padding,
+            willChange: 'transform',
+            backfaceVisibility: 'hidden',
           } }
         >
           { children }

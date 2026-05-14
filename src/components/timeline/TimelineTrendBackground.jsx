@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { BRAND_DISPLAY, PRODUCT } from './typography.js';
 
 /** search index 100 = 캔버스 상단 패딩. 상단 타이틀(Damien Hirst) 영역과 겹치지 않도록
@@ -84,20 +83,9 @@ function TimelineTrendBackground({
     });
   }, [peaks, axisY, yearToX]);
 
-  const fallbackProgress = useMotionValue(1);
-  const effectiveProgress = scrollProgress ?? fallbackProgress;
-  const smoothProgress = useSpring(effectiveProgress, {
-    stiffness: 90,
-    damping: 28,
-    mass: 1,
-  });
-
-  const halfViewport = Math.max((viewportWidth ?? 0) / 2, 0);
-  const startX = halfViewport;
-  const endX = Math.max(totalWidth - halfViewport, halfViewport);
-  const revealX = useTransform(smoothProgress, [0, 1], [startX, endX]);
-  const rightInset = useTransform(revealX, (v) => Math.max(0, totalWidth - v));
-  const clipPathValue = useMotionTemplate`inset(0px ${rightInset}px 0px 0px)`;
+  /** scroll-tied reveal 자체 제거 — 19000px SVG 두 장의 clip-path 매 프레임 보간이
+      가로 스크롤 jank의 최대 원인. 정적 SVG로 전환해 매 프레임 paint·motion 평가 0. */
+  void scrollProgress; void viewportWidth;
 
   if (!path) return null;
 
@@ -107,8 +95,8 @@ function TimelineTrendBackground({
 
   return (
     <>
-      {/* 라인 SVG — zIndex 0, scroll-tied clip reveal */}
-      <motion.svg
+      {/* 라인 SVG — 정적. clip-path/motion 제거. */}
+      <svg
         width={ totalWidth }
         height={ axisY + 1 }
         style={ {
@@ -118,9 +106,6 @@ function TimelineTrendBackground({
           pointerEvents: 'none',
           zIndex: 0,
           overflow: 'visible',
-          clipPath: clipPathValue,
-          WebkitClipPath: clipPathValue,
-          willChange: 'clip-path',
         } }
         aria-hidden="true"
       >
@@ -132,11 +117,10 @@ function TimelineTrendBackground({
           strokeLinejoin="round"
           strokeLinecap="round"
         />
-      </motion.svg>
+      </svg>
 
-      {/* Peak 마커 SVG — zIndex 50 (작품/축 위), 단 차트 라인과 동일한 clip-path reveal로
-          scroll frontier 도달 시점에 마커도 함께 등장. */}
-      <motion.svg
+      {/* Peak 마커 SVG — 정적. clip-path 제거. */}
+      <svg
         width={ totalWidth }
         height={ axisY + 200 }
         style={ {
@@ -146,9 +130,6 @@ function TimelineTrendBackground({
           pointerEvents: 'none',
           zIndex: 50,
           overflow: 'visible',
-          clipPath: clipPathValue,
-          WebkitClipPath: clipPathValue,
-          willChange: 'clip-path',
         } }
         aria-hidden="true"
       >
@@ -245,7 +226,7 @@ function TimelineTrendBackground({
             </g>
           );
         }) }
-      </motion.svg>
+      </svg>
     </>
   );
 }
