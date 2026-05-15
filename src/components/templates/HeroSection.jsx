@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
-import { useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { HeroTypeBlock } from '../typography/HeroTypeBlock.jsx';
 import VideoScrubbing from '../scroll/VideoScrubbing.jsx';
-import heroVideoSrc from '../../assets/video/hirst-scrub.mp4';
+import heroVideoSrc from '../../assets/video/hirst-scrub-graded.mp4';
 import { BRIDGE_SECTIONS } from './bridgeNarrative.js';
 import { BridgeSection } from './BridgeSection.jsx';
+import { TOKENS } from '../../styles/themes/tokens.js';
 
 /**
  * HeroSection — Hero 타이포(검정) + 영상 스크럽 + 6 Bridge stories.
@@ -61,6 +62,20 @@ function HeroSection({ onHeroProgress }) {
     return Math.max(0, Math.min(1, -rect.top / scrollable));
   });
 
+  /**
+   * DAMIEN HIRST 박스 자체를 아래 타이틀의 1/4 속도로 viewport에서 사라지게 한다.
+   * 자연 스크롤 -100vh 동안 박스에 +75vh translate 부여 → 실효 -25vh = 아래의 1/4.
+   * progress 0.5 이후엔 hero typo가 이미 viewport 위로 빠졌으므로 transform 유지만.
+   */
+  const damienY = useTransform(scrollYProgress, [0, 0.5, 1], ['0vh', '75vh', '75vh']);
+
+  /**
+   * 히어로 타이틀이 보이는 구간(progress 0 → 0.5) 동안 배경 영상을 70% → 100%로 확대.
+   * sticky video Box에 직접 transform을 걸면 sticky positioning이 깨지므로
+   * 내부 wrapper(motion.div)에 scale을 적용한다.
+   */
+  const videoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 1]);
+
   React.useEffect(() => {
     onHeroProgress?.(scrollYProgress);
   }, [onHeroProgress, scrollYProgress]);
@@ -84,9 +99,12 @@ function HeroSection({ onHeroProgress }) {
           overflow: 'hidden',
         }}
       >
+        {/* scale은 VideoScrubbing 내부 video element 자체에만 적용된다.
+            wrapper element 없음 → sticky Box 내 어떤 sibling/외부 element에도 transform 영향 없음. */}
         <VideoScrubbing
           src={heroVideoSrc}
           progress={scrollYProgress}
+          scale={videoScale}
           sx={{
             width: '100%',
             height: '100%',
@@ -108,20 +126,31 @@ function HeroSection({ onHeroProgress }) {
           pointerEvents: 'none',
         }}
       >
-        {/* 상단 타이포 — DAMIEN HIRST */}
+        {/* 상단 타이포 — DAMIEN HIRST.
+            사이트 배경이 흰색이고 영상 흰 배경과 매칭되므로 다크 토큰 텍스트로 표시.
+            박스 자체에 translate y 적용해 자연 스크롤을 부분 상쇄 → 아래 타이틀의 절반 속도. */}
         <Box
+          component={motion.div}
+          style={{ y: damienY }}
           sx={{
             position: 'absolute',
-            top: '3vw',
+            top: '1.2vw',
             left: '3vw',
             right: '3vw',
             height: '18%',
           }}
         >
-          <HeroTypeBlock text="DAMIEN HIRST" align="flex-start" color="#000000" padding={0} />
+          <HeroTypeBlock
+            text="DAMIEN HIRST"
+            align="flex-start"
+            color={TOKENS.text.onLight}
+            padding={0}
+            scrollProgress={scrollYProgress}
+            speed={0.5}
+          />
         </Box>
 
-        {/* 하단 타이포 — 1988 — PRESENT : FAME ALGORITHM */}
+        {/* 하단 타이포 — 1988 — PRESENT ─── FAME ALGORITHM */}
         <Box
           sx={{
             position: 'absolute',
@@ -132,10 +161,11 @@ function HeroSection({ onHeroProgress }) {
           }}
         >
           <HeroTypeBlock
-            text="1988 — PRESENT : FAME ALGORITHM"
+            text="1988 — PRESENT ─────────── FAME ALGORITHM"
             align="flex-end"
-            color="#000000"
+            color={TOKENS.text.onLight}
             padding={0}
+            scrollProgress={scrollYProgress}
           />
         </Box>
       </Box>
@@ -169,7 +199,7 @@ function HeroSection({ onHeroProgress }) {
       >
         <BridgeSection
           section={BRIDGE_SECTIONS[0]}
-          color="#FFFFFF"
+          color={TOKENS.text.onLight}
           layout="grid"
         />
       </Box>

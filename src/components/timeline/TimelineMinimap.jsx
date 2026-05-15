@@ -2,6 +2,8 @@ import React, { useRef, useCallback } from 'react';
 import Box from '@mui/material/Box';
 import { motion, useTransform } from 'framer-motion';
 
+import { TOKENS } from '../../styles/themes/tokens.js';
+
 /** 미니맵 고정 크기 */
 const MAP_W = 180;
 const MAP_H = 32;
@@ -101,9 +103,9 @@ function TimelineMinimap({
           x: indicatorX,
           width: indicatorW,
           height: MAP_H,
-          backgroundColor: 'rgba(255, 255, 255, 0.06)',
-          borderLeft: '1px solid rgba(255, 255, 255, 0.18)',
-          borderRight: '1px solid rgba(255, 255, 255, 0.18)',
+          backgroundColor: TOKENS.alpha.onDark(0.06),
+          borderLeft: `1px solid ${ TOKENS.alpha.onDark(0.18) }`,
+          borderRight: `1px solid ${ TOKENS.alpha.onDark(0.18) }`,
           pointerEvents: 'none',
         } }
       />

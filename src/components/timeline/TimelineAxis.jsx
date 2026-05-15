@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { useLocale } from '../../i18n';
 import { PRODUCT } from './typography.js';
+import { TOKENS } from '../../styles/themes/tokens.js';
 
 const BAND_IMAGE_SRC = {
   TRANSCENDENCE: '/images/hirst/grotesque-bitmap/transcendence-sacred-heart.png',
@@ -125,8 +126,8 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
             width: '1px',
             height: viewportHeight,
             backgroundColor: tick.isMajor
-              ? 'rgba(255, 255, 255, 0.06)'
-              : 'rgba(255, 255, 255, 0.022)',
+              ? TOKENS.alpha.onDark(0.06)
+              : TOKENS.alpha.onDark(0.022),
             transform: 'translateX(-0.5px)',
             pointerEvents: 'none',
             zIndex: 0,
@@ -142,7 +143,7 @@ function TimelineAxis({ totalWidth, axisY, yearTicks, periodBands, emotionBands,
           top: axisY,
           width: totalWidth,
           height: '1px',
-          backgroundColor: 'rgba(255, 255, 255, 0.18)',
+          backgroundColor: TOKENS.alpha.onDark(0.18),
           pointerEvents: 'none',
           zIndex: 1,
         } }

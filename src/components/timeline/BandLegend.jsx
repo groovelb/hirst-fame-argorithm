@@ -30,9 +30,6 @@ function BandLegend({ activeBandId = null }) {
         gap: { xs: 1.5, md: 3 },
         px: { xs: 1.5, md: 3 },
         py: { xs: 1, md: 1.5 },
-        backgroundColor: 'rgba(10, 10, 10, 0.55)',
-        backdropFilter: 'blur(10px)',
-        borderRadius: 1,
         pointerEvents: 'none',
         userSelect: 'none',
       } }

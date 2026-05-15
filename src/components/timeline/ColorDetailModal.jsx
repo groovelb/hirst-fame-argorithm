@@ -9,6 +9,7 @@ import { X } from 'lucide-react';
 import { useLocale } from '../../i18n';
 import { getColorName } from '../../utils/colorName';
 import { WorkImage } from './WorkImage.jsx';
+import { TOKENS } from '../../styles/themes/tokens.js';
 
 /** 밴드 ID → locale 키 (Hirst worldview 5밴드) */
 const BAND_KEY = {
@@ -55,7 +56,7 @@ function ColorDetailModal({ open, onClose, segment }) {
           },
         },
         backdrop: {
-          sx: { backgroundColor: 'rgba(0, 0, 0, 0.6)' },
+          sx: { backgroundColor: TOKENS.alpha.onLight(0.6) },
         },
       } }
     >

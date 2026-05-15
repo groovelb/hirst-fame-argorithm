@@ -6,15 +6,14 @@ import { Box } from '@mui/material';
  *
  * 컨테이너 너비에 꽉 차도록 텍스트 크기가 자동으로 조절되는 반응형 타이포그래피 컴포넌트.
  *
- * 시각적 동작:
- * 1. 텍스트가 컨테이너 너비에 맞춰 자동으로 크기가 커지거나 작아짐
- * 2. 브라우저 창 크기를 조절하면 텍스트 크기가 실시간으로 변함
- * 3. variant를 'headline'으로 설정하면 Chillax 폰트로 전환되며 더 타이트한 행간 적용
- * 4. letterSpacing, wordSpacing 값을 높이면 글자/단어 간격이 넓어짐
- * 5. minFontSize, maxFontSize로 텍스트 크기의 최소/최대 범위 제한 가능
+ * children mode:
+ *  - children이 제공되면 표시는 children 사용 (예: 단어별 motion.span 패럴럭스)
+ *  - text는 여전히 측정용으로 사용 (호출부에서 동일 텍스트 전달 책임)
+ *  - children 없으면 기존 동작: text 그대로 표시
  *
  * Props:
- * @param {string} text - 표시할 텍스트 [Required]
+ * @param {string} text - 표시·측정용 텍스트 [Required]
+ * @param {React.ReactNode} children - 표시용 커스텀 노드 (단어별 패럴럭스 등) [Optional]
  * @param {string} variant - 타이포그래피 변형 ('body' | 'h1' | 'headline') [Optional, 기본값: 'body']
  * @param {number} minFontSize - 최소 폰트 크기 (px) [Optional, 기본값: 0]
  * @param {number} maxFontSize - 최대 폰트 크기 (px) [Optional, 기본값: 9999]
@@ -22,13 +21,10 @@ import { Box } from '@mui/material';
  * @param {number} wordSpacing - 단어 간격 배율 [Optional, 기본값: 1]
  * @param {number} fontWeight - 폰트 굵기 [Optional]
  * @param {string} fontFamily - 폰트 패밀리 (variant 기본값 오버라이드) [Optional]
- *
- * Example usage:
- * <FitText text="Hello World" variant="headline" />
- * <FitText text="Responsive Text" minFontSize={ 16 } maxFontSize={ 120 } />
  */
 export function FitText({
   text,
+  children,
   variant = 'body',
   minFontSize = 0,
   maxFontSize = 9999,
@@ -116,7 +112,7 @@ export function FitText({
       } }
       { ...props }
     >
-      {/* 실제 표시되는 텍스트 */}
+      {/* 실제 표시되는 텍스트 (children이 있으면 그것을 렌더, 없으면 text) */}
       <Box
         component="span"
         sx={ {
@@ -132,7 +128,7 @@ export function FitText({
           transition: 'font-size 0.1s ease-out',
         } }
       >
-        { text }
+        { children ?? text }
       </Box>
 
       {/* 숨겨진 측정용 요소 - 100px 기준으로 텍스트 너비 측정 */}

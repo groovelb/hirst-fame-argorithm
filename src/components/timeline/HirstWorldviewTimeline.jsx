@@ -9,6 +9,7 @@ import { WorldviewMiniMap } from '../navigation/WorldviewMiniMap.jsx';
 import { CaveatNote } from '../overlay-feedback/CaveatNote.jsx';
 import { WorkDetailModal } from '../overlay-feedback/WorkDetailModal.jsx';
 import { WorkImage } from './WorkImage.jsx';
+import { TOKENS } from '../../styles/themes/tokens.js';
 
 /**
  * HirstWorldviewTimeline 컴포넌트
@@ -67,7 +68,7 @@ export function HirstWorldviewTimeline({
   };
 
   return (
-    <Box component="main" sx={{ backgroundColor: 'background.default' }}>
+    <Box component="main" sx={{ backgroundColor: TOKENS.bg.page }}>
       <WorldviewMiniMap eras={ eras } locale={ locale } />
 
       {/* Intro */}

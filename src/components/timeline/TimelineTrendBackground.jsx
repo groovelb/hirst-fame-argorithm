@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { PRODUCT } from './typography.js';
+import { TOKENS } from '../../styles/themes/tokens.js';
 
 /** search index 100 = 캔버스 상단 패딩. */
 const TOP_PADDING = 200;
@@ -105,8 +106,8 @@ function TimelineTrendBackground({
   if (!path) return null;
 
   const strokeColor = theme.palette.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.95)'
-    : 'rgba(0, 0, 0, 0.85)';
+    ? TOKENS.alpha.onDark(0.95)
+    : TOKENS.alpha.onLight(0.85);
 
   /** 공통 wrapper style — viewport-fixed, transform-only 갱신, GPU layer 고정.
       wrapper 자체는 pointer-events 차단 (작품 hover 방해 X). peak <g>에서만 auto. */
@@ -211,7 +212,7 @@ function TimelineTrendBackground({
                     cy={ p.py }
                     r={ dotR }
                     fill={ markerColor }
-                    stroke="#0A0A0A"
+                    stroke={ TOKENS.bg.page }
                     strokeWidth={ 1.5 }
                   />
                   {/* 핵심 사건명 한 줄 */}

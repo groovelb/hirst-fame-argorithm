@@ -1,5 +1,6 @@
 import { useCallback, useRef, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
+import { motion } from 'framer-motion';
 
 /**
  * VideoScrubbing Component
@@ -19,6 +20,8 @@ const VideoScrubbing = ({
   progress: externalProgress = null,
   scrollRange = { start: 0, end: 1 },
   onProgressChange,
+  scale,
+  transformOrigin = 'center center',
   ...props
 }) => {
   const videoRef = useRef(null);
@@ -148,6 +151,15 @@ const VideoScrubbing = ({
     };
   }, [isInView, containerRef, externalProgress, scrollRange, setVideoProgress]);
 
+  /**
+   * scale은 video element 자체에만 적용. wrapper Box(outer)는 layout 그대로 유지하여
+   * 외부 element(hero typo 등 sibling)에는 어떤 transform/stacking 영향도 가지 않게 한다.
+   * scale prop이 motion value면 framer-motion이 매 frame video DOM에 직접 transform 적용.
+   */
+  const motionStyle = scale != null
+    ? { scale, transformOrigin, willChange: 'transform' }
+    : undefined;
+
   return (
     <Box
       sx={{
@@ -156,13 +168,14 @@ const VideoScrubbing = ({
         height: '100%',
       }}
     >
-      {/* Video */}
+      {/* Video — scale 받을 때만 motion.video, 아니면 일반 video */}
       <Box
-        component="video"
+        component={scale != null ? motion.video : 'video'}
         ref={videoRef}
         muted
         playsInline
         preload="auto"
+        style={motionStyle}
         sx={{
           width: '100%',
           height: 'auto',

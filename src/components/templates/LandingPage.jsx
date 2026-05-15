@@ -1,11 +1,56 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
-import { useMotionValue, useMotionValueEvent } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
 import { LanguageToggle } from '../navigation/LanguageToggle.jsx';
 import { WorldviewTimeline as HirstTimeline } from '../timeline/index.js';
 import { HeroSection } from './HeroSection.jsx';
 import { BridgeSection } from './BridgeSection.jsx';
 import { BRIDGE_SECTIONS } from './bridgeNarrative.js';
+import { TOKENS } from '../../styles/themes/tokens.js';
+
+/**
+ * ParallaxGridItem — 4 BridgeSection 그리드 카드에 정적 y-offset(레이아웃) + 스크롤 패럴럭스 동시 적용.
+ *
+ * - offsetY (vh): 카드의 시작 위치 (experimental 배치, 균등 정렬 깨기)
+ * - depth (vh): 그리드가 viewport를 통과하는 동안 추가로 위로 이동하는 거리
+ * - progress: gridRef 기반 [start end, end start] 스크롤 진행도(0~1)
+ *
+ * y = offsetY → offsetY - depth (progress 0→1 동안)
+ * 즉 각 카드가 자기 시작점에서 자기 depth만큼 후행(위로) 이동.
+ */
+function ParallaxGridItem({ progress, offsetY, depth, children }) {
+  const y = useTransform(
+    progress,
+    [0, 1],
+    [`${offsetY}vh`, `${offsetY - depth}vh`]
+  );
+  /**
+   * 분리 BridgeSection 영역은 PROLOGUE 이후 검정 배경. ParallaxGridItem이 transform으로
+   * own stacking context 생성하므로 motion.div backdrop을 TOKENS.bg.dark로 명시.
+   */
+  return (
+    <motion.div
+      style={{
+        y,
+        willChange: 'transform',
+        backgroundColor: TOKENS.bg.dark,
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/** 4 카드별 정적 y-offset (vh) — 균등 정렬을 살짝만 깨는 잔잔한 비대칭 */
+const GRID_OFFSETS = [0, 5, -3, 7];
+
+/** 4 카드별 패럴럭스 추가 이동 거리 (vh) — 카드 간 속도 편차 크게 */
+const GRID_DEPTHS = [10, 50, 22, 65];
 
 /**
  * LandingPage — 라우트 `/`의 최상위 페이지 템플릿.
@@ -35,24 +80,43 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
   const fallbackProgress = useMotionValue(0);
   const [heroProgress, setHeroProgress] = useState(fallbackProgress);
 
-  /** Page background — BRIDGE 검정 톤과 일관. 보간 제거(검정 단일). */
-  const pageBg = '#0A0A0A';
-
-  /** Hero 영역에선 Minimap 숨김. progress >= 0.995에서 Timeline 진입으로 보이게.
-      boolean state로 mount/unmount 처리 → 매 frame re-render 회피. */
-  const [isHeroFinished, setIsHeroFinished] = useState(false);
-  useMotionValueEvent(heroProgress, 'change', (v) => {
-    setIsHeroFinished((prev) => {
-      const next = v >= 0.995;
-      return prev === next ? prev : next;
-    });
-  });
+  /**
+   * Page background — heroProgress 1 (PROLOGUE가 viewport 정확히 채운 순간) 직전까지는
+   * 영상 흰 배경과 매칭되는 흰색(TOKENS.bg.page = #FFFFFF), 그 이후엔 다크 토큰으로 전환.
+   * 분리 BridgeSection·HirstTimeline 영역에서 검정 배경 + 흰 텍스트 디자인을 위함.
+   */
+  const pageBg = useTransform(
+    heroProgress,
+    [0.95, 1],
+    [TOKENS.bg.page, TOKENS.text.onLight]
+  );
 
   /** Timeline 안의 작품/peak modal 열림 신호 — LanguageToggle 같이 숨김. */
   const [isTimelineModalOpen, setIsTimelineModalOpen] = useState(false);
 
+  /** 4개 BridgeSection 그리드의 viewport 진행도 — 카드 패럴럭스 구동에 사용 */
+  const gridRef = useRef(null);
+  const { scrollYProgress: gridProgress } = useScroll({
+    target: gridRef,
+    offset: ['start end', 'end start'],
+  });
+
+  /** HirstTimeline의 viewport 가시성 — minimap은 timeline이 보일 때만 노출. */
+  const timelineRef = useRef(null);
+  const [isTimelineVisible, setIsTimelineVisible] = useState(false);
+  useEffect(() => {
+    const el = timelineRef.current;
+    if (!el) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsTimelineVisible(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div
+    <motion.div
       style={{
         position: 'relative',
         minHeight: '100dvh',
@@ -76,6 +140,7 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
         }}
       >
         <Box
+          ref={gridRef}
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
@@ -83,13 +148,19 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
             rowGap: { xs: '12vh', md: '18vh' },
           }}
         >
-          {BRIDGE_SECTIONS.slice(1, 5).map((section) => (
-            <BridgeSection
+          {BRIDGE_SECTIONS.slice(1, 5).map((section, i) => (
+            <ParallaxGridItem
               key={section.id}
-              section={section}
-              color="#FFFFFF"
-              layout="grid"
-            />
+              progress={gridProgress}
+              offsetY={GRID_OFFSETS[i]}
+              depth={GRID_DEPTHS[i]}
+            >
+              <BridgeSection
+                section={section}
+                color={TOKENS.text.onDark}
+                layout="grid"
+              />
+            </ParallaxGridItem>
           ))}
         </Box>
 
@@ -97,22 +168,23 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
         <Box sx={{ mt: { xs: '20vh', md: '28vh' } }}>
           <BridgeSection
             section={BRIDGE_SECTIONS[5]}
-            color="#FFFFFF"
+            color={TOKENS.text.onDark}
           />
         </Box>
       </Box>
 
-      <div>
+      <div ref={timelineRef}>
         <HirstTimeline
           worksData={worksData}
           eventsData={eventsData}
           bioData={bioData}
           trendData={trendData}
-          hideMinimap={!isHeroFinished}
+          backgroundColor={TOKENS.bg.dark}
+          hideMinimap={!isTimelineVisible}
           onModalStateChange={setIsTimelineModalOpen}
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

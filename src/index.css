@@ -20,8 +20,8 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #0A0A0A;
-  color: rgba(255, 255, 255, 0.92);
+  background-color: #FFFFFF;
+  color: rgba(8, 9, 15, 0.92);
 }
 
 body {
@@ -36,8 +36,8 @@ body {
   html,
   body {
     color-scheme: only dark !important;
-    background-color: #0A0A0A !important;
-    color: rgba(255, 255, 255, 0.92) !important;
+    background-color: #FFFFFF !important;
+    color: rgba(8, 9, 15, 0.92) !important;
   }
 }
 

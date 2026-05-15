@@ -66,9 +66,9 @@ const palette = {
     disabled: 'rgba(255, 255, 255, 0.38)',
   },
 
-  // 배경 색상
+  // 배경 색상 — TOKENS.bg.page와 동기화 (영상 흰 배경 매칭)
   background: {
-    default: '#0A0A0A',
+    default: '#FFFFFF',
     paper: '#141414',
   },
 

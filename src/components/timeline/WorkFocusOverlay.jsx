@@ -7,6 +7,7 @@ import { X as XIcon } from 'lucide-react';
 import { WorkImage } from './WorkImage.jsx';
 import { BRAND_DISPLAY, PRODUCT } from './typography.js';
 import { useLocale } from '../../i18n';
+import { TOKENS } from '../../styles/themes/tokens.js';
 
 /** auction_record.price_usd → "$8.0M" / "$120K" 표기 */
 function formatPrice(usd) {
@@ -102,7 +103,7 @@ function WorkFocusOverlay({ activeWork, onClose }) {
           sx={ {
             position: 'absolute',
             inset: 0,
-            backgroundColor: '#0A0A0A',
+            backgroundColor: TOKENS.bg.page,
             cursor: onClose ? 'pointer' : 'default',
           } }
         />
