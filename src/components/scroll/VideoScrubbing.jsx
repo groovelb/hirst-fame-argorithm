@@ -1,7 +1,5 @@
 import { useCallback, useRef, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import { TOKENS } from '../../styles/themes/tokens.js';
 
 /**
  * VideoScrubbing Component
@@ -22,45 +20,89 @@ const VideoScrubbing = ({
   scrollRange = { start: 0, end: 1 },
   onProgressChange,
   onReady,
+  onLoadProgress,
   ...props
 }) => {
   const videoRef = useRef(null);
   const [isInView, setIsInView] = useState(false);
   /**
-   * isReady = video element가 끊김 없이 재생/스크럽 가능한 상태.
-   * canplaythrough(브라우저 판단 충분 buffer) 또는 buffered range가 duration까지 도달 시 true.
-   * 그 전까지 사이트 배경색 overlay + 로딩 인디케이터 표시 → 끊김 방지.
+   * isReady = 전체 영상 fetch 완료 + blob URL을 video element가 디코딩 완료한 상태.
+   * 이 시점부터 임의 frame seek가 메모리 내 즉시 처리 → scrubbing 완전 부드러움.
    */
   const [isReady, setIsReady] = useState(false);
+  const [blobSrc, setBlobSrc] = useState(null);
 
+  /** onLoadProgress가 매 렌더 새 ref여도 fetch effect 재실행 안 되게 ref로 stash */
+  const onLoadProgressRef = useRef(onLoadProgress);
+  onLoadProgressRef.current = onLoadProgress;
+
+  /**
+   * fetch + Blob URL 전략 — Vercel CDN의 Range Request 우회.
+   * 영상 전체 byte stream을 한 번에 받아 Blob으로 보관, video.src에는 blob URL 주입.
+   * → 모든 frame이 메모리 상주, scroll seek 시 disk/network round-trip 0.
+   * 진행률(0~1)을 onLoadProgress로 외부에 노출 → LoadingScreen %표시 등에 사용.
+   */
   useEffect(() => {
+    let cancelled = false;
+    let createdBlobUrl = null;
+
+    const fetchVideo = async () => {
+      try {
+        const res = await fetch(src);
+        if (!res.ok) throw new Error(`fetch failed: ${ res.status }`);
+        const total = Number(res.headers.get('Content-Length')) || 0;
+        const reader = res.body.getReader();
+        const chunks = [];
+        let received = 0;
+        /* eslint-disable no-constant-condition */
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done || cancelled) break;
+          chunks.push(value);
+          received += value.length;
+          if (total) {
+            const pct = Math.min(1, received / total);
+            onLoadProgressRef.current?.(pct);
+          }
+        }
+        /* eslint-enable no-constant-condition */
+        if (cancelled) return;
+        const blob = new Blob(chunks, { type: 'video/mp4' });
+        createdBlobUrl = URL.createObjectURL(blob);
+        setBlobSrc(createdBlobUrl);
+        onLoadProgressRef.current?.(1);
+      } catch (err) {
+        if (!cancelled) {
+          // fetch 실패 시 fallback으로 원본 src 그대로 사용
+          // eslint-disable-next-line no-console
+          console.warn('VideoScrubbing: fetch failed, falling back to direct src.', err);
+          setBlobSrc(src);
+          onLoadProgressRef.current?.(1);
+        }
+      }
+    };
+
+    fetchVideo();
+
+    return () => {
+      cancelled = true;
+      if (createdBlobUrl) URL.revokeObjectURL(createdBlobUrl);
+    };
+  }, [src]);
+
+  /** blob URL이 video element에 로드되어 metadata 디코딩 완료 시 ready 신호 발생 */
+  useEffect(() => {
+    if (!blobSrc) return undefined;
     const video = videoRef.current;
     if (!video) return undefined;
-
     const markReady = () => {
       setIsReady(true);
       onReady?.();
     };
-
-    const handleProgress = () => {
-      if (
-        video.duration &&
-        video.buffered.length > 0 &&
-        video.buffered.end(video.buffered.length - 1) >= video.duration - 0.5
-      ) {
-        markReady();
-      }
-    };
-
-    video.addEventListener('canplaythrough', markReady);
-    video.addEventListener('progress', handleProgress);
-    if (video.readyState >= 4) markReady();
-
-    return () => {
-      video.removeEventListener('canplaythrough', markReady);
-      video.removeEventListener('progress', handleProgress);
-    };
-  }, [onReady]);
+    video.addEventListener('loadeddata', markReady);
+    if (video.readyState >= 2) markReady();
+    return () => video.removeEventListener('loadeddata', markReady);
+  }, [blobSrc, onReady]);
 
   const setVideoProgress = useCallback((nextProgress) => {
     const video = videoRef.current;
@@ -194,33 +236,12 @@ const VideoScrubbing = ({
         height: '100%',
       }}
     >
-      {/* Loading overlay — 영상 전체 buffer 완료(canplaythrough) 전까지 표시.
-          사이트 배경(TOKENS.bg.page) 위에 작은 인디케이터. isReady true 시 opacity 0으로 fade out. */}
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: TOKENS.bg.page,
-          opacity: isReady ? 0 : 1,
-          transition: 'opacity 600ms ease',
-          pointerEvents: 'none',
-        }}
-      >
-        <CircularProgress
-          size={ 28 }
-          thickness={ 3 }
-          sx={ { color: TOKENS.alpha.onLight(0.45) } }
-        />
-      </Box>
-
-      {/* Video — isReady 전엔 opacity 0 (디코더가 임의 frame 보이지 않게), 이후 fade in */}
+      {/* Video — blob URL이 준비되기 전까지 src 미설정 → 빈 video element.
+          외부 LoadingScreen이 fetch 진행률 동안 viewport 전체를 가린다. */}
       <Box
         component="video"
         ref={videoRef}
+        src={blobSrc ?? undefined}
         muted
         playsInline
         preload="auto"
@@ -235,9 +256,7 @@ const VideoScrubbing = ({
           ...sx,
         }}
         {...props}
-      >
-        <source src={src} type="video/mp4" />
-      </Box>
+      />
     </Box>
   );
 };

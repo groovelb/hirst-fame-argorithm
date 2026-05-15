@@ -22,16 +22,18 @@ function preloadImages() {
 }
 
 /**
- * LoadingScreen — 영상 buffer 완료 전까지 viewport 전체를 덮는 풀스크린 로딩 오버레이.
+ * LoadingScreen — 영상 fetch 완료 전까지 viewport 전체를 덮는 풀스크린 로딩 오버레이.
  *
  * - grotesque-bitmap 4장(skull / vanitas / medicine / sacred-heart)을 1200ms 간격 fade cycle
  * - 사이트 배경(TOKENS.bg.page) 위에 placed → 영상 흰 배경과 매끄러운 transition
+ * - 다운로드 진행률(progress 0~1)을 하단에 "LOADING · 42%" 식으로 표시
  * - visible=false 전환 시 600ms opacity fade-out, 그 후 unmount
  *
  * Props:
  * @param {boolean} visible - true면 표시, false면 fade-out 후 unmount [Required]
+ * @param {number} progress - 영상 fetch 진행률 0~1 [Optional]
  */
-function LoadingScreen({ visible }) {
+function LoadingScreen({ visible, progress = 0 }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -106,9 +108,10 @@ function LoadingScreen({ visible }) {
               letterSpacing: '0.42em',
               color: TOKENS.alpha.onLight(0.6),
               textTransform: 'uppercase',
+              fontVariantNumeric: 'tabular-nums',
             } }
           >
-            Loading
+            { `Loading · ${ Math.floor(progress * 100) }%` }
           </Typography>
         </motion.div>
       ) }

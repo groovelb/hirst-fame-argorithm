@@ -107,8 +107,10 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
   /** Timeline 안의 작품/peak modal 열림 신호 — LanguageToggle 같이 숨김. */
   const [isTimelineModalOpen, setIsTimelineModalOpen] = useState(false);
 
-  /** 사이트 ready 상태 — Hero 영상 buffer 완료까지 LoadingScreen 표시. */
+  /** 사이트 ready 상태 — Hero 영상 fetch+blob 완료까지 LoadingScreen 표시. */
   const [isAppReady, setIsAppReady] = useState(false);
+  /** Hero 영상 다운로드 진행률 (0~1) — LoadingScreen에 % 표시 */
+  const [videoLoadProgress, setVideoLoadProgress] = useState(0);
 
   /** 4개 BridgeSection 그리드의 viewport 진행도 — 카드 패럴럭스 구동에 사용 */
   const gridRef = useRef(null);
@@ -139,13 +141,14 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
         background: pageBg,
       }}
     >
-      <LoadingScreen visible={!isAppReady} />
+      <LoadingScreen visible={!isAppReady} progress={videoLoadProgress} />
 
       {!isTimelineModalOpen && <LanguageToggle />}
 
       <HeroSection
         onHeroProgress={setHeroProgress}
         onVideoReady={() => setIsAppReady(true)}
+        onVideoLoadProgress={setVideoLoadProgress}
       />
 
       {/* HeroSection의 비디오 스크러빙 영역에서 분리된 BridgeSection들 — 영상 무관 자연 스크롤.

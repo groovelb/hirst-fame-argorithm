@@ -5,7 +5,8 @@ import { useTheme } from '@mui/material/styles';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { HeroTypeBlock } from '../typography/HeroTypeBlock.jsx';
 import VideoScrubbing from '../scroll/VideoScrubbing.jsx';
-import heroVideoSrc from '../../assets/video/hirst-scrub-graded.mp4';
+import heroVideoSrcDesktop from '../../assets/video/hirst-scrub-graded.mp4';
+import heroVideoSrcMobile from '../../assets/video/hirst-scrub-mobile.mp4';
 import { BRIDGE_SECTIONS } from './bridgeNarrative.js';
 import { BridgeSection } from './BridgeSection.jsx';
 import { TOKENS } from '../../styles/themes/tokens.js';
@@ -28,11 +29,19 @@ import { TOKENS } from '../../styles/themes/tokens.js';
  * @param {function} onHeroProgress - wrapper scrollYProgress motion value 노출 콜백 [Optional]
  * @param {function} onVideoReady - 영상 buffer 완료 콜백 (LoadingScreen dismiss) [Optional]
  */
-function HeroSection({ onHeroProgress, onVideoReady }) {
+function HeroSection({ onHeroProgress, onVideoReady, onVideoLoadProgress }) {
   const sectionRef = useRef(null);
   const theme = useTheme();
-  /** md 미만 모바일 — 영상 scale zoom-in 비활성화(처음부터 100%) */
+  /** md 미만 모바일 — 영상 scale zoom-in 비활성화 + 저해상도 영상 소스 */
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  /**
+   * 영상 소스 viewport별 분기:
+   *  - PC: 1920×1440, 32MB, GOP=1 — 고화질·전체 풀스크린 cover
+   *  - 모바일: 720×540, 6.2MB, GOP=1 — 저해상도로 GPU 디코더 부담 ↓, 다운로드 시간 ↓
+   *  검정 픽셀은 모두 #08090F로 LUT 처리 (양쪽 모두 사이트 배경과 통합)
+   */
+  const heroVideoSrc = isMobile ? heroVideoSrcMobile : heroVideoSrcDesktop;
 
   /**
    * 결정론적 진행도 계산.
@@ -175,6 +184,7 @@ function HeroSection({ onHeroProgress, onVideoReady }) {
             src={heroVideoSrc}
             progress={scrollYProgress}
             onReady={onVideoReady}
+            onLoadProgress={onVideoLoadProgress}
             sx={
               isMobile
                 ? {
