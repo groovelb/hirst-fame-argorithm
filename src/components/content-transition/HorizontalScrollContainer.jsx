@@ -57,7 +57,12 @@ function HorizontalScrollContainer({
 
   // 세로 스크롤 영역 높이 = 뷰포트 높이 + 가로 이동 거리 (px)
   // → scrollYProgress 1 도달 = 마지막 아이템 완전 노출 = 즉시 세로 스크롤 전환
-  const containerHeight = window.innerHeight + scrollDistance;
+  // 모바일 주소창 hide/show 안정성 위해 visualViewport 사용 가능 시 그 값 사용.
+  const measuredViewportH =
+    typeof window !== 'undefined'
+      ? (window.visualViewport?.height ?? window.innerHeight)
+      : 0;
+  const containerHeight = measuredViewportH + scrollDistance;
 
   // 스크롤 진행도 추적
   const { scrollYProgress } = useScroll({
@@ -86,14 +91,14 @@ function HorizontalScrollContainer({
         position: 'relative',
       } }
     >
-      {/* Sticky 컨테이너 - 화면에 고정 */}
+      {/* Sticky 컨테이너 - 화면에 고정. dvh로 모바일 주소창 점프 방지(데스크탑은 dvh==vh). */}
       <Box
         sx={ {
           position: 'sticky',
           top: 0,
           left: 0,
           width: '100vw',
-          height: '100vh',
+          height: '100dvh',
           overflow: 'hidden',
           backgroundColor,
         } }

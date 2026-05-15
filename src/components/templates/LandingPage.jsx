@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import {
@@ -15,8 +14,6 @@ import { HeroSection } from './HeroSection.jsx';
 import { BridgeSection } from './BridgeSection.jsx';
 import { BRIDGE_SECTIONS } from './bridgeNarrative.js';
 import { LoadingScreen } from '../overlay-feedback/LoadingScreen.jsx';
-import { BRAND_DISPLAY, PRODUCT } from '../timeline/typography.js';
-import { useLocale } from '../../i18n';
 import { TOKENS } from '../../styles/themes/tokens.js';
 
 /**
@@ -85,7 +82,6 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
   const theme = useTheme();
   /** md 미만(<900px MUI 기본)을 모바일로 간주. PC 분기는 기존 코드 100% 그대로 유지. */
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const { localized } = useLocale();
 
   /** HeroBridgeScene scrollYProgress motion value. fallback은 0 (브릿지 진입 전). */
   const fallbackProgress = useMotionValue(0);
@@ -104,6 +100,9 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
 
   /** Timeline 안의 작품/peak modal 열림 신호 — LanguageToggle 같이 숨김. */
   const [isTimelineModalOpen, setIsTimelineModalOpen] = useState(false);
+
+  /** 사이트 ready 상태 — Hero 영상 buffer 완료까지 LoadingScreen 표시. */
+  const [isAppReady, setIsAppReady] = useState(false);
 
   /** 4개 BridgeSection 그리드의 viewport 진행도 — 카드 패럴럭스 구동에 사용 */
   const gridRef = useRef(null);
@@ -134,9 +133,14 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
         background: pageBg,
       }}
     >
+      <LoadingScreen visible={!isAppReady} />
+
       {!isTimelineModalOpen && <LanguageToggle />}
 
-      <HeroSection onHeroProgress={setHeroProgress} />
+      <HeroSection
+        onHeroProgress={setHeroProgress}
+        onVideoReady={() => setIsAppReady(true)}
+      />
 
       {/* HeroSection의 비디오 스크러빙 영역에서 분리된 BridgeSection들 — 영상 무관 자연 스크롤.
           4개 category (DEATH / PRICE / GRID / BURN) → 2×2 grid (타이틀 이미지 크게)
@@ -200,68 +204,15 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
       </Box>
 
       <div ref={timelineRef}>
-        {isMobile ? (
-          /* 모바일: 타임라인은 vertical→horizontal scroll hijack + hover 전용 인터랙션이라
-             터치 본질적 부적합. 데스크탑 안내 카드로 대체. */
-          <Box
-            sx={{
-              backgroundColor: TOKENS.bg.dark,
-              color: TOKENS.text.onDark,
-              px: '6vw',
-              py: '20vh',
-              minHeight: '60vh',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              gap: 3,
-            }}
-          >
-            <Typography
-              component="h2"
-              sx={{
-                fontFamily: BRAND_DISPLAY,
-                fontWeight: 900,
-                fontSize: '2.4rem',
-                lineHeight: 1.05,
-                letterSpacing: '0.02em',
-              }}
-            >
-              TIMELINE
-            </Typography>
-            <Box
-              aria-hidden="true"
-              sx={{
-                width: 56,
-                height: '1px',
-                backgroundColor: TOKENS.divider.onDark,
-              }}
-            />
-            <Typography
-              sx={{
-                fontFamily: PRODUCT,
-                fontSize: '0.95rem',
-                lineHeight: 1.75,
-                opacity: 0.78,
-                maxWidth: '100%',
-              }}
-            >
-              {localized({
-                ko: '이 작품은 가로 스크롤 인터랙션 기반으로 데스크탑에서 최적화되어 있습니다. 전체 타임라인은 PC에서 확인해 주세요.',
-                en: 'This work relies on horizontal scroll interactions optimized for desktop. Please view the full timeline on a larger screen.',
-              })}
-            </Typography>
-          </Box>
-        ) : (
-          <HirstTimeline
-            worksData={worksData}
-            eventsData={eventsData}
-            bioData={bioData}
-            trendData={trendData}
-            backgroundColor={TOKENS.bg.dark}
-            hideMinimap={!isTimelineVisible}
-            onModalStateChange={setIsTimelineModalOpen}
-          />
-        )}
+        <HirstTimeline
+          worksData={worksData}
+          eventsData={eventsData}
+          bioData={bioData}
+          trendData={trendData}
+          backgroundColor={TOKENS.bg.dark}
+          hideMinimap={!isTimelineVisible}
+          onModalStateChange={setIsTimelineModalOpen}
+        />
       </div>
     </motion.div>
   );

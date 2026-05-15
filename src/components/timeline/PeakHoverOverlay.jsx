@@ -168,22 +168,26 @@ function PeakHoverOverlay({ activeEvent, getEventLabel, onClose }) {
               zIndex: 1,
               display: 'flex',
               flexDirection: { xs: 'column', md: 'row' },
-              alignItems: 'center',
+              alignItems: { xs: 'stretch', md: 'center' },
               gap: { xs: 4, md: 10 },
               maxWidth: { xs: '94vw', md: '92vw' },
-              maxHeight: { xs: '90vh', md: '86vh' },
+              maxHeight: { xs: '92dvh', md: '86vh' },
               px: { xs: 3, md: 8 },
+              py: { xs: 9, md: 0 },
+              overflowY: { xs: 'auto', md: 'visible' },
+              WebkitOverflowScrolling: 'touch',
             } }
           >
             { activeEvent.imageRef && (
               <Box
                 sx={ {
                   flexShrink: 0,
-                  width: { xs: '64vw', md: 'min(40vw, 54vh)' },
-                  height: { xs: '40vh', md: 'min(60vh, 52vw)' },
+                  width: { xs: '100%', md: 'min(40vw, 54vh)' },
+                  height: { xs: 'auto', md: 'min(60vh, 52vw)' },
+                  maxHeight: { xs: '46dvh', md: 'none' },
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  justifyContent: { xs: 'flex-start', md: 'center' },
                 } }
               >
                 <WorkImage
@@ -204,9 +208,9 @@ function PeakHoverOverlay({ activeEvent, getEventLabel, onClose }) {
             <Box
               sx={ {
                 flex: 1,
-                maxWidth: { xs: '94vw', md: 580 },
-                maxHeight: { md: '82vh' },
-                overflowY: { md: 'auto' },
+                maxWidth: { xs: '100%', md: 580 },
+                maxHeight: { xs: 'none', md: '82vh' },
+                overflowY: { xs: 'visible', md: 'auto' },
                 color: 'text.primary',
                 pr: { md: 2 },
                 '&::-webkit-scrollbar': { width: 3 },

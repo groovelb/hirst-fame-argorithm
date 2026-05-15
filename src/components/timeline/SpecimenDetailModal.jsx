@@ -156,7 +156,7 @@ function SpecimenDetailModal({ open, onClose, species, artworks = [], worksData 
           sx={ {
             position: 'relative',
             zIndex: 1,
-            minHeight: '100vh',
+            minHeight: '100dvh',
             cursor: onClose ? 'pointer' : 'default',
           } }
         >
@@ -168,7 +168,9 @@ function SpecimenDetailModal({ open, onClose, species, artworks = [], worksData 
               alignItems: { xs: 'stretch', md: 'flex-start' },
               gap: { xs: 4, md: 8, lg: 10 },
               px: { xs: 3, md: 8, lg: 12 },
-              py: { xs: 4, md: 9 },
+              /* xs pt 9 — close 버튼(top:16 + h:44 = 60)과 콘텐츠 충돌 회피 */
+              pt: { xs: 9, md: 9 },
+              pb: { xs: 6, md: 9 },
               cursor: 'default',
             } }
           >

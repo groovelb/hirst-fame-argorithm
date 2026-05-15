@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { HeroTypeBlock } from '../typography/HeroTypeBlock.jsx';
 import VideoScrubbing from '../scroll/VideoScrubbing.jsx';
@@ -28,6 +30,9 @@ import { TOKENS } from '../../styles/themes/tokens.js';
  */
 function HeroSection({ onHeroProgress, onVideoReady }) {
   const sectionRef = useRef(null);
+  const theme = useTheme();
+  /** md 미만 모바일 — 영상 scale zoom-in 비활성화(처음부터 100%) */
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   /**
    * 결정론적 진행도 계산.
@@ -72,9 +77,11 @@ function HeroSection({ onHeroProgress, onVideoReady }) {
 
   /**
    * 영상 70% → 100% scale zoom-in (히어로 타이틀 진행 구간 0~0.5 동안).
-   * motion.div wrapper에 적용 + isolation: isolate로 stacking 격리 → 외부 hero typo 영향 없음.
+   * 데스크탑 전용. 모바일은 fixed scale=1로 시작부터 풀스크린 cover (zoom 비활성).
+   * useTransform은 hook이라 조건부 호출 금지 → 항상 호출 후 분기.
    */
-  const videoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 1]);
+  const desktopVideoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 1]);
+  const videoScale = isMobile ? 1 : desktopVideoScale;
 
   React.useEffect(() => {
     onHeroProgress?.(scrollYProgress);

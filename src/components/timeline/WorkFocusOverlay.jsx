@@ -143,22 +143,26 @@ function WorkFocusOverlay({ activeWork, onClose }) {
             zIndex: 1,
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            alignItems: 'center',
+            alignItems: { xs: 'stretch', md: 'center' },
             gap: { xs: 4, md: 10 },
             maxWidth: { xs: '94vw', md: '92vw' },
-            maxHeight: { xs: '90vh', md: '86vh' },
+            maxHeight: { xs: '92dvh', md: '86vh' },
             px: { xs: 3, md: 8 },
+            py: { xs: 9, md: 0 },
+            overflowY: { xs: 'auto', md: 'visible' },
+            WebkitOverflowScrolling: 'touch',
           } }
         >
           {/* 작품 이미지 — editorial 비율 */}
           <Box
             sx={ {
               flexShrink: 0,
-              width: { xs: '74vw', md: 'min(46vw, 58vh)' },
-              height: { xs: '54vh', md: 'min(66vh, 70vw)' },
+              width: { xs: '100%', md: 'min(46vw, 58vh)' },
+              height: { xs: 'auto', md: 'min(66vh, 70vw)' },
+              maxHeight: { xs: '50dvh', md: 'none' },
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: { xs: 'flex-start', md: 'center' },
             } }
           >
             <WorkImage
@@ -179,9 +183,9 @@ function WorkFocusOverlay({ activeWork, onClose }) {
           <Box
             sx={ {
               flex: 1,
-              maxWidth: { xs: '94vw', md: 500 },
-              maxHeight: { md: '82vh' },
-              overflowY: { md: 'auto' },
+              maxWidth: { xs: '100%', md: 500 },
+              maxHeight: { xs: 'none', md: '82vh' },
+              overflowY: { xs: 'visible', md: 'auto' },
               color: 'text.primary',
               pr: { md: 2 },
               '&::-webkit-scrollbar': { width: 3 },
