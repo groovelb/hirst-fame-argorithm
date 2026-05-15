@@ -92,9 +92,15 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
    * 영상 흰 배경과 매칭되는 흰색(TOKENS.bg.page = #FFFFFF), 그 이후엔 다크 토큰으로 전환.
    * 분리 BridgeSection·HirstTimeline 영역에서 검정 배경 + 흰 텍스트 디자인을 위함.
    */
+  /**
+   * 배경 transition 타이밍은 viewport별 분기:
+   *  - PC: [0.95, 1] — PROLOGUE가 viewport를 거의 채운 시점 (기존 동작)
+   *  - 모바일: [0.45, 0.5] — PROLOGUE 등장 직전(progress 0.5 = viewport 진입 시점) 직전
+   *    모바일은 PROLOGUE 등장과 배경 전환을 거의 동시에 가져가야 부드럽다.
+   */
   const pageBg = useTransform(
     heroProgress,
-    [0.95, 1],
+    isMobile ? [0.45, 0.5] : [0.95, 1],
     [TOKENS.bg.page, TOKENS.text.onLight]
   );
 
