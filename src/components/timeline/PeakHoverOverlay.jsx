@@ -57,16 +57,20 @@ function Chip({ children }) {
       component="span"
       sx={ {
         display: 'inline-block',
-        px: 1.75,
-        py: 0.85,
+        px: { xs: 1.25, md: 1.75 },
+        py: { xs: 0.65, md: 0.85 },
         fontFamily: PRODUCT,
-        fontSize: '0.88rem',
+        fontSize: { xs: '0.72rem', md: '0.88rem' },
         fontWeight: 600,
-        letterSpacing: '0.18em',
+        letterSpacing: { xs: '0.1em', md: '0.18em' },
         textTransform: 'uppercase',
         color: 'rgba(246, 246, 236, 0.85)',
         border: '1px solid rgba(246, 246, 236, 0.28)',
-        whiteSpace: 'nowrap',
+        /* xs: 긴 actor/antecedent 라벨이 모달 텍스트 컬럼(~327px) 초과 시 줄바꿈 허용.
+           PC는 chip 1줄 유지 톤 보존. */
+        whiteSpace: { xs: 'normal', md: 'nowrap' },
+        wordBreak: { xs: 'break-word', md: 'normal' },
+        maxWidth: { xs: '100%', md: 'none' },
       } }
     >
       { children }

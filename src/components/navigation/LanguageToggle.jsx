@@ -26,8 +26,8 @@ function LanguageToggle() {
       aria-label="Language"
       sx={ {
         position: 'fixed',
-        top: { xs: 16, md: 24 },
-        right: { xs: 16, md: 28 },
+        top: { xs: 20, md: 24 },
+        right: { xs: 20, md: 28 },
         zIndex: 1200,
         display: 'flex',
         alignItems: 'center',

@@ -27,9 +27,12 @@ function BandLegend({ activeBandId = null }) {
         zIndex: 50,
         display: 'flex',
         alignItems: 'flex-end',
-        gap: { xs: 1.5, md: 3 },
-        px: { xs: 1.5, md: 3 },
+        /* xs: "Transcendence" 13자 × 5 라벨 + gap → 360px viewport에서 빠듯
+           gap 1 (8px), px 1 (8px), 라벨 fontSize는 아래 0.5rem으로 축소 */
+        gap: { xs: 1, md: 3 },
+        px: { xs: 1, md: 3 },
         py: { xs: 1, md: 1.5 },
+        maxWidth: '100vw',
         pointerEvents: 'none',
         userSelect: 'none',
       } }
@@ -70,9 +73,9 @@ function BandLegend({ activeBandId = null }) {
               variant="caption"
               sx={ {
                 fontFamily: PRODUCT,
-                fontSize: { xs: '0.55rem', md: '0.62rem' },
+                fontSize: { xs: '0.5rem', md: '0.62rem' },
                 fontWeight: 600,
-                letterSpacing: '0.16em',
+                letterSpacing: { xs: '0.08em', md: '0.16em' },
                 textTransform: 'uppercase',
                 color: isActive ? 'text.primary' : 'rgba(246, 246, 236, 0.72)',
                 whiteSpace: 'nowrap',

@@ -162,7 +162,7 @@ function BridgeSection({ section, color = TOKENS.text.onLight, layout = 'hero' }
           <Box
             aria-hidden="true"
             sx={{
-              width: { xs: 56, md: 88 },
+              width: { xs: 40, md: 88 },
               height: '1px',
               backgroundColor: dividerColor,
             }}

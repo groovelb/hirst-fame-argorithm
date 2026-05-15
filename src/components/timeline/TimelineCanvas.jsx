@@ -328,46 +328,55 @@ function TimelineCanvas({
         contain: 'layout paint',
       } }
     >
-      {/* 좌상단 고정 타이틀 — 그로테스크 high-contrast serif, viewport-fixed */}
+      {/* 좌상단 고정 타이틀 — 그로테스크 high-contrast serif, viewport-fixed.
+          xs(<375px): left/top 16px + fontSize 2.2rem (35px)로 "DAMIEN HIRST" overflow 방지. */}
       <motion.div
         style={ {
           position: 'absolute',
-          left: 32,
-          top: 32,
+          left: 16,
+          top: 16,
           pointerEvents: 'none',
           zIndex: 5,
           x: scrollOffset,
         } }
       >
-        <Typography
+        <Box
           sx={ {
-            display: 'block',
-            fontFamily: BRAND_DISPLAY,
-            fontSize: { xs: '3rem', md: '4.5rem', lg: '6rem' },
-            fontWeight: 900,
-            fontStyle: 'normal',
-            lineHeight: 0.92,
-            color: 'text.primary',
-            letterSpacing: '0.04em',
-            textTransform: 'uppercase',
+            /* xs는 16px offset, md+는 기존 32px 동등 효과를 위해 16px 추가 padding */
+            pl: { xs: 0, md: 2 },
+            pt: { xs: 0, md: 2 },
           } }
         >
-          Damien Hirst
-        </Typography>
-        <Typography
-          variant="caption"
-          sx={ {
-            display: 'block',
-            mt: 1.5,
-            fontFamily: PRODUCT,
-            fontSize: '0.78rem',
-            letterSpacing: '0.32em',
-            textTransform: 'uppercase',
-            color: 'text.disabled',
-          } }
-        >
-          1965 — present
-        </Typography>
+          <Typography
+            sx={ {
+              display: 'block',
+              fontFamily: BRAND_DISPLAY,
+              fontSize: { xs: '2.2rem', sm: '3rem', md: '4.5rem', lg: '6rem' },
+              fontWeight: 900,
+              fontStyle: 'normal',
+              lineHeight: 0.92,
+              color: 'text.primary',
+              letterSpacing: '0.04em',
+              textTransform: 'uppercase',
+            } }
+          >
+            Damien Hirst
+          </Typography>
+          <Typography
+            variant="caption"
+            sx={ {
+              display: 'block',
+              mt: { xs: 1, md: 1.5 },
+              fontFamily: PRODUCT,
+              fontSize: { xs: '0.66rem', md: '0.78rem' },
+              letterSpacing: '0.32em',
+              textTransform: 'uppercase',
+              color: 'text.disabled',
+            } }
+          >
+            1965 — present
+          </Typography>
+        </Box>
       </motion.div>
 
       {/* 우측 고정 Trend Y축 라벨 (0~100 search index) */}

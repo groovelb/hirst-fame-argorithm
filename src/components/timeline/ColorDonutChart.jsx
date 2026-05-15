@@ -166,7 +166,7 @@ function ColorDonutChart({
               sx={ {
                 fontWeight: 700,
                 color: 'text.primary',
-                fontSize: '1rem',
+                fontSize: { xs: '0.85rem', md: '1rem' },
                 lineHeight: 1,
                 mt: 0.5,
               } }

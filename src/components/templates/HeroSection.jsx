@@ -175,11 +175,23 @@ function HeroSection({ onHeroProgress, onVideoReady }) {
             src={heroVideoSrc}
             progress={scrollYProgress}
             onReady={onVideoReady}
-            sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
+            sx={
+              isMobile
+                ? {
+                    /* 모바일: viewport width와 동일 + 원본 비율 유지 (1920×1440 = 4:3).
+                       objectFit: contain → 컨테이너(100vh × 100vw) 안에서 작은 차원(가로)에 맞춰
+                       width=100vw 채우고 height=75vw로 자동 비율, 세로 가운데 정렬. crop 없음. */
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                  }
+                : {
+                    /* PC: 기존 동작 그대로 — viewport 전체 cover (필요 시 일부 crop). */
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }
+            }
           />
         </motion.div>
       </Box>
@@ -205,9 +217,9 @@ function HeroSection({ onHeroProgress, onVideoReady }) {
           style={{ y: damienY }}
           sx={{
             position: 'absolute',
-            top: '1.2vw',
-            left: '3vw',
-            right: '3vw',
+            top: { xs: '4vw', md: '1.2vw' },
+            left: { xs: '4vw', md: '3vw' },
+            right: { xs: '4vw', md: '3vw' },
             height: '18%',
             filter: 'url(#hero-dirt)',
           }}
@@ -226,9 +238,9 @@ function HeroSection({ onHeroProgress, onVideoReady }) {
         <Box
           sx={{
             position: 'absolute',
-            bottom: '3vw',
-            left: '3vw',
-            right: '3vw',
+            bottom: { xs: '4vw', md: '3vw' },
+            left: { xs: '4vw', md: '3vw' },
+            right: { xs: '4vw', md: '3vw' },
             height: '18%',
             filter: 'url(#hero-dirt)',
           }}

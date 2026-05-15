@@ -221,7 +221,7 @@ function SpecimenDetailModal({ open, onClose, species, artworks = [], worksData 
             <Typography
               sx={ {
                 fontFamily: PRODUCT,
-                fontSize: '0.92rem',
+                fontSize: { xs: '0.82rem', md: '0.92rem' },
                 lineHeight: 1.6,
                 color: 'rgba(246, 246, 236, 0.6)',
                 mb: { xs: 3, md: 4 },
@@ -249,7 +249,7 @@ function SpecimenDetailModal({ open, onClose, species, artworks = [], worksData 
                   sx={ {
                     mt: 1,
                     fontFamily: PRODUCT,
-                    fontSize: '0.75rem',
+                    fontSize: { xs: '0.68rem', md: '0.75rem' },
                     fontWeight: 700,
                     letterSpacing: '0.22em',
                     textTransform: 'uppercase',
@@ -276,7 +276,7 @@ function SpecimenDetailModal({ open, onClose, species, artworks = [], worksData 
                   sx={ {
                     mt: 1,
                     fontFamily: PRODUCT,
-                    fontSize: '0.75rem',
+                    fontSize: { xs: '0.68rem', md: '0.75rem' },
                     fontWeight: 700,
                     letterSpacing: '0.22em',
                     textTransform: 'uppercase',
@@ -382,7 +382,7 @@ function SpecimenDetailModal({ open, onClose, species, artworks = [], worksData 
                         <Typography
                           sx={ {
                             fontFamily: PRODUCT,
-                            fontSize: '0.62rem',
+                            fontSize: { xs: '0.56rem', md: '0.62rem' },
                             letterSpacing: '0.14em',
                             textTransform: 'uppercase',
                             color: 'rgba(246, 246, 236, 0.32)',

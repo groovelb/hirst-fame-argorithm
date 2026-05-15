@@ -58,12 +58,13 @@ function TimelineEventItem({
         variant="caption"
         sx={ {
           display: 'block',
-          width: 140,
+          width: { xs: 100, md: 140 },
           transform: 'translateX(-8px)',
           mt: '28px',
           fontWeight: isHigh ? 600 : 400,
           lineHeight: 1.3,
           color: 'action.disabled',
+          fontSize: { xs: '0.65rem', md: 'inherit' },
         } }
       >
         { localized(event.title) }
