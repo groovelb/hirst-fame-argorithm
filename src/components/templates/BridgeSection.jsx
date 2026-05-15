@@ -72,7 +72,7 @@ function BridgeSection({ section, color = TOKENS.text.onLight, layout = 'hero' }
             sx={{
               width: '100%',
               height: isGrid
-                ? { xs: 180, sm: 240, md: 300, lg: 360 }
+                ? { xs: 140, sm: 180, md: 300, lg: 360 }
                 : { xs: 48, sm: 56, md: 64, lg: 72 },
               display: 'flex',
               alignItems: 'center',
@@ -146,8 +146,8 @@ function BridgeSection({ section, color = TOKENS.text.onLight, layout = 'hero' }
             fontFamily: BRAND_DISPLAY,
             fontWeight: 900,
             fontSize: isCategory
-              ? { xs: '4rem', sm: '5.5rem', md: '7rem', lg: '9rem' }
-              : { xs: '2.6rem', sm: '3.4rem', md: '4.2rem', lg: '5rem' },
+              ? { xs: '3.2rem', sm: '5.5rem', md: '7rem', lg: '9rem' }
+              : { xs: '2.4rem', sm: '3.4rem', md: '4.2rem', lg: '5rem' },
             lineHeight: 0.98,
             letterSpacing: isCategory ? '0.02em' : '0.01em',
             color,
@@ -175,7 +175,7 @@ function BridgeSection({ section, color = TOKENS.text.onLight, layout = 'hero' }
             fontSize: { xs: '0.92rem', md: '1rem' },
             lineHeight: 1.75,
             color,
-            maxWidth: 460,
+            maxWidth: { xs: '100%', md: 460 },
           }}
         >
           {localizedDeck}

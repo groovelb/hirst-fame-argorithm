@@ -21,6 +21,7 @@ const VideoScrubbing = ({
   progress: externalProgress = null,
   scrollRange = { start: 0, end: 1 },
   onProgressChange,
+  onReady,
   ...props
 }) => {
   const videoRef = useRef(null);
@@ -36,7 +37,10 @@ const VideoScrubbing = ({
     const video = videoRef.current;
     if (!video) return undefined;
 
-    const markReady = () => setIsReady(true);
+    const markReady = () => {
+      setIsReady(true);
+      onReady?.();
+    };
 
     const handleProgress = () => {
       if (
@@ -56,7 +60,7 @@ const VideoScrubbing = ({
       video.removeEventListener('canplaythrough', markReady);
       video.removeEventListener('progress', handleProgress);
     };
-  }, []);
+  }, [onReady]);
 
   const setVideoProgress = useCallback((nextProgress) => {
     const video = videoRef.current;

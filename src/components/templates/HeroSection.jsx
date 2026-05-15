@@ -24,8 +24,9 @@ import { TOKENS } from '../../styles/themes/tokens.js';
  *
  * Props:
  * @param {function} onHeroProgress - wrapper scrollYProgress motion value 노출 콜백 [Optional]
+ * @param {function} onVideoReady - 영상 buffer 완료 콜백 (LoadingScreen dismiss) [Optional]
  */
-function HeroSection({ onHeroProgress }) {
+function HeroSection({ onHeroProgress, onVideoReady }) {
   const sectionRef = useRef(null);
 
   /**
@@ -138,13 +139,14 @@ function HeroSection({ onHeroProgress }) {
         </defs>
       </svg>
 
-      {/* Sticky video — viewport 크기 100vh × 100vw stuck. 히어로 콘텐츠 구간 동안 유지. */}
+      {/* Sticky video — viewport 크기 100dvh × 100vw stuck. 히어로 콘텐츠 구간 동안 유지.
+          dvh: 모바일 브라우저 주소창 hide/show 시 점프 방지. 데스크탑은 dvh==vh. */}
       <Box
         sx={{
           position: 'sticky',
           top: 0,
           width: '100%',
-          height: '100vh',
+          height: '100dvh',
           zIndex: 0,
           overflow: 'hidden',
         }}
@@ -165,6 +167,7 @@ function HeroSection({ onHeroProgress }) {
           <VideoScrubbing
             src={heroVideoSrc}
             progress={scrollYProgress}
+            onReady={onVideoReady}
             sx={{
               width: '100%',
               height: '100%',
@@ -181,8 +184,8 @@ function HeroSection({ onHeroProgress }) {
       <Box
         sx={{
           position: 'relative',
-          height: '100vh',
-          marginTop: '-100vh',
+          height: '100dvh',
+          marginTop: '-100dvh',
           zIndex: 1,
           pointerEvents: 'none',
         }}
@@ -241,7 +244,7 @@ function HeroSection({ onHeroProgress }) {
           position: 'relative',
           zIndex: 1,
           pointerEvents: 'none',
-          height: '100vh',
+          height: '100dvh',
         }}
       />
 
@@ -254,7 +257,7 @@ function HeroSection({ onHeroProgress }) {
           position: 'relative',
           zIndex: 1,
           pointerEvents: 'none',
-          height: '100vh',
+          height: '100dvh',
           display: 'flex',
           alignItems: 'center',
           px: { xs: '3vw', md: '6vw' },

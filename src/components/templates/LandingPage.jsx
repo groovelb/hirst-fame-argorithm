@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import {
   motion,
   useMotionValue,
@@ -11,6 +14,9 @@ import { WorldviewTimeline as HirstTimeline } from '../timeline/index.js';
 import { HeroSection } from './HeroSection.jsx';
 import { BridgeSection } from './BridgeSection.jsx';
 import { BRIDGE_SECTIONS } from './bridgeNarrative.js';
+import { LoadingScreen } from '../overlay-feedback/LoadingScreen.jsx';
+import { BRAND_DISPLAY, PRODUCT } from '../timeline/typography.js';
+import { useLocale } from '../../i18n';
 import { TOKENS } from '../../styles/themes/tokens.js';
 
 /**
@@ -76,6 +82,11 @@ const GRID_DEPTHS = [10, 50, 22, 65];
  * <LandingPage worksData={ works } eventsData={ events } bioData={ bio } trendData={ trend } />
  */
 function LandingPage({ worksData, eventsData, bioData, trendData }) {
+  const theme = useTheme();
+  /** md 미만(<900px MUI 기본)을 모바일로 간주. PC 분기는 기존 코드 100% 그대로 유지. */
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const { localized } = useLocale();
+
   /** HeroBridgeScene scrollYProgress motion value. fallback은 0 (브릿지 진입 전). */
   const fallbackProgress = useMotionValue(0);
   const [heroProgress, setHeroProgress] = useState(fallbackProgress);
@@ -135,7 +146,7 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
         component="section"
         sx={{
           position: 'relative',
-          py: { xs: '20vh', md: '28vh' },
+          py: { xs: '12vh', md: '28vh' },
           px: { xs: '4vw', md: '6vw', lg: '8vw' },
         }}
       >
@@ -145,27 +156,42 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
             columnGap: { xs: '4vw', md: '6vw' },
-            rowGap: { xs: '12vh', md: '18vh' },
+            rowGap: { xs: '8vh', md: '18vh' },
           }}
         >
-          {BRIDGE_SECTIONS.slice(1, 5).map((section, i) => (
-            <ParallaxGridItem
-              key={section.id}
-              progress={gridProgress}
-              offsetY={GRID_OFFSETS[i]}
-              depth={GRID_DEPTHS[i]}
-            >
-              <BridgeSection
-                section={section}
-                color={TOKENS.text.onDark}
-                layout="grid"
-              />
-            </ParallaxGridItem>
-          ))}
+          {BRIDGE_SECTIONS.slice(1, 5).map((section, i) =>
+            isMobile ? (
+              /* 모바일: depth=65vh 등 패럴럭스가 카드 높이 초과로 레이아웃 붕괴 →
+                 정적 Box로 대체. PC는 기존 ParallaxGridItem 분기 유지. */
+              <Box
+                key={section.id}
+                sx={{ backgroundColor: TOKENS.bg.dark }}
+              >
+                <BridgeSection
+                  section={section}
+                  color={TOKENS.text.onDark}
+                  layout="grid"
+                />
+              </Box>
+            ) : (
+              <ParallaxGridItem
+                key={section.id}
+                progress={gridProgress}
+                offsetY={GRID_OFFSETS[i]}
+                depth={GRID_DEPTHS[i]}
+              >
+                <BridgeSection
+                  section={section}
+                  color={TOKENS.text.onDark}
+                  layout="grid"
+                />
+              </ParallaxGridItem>
+            )
+          )}
         </Box>
 
         {/* INDEX pivot — 그리드 아래 풀폭 */}
-        <Box sx={{ mt: { xs: '20vh', md: '28vh' } }}>
+        <Box sx={{ mt: { xs: '12vh', md: '28vh' } }}>
           <BridgeSection
             section={BRIDGE_SECTIONS[5]}
             color={TOKENS.text.onDark}
@@ -174,15 +200,68 @@ function LandingPage({ worksData, eventsData, bioData, trendData }) {
       </Box>
 
       <div ref={timelineRef}>
-        <HirstTimeline
-          worksData={worksData}
-          eventsData={eventsData}
-          bioData={bioData}
-          trendData={trendData}
-          backgroundColor={TOKENS.bg.dark}
-          hideMinimap={!isTimelineVisible}
-          onModalStateChange={setIsTimelineModalOpen}
-        />
+        {isMobile ? (
+          /* 모바일: 타임라인은 vertical→horizontal scroll hijack + hover 전용 인터랙션이라
+             터치 본질적 부적합. 데스크탑 안내 카드로 대체. */
+          <Box
+            sx={{
+              backgroundColor: TOKENS.bg.dark,
+              color: TOKENS.text.onDark,
+              px: '6vw',
+              py: '20vh',
+              minHeight: '60vh',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              gap: 3,
+            }}
+          >
+            <Typography
+              component="h2"
+              sx={{
+                fontFamily: BRAND_DISPLAY,
+                fontWeight: 900,
+                fontSize: '2.4rem',
+                lineHeight: 1.05,
+                letterSpacing: '0.02em',
+              }}
+            >
+              TIMELINE
+            </Typography>
+            <Box
+              aria-hidden="true"
+              sx={{
+                width: 56,
+                height: '1px',
+                backgroundColor: TOKENS.divider.onDark,
+              }}
+            />
+            <Typography
+              sx={{
+                fontFamily: PRODUCT,
+                fontSize: '0.95rem',
+                lineHeight: 1.75,
+                opacity: 0.78,
+                maxWidth: '100%',
+              }}
+            >
+              {localized({
+                ko: '이 작품은 가로 스크롤 인터랙션 기반으로 데스크탑에서 최적화되어 있습니다. 전체 타임라인은 PC에서 확인해 주세요.',
+                en: 'This work relies on horizontal scroll interactions optimized for desktop. Please view the full timeline on a larger screen.',
+              })}
+            </Typography>
+          </Box>
+        ) : (
+          <HirstTimeline
+            worksData={worksData}
+            eventsData={eventsData}
+            bioData={bioData}
+            trendData={trendData}
+            backgroundColor={TOKENS.bg.dark}
+            hideMinimap={!isTimelineVisible}
+            onModalStateChange={setIsTimelineModalOpen}
+          />
+        )}
       </div>
     </motion.div>
   );
