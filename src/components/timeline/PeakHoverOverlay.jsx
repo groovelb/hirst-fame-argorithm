@@ -129,7 +129,7 @@ function PeakHoverOverlay({ activeEvent, getEventLabel, onClose }) {
             sx={ {
               position: 'absolute',
               inset: 0,
-              backgroundColor: TOKENS.bg.page,
+              backgroundColor: TOKENS.bg.dark,
               cursor: onClose ? 'pointer' : 'default',
             } }
           />

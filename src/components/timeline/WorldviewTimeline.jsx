@@ -227,6 +227,7 @@ function WorldviewTimeline({
       <div ref={specimenRef}>
         <SpecimenInfographicSection
           bioData={bioData}
+          worksData={worksData}
           width="100%"
           viewportHeight={viewportHeight}
         />

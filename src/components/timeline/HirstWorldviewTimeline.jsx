@@ -68,7 +68,7 @@ export function HirstWorldviewTimeline({
   };
 
   return (
-    <Box component="main" sx={{ backgroundColor: TOKENS.bg.page }}>
+    <Box component="main" sx={{ backgroundColor: TOKENS.bg.dark }}>
       <WorldviewMiniMap eras={ eras } locale={ locale } />
 
       {/* Intro */}

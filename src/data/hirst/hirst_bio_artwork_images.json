@@ -1,0 +1,18 @@
+{
+  "meta": {
+    "title": "Bio-specimen artwork image map (auto-generated)",
+    "purpose": "bio.id → /images/hirst/bio/* 직접 매핑. workBioMap에 없는 bio artwork 보조.",
+    "asOfDate": "2026-05-15"
+  },
+  "images": {
+    "wrath-2005": "/images/hirst/bio/wrath-2005.jpg",
+    "death-explained-2007": "/images/hirst/bio/death-explained-2007.jpg",
+    "leviathan-2006": "/images/hirst/bio/leviathan-2006.jpg",
+    "pursuit-oblivion-2004": "/images/hirst/bio/pursuit-oblivion-2004.jpg",
+    "cock-and-bull-2012": "/images/hirst/bio/cock-and-bull-2012.jpg",
+    "incredible-journey-2008": "/images/hirst/bio/incredible-journey-2008.jpg",
+    "incomplete-truth-2006": "/images/hirst/bio/incomplete-truth-2006.jpg",
+    "in-out-love-1991-paintings": "/images/hirst/bio/in-out-love-1991-paintings.jpg",
+    "in-out-love-tate-2012": "/images/hirst/bio/in-out-love-tate-2012.jpg"
+  }
+}

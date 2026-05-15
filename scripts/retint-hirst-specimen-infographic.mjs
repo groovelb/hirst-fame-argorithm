@@ -1,11 +1,21 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
-import { TOKENS } from '../src/styles/themes/tokens.js';
+
+/**
+ * Retint specimen infographic images to match `mortality-skull.png`:
+ *   - sample reference's background (darkest 5% mean) + foreground (brightest 5% mean)
+ *   - duotone-map each pixel's luma onto that bg→fg gradient
+ *   - read from `_warm-original/` so repeated runs don't compound the shift
+ */
 
 const ROOT = process.cwd();
 const SOURCE_DIR = path.join(ROOT, 'public/images/hirst/specimen-infographic');
 const BACKUP_DIR = path.join(SOURCE_DIR, '_warm-original');
+const REFERENCE_IMAGE = path.join(
+  ROOT,
+  'public/images/hirst/grotesque-bitmap-rgb-background-backup/mortality-skull.png',
+);
 
 const TARGET_FILES = [
   'specimen-butterfly-reliquary.png',
@@ -16,6 +26,7 @@ const TARGET_FILES = [
   'specimen-dove.png',
   'specimen-cockerel.png',
   'specimen-uncounted-cycle.png',
+  'specimen-minor-animals-strip.png',
 ];
 
 function hexToRgb(hex) {
@@ -24,13 +35,6 @@ function hexToRgb(hex) {
     .match(/.{1,2}/g)
     .map((value) => parseInt(value, 16));
 }
-
-const PALETTE = {
-  background: hexToRgb(TOKENS.bg.page),
-  coolWhite: hexToRgb(TOKENS.text.onDark),
-  primaryBlue: hexToRgb(TOKENS.accent.brand),
-  primaryLight: hexToRgb(TOKENS.accent.brandLight),
-};
 
 function clamp(value, min = 0, max = 255) {
   return Math.max(min, Math.min(max, value));
@@ -44,28 +48,69 @@ function luma(r, g, b) {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
-function mapPixel(r, g, b) {
-  const y = luma(r, g, b);
-  const normalized = clamp((y - 8) / 247, 0, 1);
-  const etched = Math.pow(normalized, 1.12);
-  const midAccent = Math.sin(etched * Math.PI);
-  const blueAmount = 0.2 * etched + 0.18 * midAccent;
-  const whiteAmount = etched;
+/**
+ * Sample the reference image: collect every opaque pixel sorted by luma,
+ * take the mean RGB of the bottom (background) and top (foreground) tails.
+ */
+async function sampleReferenceTones(filePath, tailRatio = 0.05) {
+  const { data, info } = await sharp(filePath)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
 
-  const base = PALETTE.background.map((bgChannel, index) => {
-    const coolWhite = PALETTE.coolWhite[index];
-    const primaryBlue = PALETTE.primaryBlue[index];
-    const primaryLight = PALETTE.primaryLight[index];
-    const line = mix(bgChannel, coolWhite, whiteAmount);
-    const blue = mix(primaryBlue, primaryLight, etched);
-    return mix(line, blue, blueAmount);
-  });
+  const pixels = [];
+  for (let index = 0; index < data.length; index += 4) {
+    const a = data[index + 3];
+    if (a < 32) continue;
+    const r = data[index];
+    const g = data[index + 1];
+    const b = data[index + 2];
+    pixels.push({ r, g, b, y: luma(r, g, b) });
+  }
+  if (pixels.length === 0) {
+    throw new Error(`Reference image has no opaque pixels: ${ filePath }`);
+  }
+  pixels.sort((a, b) => a.y - b.y);
 
-  return [
-    Math.round(clamp(base[0])),
-    Math.round(clamp(base[1])),
-    Math.round(clamp(base[2])),
-  ];
+  const tailCount = Math.max(1, Math.floor(pixels.length * tailRatio));
+  const darkSlice = pixels.slice(0, tailCount);
+  const lightSlice = pixels.slice(-tailCount);
+
+  const meanRgb = (slice) => {
+    const total = slice.reduce(
+      (acc, pixel) => {
+        acc.r += pixel.r;
+        acc.g += pixel.g;
+        acc.b += pixel.b;
+        return acc;
+      },
+      { r: 0, g: 0, b: 0 },
+    );
+    return [
+      Math.round(total.r / slice.length),
+      Math.round(total.g / slice.length),
+      Math.round(total.b / slice.length),
+    ];
+  };
+
+  return {
+    background: meanRgb(darkSlice),
+    foreground: meanRgb(lightSlice),
+    info: { width: info.width, height: info.height, totalSampled: pixels.length },
+  };
+}
+
+function buildPixelMapper({ background, foreground }) {
+  return function mapPixel(r, g, b) {
+    const y = luma(r, g, b);
+    const t = clamp(y / 255, 0, 1);
+    const shaped = Math.pow(t, 1.08);
+    return [
+      Math.round(clamp(mix(background[0], foreground[0], shaped))),
+      Math.round(clamp(mix(background[1], foreground[1], shaped))),
+      Math.round(clamp(mix(background[2], foreground[2], shaped))),
+    ];
+  };
 }
 
 async function ensureBackup(filePath, backupPath) {
@@ -77,9 +122,14 @@ async function ensureBackup(filePath, backupPath) {
   }
 }
 
-async function retintFile(filename) {
+async function retintFile(filename, mapPixel) {
   const filePath = path.join(SOURCE_DIR, filename);
   const backupPath = path.join(BACKUP_DIR, filename);
+  try {
+    await fs.access(filePath);
+  } catch {
+    return { filename, skipped: true, reason: 'missing source file' };
+  }
   await ensureBackup(filePath, backupPath);
 
   const { data, info } = await sharp(backupPath)
@@ -93,30 +143,42 @@ async function retintFile(filename) {
     output[index] = r;
     output[index + 1] = g;
     output[index + 2] = b;
-    output[index + 3] = data[index + 3];
+    output[index + 3] = 255;
   }
 
   await sharp(output, {
-    raw: {
-      width: info.width,
-      height: info.height,
-      channels: 4,
-    },
+    raw: { width: info.width, height: info.height, channels: 4 },
   })
     .png({ compressionLevel: 9 })
     .toFile(filePath);
 
-  return filePath;
+  return { filename, filePath, skipped: false };
+}
+
+function rgbToHex([r, g, b]) {
+  const toHex = (v) => v.toString(16).padStart(2, '0');
+  return `#${ toHex(r) }${ toHex(g) }${ toHex(b) }`;
 }
 
 async function main() {
-  const changed = [];
+  const { background, foreground, info } = await sampleReferenceTones(REFERENCE_IMAGE);
+  console.log(`Sampled reference: ${ path.relative(ROOT, REFERENCE_IMAGE) }`);
+  console.log(`  size: ${ info.width } x ${ info.height }, opaque pixels: ${ info.totalSampled }`);
+  console.log(`  background tone: rgb(${ background.join(', ') }) ${ rgbToHex(background) }`);
+  console.log(`  foreground tone: rgb(${ foreground.join(', ') }) ${ rgbToHex(foreground) }`);
+
+  const mapPixel = buildPixelMapper({ background, foreground });
+  const results = [];
   for (const filename of TARGET_FILES) {
-    changed.push(await retintFile(filename));
+    results.push(await retintFile(filename, mapPixel));
   }
-  console.log(`Retinted ${ changed.length } specimen infographic images.`);
-  changed.forEach((filePath) => console.log(path.relative(ROOT, filePath)));
-  console.log(`Warm originals are backed up in ${ path.relative(ROOT, BACKUP_DIR) }.`);
+
+  const applied = results.filter((r) => !r.skipped);
+  const skipped = results.filter((r) => r.skipped);
+  console.log(`\nRetinted ${ applied.length } / ${ TARGET_FILES.length } files.`);
+  applied.forEach((r) => console.log(`  ok ${ path.relative(ROOT, r.filePath) }`));
+  skipped.forEach((r) => console.log(`  - skipped ${ r.filename } (${ r.reason })`));
+  console.log(`\nOriginals are backed up in ${ path.relative(ROOT, BACKUP_DIR) }.`);
 }
 
 main().catch((error) => {

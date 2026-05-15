@@ -7,7 +7,7 @@ Target folder: `/public/images/hirst/specimen-infographic/`
 ## Shared Art Direction
 
 - Format: PNG, 1254 x 1254 px, RGB, black background baked in.
-- Palette: use `src/styles/themes/tokens.js`: `TOKENS.bg.page`, `TOKENS.text.onDark`, `TOKENS.accent.brand`, and `TOKENS.accent.brandLight`. Avoid warm ivory, cream, sepia, green, or beige drift.
+- Palette: use `src/styles/themes/tokens.js`: `TOKENS.bg.dark`, `TOKENS.text.onDark`, `TOKENS.accent.brand`, and `TOKENS.accent.brandLight`. Avoid warm ivory, cream, sepia, green, or beige drift.
 - Style: clinical grotesque monoline engraving, taxonomic museum plate, surgical annotation, specimen-count infographic, measured symmetry, quiet archival unease.
 - Line handling: thin continuous strokes, sharp joins, etched cross-hatching only where it supports form; no broad filled shapes beyond the black background.
 - Composition: leave a central read and enough negative space for overlaid numeric counts, labels, or UI copy; avoid dense texture behind likely text zones.

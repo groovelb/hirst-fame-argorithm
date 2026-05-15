@@ -4,6 +4,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useLocale } from '../../i18n';
+import { TOKENS } from '../../styles/themes/tokens.js';
 import { SpecimenDetailModal } from './SpecimenDetailModal.jsx';
 
 const IMAGE_BASE = '/images/hirst/specimen-infographic';
@@ -179,10 +180,11 @@ function SpeciesCard({ species, locale, onOpen }) {
  *
  * Props:
  * @param {Object} bioData - bio-specimen JSON [Required]
+ * @param {Object} worksData - hirst_works.json (모달의 연관 작품 이미지용) [Optional]
  * @param {number} width - 섹션 너비(px) [Required]
  * @param {number} viewportHeight - 섹션 높이(px) [Required]
  */
-function SpecimenInfographicSection({ bioData, width, viewportHeight }) {
+function SpecimenInfographicSection({ bioData, worksData, width, viewportHeight }) {
   const { locale, localized } = useLocale();
   const [selected, setSelected] = useState(null);
 
@@ -215,8 +217,8 @@ function SpecimenInfographicSection({ bioData, width, viewportHeight }) {
         position: 'relative',
         width,
         minHeight: viewportHeight,
-        backgroundColor: 'background.default',
-        color: 'text.primary',
+        backgroundColor: TOKENS.bg.dark,
+        color: TOKENS.text.onDark,
         display: 'flex',
         flexDirection: 'column',
         px: { xs: 4, md: 7, lg: 10 },
@@ -289,7 +291,7 @@ function SpecimenInfographicSection({ bioData, width, viewportHeight }) {
 
       <Grid
         container
-        spacing={ { xs: 1.5, md: 2, lg: 2.5 } }
+        spacing={ { xs: 3, md: 4, lg: 5 } }
         sx={ { flex: 1, minHeight: 0 } }
       >
         { data.species.map((sp) => (
@@ -308,6 +310,7 @@ function SpecimenInfographicSection({ bioData, width, viewportHeight }) {
         onClose={ () => setSelected(null) }
         species={ selected }
         artworks={ bioData?.artworks ?? [] }
+        worksData={ worksData?.works ?? worksData ?? [] }
       />
     </Box>
   );

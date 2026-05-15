@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useLocale } from '../../i18n';
+import { TOKENS } from '../../styles/themes/tokens.js';
 import { ColorDonutChart } from './ColorDonutChart.jsx';
 import { ColorDetailModal } from './ColorDetailModal.jsx';
 import { TimelineAxis } from './TimelineAxis.jsx';
@@ -321,7 +322,7 @@ function TimelineCanvas({
         width: totalWidth,
         height: viewportHeight,
         flexShrink: 0,
-        backgroundColor: 'background.default',
+        backgroundColor: TOKENS.bg.dark,
         /** CSS containment — 자식 transform/opacity 변경이 외부로 invalidation 누수
             못하게 차단. paint도 이 박스 내부로 클립. */
         contain: 'layout paint',
@@ -429,11 +430,13 @@ function TimelineCanvas({
               </Box>
             );
           }) }
-          {/* 축 라벨 — Google Trends 출처 명시 */}
+          {/* 축 라벨 — Google Trends 출처 명시.
+              100 tick (TOP_PADDING = 200) 바로 위에 위치. LanguageToggle(fixed)에 가리지 않도록
+              viewport 최상단 대신 차트 영역 안쪽 배치. */}
           <Box
             sx={ {
               position: 'absolute',
-              top: 8,
+              top: 156,
               right: 8,
               display: 'flex',
               flexDirection: 'column',

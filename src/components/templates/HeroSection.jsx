@@ -70,9 +70,8 @@ function HeroSection({ onHeroProgress }) {
   const damienY = useTransform(scrollYProgress, [0, 0.5, 1], ['0vh', '75vh', '75vh']);
 
   /**
-   * 히어로 타이틀이 보이는 구간(progress 0 → 0.5) 동안 배경 영상을 70% → 100%로 확대.
-   * sticky video Box에 직접 transform을 걸면 sticky positioning이 깨지므로
-   * 내부 wrapper(motion.div)에 scale을 적용한다.
+   * 영상 70% → 100% scale zoom-in (히어로 타이틀 진행 구간 0~0.5 동안).
+   * motion.div wrapper에 적용 + isolation: isolate로 stacking 격리 → 외부 hero typo 영향 없음.
    */
   const videoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.7, 1, 1]);
 
@@ -88,6 +87,57 @@ function HeroSection({ onHeroProgress }) {
         position: 'relative',
       }}
     >
+      {/* SVG filter — 텍스트(검정) 위에 흰 dirt를 간헐적으로 합성.
+          1) feTurbulence — 그레이스케일 노이즈 생성
+          2) feColorMatrix — RGB를 흰(1,1,1)로 고정 + 휘도가 매우 높은 픽셀만 alpha 살림 (threshold)
+                              → 간헐적 흰 dot 결과
+          3) feComposite (in) — 흰 dot을 텍스트 모양 안에만 클립 (텍스트 밖으로 안 튐)
+          4) feMerge — 원본 텍스트 위에 dot overlay → 검정 영역 보존 + 간헐적 흰 dirt */}
+      <svg
+        aria-hidden="true"
+        width="0"
+        height="0"
+        style={{ position: 'absolute' }}
+      >
+        <defs>
+          <filter
+            id="hero-dirt"
+            x="-5%"
+            y="-5%"
+            width="110%"
+            height="110%"
+            colorInterpolationFilters="sRGB"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.75"
+              numOctaves="2"
+              seed="5"
+              result="noise"
+            />
+            <feColorMatrix
+              in="noise"
+              type="matrix"
+              values="0 0 0 0 1
+                      0 0 0 0 1
+                      0 0 0 0 1
+                      0.4 0.4 0.4 0 -1.05"
+              result="whiteDots"
+            />
+            <feComposite
+              in="whiteDots"
+              in2="SourceGraphic"
+              operator="in"
+              result="dirtOnText"
+            />
+            <feMerge>
+              <feMergeNode in="SourceGraphic"/>
+              <feMergeNode in="dirtOnText"/>
+            </feMerge>
+          </filter>
+        </defs>
+      </svg>
+
       {/* Sticky video — viewport 크기 100vh × 100vw stuck. 히어로 콘텐츠 구간 동안 유지. */}
       <Box
         sx={{
@@ -99,18 +149,29 @@ function HeroSection({ onHeroProgress }) {
           overflow: 'hidden',
         }}
       >
-        {/* scale은 VideoScrubbing 내부 video element 자체에만 적용된다.
-            wrapper element 없음 → sticky Box 내 어떤 sibling/외부 element에도 transform 영향 없음. */}
-        <VideoScrubbing
-          src={heroVideoSrc}
-          progress={scrollYProgress}
-          scale={videoScale}
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
+        {/* motion.div wrapper: scale은 이 wrapper에만 적용 — VideoScrubbing 내부 element는
+            건드리지 않아 motion.video 변환으로 인한 fetchpriority warning 등 부수효과 회피.
+            isolation: isolate로 stacking 격리 → hero typo/PROLOGUE에 영향 없음. */}
+        <motion.div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            scale: videoScale,
+            transformOrigin: 'center center',
+            willChange: 'transform',
+            isolation: 'isolate',
           }}
-        />
+        >
+          <VideoScrubbing
+            src={heroVideoSrc}
+            progress={scrollYProgress}
+            sx={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </motion.div>
       </Box>
 
       {/* Hero 타이포 — 자연 스크롤 (fade/transform 없음).
@@ -138,6 +199,7 @@ function HeroSection({ onHeroProgress }) {
             left: '3vw',
             right: '3vw',
             height: '18%',
+            filter: 'url(#hero-dirt)',
           }}
         >
           <HeroTypeBlock
@@ -158,6 +220,7 @@ function HeroSection({ onHeroProgress }) {
             left: '3vw',
             right: '3vw',
             height: '18%',
+            filter: 'url(#hero-dirt)',
           }}
         >
           <HeroTypeBlock
@@ -199,7 +262,7 @@ function HeroSection({ onHeroProgress }) {
       >
         <BridgeSection
           section={BRIDGE_SECTIONS[0]}
-          color={TOKENS.text.onLight}
+          color={TOKENS.text.onDark}
           layout="grid"
         />
       </Box>
