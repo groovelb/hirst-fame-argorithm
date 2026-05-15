@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "extract-colors": "node scripts/extract-rothko-colors.mjs"
+    "extract-colors": "node scripts/extract-rothko-colors.mjs",
+    "generate:hero-motion": "node scripts/generate-hirst-kling-motion.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -23,6 +24,7 @@
     "@react-three/fiber": "^9.6.1",
     "d3": "^7.9.0",
     "framer-motion": "^12.31.1",
+    "lenis": "^1.3.23",
     "lucide-react": "^1.7.0",
     "pixelarticons": "^1.8.1",
     "react": "^19.2.0",
@@ -33,6 +35,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.3",
     "@eslint/js": "^9.39.1",
+    "@fal-ai/client": "^1.10.1",
     "@rollup/rollup-darwin-arm64": "^4.60.3",
     "@storybook/addon-a11y": "^10.1.0",
     "@storybook/addon-docs": "^10.1.0",

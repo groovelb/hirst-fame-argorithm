@@ -4,18 +4,20 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { HorizontalScrollContainer } from '../content-transition/HorizontalScrollContainer.jsx';
 import { BandLegend } from './BandLegend.jsx';
+import { PeakHoverOverlay } from './PeakHoverOverlay.jsx';
 import { TimelineCanvas } from './TimelineCanvas.jsx';
 import { TimelineMinimap } from './TimelineMinimap.jsx';
 import { useTimelineLayout } from './useTimelineLayout.js';
+import { WorkFocusOverlay } from './WorkFocusOverlay.jsx';
 
 /**
- * WorldviewTimeline — 세계관 5밴드 기반 신규 타임라인.
+ * WorldviewTimeline — 세계관 5밴드 기반 타임라인.
  *
- * 기존 RothkoTimeline과 달리:
- * - 작품의 y를 worldview 밴드에 따라 분산하지 않고 모두 화면 수직 중앙으로 통일.
- * - 좌측 밴드 라벨(이미지+텍스트)을 제거하고, 동일한 BAND legend를 하단으로 이동.
- * - 가로 스크롤로 viewport 중앙에 도달한 focus 작품의 band를 하단 legend에서 강조,
- *   나머지 항목은 dim. 등장 fade-in / Voronoi focus 동작은 기존 컴포넌트 재사용.
+ * Focus 관련 인터랙션은 모두 제거됨:
+ *  - 작품 hover/active 상태 없음
+ *  - viewport 중앙 작품의 band 강조 없음
+ *  - BandLegend는 정적 표시
+ * 유지되는 동작: 작품 등장(entry) fade-in, chunk 가상화, 가로 스크롤.
  *
  * Props:
  * @param {Object} worksData - works JSON [Required]
@@ -24,7 +26,7 @@ import { useTimelineLayout } from './useTimelineLayout.js';
  * @param {Object} trendData - trend JSON [Optional]
  * @param {number} pxPerYear - 연도당 픽셀 [Optional, 기본값: 250]
  * @param {string} backgroundColor - 배경색 [Optional]
- * @param {boolean} hideMinimap - 미니맵 숨김 [Optional, 기본값: false]
+ * @param {boolean} hideMinimap - 미니맵/legend 숨김 [Optional, 기본값: false]
  *
  * Example usage:
  * <WorldviewTimeline worksData={ works } eventsData={ events } trendData={ trend } />
@@ -37,6 +39,7 @@ function WorldviewTimeline({
   pxPerYear = 250,
   backgroundColor,
   hideMinimap = false,
+  onModalStateChange,
 }) {
   const [viewportWidth, setViewportWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1920,
@@ -44,8 +47,9 @@ function WorldviewTimeline({
   const [viewportHeight, setViewportHeight] = useState(
     typeof window !== 'undefined' ? window.innerHeight : 800,
   );
-  const [activeId, setActiveId] = useState(null);
-  const [activeBandId, setActiveBandId] = useState(null);
+  const [hoveredId, setHoveredId] = useState(null);   /** 작품 dim 효과 전용 */
+  const [activeId, setActiveId] = useState(null);     /** modal 열림 — 작품 */
+  const [activePeakId, setActivePeakId] = useState(null); /** modal 열림 — peak */
 
   const theme = useTheme();
   const isBelowSm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -55,9 +59,7 @@ function WorldviewTimeline({
   const responsivePxPerYear = isBelowSm ? 120 : isBelowMd ? 160 : isBelowLg ? 200 : pxPerYear;
   const nodeScale = isBelowSm ? 0.53 : isBelowMd ? 0.67 : isBelowLg ? 0.83 : 1.0;
 
-  /** 작품 중앙 y는 화면의 45%, 축은 62% — 하단 legend 공간 확보. */
   const axisRatio = 0.62;
-  const uniformWorkY = viewportHeight * 0.45;
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,26 +79,20 @@ function WorldviewTimeline({
     axisRatio,
   });
 
-  /** 작품 y 통일 — 밴드별 분산 폐기, 모두 화면 중앙. band 정보는 legend 강조용으로 유지. */
+  const uniformWorkY = viewportHeight * 0.45;
+
   const flattenedWorks = useMemo(
     () => layout.positionedWorks.map((w) => ({ ...w, y: uniformWorkY })),
     [layout.positionedWorks, uniformWorkY],
   );
 
-  /** 가로 스크롤 진행 → viewport 중앙 X */
   const scrollProgress = useMotionValue(0);
   const scrollDistance = Math.max(0, layout.totalWidth - viewportWidth);
   const scrollOffset = useTransform(scrollProgress, [0, 1], [0, scrollDistance]);
-  const viewportCenterX = useTransform(
-    scrollProgress,
-    (p) => p * scrollDistance + viewportWidth / 2,
-  );
 
-  /** 가상화 — 가로 스크롤 위치 기준 viewport 폭 단위 chunk로 나눠
-      현재 chunk ± BUFFER 안의 작품만 mount. 화면 밖 노드의 motion 평가/렌더 비용 제거.
-      fade-in 거리(=halfViewport)보다 BUFFER가 커야 자연스러운 등장 보장. */
-  const CHUNK_WIDTH_FACTOR = 2; /** chunk 폭 = viewportWidth × factor (chunk 전환 빈도 낮춤) */
-  const BUFFER = 1;             /** ±1 chunk buffer */
+  /** 가상화 — chunk 기반. */
+  const CHUNK_WIDTH_FACTOR = 2;
+  const BUFFER = 1;
   const chunkWidth = Math.max(1, viewportWidth * CHUNK_WIDTH_FACTOR);
   const chunkCount = Math.max(1, Math.ceil(layout.totalWidth / chunkWidth));
   const [visibleChunkIdx, setVisibleChunkIdx] = useState(0);
@@ -110,45 +106,66 @@ function WorldviewTimeline({
     return flattenedWorks.filter((w) => w.x >= minX && w.x <= maxX);
   }, [flattenedWorks, visibleChunkIdx, chunkWidth]);
 
-  /** active band 추적 — viewport 중앙에서 가장 가까운 작품의 band.
-      x 정렬 후 binary search로 O(log n). band 전환 시에만 setState. */
-  const sortedByX = useMemo(() => {
-    const arr = [...flattenedWorks].sort((a, b) => a.x - b.x);
-    return {
-      xs: arr.map((w) => w.x),
-      bands: arr.map((w) => w.band),
-    };
-  }, [flattenedWorks]);
-
-  useMotionValueEvent(viewportCenterX, 'change', (cx) => {
-    const { xs, bands } = sortedByX;
-    if (xs.length === 0) return;
-    let lo = 0;
-    let hi = xs.length - 1;
-    while (lo < hi) {
-      const mid = (lo + hi) >> 1;
-      if (xs[mid] < cx) lo = mid + 1;
-      else hi = mid;
-    }
-    const candidates = [];
-    if (lo > 0) candidates.push(lo - 1);
-    candidates.push(lo);
-    let bestIdx = candidates[0];
-    let bestD = Math.abs(xs[bestIdx] - cx);
-    for (let i = 1; i < candidates.length; i++) {
-      const d = Math.abs(xs[candidates[i]] - cx);
-      if (d < bestD) { bestD = d; bestIdx = candidates[i]; }
-    }
-    const nextBand = bands[bestIdx];
-    setActiveBandId((prev) => (prev === nextBand ? prev : nextBand));
-  });
-
   const handleScrollProgress = useCallback(
     (v) => { scrollProgress.set(v); },
     [scrollProgress],
   );
-  const handleItemHover = useCallback((id) => setActiveId(id), []);
-  const handleItemLeave = useCallback(() => setActiveId(null), []);
+  /** Hover는 dim 전용. Click이 modal을 연다. */
+  const handleItemHover = useCallback((id) => setHoveredId(id), []);
+  const handleItemLeave = useCallback(() => setHoveredId(null), []);
+  const handleItemClick = useCallback((id) => setActiveId(id), []);
+  const handleItemModalClose = useCallback(() => setActiveId(null), []);
+  const activeWork = useMemo(
+    () => (activeId ? flattenedWorks.find((w) => w.id === activeId) ?? null : null),
+    [activeId, flattenedWorks],
+  );
+  /** 하단 BandLegend 강조: hover 또는 click 상태의 작품 band를 반영 */
+  const highlightedWorkId = activeId ?? hoveredId;
+  const highlightedWork = useMemo(
+    () => (highlightedWorkId
+      ? flattenedWorks.find((w) => w.id === highlightedWorkId) ?? null
+      : null),
+    [highlightedWorkId, flattenedWorks],
+  );
+
+  /** Peak hover — TimelineTrendBackground는 peak object(date/value/trigger 등)를 넘긴다.
+      data root: { trendData: { peaks, series }, events: [...] }.
+      peak.eventId(이 워크플로의 출력)로 top-level events 배열에서 풀 detail을 lookup. */
+  const eventById = useMemo(() => {
+    const map = new Map();
+    (trendData?.events ?? []).forEach((e) => map.set(e.id, e));
+    return map;
+  }, [trendData]);
+  const peakEventIdByDate = useMemo(() => {
+    const map = new Map();
+    (trendData?.trendData?.peaks ?? []).forEach((p) => {
+      if (p.eventId) map.set(p.date, p.eventId);
+    });
+    return map;
+  }, [trendData]);
+  /** Peak hover/leave는 현재 dim 대상 없음 → no-op. Click에서만 modal. */
+  const handlePeakHover = useCallback(() => {}, []);
+  const handlePeakLeave = useCallback(() => {}, []);
+  const handlePeakClick = useCallback((peakObj) => {
+    const eid = peakEventIdByDate.get(peakObj?.date);
+    if (eid) setActivePeakId(eid);
+  }, [peakEventIdByDate]);
+  const handlePeakModalClose = useCallback(() => setActivePeakId(null), []);
+  const activePeakEvent = activePeakId ? eventById.get(activePeakId) ?? null : null;
+  /** modal(작품 or peak) 열림 상태 — Minimap·BandLegend·외부 토글 등 숨김 트리거 */
+  const isModalOpen = !!(activeId || activePeakId);
+
+  /** 부모(LandingPage 등)가 LanguageToggle 같은 외부 오버레이를 같이 숨길 수 있게 신호. */
+  useEffect(() => {
+    onModalStateChange?.(isModalOpen);
+  }, [isModalOpen, onModalStateChange]);
+  const getEventLabel = useCallback(
+    (id) => {
+      const ev = eventById.get(id);
+      return ev?.label || ev?.title || id;
+    },
+    [eventById],
+  );
   const handleMinimapNavigate = useCallback(
     (targetProgress) => {
       const targetY = targetProgress * scrollDistance;
@@ -159,7 +176,7 @@ function WorldviewTimeline({
 
   return (
     <>
-      { !hideMinimap && (
+      { !hideMinimap && !isModalOpen && (
         <TimelineMinimap
           positionedWorks={ flattenedWorks }
           totalWidth={ layout.totalWidth }
@@ -183,9 +200,13 @@ function WorldviewTimeline({
           totalWidth={ layout.totalWidth }
           axisY={ layout.axisY }
           viewportHeight={ viewportHeight }
-          activeId={ activeId }
+          activeId={ highlightedWorkId }
           onItemHover={ handleItemHover }
           onItemLeave={ handleItemLeave }
+          onItemClick={ handleItemClick }
+          onPeakHover={ handlePeakHover }
+          onPeakLeave={ handlePeakLeave }
+          onPeakClick={ handlePeakClick }
           scrollOffset={ scrollOffset }
           nodeScale={ nodeScale }
           bioData={ bioData }
@@ -196,7 +217,15 @@ function WorldviewTimeline({
         />
       </HorizontalScrollContainer>
 
-      { !hideMinimap && <BandLegend activeBandId={ activeBandId } /> }
+      { !hideMinimap && !isModalOpen && (
+        <BandLegend activeBandId={ highlightedWork?.band ?? null } />
+      ) }
+      <WorkFocusOverlay activeWork={ activeWork } onClose={ handleItemModalClose } />
+      <PeakHoverOverlay
+        activeEvent={ activePeakEvent }
+        getEventLabel={ getEventLabel }
+        onClose={ handlePeakModalClose }
+      />
     </>
   );
 }

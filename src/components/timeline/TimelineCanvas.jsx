@@ -6,7 +6,7 @@ import { useLocale } from '../../i18n';
 import { ColorDonutChart } from './ColorDonutChart.jsx';
 import { ColorDetailModal } from './ColorDetailModal.jsx';
 import { TimelineAxis } from './TimelineAxis.jsx';
-import { BRAND_DISPLAY, BRAND_LABEL, PRODUCT } from './typography.js';
+import { BRAND_DISPLAY, PRODUCT } from './typography.js';
 import { TimelineEventItem } from './TimelineEventItem.jsx';
 import { TimelineWorkItem } from './TimelineWorkItem.jsx';
 import { TimelineTrendBackground } from './TimelineTrendBackground.jsx';
@@ -257,6 +257,10 @@ function TimelineCanvas({
   activeId = null,
   onItemHover,
   onItemLeave,
+  onItemClick,
+  onPeakHover,
+  onPeakLeave,
+  onPeakClick,
   scrollOffset,
   nodeScale = 1,
   bioData,
@@ -265,6 +269,8 @@ function TimelineCanvas({
   scrollProgress,
   viewportWidth,
 }) {
+  /** focus/hover 인터랙션 제거됨. activeId/activeWork는 더 이상 시각 동작에 영향 X
+      (panel 비활성 상태에선 아예 사용되지 않음). */
   const activeWork = activeId
     ? positionedWorks.find((w) => w.id === activeId)
     : null;
@@ -295,9 +301,8 @@ function TimelineCanvas({
   );
   const selectedBioArtworks = bioArtworksByCategory[selectedBioCategory] ?? [];
 
-  /** viewport 중앙의 canvas X 좌표 — 작품 focus scale 계산용.
-      scrollProgress(0~1) × scrollDistance + viewportWidth/2 = 화면 중앙 좌표.
-      scrollProgress 미주입 시 fallback motion value 사용. */
+  /** viewport 중앙 canvas X 좌표 — 이제 작품의 entry fade-in trigger용으로만 사용.
+      focus scale 로직(Voronoi)은 제거됨. */
   const fallbackProgress = useMotionValue(0);
   const sourceProgress = scrollProgress ?? fallbackProgress;
   const scrollDistance = Math.max(0, totalWidth - (viewportWidth ?? 0));
@@ -306,22 +311,8 @@ function TimelineCanvas({
     sourceProgress,
     (p) => p * scrollDistance + halfViewport,
   );
-  /** focus falloff 반경 (legacy, 현재 미사용 — Voronoi 경계 방식으로 전환) */
+  /** entry fade-in 시작 반경 (viewport 우측 끝) */
   const focusRadius = Math.max(halfViewport, 1);
-
-  /** Voronoi 경계용 — x 기준 정렬된 sibling 좌표 lookup.
-      각 work에 대해 좌·우 인접 작품의 x를 O(1) 조회. */
-  const sortedXById = useMemo(() => {
-    const sorted = [...positionedWorks].sort((a, b) => a.x - b.x);
-    const map = new Map();
-    sorted.forEach((w, i) => {
-      map.set(w.id, {
-        prevX: i > 0 ? sorted[i - 1].x : null,
-        nextX: i < sorted.length - 1 ? sorted[i + 1].x : null,
-      });
-    });
-    return map;
-  }, [positionedWorks]);
 
   return (
     <Box
@@ -331,6 +322,9 @@ function TimelineCanvas({
         height: viewportHeight,
         flexShrink: 0,
         backgroundColor: 'background.default',
+        /** CSS containment — 자식 transform/opacity 변경이 외부로 invalidation 누수
+            못하게 차단. paint도 이 박스 내부로 클립. */
+        contain: 'layout paint',
       } }
     >
       {/* 좌상단 고정 타이틀 — 그로테스크 high-contrast serif, viewport-fixed */}
@@ -364,7 +358,7 @@ function TimelineCanvas({
           sx={ {
             display: 'block',
             mt: 1.5,
-            fontFamily: BRAND_LABEL,
+            fontFamily: PRODUCT,
             fontSize: '0.78rem',
             letterSpacing: '0.32em',
             textTransform: 'uppercase',
@@ -435,26 +429,48 @@ function TimelineCanvas({
               </Box>
             );
           }) }
-          {/* 축 라벨 — search index */}
-          <Typography
-            variant="caption"
+          {/* 축 라벨 — Google Trends 출처 명시 */}
+          <Box
             sx={ {
               position: 'absolute',
               top: 8,
               right: 8,
-              fontFamily: PRODUCT,
-              fontSize: '0.6rem',
-              fontWeight: 600,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: 'text.disabled',
-              opacity: 0.7,
-              writingMode: 'horizontal-tb',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              gap: 0.25,
               userSelect: 'none',
             } }
           >
-            Search Index
-          </Typography>
+            <Typography
+              component="span"
+              sx={ {
+                fontFamily: PRODUCT,
+                fontSize: '0.64rem',
+                fontWeight: 700,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: 'text.secondary',
+                lineHeight: 1.2,
+              } }
+            >
+              Google Trends
+            </Typography>
+            <Typography
+              component="span"
+              sx={ {
+                fontFamily: PRODUCT,
+                fontSize: '0.56rem',
+                fontWeight: 500,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                color: 'text.disabled',
+                lineHeight: 1.2,
+              } }
+            >
+              Search Index · 0–100
+            </Typography>
+          </Box>
         </motion.div>
       ) }
 
@@ -469,6 +485,9 @@ function TimelineCanvas({
           yearToX={ yearToX }
           scrollProgress={ scrollProgress }
           viewportWidth={ viewportWidth }
+          onPeakHover={ onPeakHover }
+          onPeakLeave={ onPeakLeave }
+          onPeakClick={ onPeakClick }
         />
       ) }
 
@@ -483,26 +502,21 @@ function TimelineCanvas({
         scrollOffset={ scrollOffset }
       />
 
-      {/* 작품 노드 (축 상단) */}
+      {/* 작품 노드 — hover 인터랙션: 활성 작품 overlay + 나머지 dim. */}
       { positionedWorks.map((work) => {
-        const neighbors = sortedXById.get(work.id);
-        const isActive = activeId === work.id;
-        const isDimmed = activeId != null && !isActive;
+        const isDimmed = activeId != null && activeId !== work.id;
         return (
           <TimelineWorkItem
             key={ work.id }
             work={ work }
             axisY={ axisY }
-            isActive={ isActive }
-            isDimmed={ isDimmed }
             nodeScale={ nodeScale }
             viewportCenterX={ viewportCenterX }
             focusRadius={ focusRadius }
-            prevX={ neighbors?.prevX }
-            nextX={ neighbors?.nextX }
-            onMouseEnter={ () => onItemHover?.(work.id) }
-            onMouseLeave={ () => onItemLeave?.() }
-            onClick={ () => onItemHover?.(work.id) }
+            isDimmed={ isDimmed }
+            onMouseEnter={ onItemHover }
+            onMouseLeave={ onItemLeave }
+            onClick={ onItemClick }
           />
         );
       }) }
@@ -784,7 +798,7 @@ function TimelineCanvas({
               )) : (
                 <Typography
                   variant="body2"
-                  sx={ { color: 'text.disabled', fontStyle: 'italic', pt: 2 } }
+                  sx={ { color: 'text.disabled', pt: 2 } }
                 >
                   { localized({ ko: '해당 카테고리 작품 없음', en: 'No works in this category' }) }
                 </Typography>

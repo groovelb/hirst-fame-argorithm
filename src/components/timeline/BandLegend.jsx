@@ -1,36 +1,14 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useLocale } from '../../i18n';
-import { BRAND_LABEL } from './typography.js';
-
-/** 5밴드 표시 순서 — 좌→우 */
-const BAND_ORDER = ['MORTALITY', 'VANITAS', 'RITUAL', 'SYSTEM', 'TRANSCENDENCE'];
-
-/** 밴드별 이미지 — TimelineAxis.jsx와 동일 자산 사용 */
-const BAND_IMAGE_SRC = {
-  TRANSCENDENCE: '/images/hirst/grotesque-bitmap/transcendence-sacred-heart.png',
-  SYSTEM: '/images/hirst/grotesque-bitmap/system-medicine-cabinet.png',
-  RITUAL: '/images/hirst/grotesque-bitmap/ritual-vanitas-burning-money.png',
-  VANITAS: '/images/hirst/grotesque-bitmap/ritual-vanitas-burning-money.png',
-  MORTALITY: '/images/hirst/grotesque-bitmap/mortality-skull.png',
-};
-
-const BAND_LOCALE_KEYS = {
-  TRANSCENDENCE: 'band.transcendence',
-  SYSTEM: 'band.system',
-  RITUAL: 'band.ritual',
-  VANITAS: 'band.vanitas',
-  MORTALITY: 'band.mortality',
-};
+import { BAND_IMAGE_SRC, BAND_LABEL_EN, BAND_ORDER } from './bandMeta.js';
+import { PRODUCT } from './typography.js';
 
 /**
  * BandLegend — 화면 하단 고정 5밴드 범례.
  *
- * WorldviewTimeline에서 모든 작품 y를 화면 중앙으로 통일한 뒤,
- * 좌측에 있던 카테고리 라벨을 이곳으로 옮긴 컴포넌트.
- * 가로 스크롤로 viewport 중앙에 도달한 작품의 band가 `activeBandId`로 들어오면
- * 해당 항목만 강조하고 나머지는 dim한다.
+ * activeBandId 주어지면 해당 밴드를 강조(밝게 + 위로 살짝 부상)하고
+ * 나머지는 dim(grayscale + opacity↓) 처리. 영어 라벨 고정, border 없음.
  *
  * Props:
  * @param {string|null} activeBandId - 강조할 밴드 ID [Optional, 기본값: null]
@@ -39,8 +17,6 @@ const BAND_LOCALE_KEYS = {
  * <BandLegend activeBandId={ 'MORTALITY' } />
  */
 function BandLegend({ activeBandId = null }) {
-  const { t } = useLocale();
-
   return (
     <Box
       sx={ {
@@ -56,18 +32,15 @@ function BandLegend({ activeBandId = null }) {
         py: { xs: 1, md: 1.5 },
         backgroundColor: 'rgba(10, 10, 10, 0.55)',
         backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255,255,255,0.06)',
         borderRadius: 1,
         pointerEvents: 'none',
         userSelect: 'none',
       } }
     >
       { BAND_ORDER.map((bandId) => {
+        const imageSrc = BAND_IMAGE_SRC[bandId];
         const isActive = activeBandId === bandId;
         const isDimmed = activeBandId != null && !isActive;
-        const imageSrc = BAND_IMAGE_SRC[bandId];
-        const localeKey = BAND_LOCALE_KEYS[bandId];
-
         return (
           <Box
             key={ bandId }
@@ -76,10 +49,10 @@ function BandLegend({ activeBandId = null }) {
               flexDirection: 'column',
               alignItems: 'center',
               gap: 0.5,
-              opacity: isDimmed ? 0.28 : 1,
+              opacity: isDimmed ? 0.32 : 1,
               transform: isActive ? 'translateY(-4px)' : 'translateY(0)',
-              transition: 'opacity 0.32s ease, transform 0.32s ease, filter 0.32s ease',
-              filter: isDimmed ? 'grayscale(0.6)' : 'none',
+              filter: isDimmed ? 'grayscale(0.7)' : 'none',
+              transition: 'opacity 0.28s ease, transform 0.28s ease, filter 0.28s ease',
             } }
           >
             { imageSrc && (
@@ -99,17 +72,17 @@ function BandLegend({ activeBandId = null }) {
             <Typography
               variant="caption"
               sx={ {
-                fontFamily: BRAND_LABEL,
+                fontFamily: PRODUCT,
                 fontSize: { xs: '0.55rem', md: '0.62rem' },
                 fontWeight: 600,
                 letterSpacing: '0.16em',
                 textTransform: 'uppercase',
-                color: isActive ? 'text.primary' : 'rgba(246, 246, 236, 0.48)',
+                color: isActive ? 'text.primary' : 'rgba(246, 246, 236, 0.72)',
                 whiteSpace: 'nowrap',
-                transition: 'color 0.32s ease',
+                transition: 'color 0.28s ease',
               } }
             >
-              { t(localeKey) || bandId }
+              { BAND_LABEL_EN[bandId] }
             </Typography>
           </Box>
         );

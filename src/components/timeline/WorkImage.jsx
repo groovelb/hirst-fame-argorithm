@@ -38,6 +38,9 @@ function WorkImage({
         src={ currentSrc }
         alt={ alt ?? work.title }
         loading={ loading }
+        decoding="async"
+        fetchpriority="low"
+        draggable={ false }
         onError={ () => setFailedSrc(currentSrc) }
         sx={ sx }
       />

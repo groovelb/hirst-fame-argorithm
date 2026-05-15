@@ -1,0 +1,18 @@
+{
+  "model": "fal-ai/kling-video/o1/standard/image-to-video",
+  "createdAt": "2026-05-14T18:02:24.824Z",
+  "clips": [
+    {
+      "name": "03-mouth-to-hirst-portrait",
+      "requestId": "019e27a5-6a0f-7ce2-b299-ff2a0624ee8a",
+      "duration": "5",
+      "prompt": "Use @Image1 as the exact first frame and @Image2 as the exact last frame.\n\nCreate a smooth cinematic transition from inside the shark's open mouth into a black engraved portrait. The camera pushes forward into the dark hollow of the shark mouth. The teeth and wet gums start large at the frame edges, then slide outward and disappear as the viewer moves deeper into the black throat. The whole screen gradually becomes deep black, not by a hard cut, but through natural darkness inside the mouth.\n\nInside the darkness, fine white etched lines begin to appear slowly like scratches emerging from black paper. These lines coalesce into the exact monochrome portrait from the final image: centered face, black knit cap, intense eyes, shoulders fading into black. The portrait should emerge from the darkness as if drawn by light, first subtle facial contours and eyes, then the cap texture, skin hatching, beard, and clothing lines.\n\nKeep the motion continuous and atmospheric. Preserve the first frame's shark mouth scale, teeth placement, wet preserved texture, and green-black color at the beginning. Preserve the final frame's centered portrait composition, black background, high-contrast white etched line style, serious expression, knit cap, and shoulders fading into black. No extra faces, no text, no logos, no watermark, no sudden cuts, no camera shake, no cartoon effects. The transition should feel like entering the shark mouth and finding the portrait inside the darkness.",
+      "startImage": "generated-images/hero-keyframes-v2/05_mouth_extreme_closeup.png",
+      "endImage": "generated-images/hero-keyframes-v2/06_hirst_etching_portrait.png",
+      "startImageUrl": "https://v3b.fal.media/files/b/0a9a3490/8HaKYz_G-GPaWjckScZpL_05_mouth_extreme_closeup.png",
+      "endImageUrl": "https://v3b.fal.media/files/b/0a9a3491/Mwv8XazALAmccC5if8ufg_06_hirst_etching_portrait.png",
+      "videoUrl": "https://v3b.fal.media/files/b/0a9a349d/b32Qe5H_w8qIOTEhS3Eyq_output.mp4",
+      "outputPath": "generated-videos/hero-motion-kling-o1/03-mouth-to-hirst-portrait.mp4"
+    }
+  ]
+}

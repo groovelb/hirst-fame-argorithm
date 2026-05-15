@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { BRAND_DISPLAY, PRODUCT } from './typography.js';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { PRODUCT } from './typography.js';
 
-/** search index 100 = 캔버스 상단 패딩. 상단 타이틀(Damien Hirst) 영역과 겹치지 않도록
-    충분한 여백 확보 (타이틀 영역 ≈ top 32 + 6rem 폰트 + sub 라벨 ≈ 160~170px). */
+/** search index 100 = 캔버스 상단 패딩. */
 const TOP_PADDING = 200;
-/** Catmull-Rom → Cubic Bezier 변환 tension */
 const BEZIER_TENSION = 1 / 6;
 
 function buildBezierPath(pts) {
@@ -29,17 +28,24 @@ function buildBezierPath(pts) {
 /**
  * TimelineTrendBackground — Google Trends 라인 + peak 마커
  *
- * - 라인 SVG: zIndex 0, clip-path reveal 적용 (scroll-tied)
- * - Peak 마커 SVG: zIndex 50, clip 영향 X, 항상 최상위 표시 (작품/축 위)
+ * 퍼포먼스 전략 (Compositor 친화):
+ * - 두 SVG의 폭을 viewport(=화면 폭)으로 좁힘. paint area = 19000×H → 1920×H (≈10× 감소).
+ * - 외부 wrapper: motion track의 translateX를 상쇄(`x: scrollOffset`)해 SVG를 viewport에 박음.
+ * - SVG는 overflow:hidden. 내부 `<motion.g x={negativeOffset}>`로 path 좌표를 현재 스크롤
+ *   위치만큼 평행이동해 항상 viewport 안의 영역만 paint.
+ * - 결과: GPU layer 크기 작아지고, transform-only 갱신이라 paint 발생 없음.
  *
  * Props:
- * @param {Array<[string, number]>} series - [["YYYY-MM", value], ...] [Required]
- * @param {Array<{date,value,trigger}>} peaks - peak 데이터 [Optional]
+ * @param {Array<[string, number]>} series [Required]
+ * @param {Array<{date,value,trigger}>} peaks [Optional]
  * @param {number} axisY [Required]
  * @param {number} totalWidth [Required]
  * @param {function} yearToX [Required]
- * @param {Object} scrollProgress [Optional]
+ * @param {Object} scrollProgress - framer-motion MotionValue (0~1) [Optional]
  * @param {number} viewportWidth [Optional]
+ * @param {function} onPeakHover - (peakObj) => void [Optional]
+ * @param {function} onPeakLeave - () => void [Optional]
+ * @param {function} onPeakClick - (peakObj) => void. modal 열기 [Optional]
  */
 function TimelineTrendBackground({
   series,
@@ -49,6 +55,9 @@ function TimelineTrendBackground({
   yearToX,
   scrollProgress,
   viewportWidth,
+  onPeakHover,
+  onPeakLeave,
+  onPeakClick,
 }) {
   const theme = useTheme();
 
@@ -83,9 +92,15 @@ function TimelineTrendBackground({
     });
   }, [peaks, axisY, yearToX]);
 
-  /** scroll-tied reveal 자체 제거 — 19000px SVG 두 장의 clip-path 매 프레임 보간이
-      가로 스크롤 jank의 최대 원인. 정적 SVG로 전환해 매 프레임 paint·motion 평가 0. */
-  void scrollProgress; void viewportWidth;
+  const safeViewportWidth = viewportWidth ?? 1920;
+  const scrollDistance = Math.max(0, totalWidth - safeViewportWidth);
+
+  const fallbackProgress = useMotionValue(0);
+  const effectiveProgress = scrollProgress ?? fallbackProgress;
+  /** wrapper의 +x → 트랙 translateX(-x) 보정 → viewport에 박힘. */
+  const positiveOffset = useTransform(effectiveProgress, (p) => p * scrollDistance);
+  /** inner g의 -x → totalWidth 좌표계의 path를 현재 viewport 위치로 평행이동. */
+  const negativeOffset = useTransform(effectiveProgress, (p) => -p * scrollDistance);
 
   if (!path) return null;
 
@@ -93,140 +108,131 @@ function TimelineTrendBackground({
     ? 'rgba(255, 255, 255, 0.95)'
     : 'rgba(0, 0, 0, 0.85)';
 
+  /** 공통 wrapper style — viewport-fixed, transform-only 갱신, GPU layer 고정.
+      wrapper 자체는 pointer-events 차단 (작품 hover 방해 X). peak <g>에서만 auto. */
+  const wrapperBase = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: safeViewportWidth,
+    pointerEvents: 'none',
+    willChange: 'transform',
+  };
+  const hasPeakHover = typeof onPeakHover === 'function';
+  const hasPeakClick = typeof onPeakClick === 'function';
+  const peakInteractive = hasPeakHover || hasPeakClick;
+
   return (
     <>
-      {/* 라인 SVG — 정적. clip-path/motion 제거. */}
-      <svg
-        width={ totalWidth }
-        height={ axisY + 1 }
+      {/* 라인 wrapper — zIndex 0 */}
+      <motion.div
         style={ {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          pointerEvents: 'none',
+          ...wrapperBase,
+          height: axisY + 1,
           zIndex: 0,
-          overflow: 'visible',
+          x: positiveOffset,
         } }
         aria-hidden="true"
       >
-        <path
-          d={ path }
-          fill="none"
-          stroke={ strokeColor }
-          strokeWidth={ 1.5 }
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        />
-      </svg>
+        <svg
+          width={ safeViewportWidth }
+          height={ axisY + 1 }
+          style={ { overflow: 'hidden', display: 'block' } }
+        >
+          <motion.g style={ { x: negativeOffset } }>
+            <path
+              d={ path }
+              fill="none"
+              stroke={ strokeColor }
+              strokeWidth={ 1.5 }
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          </motion.g>
+        </svg>
+      </motion.div>
 
-      {/* Peak 마커 SVG — 정적. clip-path 제거. */}
-      <svg
-        width={ totalWidth }
-        height={ axisY + 200 }
+      {/* Peak 마커 wrapper — zIndex 50 (작품/축 위) */}
+      <motion.div
         style={ {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          pointerEvents: 'none',
+          ...wrapperBase,
+          height: axisY + 200,
           zIndex: 50,
-          overflow: 'visible',
+          x: positiveOffset,
         } }
         aria-hidden="true"
       >
-        { peakMarkers.map((p) => {
-          const isMax = p.value >= 100;
-          const dotR = isMax ? 22 : 13;
-          const ringR = dotR + 14;
-          const outerRingR = ringR + 14;
-          const markerColor = isMax ? '#E63946' : 'rgba(255,255,255,0.98)';
-          const stickLen = isMax ? 160 : 130;
-          const stickTop = Math.max(p.py - stickLen, 0);
-          return (
-            <g key={ `${p.date}-${p.value}` }>
-              {/* vertical stick */}
-              <line
-                x1={ p.px }
-                y1={ p.py - dotR - 6 }
-                x2={ p.px }
-                y2={ stickTop + 12 }
-                stroke={ markerColor }
-                strokeWidth={ isMax ? 3 : 2 }
-                strokeDasharray={ isMax ? 'none' : '4,4' }
-              />
-              {/* 외곽 링 */}
-              <circle
-                cx={ p.px }
-                cy={ p.py }
-                r={ ringR }
-                fill="none"
-                stroke={ markerColor }
-                strokeWidth={ isMax ? 2 : 1.5 }
-                opacity={ isMax ? 0.6 : 0.4 }
-              />
-              {/* max용 추가 halo */}
-              { isMax && (
-                <circle
-                  cx={ p.px }
-                  cy={ p.py }
-                  r={ outerRingR }
-                  fill="none"
-                  stroke={ markerColor }
-                  strokeWidth={ 1.25 }
-                  opacity={ 0.3 }
-                />
-              ) }
-              {/* peak point dot */}
-              <circle
-                cx={ p.px }
-                cy={ p.py }
-                r={ dotR }
-                fill={ markerColor }
-                stroke="#0A0A0A"
-                strokeWidth={ isMax ? 3 : 2 }
-              />
-              {/* value 라벨 — BRAND (큰 monumental 숫자) */}
-              <text
-                x={ p.px }
-                y={ stickTop }
-                fill={ markerColor }
-                fontSize={ isMax ? 56 : 38 }
-                fontWeight={ 900 }
-                textAnchor="middle"
-                fontFamily={ BRAND_DISPLAY }
-                letterSpacing="0.04em"
-              >
-                { p.value }
-              </text>
-              {/* trigger 라벨 — PRODUCT (정보성) */}
-              <text
-                x={ p.px }
-                y={ stickTop + (isMax ? 32 : 24) }
-                fill={ isMax ? markerColor : 'rgba(255,255,255,0.88)' }
-                fontSize={ isMax ? 16 : 13 }
-                fontWeight={ isMax ? 600 : 500 }
-                textAnchor="middle"
-                fontFamily={ PRODUCT }
-                letterSpacing="0.02em"
-              >
-                { p.trigger }
-              </text>
-              {/* date 라벨 — PRODUCT */}
-              <text
-                x={ p.px }
-                y={ stickTop + (isMax ? 52 : 42) }
-                fill="rgba(255,255,255,0.55)"
-                fontSize={ isMax ? 12 : 10 }
-                fontWeight={ 500 }
-                textAnchor="middle"
-                fontFamily={ PRODUCT }
-                letterSpacing="0.12em"
-              >
-                { p.date }
-              </text>
-            </g>
-          );
-        }) }
-      </svg>
+        <svg
+          width={ safeViewportWidth }
+          height={ axisY + 200 }
+          style={ { overflow: 'hidden', display: 'block' } }
+        >
+          <motion.g style={ { x: negativeOffset } }>
+            { peakMarkers.map((p) => {
+              /** 단순화: dot + 짧은 stick + 핵심 사건명 1줄.
+                  큰 value 숫자, date, 외곽 ring, halo 모두 제거 — 라인 위에 깔끔히. */
+              const isMax = p.value >= 100;
+              const dotR = isMax ? 14 : 10;
+              const markerColor = isMax ? '#E63946' : 'rgba(255,255,255,0.92)';
+              const stickLen = 56;
+              const stickTop = Math.max(p.py - stickLen, 0);
+              const labelY = Math.max(stickTop - 8, 12);
+              const hitW = 180;
+              const hitH = (p.py - labelY) + dotR + 24;
+              return (
+                <g
+                  key={ `${p.date}-${p.value}` }
+                  onMouseEnter={ hasPeakHover ? () => onPeakHover(p) : undefined }
+                  onMouseLeave={ hasPeakHover ? () => onPeakLeave?.() : undefined }
+                  onClick={ hasPeakClick ? () => onPeakClick(p) : undefined }
+                  style={ { cursor: peakInteractive ? 'pointer' : 'default', pointerEvents: 'auto' } }
+                >
+                  {/* invisible hit-rect */}
+                  <rect
+                    x={ p.px - hitW / 2 }
+                    y={ labelY - 14 }
+                    width={ hitW }
+                    height={ hitH }
+                    fill="transparent"
+                  />
+                  {/* 짧은 stick */}
+                  <line
+                    x1={ p.px }
+                    y1={ p.py - dotR - 4 }
+                    x2={ p.px }
+                    y2={ stickTop + 4 }
+                    stroke={ markerColor }
+                    strokeWidth={ 1 }
+                    opacity={ 0.65 }
+                  />
+                  {/* dot */}
+                  <circle
+                    cx={ p.px }
+                    cy={ p.py }
+                    r={ dotR }
+                    fill={ markerColor }
+                    stroke="#0A0A0A"
+                    strokeWidth={ 1.5 }
+                  />
+                  {/* 핵심 사건명 한 줄 */}
+                  <text
+                    x={ p.px }
+                    y={ labelY }
+                    fill={ isMax ? markerColor : 'rgba(255,255,255,0.85)' }
+                    fontSize={ 12 }
+                    fontWeight={ 600 }
+                    textAnchor="middle"
+                    fontFamily={ PRODUCT }
+                    letterSpacing="0.02em"
+                  >
+                    { p.trigger }
+                  </text>
+                </g>
+              );
+            }) }
+          </motion.g>
+        </svg>
+      </motion.div>
     </>
   );
 }

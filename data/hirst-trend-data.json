@@ -14,7 +14,6 @@
       "aquaticEstimated": 38
     }
   },
-
   "trendData": {
     "source": "Google Trends Worldwide",
     "unit": "Search Index (max=100)",
@@ -24,46 +23,1114 @@
       "monthlyPoints": 266
     },
     "peaks": [
-      { "date": "2008-09", "value": 100, "trigger": "Sotheby's BIMHF" },
-      { "date": "2007-06", "value": 75,  "trigger": "For the Love of God (다이아몬드 해골) 공개" },
-      { "date": "2012-04", "value": 73,  "trigger": "Tate Modern 회고전" },
-      { "date": "2017-04", "value": 27,  "trigger": "베니스 〈Treasures from the Wreck〉" },
-      { "date": "2021-09", "value": 23,  "trigger": "〈The Currency〉 NFT" }
+      {
+        "date": "2008-09",
+        "value": 100,
+        "trigger": "Sotheby's BIMHF",
+        "eventId": "sotheby"
+      },
+      {
+        "date": "2007-06",
+        "value": 75,
+        "trigger": "For the Love of God (다이아몬드 해골) 공개",
+        "eventId": "skull"
+      },
+      {
+        "date": "2012-04",
+        "value": 73,
+        "trigger": "Tate Modern 회고전",
+        "eventId": "tate"
+      },
+      {
+        "date": "2017-04",
+        "value": 27,
+        "trigger": "베니스 〈Treasures from the Wreck〉",
+        "eventId": "venice"
+      },
+      {
+        "date": "2021-09",
+        "value": 23,
+        "trigger": "〈The Currency〉 NFT",
+        "eventId": "currency"
+      }
     ],
     "series": [
-      ["2004-04", 25], ["2004-05", 28], ["2004-06", 19], ["2004-07", 16], ["2004-08", 14], ["2004-09", 21], ["2004-10", 24], ["2004-11", 30], ["2004-12", 25],
-      ["2005-01", 22], ["2005-02", 24], ["2005-03", 37], ["2005-04", 26], ["2005-05", 24], ["2005-06", 19], ["2005-07", 13], ["2005-08", 14], ["2005-09", 19], ["2005-10", 22], ["2005-11", 24], ["2005-12", 18],
-      ["2006-01", 19], ["2006-02", 20], ["2006-03", 22], ["2006-04", 17], ["2006-05", 16], ["2006-06", 16], ["2006-07", 13], ["2006-08", 13], ["2006-09", 17], ["2006-10", 22], ["2006-11", 22], ["2006-12", 17],
-      ["2007-01", 20], ["2007-02", 20], ["2007-03", 21], ["2007-04", 18], ["2007-05", 19], ["2007-06", 75], ["2007-07", 24], ["2007-08", 23], ["2007-09", 30], ["2007-10", 26], ["2007-11", 28], ["2007-12", 18],
-      ["2008-01", 21], ["2008-02", 22], ["2008-03", 17], ["2008-04", 18], ["2008-05", 17], ["2008-06", 18], ["2008-07", 17], ["2008-08", 18], ["2008-09", 100], ["2008-10", 35], ["2008-11", 32], ["2008-12", 25],
-      ["2009-01", 21], ["2009-02", 18], ["2009-03", 24], ["2009-04", 24], ["2009-05", 18], ["2009-06", 18], ["2009-07", 16], ["2009-08", 17], ["2009-09", 24], ["2009-10", 27], ["2009-11", 24], ["2009-12", 18],
-      ["2010-01", 21], ["2010-02", 20], ["2010-03", 22], ["2010-04", 27], ["2010-05", 18], ["2010-06", 16], ["2010-07", 13], ["2010-08", 14], ["2010-09", 18], ["2010-10", 24], ["2010-11", 21], ["2010-12", 18],
-      ["2011-01", 21], ["2011-02", 19], ["2011-03", 21], ["2011-04", 19], ["2011-05", 17], ["2011-06", 16], ["2011-07", 13], ["2011-08", 16], ["2011-09", 24], ["2011-10", 26], ["2011-11", 24], ["2011-12", 18],
-      ["2012-01", 32], ["2012-02", 24], ["2012-03", 24], ["2012-04", 73], ["2012-05", 34], ["2012-06", 28], ["2012-07", 20], ["2012-08", 24], ["2012-09", 24], ["2012-10", 35], ["2012-11", 24], ["2012-12", 18],
-      ["2013-01", 19], ["2013-02", 18], ["2013-03", 22], ["2013-04", 18], ["2013-05", 16], ["2013-06", 14], ["2013-07", 13], ["2013-08", 13], ["2013-09", 18], ["2013-10", 20], ["2013-11", 19], ["2013-12", 13],
-      ["2014-01", 17], ["2014-02", 16], ["2014-03", 17], ["2014-04", 16], ["2014-05", 16], ["2014-06", 13], ["2014-07", 11], ["2014-08", 13], ["2014-09", 17], ["2014-10", 17], ["2014-11", 18], ["2014-12", 13],
-      ["2015-01", 14], ["2015-02", 17], ["2015-03", 17], ["2015-04", 16], ["2015-05", 13], ["2015-06", 13], ["2015-07", 12], ["2015-08", 13], ["2015-09", 13], ["2015-10", 13], ["2015-11", 12], ["2015-12", 13],
-      ["2016-01", 16], ["2016-02", 16], ["2016-03", 17], ["2016-04", 16], ["2016-05", 13], ["2016-06", 13], ["2016-07", 10], ["2016-08", 10], ["2016-09", 13], ["2016-10", 16], ["2016-11", 13], ["2016-12", 10],
-      ["2017-01", 16], ["2017-02", 16], ["2017-03", 12], ["2017-04", 27], ["2017-05", 20], ["2017-06", 14], ["2017-07", 13], ["2017-08", 13], ["2017-09", 16], ["2017-10", 17], ["2017-11", 16], ["2017-12", 13],
-      ["2018-01", 27], ["2018-02", 17], ["2018-03", 17], ["2018-04", 18], ["2018-05", 16], ["2018-06", 13], ["2018-07", 13], ["2018-08", 13], ["2018-09", 13], ["2018-10", 16], ["2018-11", 13], ["2018-12", 10],
-      ["2019-01", 13], ["2019-02", 13], ["2019-03", 14], ["2019-04", 14], ["2019-05", 13], ["2019-06", 11], ["2019-07", 10], ["2019-08", 10], ["2019-09", 13], ["2019-10", 13], ["2019-11", 13], ["2019-12", 10],
-      ["2020-01", 13], ["2020-02", 13], ["2020-03", 11], ["2020-04", 10], ["2020-05", 10], ["2020-06", 10], ["2020-07", 10], ["2020-08", 10], ["2020-09", 13], ["2020-10", 13], ["2020-11", 13], ["2020-12", 10],
-      ["2021-01", 13], ["2021-02", 13], ["2021-03", 13], ["2021-04", 13], ["2021-05", 10], ["2021-06", 10], ["2021-07", 16], ["2021-08", 14], ["2021-09", 23], ["2021-10", 15], ["2021-11", 13], ["2021-12", 10],
-      ["2022-01", 13], ["2022-02", 11], ["2022-03", 13], ["2022-04", 13], ["2022-05", 10], ["2022-06", 10], ["2022-07", 10], ["2022-08", 8], ["2022-09", 9], ["2022-10", 15], ["2022-11", 9], ["2022-12", 7],
-      ["2023-01", 10], ["2023-02", 10], ["2023-03", 13], ["2023-04", 13], ["2023-05", 10], ["2023-06", 10], ["2023-07", 10], ["2023-08", 10], ["2023-09", 13], ["2023-10", 13], ["2023-11", 10], ["2023-12", 10],
-      ["2024-01", 13], ["2024-02", 13], ["2024-03", 13], ["2024-04", 16], ["2024-05", 13], ["2024-06", 13], ["2024-07", 10], ["2024-08", 10], ["2024-09", 13], ["2024-10", 13], ["2024-11", 13], ["2024-12", 10],
-      ["2025-01", 13], ["2025-02", 13], ["2025-03", 13], ["2025-04", 13], ["2025-05", 13], ["2025-06", 10], ["2025-07", 10], ["2025-08", 10], ["2025-09", 13], ["2025-10", 13], ["2025-11", 13], ["2025-12", 10],
-      ["2026-01", 13], ["2026-02", 13], ["2026-03", 13], ["2026-04", 13], ["2026-05", 13]
+      [
+        "2004-04",
+        25
+      ],
+      [
+        "2004-05",
+        28
+      ],
+      [
+        "2004-06",
+        19
+      ],
+      [
+        "2004-07",
+        16
+      ],
+      [
+        "2004-08",
+        14
+      ],
+      [
+        "2004-09",
+        21
+      ],
+      [
+        "2004-10",
+        24
+      ],
+      [
+        "2004-11",
+        30
+      ],
+      [
+        "2004-12",
+        25
+      ],
+      [
+        "2005-01",
+        22
+      ],
+      [
+        "2005-02",
+        24
+      ],
+      [
+        "2005-03",
+        37
+      ],
+      [
+        "2005-04",
+        26
+      ],
+      [
+        "2005-05",
+        24
+      ],
+      [
+        "2005-06",
+        19
+      ],
+      [
+        "2005-07",
+        13
+      ],
+      [
+        "2005-08",
+        14
+      ],
+      [
+        "2005-09",
+        19
+      ],
+      [
+        "2005-10",
+        22
+      ],
+      [
+        "2005-11",
+        24
+      ],
+      [
+        "2005-12",
+        18
+      ],
+      [
+        "2006-01",
+        19
+      ],
+      [
+        "2006-02",
+        20
+      ],
+      [
+        "2006-03",
+        22
+      ],
+      [
+        "2006-04",
+        17
+      ],
+      [
+        "2006-05",
+        16
+      ],
+      [
+        "2006-06",
+        16
+      ],
+      [
+        "2006-07",
+        13
+      ],
+      [
+        "2006-08",
+        13
+      ],
+      [
+        "2006-09",
+        17
+      ],
+      [
+        "2006-10",
+        22
+      ],
+      [
+        "2006-11",
+        22
+      ],
+      [
+        "2006-12",
+        17
+      ],
+      [
+        "2007-01",
+        20
+      ],
+      [
+        "2007-02",
+        20
+      ],
+      [
+        "2007-03",
+        21
+      ],
+      [
+        "2007-04",
+        18
+      ],
+      [
+        "2007-05",
+        19
+      ],
+      [
+        "2007-06",
+        75
+      ],
+      [
+        "2007-07",
+        24
+      ],
+      [
+        "2007-08",
+        23
+      ],
+      [
+        "2007-09",
+        30
+      ],
+      [
+        "2007-10",
+        26
+      ],
+      [
+        "2007-11",
+        28
+      ],
+      [
+        "2007-12",
+        18
+      ],
+      [
+        "2008-01",
+        21
+      ],
+      [
+        "2008-02",
+        22
+      ],
+      [
+        "2008-03",
+        17
+      ],
+      [
+        "2008-04",
+        18
+      ],
+      [
+        "2008-05",
+        17
+      ],
+      [
+        "2008-06",
+        18
+      ],
+      [
+        "2008-07",
+        17
+      ],
+      [
+        "2008-08",
+        18
+      ],
+      [
+        "2008-09",
+        100
+      ],
+      [
+        "2008-10",
+        35
+      ],
+      [
+        "2008-11",
+        32
+      ],
+      [
+        "2008-12",
+        25
+      ],
+      [
+        "2009-01",
+        21
+      ],
+      [
+        "2009-02",
+        18
+      ],
+      [
+        "2009-03",
+        24
+      ],
+      [
+        "2009-04",
+        24
+      ],
+      [
+        "2009-05",
+        18
+      ],
+      [
+        "2009-06",
+        18
+      ],
+      [
+        "2009-07",
+        16
+      ],
+      [
+        "2009-08",
+        17
+      ],
+      [
+        "2009-09",
+        24
+      ],
+      [
+        "2009-10",
+        27
+      ],
+      [
+        "2009-11",
+        24
+      ],
+      [
+        "2009-12",
+        18
+      ],
+      [
+        "2010-01",
+        21
+      ],
+      [
+        "2010-02",
+        20
+      ],
+      [
+        "2010-03",
+        22
+      ],
+      [
+        "2010-04",
+        27
+      ],
+      [
+        "2010-05",
+        18
+      ],
+      [
+        "2010-06",
+        16
+      ],
+      [
+        "2010-07",
+        13
+      ],
+      [
+        "2010-08",
+        14
+      ],
+      [
+        "2010-09",
+        18
+      ],
+      [
+        "2010-10",
+        24
+      ],
+      [
+        "2010-11",
+        21
+      ],
+      [
+        "2010-12",
+        18
+      ],
+      [
+        "2011-01",
+        21
+      ],
+      [
+        "2011-02",
+        19
+      ],
+      [
+        "2011-03",
+        21
+      ],
+      [
+        "2011-04",
+        19
+      ],
+      [
+        "2011-05",
+        17
+      ],
+      [
+        "2011-06",
+        16
+      ],
+      [
+        "2011-07",
+        13
+      ],
+      [
+        "2011-08",
+        16
+      ],
+      [
+        "2011-09",
+        24
+      ],
+      [
+        "2011-10",
+        26
+      ],
+      [
+        "2011-11",
+        24
+      ],
+      [
+        "2011-12",
+        18
+      ],
+      [
+        "2012-01",
+        32
+      ],
+      [
+        "2012-02",
+        24
+      ],
+      [
+        "2012-03",
+        24
+      ],
+      [
+        "2012-04",
+        73
+      ],
+      [
+        "2012-05",
+        34
+      ],
+      [
+        "2012-06",
+        28
+      ],
+      [
+        "2012-07",
+        20
+      ],
+      [
+        "2012-08",
+        24
+      ],
+      [
+        "2012-09",
+        24
+      ],
+      [
+        "2012-10",
+        35
+      ],
+      [
+        "2012-11",
+        24
+      ],
+      [
+        "2012-12",
+        18
+      ],
+      [
+        "2013-01",
+        19
+      ],
+      [
+        "2013-02",
+        18
+      ],
+      [
+        "2013-03",
+        22
+      ],
+      [
+        "2013-04",
+        18
+      ],
+      [
+        "2013-05",
+        16
+      ],
+      [
+        "2013-06",
+        14
+      ],
+      [
+        "2013-07",
+        13
+      ],
+      [
+        "2013-08",
+        13
+      ],
+      [
+        "2013-09",
+        18
+      ],
+      [
+        "2013-10",
+        20
+      ],
+      [
+        "2013-11",
+        19
+      ],
+      [
+        "2013-12",
+        13
+      ],
+      [
+        "2014-01",
+        17
+      ],
+      [
+        "2014-02",
+        16
+      ],
+      [
+        "2014-03",
+        17
+      ],
+      [
+        "2014-04",
+        16
+      ],
+      [
+        "2014-05",
+        16
+      ],
+      [
+        "2014-06",
+        13
+      ],
+      [
+        "2014-07",
+        11
+      ],
+      [
+        "2014-08",
+        13
+      ],
+      [
+        "2014-09",
+        17
+      ],
+      [
+        "2014-10",
+        17
+      ],
+      [
+        "2014-11",
+        18
+      ],
+      [
+        "2014-12",
+        13
+      ],
+      [
+        "2015-01",
+        14
+      ],
+      [
+        "2015-02",
+        17
+      ],
+      [
+        "2015-03",
+        17
+      ],
+      [
+        "2015-04",
+        16
+      ],
+      [
+        "2015-05",
+        13
+      ],
+      [
+        "2015-06",
+        13
+      ],
+      [
+        "2015-07",
+        12
+      ],
+      [
+        "2015-08",
+        13
+      ],
+      [
+        "2015-09",
+        13
+      ],
+      [
+        "2015-10",
+        13
+      ],
+      [
+        "2015-11",
+        12
+      ],
+      [
+        "2015-12",
+        13
+      ],
+      [
+        "2016-01",
+        16
+      ],
+      [
+        "2016-02",
+        16
+      ],
+      [
+        "2016-03",
+        17
+      ],
+      [
+        "2016-04",
+        16
+      ],
+      [
+        "2016-05",
+        13
+      ],
+      [
+        "2016-06",
+        13
+      ],
+      [
+        "2016-07",
+        10
+      ],
+      [
+        "2016-08",
+        10
+      ],
+      [
+        "2016-09",
+        13
+      ],
+      [
+        "2016-10",
+        16
+      ],
+      [
+        "2016-11",
+        13
+      ],
+      [
+        "2016-12",
+        10
+      ],
+      [
+        "2017-01",
+        16
+      ],
+      [
+        "2017-02",
+        16
+      ],
+      [
+        "2017-03",
+        12
+      ],
+      [
+        "2017-04",
+        27
+      ],
+      [
+        "2017-05",
+        20
+      ],
+      [
+        "2017-06",
+        14
+      ],
+      [
+        "2017-07",
+        13
+      ],
+      [
+        "2017-08",
+        13
+      ],
+      [
+        "2017-09",
+        16
+      ],
+      [
+        "2017-10",
+        17
+      ],
+      [
+        "2017-11",
+        16
+      ],
+      [
+        "2017-12",
+        13
+      ],
+      [
+        "2018-01",
+        27
+      ],
+      [
+        "2018-02",
+        17
+      ],
+      [
+        "2018-03",
+        17
+      ],
+      [
+        "2018-04",
+        18
+      ],
+      [
+        "2018-05",
+        16
+      ],
+      [
+        "2018-06",
+        13
+      ],
+      [
+        "2018-07",
+        13
+      ],
+      [
+        "2018-08",
+        13
+      ],
+      [
+        "2018-09",
+        13
+      ],
+      [
+        "2018-10",
+        16
+      ],
+      [
+        "2018-11",
+        13
+      ],
+      [
+        "2018-12",
+        10
+      ],
+      [
+        "2019-01",
+        13
+      ],
+      [
+        "2019-02",
+        13
+      ],
+      [
+        "2019-03",
+        14
+      ],
+      [
+        "2019-04",
+        14
+      ],
+      [
+        "2019-05",
+        13
+      ],
+      [
+        "2019-06",
+        11
+      ],
+      [
+        "2019-07",
+        10
+      ],
+      [
+        "2019-08",
+        10
+      ],
+      [
+        "2019-09",
+        13
+      ],
+      [
+        "2019-10",
+        13
+      ],
+      [
+        "2019-11",
+        13
+      ],
+      [
+        "2019-12",
+        10
+      ],
+      [
+        "2020-01",
+        13
+      ],
+      [
+        "2020-02",
+        13
+      ],
+      [
+        "2020-03",
+        11
+      ],
+      [
+        "2020-04",
+        10
+      ],
+      [
+        "2020-05",
+        10
+      ],
+      [
+        "2020-06",
+        10
+      ],
+      [
+        "2020-07",
+        10
+      ],
+      [
+        "2020-08",
+        10
+      ],
+      [
+        "2020-09",
+        13
+      ],
+      [
+        "2020-10",
+        13
+      ],
+      [
+        "2020-11",
+        13
+      ],
+      [
+        "2020-12",
+        10
+      ],
+      [
+        "2021-01",
+        13
+      ],
+      [
+        "2021-02",
+        13
+      ],
+      [
+        "2021-03",
+        13
+      ],
+      [
+        "2021-04",
+        13
+      ],
+      [
+        "2021-05",
+        10
+      ],
+      [
+        "2021-06",
+        10
+      ],
+      [
+        "2021-07",
+        16
+      ],
+      [
+        "2021-08",
+        14
+      ],
+      [
+        "2021-09",
+        23
+      ],
+      [
+        "2021-10",
+        15
+      ],
+      [
+        "2021-11",
+        13
+      ],
+      [
+        "2021-12",
+        10
+      ],
+      [
+        "2022-01",
+        13
+      ],
+      [
+        "2022-02",
+        11
+      ],
+      [
+        "2022-03",
+        13
+      ],
+      [
+        "2022-04",
+        13
+      ],
+      [
+        "2022-05",
+        10
+      ],
+      [
+        "2022-06",
+        10
+      ],
+      [
+        "2022-07",
+        10
+      ],
+      [
+        "2022-08",
+        8
+      ],
+      [
+        "2022-09",
+        9
+      ],
+      [
+        "2022-10",
+        15
+      ],
+      [
+        "2022-11",
+        9
+      ],
+      [
+        "2022-12",
+        7
+      ],
+      [
+        "2023-01",
+        10
+      ],
+      [
+        "2023-02",
+        10
+      ],
+      [
+        "2023-03",
+        13
+      ],
+      [
+        "2023-04",
+        13
+      ],
+      [
+        "2023-05",
+        10
+      ],
+      [
+        "2023-06",
+        10
+      ],
+      [
+        "2023-07",
+        10
+      ],
+      [
+        "2023-08",
+        10
+      ],
+      [
+        "2023-09",
+        13
+      ],
+      [
+        "2023-10",
+        13
+      ],
+      [
+        "2023-11",
+        10
+      ],
+      [
+        "2023-12",
+        10
+      ],
+      [
+        "2024-01",
+        13
+      ],
+      [
+        "2024-02",
+        13
+      ],
+      [
+        "2024-03",
+        13
+      ],
+      [
+        "2024-04",
+        16
+      ],
+      [
+        "2024-05",
+        13
+      ],
+      [
+        "2024-06",
+        13
+      ],
+      [
+        "2024-07",
+        10
+      ],
+      [
+        "2024-08",
+        10
+      ],
+      [
+        "2024-09",
+        13
+      ],
+      [
+        "2024-10",
+        13
+      ],
+      [
+        "2024-11",
+        13
+      ],
+      [
+        "2024-12",
+        10
+      ],
+      [
+        "2025-01",
+        13
+      ],
+      [
+        "2025-02",
+        13
+      ],
+      [
+        "2025-03",
+        13
+      ],
+      [
+        "2025-04",
+        13
+      ],
+      [
+        "2025-05",
+        13
+      ],
+      [
+        "2025-06",
+        10
+      ],
+      [
+        "2025-07",
+        10
+      ],
+      [
+        "2025-08",
+        10
+      ],
+      [
+        "2025-09",
+        13
+      ],
+      [
+        "2025-10",
+        13
+      ],
+      [
+        "2025-11",
+        13
+      ],
+      [
+        "2025-12",
+        10
+      ],
+      [
+        "2026-01",
+        13
+      ],
+      [
+        "2026-02",
+        13
+      ],
+      [
+        "2026-03",
+        13
+      ],
+      [
+        "2026-04",
+        13
+      ],
+      [
+        "2026-05",
+        13
+      ]
     ]
   },
-
   "careerStages": [
     {
       "id": 1,
       "num": "I",
       "name": "큐레이션 통제",
       "nameEn": "Curatorial control",
-      "period": { "start": "1988", "end": "1990 (데이터 외)" },
+      "period": {
+        "start": "1988",
+        "end": "1990 (데이터 외)"
+      },
       "color": "#d4cdaa",
       "summary": "학생 신분으로 〈Freeze〉전을 직접 큐레이팅. 사치, 노먼 로젠탈, 니콜라스 세로타를 직접 부름. 작가로 데뷔하기 전에 무대를 만드는 사람으로 먼저 자리잡았다."
     },
@@ -72,7 +1139,10 @@
       "num": "II",
       "name": "컬렉터 관계 통제",
       "nameEn": "Collector relationship control",
-      "period": { "start": "1990", "end": "1995 (데이터 외)" },
+      "period": {
+        "start": "1990",
+        "end": "1995 (데이터 외)"
+      },
       "color": "#c9c197",
       "summary": "사치 컬렉션 시스템 활용. 작품이 사치 갤러리에 전시되면 인지도가 형성되고, 그 인지도가 다음 작품 가격을 올리는 부트스트랩 구조."
     },
@@ -81,7 +1151,10 @@
       "num": "III",
       "name": "갤러리 시스템 레버리지",
       "nameEn": "Gallery system leverage",
-      "period": { "start": "1995", "end": "2007" },
+      "period": {
+        "start": "1995",
+        "end": "2007"
+      },
       "color": "#bbb281",
       "summary": "화이트큐브(제이 조플링)와 가고시안(래리 가고시안)을 동시 활용. 한 갤러리에 전속되지 않고 양쪽을 통해 가격 협상력을 자기 쪽으로 가져온 시기.",
       "triggers": [
@@ -96,7 +1169,10 @@
       "num": "IV",
       "name": "갤러리 우회",
       "nameEn": "Bypassing the gallery system",
-      "period": { "start": "2008-09-15", "end": "2008-09-16" },
+      "period": {
+        "start": "2008-09-15",
+        "end": "2008-09-16"
+      },
       "color": "#a89a65",
       "summary": "미술 시장의 1차—2차 시장 구조를 건너뛴 단일 사건. 검색량 100은 작품이 아니라 분배 시스템 전환이 만든 숫자다."
     },
@@ -105,17 +1181,41 @@
       "num": "V",
       "name": "자체 채널 구축",
       "nameEn": "Channel building",
-      "period": { "start": "2009", "end": "2016" },
+      "period": {
+        "start": "2009",
+        "end": "2016"
+      },
       "color": "#94834d",
       "summary": "Other Criteria(출판/에디션), Newport Street Gallery(자기 미술관), HENI(디지털 플랫폼)의 3축 자체 채널 구축기. 갤러리가 가져가던 50% 수수료를 우회. 트렌드는 낮지만 사업적으로 가장 두꺼워진 시기.",
       "channels": [
-        { "name": "Other Criteria", "since": 2005, "role": "출판/에디션/굿즈 — 자체 유통" },
-        { "name": "Newport Street Gallery", "since": 2015, "construction": 2013, "role": "Vauxhall · 자기 컬렉션 전시 공간 · Caruso St John 설계 (2016 Stirling Prize)" },
-        { "name": "HENI", "since": 2011, "role": "디지털 플랫폼 — 이후 Currency(2021) 운영 인프라로 발전" },
-        { "name": "Toddington Manor (Devon)", "since": 2005, "role": "자산·작업 거점" }
+        {
+          "name": "Other Criteria",
+          "since": 2005,
+          "role": "출판/에디션/굿즈 — 자체 유통"
+        },
+        {
+          "name": "Newport Street Gallery",
+          "since": 2015,
+          "construction": 2013,
+          "role": "Vauxhall · 자기 컬렉션 전시 공간 · Caruso St John 설계 (2016 Stirling Prize)"
+        },
+        {
+          "name": "HENI",
+          "since": 2011,
+          "role": "디지털 플랫폼 — 이후 Currency(2021) 운영 인프라로 발전"
+        },
+        {
+          "name": "Toddington Manor (Devon)",
+          "since": 2005,
+          "role": "자산·작업 거점"
+        }
       ],
       "knownFailures": [
-        { "year": 2009, "event": "Wallace Collection 〈No Love Lost〉 — 본인 손 회화 첫 시도, 비평계 만장 부정", "lesson": "시장 검증 자산이 회화 영역엔 전이되지 않음 — 본인 손 회화는 2018 Cherry Blossoms까지 9년 보류" }
+        {
+          "year": 2009,
+          "event": "Wallace Collection 〈No Love Lost〉 — 본인 손 회화 첫 시도, 비평계 만장 부정",
+          "lesson": "시장 검증 자산이 회화 영역엔 전이되지 않음 — 본인 손 회화는 2018 Cherry Blossoms까지 9년 보류"
+        }
       ]
     },
     {
@@ -123,24 +1223,92 @@
       "num": "VI",
       "name": "분배 채널의 작품화",
       "nameEn": "Channel-as-artwork",
-      "period": { "start": "2017", "end": "현재" },
+      "period": {
+        "start": "2017",
+        "end": "현재"
+      },
       "color": "#7a6a3a",
       "summary": "베니스 〈Treasures〉, NFT 〈The Currency〉. 더 이상 작품을 파는 게 아니라 판매 메커니즘 자체를 작품으로 만드는 단계."
     }
   ],
-
   "preTrendEvents": [
-    { "year": 1988, "stage": 1, "title": "〈Freeze〉 큐레이션", "note": "학생이 메가 컬렉터를 직접 부르다 — 사치, 노먼 로젠탈, 니콜라스 세로타", "imageRef": null, "sourceEventId": "E006" },
-    { "year": 1990, "stage": 2, "title": "Saatchi가 〈A Thousand Years〉 컬렉팅", "note": "stage II '컬렉터 통제' 출발점 — 사치 컬렉션 시스템 진입", "imageRef": "/images/hirst/W005_1990_a-thousand-years.jpg", "sourceEventId": "E010", "sourceWorkId": "W005" },
-    { "year": 1991, "stage": 2, "title": "〈Physical Impossibility of Death...〉", "note": "Saatchi 의뢰 £50,000 — 포름알데히드 상어, YBA의 대표작 등극", "imageRef": "/images/hirst/W007_1991_physical-impossibility-of-death.jpg", "sourceEventId": "E011", "sourceWorkId": "W007" },
-    { "year": 1992, "stage": 2, "title": "Young British Artists I (Saatchi Gallery)", "note": "사치 컬렉션 부트스트랩 구조의 본격 가동", "imageRef": null, "sourceEventId": "E013" },
-    { "year": 1993, "stage": 2, "title": "Venice Biennale Aperto · Premio 2000 수상", "note": "Mother and Child (Divided) 발표 — 국제 무대 첫 진입", "imageRef": "/images/hirst/W011_1993_mother-and-child-divided.jpg", "sourceEventId": "E015", "sourceWorkId": "W011" },
-    { "year": 1995, "stage": 3, "title": "Turner Prize 수상", "note": "제도권 인정 — Robert Hughes는 이때부터 일관된 부정 입장", "imageRef": null, "sourceEventId": "E017" },
-    { "year": 1996, "stage": 3, "title": "Gagosian 첫 미국 개인전", "note": "stage III '갤러리 시스템 레버리지' 진입 — 화이트큐브와 가고시안 동시 활용 구조 시작", "imageRef": null, "sourceEventId": "E019" },
-    { "year": 1997, "stage": 3, "title": "Sensation 전 (Royal Academy)", "note": "사치 컬렉션 시스템의 정점 — YBA 세대 국제 브랜드화", "imageRef": null, "sourceEventId": "E020" },
-    { "year": 1998, "stage": 3, "title": "Pharmacy 레스토랑 개업", "note": "Notting Hill — 작품과 사업의 경계 해체 첫 실험 (2003 폐업, 2002 Sotheby's 비품 경매 $19.2M)", "imageRef": "/images/hirst/W010_1992_pharmacy.jpg", "sourceEventId": "E022", "sourceWorkId": "W010" }
+    {
+      "year": 1988,
+      "stage": 1,
+      "title": "〈Freeze〉 큐레이션",
+      "note": "학생이 메가 컬렉터를 직접 부르다 — 사치, 노먼 로젠탈, 니콜라스 세로타",
+      "imageRef": null,
+      "sourceEventId": "E006"
+    },
+    {
+      "year": 1990,
+      "stage": 2,
+      "title": "Saatchi가 〈A Thousand Years〉 컬렉팅",
+      "note": "stage II '컬렉터 통제' 출발점 — 사치 컬렉션 시스템 진입",
+      "imageRef": "/images/hirst/W005_1990_a-thousand-years.jpg",
+      "sourceEventId": "E010",
+      "sourceWorkId": "W005"
+    },
+    {
+      "year": 1991,
+      "stage": 2,
+      "title": "〈Physical Impossibility of Death...〉",
+      "note": "Saatchi 의뢰 £50,000 — 포름알데히드 상어, YBA의 대표작 등극",
+      "imageRef": "/images/hirst/W007_1991_physical-impossibility-of-death.jpg",
+      "sourceEventId": "E011",
+      "sourceWorkId": "W007"
+    },
+    {
+      "year": 1992,
+      "stage": 2,
+      "title": "Young British Artists I (Saatchi Gallery)",
+      "note": "사치 컬렉션 부트스트랩 구조의 본격 가동",
+      "imageRef": null,
+      "sourceEventId": "E013"
+    },
+    {
+      "year": 1993,
+      "stage": 2,
+      "title": "Venice Biennale Aperto · Premio 2000 수상",
+      "note": "Mother and Child (Divided) 발표 — 국제 무대 첫 진입",
+      "imageRef": "/images/hirst/W011_1993_mother-and-child-divided.jpg",
+      "sourceEventId": "E015",
+      "sourceWorkId": "W011"
+    },
+    {
+      "year": 1995,
+      "stage": 3,
+      "title": "Turner Prize 수상",
+      "note": "제도권 인정 — Robert Hughes는 이때부터 일관된 부정 입장",
+      "imageRef": null,
+      "sourceEventId": "E017"
+    },
+    {
+      "year": 1996,
+      "stage": 3,
+      "title": "Gagosian 첫 미국 개인전",
+      "note": "stage III '갤러리 시스템 레버리지' 진입 — 화이트큐브와 가고시안 동시 활용 구조 시작",
+      "imageRef": null,
+      "sourceEventId": "E019"
+    },
+    {
+      "year": 1997,
+      "stage": 3,
+      "title": "Sensation 전 (Royal Academy)",
+      "note": "사치 컬렉션 시스템의 정점 — YBA 세대 국제 브랜드화",
+      "imageRef": null,
+      "sourceEventId": "E020"
+    },
+    {
+      "year": 1998,
+      "stage": 3,
+      "title": "Pharmacy 레스토랑 개업",
+      "note": "Notting Hill — 작품과 사업의 경계 해체 첫 실험 (2003 폐업, 2002 Sotheby's 비품 경매 $19.2M)",
+      "imageRef": "/images/hirst/W010_1992_pharmacy.jpg",
+      "sourceEventId": "E022",
+      "sourceWorkId": "W010"
+    }
   ],
-
   "events": [
     {
       "id": "pharmacy-auction",
@@ -177,12 +1345,154 @@
         "도상학을 몰라도 멈춰서 보게 되는 시각 + 알면 reliquary 전통과 메멘토 모리로 한 겹 더 작동하는 이중 구조. 18세기 유럽 남성 추정 두개골에 백금 캐스트, 8,601개 다이아(1,106.18ct), 이마 핑크 다이아 52.4ct.",
         "이 작품으로 그는 단순한 작가가 아니라 시장에서 검증된 자산이 됐다."
       ],
-      "reception": [
-        { "critic": "Adrian Searle", "media": "Guardian", "stance": "negative", "date": "2007.06" }
-      ],
+      "reception": [],
       "imageRef": "/images/hirst/W035_2007_for-the-love-of-god.jpg",
       "sourceWorkId": "W035",
-      "sourceEventId": "E029"
+      "sourceEventId": "E029",
+      "isPeak": true,
+      "causes": {
+        "antecedents": [
+          "pharmacy-auction"
+        ],
+        "key_actors": [
+          {
+            "role": "gallery",
+            "name": "White Cube",
+            "label": {
+              "ko": "White Cube (Jay Jopling)",
+              "en": "White Cube (Jay Jopling)"
+            }
+          },
+          {
+            "role": "fabricator",
+            "name": "Bentley & Skinner",
+            "label": {
+              "ko": "본드 스트리트 보석상",
+              "en": "Bentley & Skinner (Bond St jeweller)"
+            }
+          }
+        ],
+        "production": {
+          "ko": "백금 캐스트 위에 8,601개 다이아몬드 1,106.18ct를 페이브 세팅. 이마에 페어컷 핑크 다이아(\"Skull Star Diamond\") 52.4ct. 두개골은 1720~1810년경 유럽 남성(약 35세), 앞니는 런던에서 별도 구입한 실제 인골. 제작비는 BBC 보도 기준 £14M.",
+          "en": "A platinum cast pavé-set with 8,601 flawless diamonds totalling 1,106.18ct, with a pear-shaped pink \"Skull Star\" diamond (52.4ct) in the forehead. The skull is that of a European male, c.1720–1810, around 35 years old; the front teeth are real human teeth bought in London. Production cost reported by the BBC at £14M."
+        },
+        "context": {
+          "ko": "2002 Pharmacy 비품 경매(E024)가 갤러리 우회 매각의 리허설이었다면, 이 작품은 2007 컨템포러리 버블 정점에 \"가격이 작품인 작품\"으로 출시되었다. White Cube의 발표 연출과 £14M 제작비 자체가 헤드라인 장치였다.",
+          "en": "If the 2002 Pharmacy fixtures sale (E024) was the dress rehearsal for bypassing the gallery, this work was released at the very top of the 2007 contemporary bubble as a piece whose price was the content. White Cube's release stagecraft and the £14M production figure were themselves the headline mechanism."
+        }
+      },
+      "commercial": {
+        "price": {
+          "amount": 50000000,
+          "currency": "GBP",
+          "sale_type": "reported_consortium",
+          "date": "2007-08-30",
+          "disputed": true,
+          "note": {
+            "ko": "공식 발표는 £50M 익명 컨소시엄 매각. 2012년 Hirst 본인이 \"1/3만 매각\"으로 정정했고, 2022년 1월에는 본인·White Cube·미공개 투자자 공동 소유로 Hatton Garden 금고에 보관 중임을 인정. Artnet은 사실상 2007 매각이 성사되지 않은 것으로 해석.",
+            "en": "Announced as a £50M sale to an anonymous consortium. In 2012 Hirst revised this to \"I sold a third\"; in Jan 2022 he conceded the work is still co-owned by himself, White Cube and undisclosed investors and is kept in a Hatton Garden vault — read by Artnet as confirmation that the 2007 sale did not actually close."
+          }
+        },
+        "production_cost_gbp": 14000000,
+        "delta_pct": 295,
+        "delta_baseline": "12mo_avg",
+        "subsequent": []
+      },
+      "status": {
+        "headline_reach": "global",
+        "position_shift": {
+          "ko": "이 시점부터 Hirst는 \"비싼 작가\"가 아니라 \"가격 자체가 콘텐츠인 작가\"가 되었다. 이는 1년 뒤 BIMHF(2008-09) 단독 경매에서 갤러리 우회 모델을 시도할 수 있게 한 직접 토대였다.",
+          "en": "From this point Hirst was no longer simply \"an expensive artist\" but one whose price was the content itself — the direct foundation for attempting the bypass-the-gallery 2008 BIMHF auction a year later."
+        },
+        "reception_extras": [
+          {
+            "critic": "Robert Hughes",
+            "media": "—",
+            "date": "2007-07",
+            "stance": "negative",
+            "quote_short": {
+              "ko": "멕시코 민속 두개골에 비하면 실망스럽다",
+              "en": "a letdown compared with Mexican folk art skulls"
+            }
+          },
+          {
+            "critic": "Richard Dorment",
+            "media": "Daily Telegraph",
+            "date": "2007-06",
+            "stance": "ambivalent",
+            "quote_short": {
+              "ko": "예술과 돈의 도덕성을 묻는 작업",
+              "en": "questions the morality of art and money"
+            }
+          },
+          {
+            "critic": "Ralph Rugoff",
+            "media": "Hayward Gallery",
+            "date": "2007",
+            "stance": "negative",
+            "quote_short": {
+              "ko": "장식품 수준",
+              "en": "a decorative object"
+            }
+          },
+          {
+            "critic": "Germaine Greer",
+            "media": "Guardian",
+            "date": "2007",
+            "stance": "positive",
+            "quote_short": {
+              "ko": "마케팅 자체가 혁명적",
+              "en": "the marketing itself is revolutionary"
+            }
+          }
+        ],
+        "institutional": [
+          {
+            "venue": "Tate Modern",
+            "date": "2012-04-04/2012-06-25",
+            "note": {
+              "ko": "Tate Modern 회고전 동안 별도 임시 전시. 미술관 인입의 정점이자 2012-04 peak의 dual trigger 중 하나.",
+              "en": "Shown in a dedicated room during the Tate Modern retrospective — institutional peak and one of the dual triggers of the 2012-04 search peak."
+            }
+          }
+        ]
+      },
+      "long_term_ripple": [
+        {
+          "to": "sotheby",
+          "note": {
+            "ko": "BIMHF(2008-09) 단독 경매를 작가가 직접 자신감 있게 시도할 수 있게 한 가격 정당화 사례.",
+            "en": "The price-justification precedent that gave Hirst the confidence to attempt the BIMHF (2008-09) gallery-bypass auction."
+          }
+        }
+      ],
+      "sources": [
+        {
+          "type": "encyclopedia",
+          "title": "Wikipedia · For the Love of God",
+          "url": "https://en.wikipedia.org/wiki/For_the_Love_of_God",
+          "confidence": "medium"
+        },
+        {
+          "type": "press",
+          "title": "Artnet · Diamond skull still belongs to Hirst (2022-01)",
+          "url": "https://news.artnet.com/art-world/damien-hirst-skull-storage-2064567",
+          "confidence": "high"
+        },
+        {
+          "type": "press",
+          "title": "BBC · production cost £14M (2007 coverage)",
+          "url": null,
+          "confidence": "medium"
+        },
+        {
+          "type": "release",
+          "title": "White Cube · Beyond Belief (2007-06)",
+          "url": null,
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high"
     },
     {
       "id": "fairhurst",
@@ -224,11 +1534,136 @@
         "검색량 100은 작품 한 점이 만든 게 아니라 분배 시스템 전환 자체가 만든 숫자다. 헤드라인 lot은 The Golden Calf £10.3M (송아지 1) · The Kingdom £9.6M (호랑이상어 1)."
       ],
       "reception": [
-        { "critic": "Robert Hughes", "media": "Guardian", "stance": "negative", "date": "2008.09.13", "note": "〈Day of the dead〉 컬럼 — 세일 직전 게재" }
+        {
+          "critic": "Robert Hughes",
+          "media": "Guardian",
+          "stance": "negative",
+          "date": "2008.09.13",
+          "note": "〈Day of the dead〉 컬럼 — 세일 직전 게재"
+        }
       ],
       "imageRef": "/images/hirst/W039_2008_beautiful-inside-my-head-forever.jpg",
       "sourceWorkId": "W039",
-      "sourceEventId": "E031"
+      "sourceEventId": "E031",
+      "isPeak": true,
+      "causes": {
+        "antecedents": [
+          "skull",
+          "pharmacy-auction"
+        ],
+        "key_actors": [
+          {
+            "role": "auction_house",
+            "name": "Sotheby's",
+            "label": {
+              "ko": "Sotheby's London",
+              "en": "Sotheby's London"
+            }
+          },
+          {
+            "role": "self",
+            "name": "Damien Hirst",
+            "label": {
+              "ko": "작가 본인 (갤러리 우회 직접 출품)",
+              "en": "The artist (bypassing galleries)"
+            }
+          }
+        ],
+        "production": {
+          "ko": "신작 218 lots를 1차 시장(갤러리)을 거치지 않고 곧장 경매에 직접 위탁. Evening Sale(9.15) + Day Sale(9.16) 이틀 구성. 스타 lot은 〈The Golden Calf〉(18K 금 뿔·발굽의 포름알데히드 송아지)와 〈The Kingdom〉(타이거 샤크).",
+          "en": "218 new lots consigned straight to auction without ever passing through a primary-market gallery. Structured as an Evening Sale (15 Sep) plus a Day Sale (16 Sep). Star lots: The Golden Calf (formaldehyde calf with 18-carat gold horns and hooves) and The Kingdom (a tiger shark)."
+        },
+        "context": {
+          "ko": "2002 Pharmacy 비품 경매(갤러리 우회 리허설) → 2007 다이아몬드 해골 £50M 보도(가격 정당화) → 이 사건으로 모델 완성. 경매 첫날은 공교롭게도 Lehman Brothers 파산일(2008-09-15)과 겹쳤다.",
+          "en": "The 2002 Pharmacy fixtures sale (gallery-bypass dress rehearsal) and the 2007 £50M skull narrative (price justification) had built the platform; this auction completed the model. Day one coincided, by chance, with the bankruptcy of Lehman Brothers (15 Sep 2008)."
+        }
+      },
+      "commercial": {
+        "price": {
+          "amount": 200750000,
+          "currency": "USD",
+          "sale_type": "single_artist_auction",
+          "date": "2008-09-15/2008-09-16",
+          "disputed": false,
+          "note": {
+            "ko": "총 낙찰가 £111M ≒ $200.75M. 218 lots 단일 작가 경매로 사상 최대 규모. 갤러리 분배 없이 작가가 직접 수익을 흡수한 첫 정점.",
+            "en": "Total £111M ≒ $200.75M for 218 lots — the largest single-artist auction on record at the time and the first peak in which the artist absorbed sale revenue without gallery distribution."
+          }
+        },
+        "production_cost_gbp": null,
+        "delta_pct": null,
+        "delta_baseline": "12mo_avg",
+        "subsequent": [
+          {
+            "note": {
+              "ko": "경매 직후 시작된 글로벌 금융위기로 2차 시장 가격은 2010년대 내내 약세. Artnet 2018년 분석에 따르면 다수 lot의 resale가가 낙찰가를 하회.",
+              "en": "The global financial crisis that began the same day suppressed secondary-market values through the 2010s. An Artnet 2018 analysis found that many lots resold below their original hammer price."
+            }
+          }
+        ]
+      },
+      "status": {
+        "headline_reach": "global",
+        "position_shift": {
+          "ko": "Hirst는 이 경매로 \"갤러리 시스템에서 가장 비싼 작가\"에서 \"갤러리 시스템 자체를 우회할 수 있는 작가\"로 자리 이동. 1차/2차 시장의 위계를 흔든 사건으로 미술시장 역사에 등록.",
+          "en": "With this auction Hirst shifted from \"the most expensive artist inside the gallery system\" to \"the artist who can route around the gallery system entirely\" — recorded in art-market history as a moment that destabilised the primary/secondary hierarchy."
+        },
+        "reception_extras": [
+          {
+            "critic": "Don Thompson",
+            "media": "The $12M Stuffed Shark (book, 2008–09)",
+            "date": "2008–09",
+            "stance": "analytical",
+            "quote_short": {
+              "ko": "갤러리 시스템에 대한 직접 도전이자 브랜딩의 정점",
+              "en": "a direct challenge to the gallery system and a peak of branding"
+            }
+          }
+        ],
+        "institutional": []
+      },
+      "long_term_ripple": [
+        {
+          "to": "currency",
+          "note": {
+            "ko": "갤러리 외 채널로 작가가 직접 분배하는 모델의 원형 — 2021 Currency에서 NFT/메커니즘 형태로 재구현.",
+            "en": "The archetype of distributing work through non-gallery channels — re-implemented in 2021 in NFT/mechanism form as The Currency."
+          }
+        }
+      ],
+      "sources": [
+        {
+          "type": "encyclopedia",
+          "title": "Wikipedia · Beautiful Inside My Head Forever",
+          "url": "https://en.wikipedia.org/wiki/Beautiful_Inside_My_Head_Forever",
+          "confidence": "medium"
+        },
+        {
+          "type": "auction",
+          "title": "Sotheby's · Evening Sale L08027",
+          "url": "https://www.sothebys.com/en/auctions/2008/damien-hirst-beautiful-inside-my-head-forever-evening-sale-l08027.html",
+          "confidence": "high"
+        },
+        {
+          "type": "auction",
+          "title": "Sotheby's · Day Sale L08028",
+          "url": "https://www.sothebys.com/en/auctions/2008/damien-hirst-beautiful-inside-my-head-forever.html",
+          "confidence": "high"
+        },
+        {
+          "type": "press",
+          "title": "Artsy · pre-recession decadence symbol",
+          "url": "https://www.artsy.net/article/artsy-editorial-damien-hirsts-200-million-auction-symbol-pre-recession-decadence",
+          "confidence": "high"
+        },
+        {
+          "type": "press",
+          "title": "Artnet · Decade after BIMHF resales (2018)",
+          "url": "https://news.artnet.com/market/damien-hirst-beautiful-resales-1346528",
+          "confidence": "high"
+        }
+      ],
+      "confidence": "high"
     },
     {
       "id": "wallace",
@@ -247,8 +1682,18 @@
         "이 실패가 2010년 음주·약물 의존 공개 인정과 같은 분기에 있다. 검색량 24로 잠시 올랐지만 sustained 상승 없이 빠르게 사라진다 — 시장이 무엇을 자산으로 인정하고 무엇을 인정하지 않는지의 분기점."
       ],
       "reception": [
-        { "critic": "Adrian Searle", "media": "Guardian", "stance": "negative", "date": "2009.10" },
-        { "critic": "Tom Lubbock", "media": "Independent", "stance": "negative", "date": "2009.10" }
+        {
+          "critic": "Adrian Searle",
+          "media": "Guardian",
+          "stance": "negative",
+          "date": "2009.10"
+        },
+        {
+          "critic": "Tom Lubbock",
+          "media": "Independent",
+          "stance": "negative",
+          "date": "2009.10"
+        }
       ],
       "imageRef": "/images/hirst/W041_2009_no-love-lost-wallace.jpg",
       "sourceWorkId": "W041",
@@ -266,8 +1711,20 @@
       "impactNote": "vs 직전 12개월 평균 — 두 사건의 합산",
       "dualTrigger": true,
       "triggers": [
-        { "type": "museum", "title": "Tate Modern 회고전", "date": "2012-04-04 ~ 2012-09-09", "note": "런던 올림픽 기념 · 25년 커리어 대규모 회고 · In and Out of Love 재현", "sourceEventId": "E037" },
-        { "type": "gallery", "title": "Gagosian 11-Gallery 동시 Spot Retrospective", "date": "2012-01-12 ~ 2012-03-31", "note": "전 세계 Gagosian 11개 venue 동시 Spot 회고전 · 총 ~300점 · stage III 갤러리 시스템의 마지막 대형 동원", "sourceEventId": "E038" }
+        {
+          "type": "museum",
+          "title": "Tate Modern 회고전",
+          "date": "2012-04-04 ~ 2012-09-09",
+          "note": "런던 올림픽 기념 · 25년 커리어 대규모 회고 · In and Out of Love 재현",
+          "sourceEventId": "E037"
+        },
+        {
+          "type": "gallery",
+          "title": "Gagosian 11-Gallery 동시 Spot Retrospective",
+          "date": "2012-01-12 ~ 2012-03-31",
+          "note": "전 세계 Gagosian 11개 venue 동시 Spot 회고전 · 총 ~300점 · stage III 갤러리 시스템의 마지막 대형 동원",
+          "sourceEventId": "E038"
+        }
       ],
       "body": [
         "2012-04 피크 73은 단일 사건이 아니다. Tate Modern 제도권 추인 + Gagosian 11-gallery 동시 Spot 회고전 두 채널이 합쳐 만든 숫자.",
@@ -276,14 +1733,166 @@
         "비평계가 가장 강하게 정조준한 것도 이때. Searle은 부정·혼합, Jones는 옹호. 같은 해 Newport Street Gallery 계획이 공개되고 2013년 건축이 시작된다."
       ],
       "reception": [
-        { "critic": "Adrian Searle", "media": "Guardian", "stance": "mixed", "date": "2012.04.02" },
-        { "critic": "Jonathan Jones", "media": "Guardian", "stance": "positive", "date": "2012.04" },
-        { "critic": "RSPCA", "media": "공식 성명", "stance": "negative", "date": "2012.10.14", "note": "9,000마리 사망 공식 수치" }
+        {
+          "critic": "Adrian Searle",
+          "media": "Guardian",
+          "stance": "mixed",
+          "date": "2012.04.02"
+        },
+        {
+          "critic": "Jonathan Jones",
+          "media": "Guardian",
+          "stance": "positive",
+          "date": "2012.04"
+        },
+        {
+          "critic": "RSPCA",
+          "media": "공식 성명",
+          "stance": "negative",
+          "date": "2012.10.14",
+          "note": "9,000마리 사망 공식 수치"
+        }
       ],
       "imageRef": "/images/hirst/W044_2012_tate-modern-retrospective.jpg",
       "imageRefSecondary": "/images/hirst/W043_2012_spot-painting-gagosian.jpg",
-      "sourceWorkIds": ["W043", "W044"],
-      "sourceEventIds": ["E037", "E038"]
+      "sourceWorkIds": [
+        "W043",
+        "W044"
+      ],
+      "sourceEventIds": [
+        "E037",
+        "E038"
+      ],
+      "isPeak": true,
+      "causes": {
+        "antecedents": [
+          "sotheby",
+          "skull"
+        ],
+        "key_actors": [
+          {
+            "role": "museum",
+            "name": "Tate Modern",
+            "label": {
+              "ko": "Tate Modern (영국 작가 첫 단독 회고전)",
+              "en": "Tate Modern (first British-institution Hirst retrospective)"
+            }
+          },
+          {
+            "role": "sponsor",
+            "name": "Qatar Museums Authority",
+            "label": {
+              "ko": "Qatar Museums Authority (스폰서)",
+              "en": "Qatar Museums Authority (sponsor)"
+            }
+          },
+          {
+            "role": "gallery",
+            "name": "Gagosian",
+            "label": {
+              "ko": "Gagosian (Complete Spot Paintings 11도시 동시 개최)",
+              "en": "Gagosian (Complete Spot Paintings, simultaneous in 11 cities)"
+            }
+          }
+        ],
+        "production": {
+          "ko": "2012.04.04~09.09 Tate Modern 단독 회고전. 25년 커리어를 70여 작품으로 정리. 같은 해 1~2월 Gagosian 11개 도시 동시 〈The Complete Spot Paintings 1986–2011〉이 미술관 회고전 직전의 시장 발판으로 작동.",
+          "en": "A single-artist retrospective at Tate Modern, 4 Apr – 9 Sep 2012, covering 25 years across ~70 works. Earlier the same year (Jan–Feb) Gagosian opened The Complete Spot Paintings 1986–2011 simultaneously in 11 cities — a market platform set up immediately before the museum show."
+        },
+        "context": {
+          "ko": "London 2012 Festival(컬처럴 올림픽의 마무리) 프로그램의 일부. Qatar Museums Authority의 후원, Tate의 영국 단독 작가 첫 대규모 회고전이라는 제도적 무게가 결합.",
+          "en": "Programmed as part of the London 2012 Festival (the Cultural Olympiad's finale). Qatar Museums Authority sponsorship plus Tate's first major retrospective of a single British artist gave the show its institutional weight."
+        }
+      },
+      "commercial": {
+        "price": null,
+        "production_cost_gbp": null,
+        "delta_pct": null,
+        "delta_baseline": "12mo_avg",
+        "subsequent": [
+          {
+            "note": {
+              "ko": "회고전 직후 1차 시장 Spot Paintings 가격은 단기 상승 후 조정. 2012 이후 Hirst의 작품 가격은 BIMHF 직전 수준으로 회복되지 못함.",
+              "en": "Primary-market Spot Painting prices saw a short-term rise followed by correction. From 2012 onward Hirst prices did not recover to pre-BIMHF levels."
+            }
+          }
+        ]
+      },
+      "status": {
+        "headline_reach": "global",
+        "position_shift": {
+          "ko": "\"미술시장 최고가 작가\"에서 \"미술관 정전(canon)에 입성한 작가\"로의 공식 전환점. 단, 비평은 분기(찬·반)가 이 시점부터 굳어졌다.",
+          "en": "The official pivot from \"highest-priced market artist\" to \"canonised museum artist\" — though critical opinion polarised permanently from this point onward."
+        },
+        "reception_extras": [
+          {
+            "critic": "Adrian Searle",
+            "media": "Guardian",
+            "date": "2012-04",
+            "stance": "mixed",
+            "quote_short": {
+              "ko": "시장이 만든 작가에 대한 미술관의 헌사",
+              "en": "a museum tribute to the artist the market made"
+            }
+          },
+          {
+            "critic": "Jonathan Jones",
+            "media": "Guardian",
+            "date": "2012-04",
+            "stance": "positive",
+            "quote_short": {
+              "ko": "초기 작업의 폭력성을 재확인",
+              "en": "a reaffirmation of the violence of the early work"
+            }
+          }
+        ],
+        "institutional": [
+          {
+            "venue": "Tate Modern",
+            "date": "2012-04-04/2012-09-09",
+            "note": {
+              "ko": "Tate 단일 작가전 사상 최다 관람객 — 약 463,000명 (1일 약 3,000명).",
+              "en": "The most-attended single-artist exhibition in Tate history — approx. 463,000 visitors (~3,000/day)."
+            }
+          }
+        ]
+      },
+      "long_term_ripple": [
+        {
+          "to": "venice",
+          "note": {
+            "ko": "Tate 회고전을 정점으로 한 미술관 시기 이후 5년 침체 → 2017 Venice 〈Treasures〉로 재반등 시도.",
+            "en": "Following the Tate-led institutional peak came a five-year slump, and the 2017 Venice 'Treasures' was the attempted comeback."
+          }
+        }
+      ],
+      "sources": [
+        {
+          "type": "release",
+          "title": "Damien Hirst official · Tate stats",
+          "url": "https://www.damienhirst.com/news/2012/tate-stats",
+          "confidence": "high"
+        },
+        {
+          "type": "museum",
+          "title": "Tate Modern · Damien Hirst exhibition page",
+          "url": "https://www.tate.org.uk/whats-on/tate-modern/damien-hirst",
+          "confidence": "high"
+        },
+        {
+          "type": "museum",
+          "title": "Tate annual press release 2012–13",
+          "url": "https://www.tate.org.uk/press/press-releases/2012-13-year-success-and-worldwide-development",
+          "confidence": "high"
+        },
+        {
+          "type": "press",
+          "title": "Studio International · Hirst Reconsidered (2012)",
+          "url": "https://www.studiointernational.com/index.php/hirst-reconsidered-damien-hirst--tate-modern--london--2012",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "high"
     },
     {
       "id": "newport",
@@ -324,16 +1933,170 @@
         "단 비평계 반응은 만장 부정. 같은 분기에 #MeToo 운동이 미술계로 확산되며 YBA 세대 자체가 재평가 대상이 됐다 — 검색량 27의 절반은 부정적 화제."
       ],
       "reception": [
-        { "critic": "Jonathan Jones", "media": "Guardian", "stance": "mixed", "date": "2017.04.06" },
-        { "critic": "Laura Cumming", "media": "Observer", "stance": "negative", "date": "2017.04.16" },
-        { "critic": "Jason Farago", "media": "NYT", "stance": "negative", "date": "2017.04.13", "note": "'monumentally vulgar'" },
-        { "critic": "Hettie Judah", "media": "iNews", "stance": "negative", "date": "2017.04" },
-        { "critic": "#MeToo / YBA 재평가", "media": "art press 전반", "stance": "context-negative", "date": "2017.10-", "note": "YBA 세대의 권력·자본 구조 재검토" }
+        {
+          "critic": "Jonathan Jones",
+          "media": "Guardian",
+          "stance": "mixed",
+          "date": "2017.04.06"
+        },
+        {
+          "critic": "Laura Cumming",
+          "media": "Observer",
+          "stance": "negative",
+          "date": "2017.04.16"
+        },
+        {
+          "critic": "Jason Farago",
+          "media": "NYT",
+          "stance": "negative",
+          "date": "2017.04.13",
+          "note": "'monumentally vulgar'"
+        },
+        {
+          "critic": "Hettie Judah",
+          "media": "iNews",
+          "stance": "negative",
+          "date": "2017.04"
+        },
+        {
+          "critic": "#MeToo / YBA 재평가",
+          "media": "art press 전반",
+          "stance": "context-negative",
+          "date": "2017.10-",
+          "note": "YBA 세대의 권력·자본 구조 재검토"
+        }
       ],
       "imageRef": "/images/hirst/W048_2017_demon-with-bowl.jpg",
       "imageRefSecondary": "/images/hirst/W049_2017_severed-head-of-medusa.jpg",
-      "sourceWorkIds": ["W048", "W049", "W050", "W051"],
-      "sourceEventIds": ["E041", "E042", "E043"]
+      "sourceWorkIds": [
+        "W048",
+        "W049",
+        "W050",
+        "W051"
+      ],
+      "sourceEventIds": [
+        "E041",
+        "E042",
+        "E043"
+      ],
+      "isPeak": true,
+      "causes": {
+        "antecedents": [
+          "tate"
+        ],
+        "key_actors": [
+          {
+            "role": "patron",
+            "name": "François Pinault",
+            "label": {
+              "ko": "François Pinault (펀딩·전시 공간 제공)",
+              "en": "François Pinault (funded the project and provided both venues)"
+            }
+          },
+          {
+            "role": "museum",
+            "name": "Palazzo Grassi + Punta della Dogana",
+            "label": {
+              "ko": "Palazzo Grassi + Punta della Dogana (단일 작가 동시 사용 첫 사례)",
+              "en": "Palazzo Grassi + Punta della Dogana (first time both Pinault venues dedicated to one artist)"
+            }
+          }
+        ],
+        "production": {
+          "ko": "10년 제작 · 약 190점 (금·은·청동·대리석 조각). 5,000㎡ 전시 공간. 가상의 고대 난파선 〈Apistos(Unbelievable)〉에서 인양된 보물이라는 fictional narrative를 사진·비디오·모형으로 다층 구성.",
+          "en": "Ten years in the making · ~190 works in gold, silver, bronze and marble · displayed across 5,000 m². A fictional narrative of treasures salvaged from the ancient wreck Apistos (Unbelievable), layered with photographs, video and models."
+        },
+        "context": {
+          "ko": "2012 Tate 회고전 이후 5년간의 시장·비평 침체 끝의 \"복귀 시도\". 갤러리 회고전이 아니라 컬렉터(Pinault)의 사적 미술관에서 작가가 전시 자체를 작품화하는 형식.",
+          "en": "After a five-year market and critical slump following Tate (2012), this was framed as Hirst's comeback — staged not as a gallery retrospective but as an artist-authored exhibition inside a collector's (Pinault's) private museum."
+        }
+      },
+      "commercial": {
+        "price": {
+          "amount": 65000000,
+          "currency": "USD",
+          "sale_type": "production_cost_estimate",
+          "date": "2007-2017",
+          "disputed": true,
+          "note": {
+            "ko": "제작비 공식 미공개. 미국 매체 추정 약 $65M. 비평계는 \"현존 최대 규모의 예술적 실패작이라면 그 비용 또한 신기록을 세웠을 것\"이라고 평.",
+            "en": "No official cost was disclosed; US media estimated ≈ $65M. Critics noted that if the cost were known, it would probably set a benchmark for how much money could be sunk into an artistic flop."
+          }
+        },
+        "production_cost_gbp": null,
+        "delta_pct": null,
+        "delta_baseline": "12mo_avg",
+        "subsequent": []
+      },
+      "status": {
+        "headline_reach": "global",
+        "position_shift": {
+          "ko": "제도권 미술관(Tate) → 컬렉터의 미술관(Pinault)으로의 채널 이동. \"복귀\"라는 서사는 만들었으나 비평·시장 모두 미적지근 — 트렌드 검색량은 peak(value 27)에 그쳐 BIMHF/skull의 1/3 수준.",
+          "en": "A channel shift from the public-museum platform (Tate) to a collector-museum platform (Pinault). The 'comeback' framing landed, but critical and market response stayed tepid — the search peak (value 27) reached only ~1/3 of the BIMHF/skull levels."
+        },
+        "reception_extras": [
+          {
+            "critic": "Hyperallergic",
+            "media": "Hyperallergic",
+            "date": "2017-05",
+            "stance": "negative",
+            "quote_short": {
+              "ko": "Hirst의 난파선 환상은 베니스에서 가라앉았다",
+              "en": "Hirst's shipwreck fantasy sinks in Venice"
+            }
+          },
+          {
+            "critic": "multiple",
+            "media": "press consensus",
+            "date": "2017",
+            "stance": "polarised",
+            "quote_short": {
+              "ko": "극히 양극화된 평단 — \"기억할 만한 가장 비싼 실패작\"이라는 표현이 반복",
+              "en": "extremely polarised — the phrase \"most expensive artistic flop in living memory\" recurred"
+            }
+          }
+        ],
+        "institutional": [
+          {
+            "venue": "Palazzo Grassi + Punta della Dogana",
+            "date": "2017-04-09/2017-12-03",
+            "note": {
+              "ko": "Pinault Collection 두 베니스 공간 동시 사용 — 컬렉션 사상 단일 작가에게 양쪽이 동시에 주어진 첫 사례.",
+              "en": "Both Pinault venues used simultaneously — the first time the collection devoted both Venice spaces to a single artist."
+            }
+          }
+        ]
+      },
+      "long_term_ripple": [
+        {
+          "to": "currency",
+          "note": {
+            "ko": "\"전시를 통한 복귀\" 시도의 한계를 확인한 뒤, 다음 시도는 갤러리/미술관 채널을 모두 벗어난 메커니즘(Currency)으로 이동.",
+            "en": "After the limits of the 'exhibition-as-comeback' attempt were exposed, the next move shifted into a mechanism (The Currency) that bypassed both gallery and museum channels altogether."
+          }
+        }
+      ],
+      "sources": [
+        {
+          "type": "museum",
+          "title": "Pinault Collection · official exhibition page",
+          "url": "https://www.pinaultcollection.com/palazzograssi/en/treasures-wreck-unbelievable",
+          "confidence": "high"
+        },
+        {
+          "type": "press",
+          "title": "Hyperallergic · shipwreck fantasy sinks in Venice",
+          "url": "https://hyperallergic.com/damien-hirst-treasures-from-the-wreck-of-the-unbelievable-venice-punta-della-dogana-palazzo-grassi/",
+          "confidence": "high"
+        },
+        {
+          "type": "press",
+          "title": "Designboom · underwater fantasy (2017-05)",
+          "url": "https://www.designboom.com/art/damien-hirst-venice-underwater-fantasy-exhibition-treasures-from-the-wreck-of-the-unbelievable-05-23-2017/",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "medium"
     },
     {
       "id": "cherry-cartier",
@@ -375,7 +2138,128 @@
       "reception": [],
       "imageRef": "/images/hirst/W060_2021_the-currency.jpg",
       "sourceWorkId": "W060",
-      "sourceEventId": "E048"
+      "sourceEventId": "E048",
+      "isPeak": true,
+      "causes": {
+        "antecedents": [
+          "sotheby"
+        ],
+        "key_actors": [
+          {
+            "role": "platform",
+            "name": "HENI",
+            "label": {
+              "ko": "HENI (NFT 발행·운영)",
+              "en": "HENI (NFT issuance & operations)"
+            }
+          },
+          {
+            "role": "self",
+            "name": "Damien Hirst",
+            "label": {
+              "ko": "작가 본인 (회화·NFT 양 채널 직접 분배)",
+              "en": "The artist (direct distribution of both painting and NFT channels)"
+            }
+          }
+        ],
+        "production": {
+          "ko": "2016년에 이미 그려둔 10,000개의 점 회화에 각 1:1 매칭되는 10,000개 NFT를 2021.07 $2,000에 발행. 구매자는 1년 내(2022.07.27 마감)에 NFT를 지킬지 회화로 교환할지 선택 — 양립 불가.",
+          "en": "10,000 spot paintings (executed in 2016) were each paired 1:1 with an NFT minted in July 2021 at $2,000. Holders had until 27 Jul 2022 to choose: keep the NFT, or swap it for the physical painting — not both."
+        },
+        "context": {
+          "ko": "2021.03 Beeple Christie's $69M 이후 NFT/암호자산 광풍 정점기. Hirst는 점 회화를 \"통화처럼 작동하는 시리즈\"로 재정의하고, 작품을 폐기(소각)할지 보존할지를 시장에 결정권으로 넘기는 메커니즘을 설계.",
+          "en": "Mounted at the peak of the 2021 NFT/crypto frenzy, six months after Beeple's $69M sale at Christie's. Hirst reframed the spot painting as a series that 'behaves like a currency', and engineered the choice — destroy (burn) the painting or preserve it — into a mechanism handed to the market."
+        }
+      },
+      "commercial": {
+        "price": {
+          "amount": 2000,
+          "currency": "USD",
+          "sale_type": "primary_nft_drop",
+          "date": "2021-07",
+          "disputed": false,
+          "note": {
+            "ko": "1차 발행가 $2,000 × 10,000개 = 표면상 $20M 매출. 2차 시장(OpenSea) 변동 큼. 선택 결과: 5,149개 회화 보존 / 4,851개 NFT 보존 → 4,851개 회화는 2022.09~10 Newport Street Gallery에서 점진적 소각.",
+            "en": "Primary drop $2,000 × 10,000 = ≈ $20M nominal revenue. Secondary (OpenSea) prices fluctuated heavily. Final split: 5,149 holders kept the painting, 4,851 kept the NFT — those 4,851 physical paintings were then burned gradually at Newport Street Gallery, Sep–Oct 2022."
+          }
+        },
+        "production_cost_gbp": null,
+        "delta_pct": null,
+        "delta_baseline": "12mo_avg",
+        "subsequent": [
+          {
+            "note": {
+              "ko": "2022.10 Frieze week 폐막식에 Hirst 본인이 1,000점을 직접 소각. 소각식 자체가 단독 이벤트로 미디어 커버 (Artnet).",
+              "en": "During Frieze week 2022 Hirst himself burned 1,000 paintings at the closing ceremony — the burn ritual was covered as a stand-alone media event (Artnet)."
+            }
+          }
+        ]
+      },
+      "status": {
+        "headline_reach": "global",
+        "position_shift": {
+          "ko": "BIMHF(2008)가 '갤러리 시스템 우회'였다면 Currency는 '시장 자체를 메커니즘으로 설계'한 단계. 작가의 정체성이 \"그리는 사람\"에서 \"시스템을 설계하는 사람\"으로 이동한 사건.",
+          "en": "If BIMHF (2008) was about bypassing the gallery system, The Currency was about engineering the market itself as a mechanism. The artist's identity shifted from 'someone who paints' to 'someone who designs systems'."
+        },
+        "reception_extras": [
+          {
+            "critic": "multiple",
+            "media": "press consensus",
+            "date": "2021–22",
+            "stance": "polarised",
+            "quote_short": {
+              "ko": "NFT 회의론자(가짜 가치) vs 시장 검증론자(가격 자체가 작품) 명확한 분기",
+              "en": "a clear split between NFT sceptics (manufactured value) and pro-market readers (the price is the work)"
+            }
+          }
+        ],
+        "institutional": [
+          {
+            "venue": "Newport Street Gallery",
+            "date": "2022-09/2022-10",
+            "note": {
+              "ko": "Hirst 본인 소유 미술관에서 소각 의례 진행 — 작가가 공간·작품·메커니즘·소각식까지 전부 직접 운영.",
+              "en": "The burn ceremony was held at Hirst's own museum — the artist controlled the venue, the work, the mechanism, and the ritual end-to-end."
+            }
+          }
+        ]
+      },
+      "long_term_ripple": [
+        {
+          "to": null,
+          "note": {
+            "ko": "2022 이후 Hirst의 주요 활동은 다시 갤러리(Cherry Blossoms, Cartier, Gagosian)로 부분 복귀. Currency 모델은 1회성 메커니즘 실험으로 남았으나, \"작가가 메커니즘을 설계\"하는 분배 모델의 레퍼런스로 작용.",
+            "en": "From 2022 onward Hirst partially returned to gallery channels (Cherry Blossoms with Cartier and Gagosian). The Currency model remained a one-off mechanism experiment but stands as a reference point for the distribution mode in which the artist authors the mechanism itself."
+          }
+        }
+      ],
+      "sources": [
+        {
+          "type": "platform",
+          "title": "HENI · The Currency project page",
+          "url": "https://heni.com/nft/more-info/the-currency",
+          "confidence": "high"
+        },
+        {
+          "type": "press",
+          "title": "Artnet · Newport Street Gallery burn (2022-10)",
+          "url": "https://news.artnet.com/market/damien-hirst-newport-street-gallery-burn-2190205",
+          "confidence": "high"
+        },
+        {
+          "type": "press",
+          "title": "Designboom · 1,000 destroyed in front of buyers (2022-10)",
+          "url": "https://www.designboom.com/art/damien-hirst-destroys-1000-physical-artworks-the-currency-10-13-2022/",
+          "confidence": "medium"
+        },
+        {
+          "type": "press",
+          "title": "FAD Magazine · 4,851 to burn (2022-07)",
+          "url": "https://fadmagazine.com/2022/07/27/damien-hirst-to-burn-4851-artworks-from-the-currency-at-nft-exhibition/",
+          "confidence": "medium"
+        }
+      ],
+      "confidence": "high"
     },
     {
       "id": "currency-burn",
@@ -420,7 +2304,6 @@
       "sourceEventId": "E050"
     }
   ],
-
   "specimens": [
     {
       "key": "tigerShark",
@@ -429,11 +2312,36 @@
       "count": 5,
       "verified": "mixed",
       "items": [
-        { "year": 1991, "work": "The Physical Impossibility of Death... (원본)", "peak": false, "note": "Saatchi 위탁 · Hervey Bay 포획" },
-        { "year": 2006, "work": "TPID 표본 교체분", "peak": false, "note": "Cohen 인수 후 부패로 신규 개체 교체" },
-        { "year": 2005, "work": "The Wrath of God", "peak": false, "note": null },
-        { "year": 2008, "work": "Death Denied", "peak": false, "note": "Natural History 시리즈" },
-        { "year": 2008, "work": "The Kingdom · Sotheby BIMHF", "peak": true, "note": "2008.09.15 · £9.6M (premium 포함)" }
+        {
+          "year": 1991,
+          "work": "The Physical Impossibility of Death... (원본)",
+          "peak": false,
+          "note": "Saatchi 위탁 · Hervey Bay 포획"
+        },
+        {
+          "year": 2006,
+          "work": "TPID 표본 교체분",
+          "peak": false,
+          "note": "Cohen 인수 후 부패로 신규 개체 교체"
+        },
+        {
+          "year": 2005,
+          "work": "The Wrath of God",
+          "peak": false,
+          "note": null
+        },
+        {
+          "year": 2008,
+          "work": "Death Denied",
+          "peak": false,
+          "note": "Natural History 시리즈"
+        },
+        {
+          "year": 2008,
+          "work": "The Kingdom · Sotheby BIMHF",
+          "peak": true,
+          "note": "2008.09.15 · £9.6M (premium 포함)"
+        }
       ]
     },
     {
@@ -443,7 +2351,12 @@
       "count": 1,
       "verified": "mixed",
       "items": [
-        { "year": 2006, "work": "Leviathan · 대형 표본", "peak": false, "note": null }
+        {
+          "year": 2006,
+          "work": "Leviathan · 대형 표본",
+          "peak": false,
+          "note": null
+        }
       ]
     },
     {
@@ -453,17 +2366,72 @@
       "count": 11,
       "verified": "verified",
       "items": [
-        { "year": 1993, "work": "Mother and Child (Divided) · cow", "peak": false, "note": "1993 Venice Biennale Aperto" },
-        { "year": 1993, "work": "Mother and Child (Divided) · calf", "peak": false, "note": "Astrup Fearnley 소장" },
-        { "year": 1994, "work": "Cain and Abel · calf 1", "peak": false, "note": null },
-        { "year": 1994, "work": "Cain and Abel · calf 2", "peak": false, "note": null },
-        { "year": 1996, "work": "Some Comfort Gained · cow", "peak": false, "note": "소 1 + 황소 1, 각 6분할 = 12 vitrines" },
-        { "year": 1996, "work": "Some Comfort Gained · bull", "peak": false, "note": null },
-        { "year": 2007, "work": "Saint Sebastian, Exquisite Pain · calf", "peak": false, "note": "화살 관통" },
-        { "year": 2008, "work": "The Golden Calf · Sotheby BIMHF", "peak": true, "note": "£10.3M · 세일 최고가 (18K 황금 뿔·발굽)" },
-        { "year": 2008, "work": "Adam and Eve (Banished) · calf 1", "peak": true, "note": "Sotheby BIMHF" },
-        { "year": 2008, "work": "Adam and Eve (Banished) · calf 2", "peak": true, "note": null },
-        { "year": 2009, "work": "End of an Era · bull head", "peak": false, "note": "머리만 · 18K 황금 뿔" }
+        {
+          "year": 1993,
+          "work": "Mother and Child (Divided) · cow",
+          "peak": false,
+          "note": "1993 Venice Biennale Aperto"
+        },
+        {
+          "year": 1993,
+          "work": "Mother and Child (Divided) · calf",
+          "peak": false,
+          "note": "Astrup Fearnley 소장"
+        },
+        {
+          "year": 1994,
+          "work": "Cain and Abel · calf 1",
+          "peak": false,
+          "note": null
+        },
+        {
+          "year": 1994,
+          "work": "Cain and Abel · calf 2",
+          "peak": false,
+          "note": null
+        },
+        {
+          "year": 1996,
+          "work": "Some Comfort Gained · cow",
+          "peak": false,
+          "note": "소 1 + 황소 1, 각 6분할 = 12 vitrines"
+        },
+        {
+          "year": 1996,
+          "work": "Some Comfort Gained · bull",
+          "peak": false,
+          "note": null
+        },
+        {
+          "year": 2007,
+          "work": "Saint Sebastian, Exquisite Pain · calf",
+          "peak": false,
+          "note": "화살 관통"
+        },
+        {
+          "year": 2008,
+          "work": "The Golden Calf · Sotheby BIMHF",
+          "peak": true,
+          "note": "£10.3M · 세일 최고가 (18K 황금 뿔·발굽)"
+        },
+        {
+          "year": 2008,
+          "work": "Adam and Eve (Banished) · calf 1",
+          "peak": true,
+          "note": "Sotheby BIMHF"
+        },
+        {
+          "year": 2008,
+          "work": "Adam and Eve (Banished) · calf 2",
+          "peak": true,
+          "note": null
+        },
+        {
+          "year": 2009,
+          "work": "End of an Era · bull head",
+          "peak": false,
+          "note": "머리만 · 18K 황금 뿔"
+        }
       ]
     },
     {
@@ -473,11 +2441,36 @@
       "count": 5,
       "verified": "mixed",
       "items": [
-        { "year": 1994, "work": "Away from the Flock · Tate AR00499", "peak": false, "note": "1994 Serpentine 전시 중 잉크 투기 vandal" },
-        { "year": 2006, "work": "Tranquility of Solitude · sheep 1", "peak": false, "note": "For George Dyer · Bacon 트립틱 참조" },
-        { "year": 2006, "work": "Tranquility of Solitude · sheep 2", "peak": false, "note": null },
-        { "year": 2006, "work": "Tranquility of Solitude · sheep 3", "peak": false, "note": null },
-        { "year": 2007, "work": "Black Sheep", "peak": false, "note": null }
+        {
+          "year": 1994,
+          "work": "Away from the Flock · Tate AR00499",
+          "peak": false,
+          "note": "1994 Serpentine 전시 중 잉크 투기 vandal"
+        },
+        {
+          "year": 2006,
+          "work": "Tranquility of Solitude · sheep 1",
+          "peak": false,
+          "note": "For George Dyer · Bacon 트립틱 참조"
+        },
+        {
+          "year": 2006,
+          "work": "Tranquility of Solitude · sheep 2",
+          "peak": false,
+          "note": null
+        },
+        {
+          "year": 2006,
+          "work": "Tranquility of Solitude · sheep 3",
+          "peak": false,
+          "note": null
+        },
+        {
+          "year": 2007,
+          "work": "Black Sheep",
+          "peak": false,
+          "note": null
+        }
       ]
     },
     {
@@ -487,7 +2480,12 @@
       "count": 1,
       "verified": "verified",
       "items": [
-        { "year": 2008, "work": "The Dream · Sotheby BIMHF · 흰 망아지 + 유니콘 뿔", "peak": true, "note": "추정가 £1.5–2M" }
+        {
+          "year": 2008,
+          "work": "The Dream · Sotheby BIMHF · 흰 망아지 + 유니콘 뿔",
+          "peak": true,
+          "note": "추정가 £1.5–2M"
+        }
       ]
     },
     {
@@ -497,9 +2495,24 @@
       "count": 3,
       "verified": "mixed",
       "items": [
-        { "year": 1996, "work": "This Little Piggy · pig", "peak": false, "note": "종단 2분할 · 모터 구동" },
-        { "year": 2006, "work": "The Incomplete Truth · dove", "peak": false, "note": null },
-        { "year": 2007, "work": "Heaven Can Wait · dove", "peak": false, "note": null }
+        {
+          "year": 1996,
+          "work": "This Little Piggy · pig",
+          "peak": false,
+          "note": "종단 2분할 · 모터 구동"
+        },
+        {
+          "year": 2006,
+          "work": "The Incomplete Truth · dove",
+          "peak": false,
+          "note": null
+        },
+        {
+          "year": 2007,
+          "work": "Heaven Can Wait · dove",
+          "peak": false,
+          "note": null
+        }
       ]
     },
     {
@@ -509,11 +2522,15 @@
       "count": 1,
       "verified": "verified",
       "items": [
-        { "year": 2007, "work": "For the Love of God · 8,601 다이아 · 백금 캐스트", "peak": true, "note": "2007.06 검색량 75 · White Cube Beyond Belief" }
+        {
+          "year": 2007,
+          "work": "For the Love of God · 8,601 다이아 · 백금 캐스트",
+          "peak": true,
+          "note": "2007.06 검색량 75 · White Cube Beyond Belief"
+        }
       ]
     }
   ],
-
   "aquaticSpecimens": {
     "note": "위 척추동물 27개체와 별도. 종 동정 1차 공시 없음.",
     "items": [
@@ -533,26 +2550,43 @@
       }
     ]
   },
-
   "tateButterflies2012": {
     "event": "Tate Modern Damien Hirst 회고전",
     "work": "In and Out of Love (재현)",
-    "period": { "start": "2012-04-04", "end": "2012-09-09", "weeks": 23 },
+    "period": {
+      "start": "2012-04-04",
+      "end": "2012-09-09",
+      "weeks": 23
+    },
     "deaths": 9000,
     "dailyAvg": 400,
     "verified": true,
     "officialStatement": "RSPCA 공식 성명(2012.10.14): 9,000마리 사망",
     "hirstResponse": "열대 사육 환경에서 자연 수명 종료",
     "trendImpactConcurrent": 73,
-    "sources": ["RSPCA 2012.10", "BBC News 2012.10.14", "Guardian (Searle, Jones)", "Tate 2012 도록"]
+    "sources": [
+      "RSPCA 2012.10",
+      "BBC News 2012.10.14",
+      "Guardian (Searle, Jones)",
+      "Tate 2012 도록"
+    ]
   },
-
   "sothebyBimhf2008": {
     "saleTitle": "Beautiful Inside My Head Forever",
-    "saleDate": { "start": "2008-09-15", "end": "2008-09-16" },
+    "saleDate": {
+      "start": "2008-09-15",
+      "end": "2008-09-16"
+    },
     "house": "Sotheby's London",
-    "saleIds": ["L08027 (Evening, 2008-09-15)", "L08028 (Day, 2008-09-16)"],
-    "totalProceeds": { "value": 111466650, "currency": "GBP", "note": "buyer's premium 포함" },
+    "saleIds": [
+      "L08027 (Evening, 2008-09-15)",
+      "L08028 (Day, 2008-09-16)"
+    ],
+    "totalProceeds": {
+      "value": 111466650,
+      "currency": "GBP",
+      "note": "buyer's premium 포함"
+    },
     "totalLots": 223,
     "soldLots": 218,
     "unsoldLots": 5,
@@ -562,7 +2596,9 @@
         "rank": 1,
         "title": "The Golden Calf",
         "session": "Evening Sale",
-        "speciesUsed": ["Bos taurus"],
+        "speciesUsed": [
+          "Bos taurus"
+        ],
         "specimenCount": 1,
         "specimenNote": "송아지 1 · 18K 황금 뿔·발굽·황금관",
         "hammerPrice": null,
@@ -573,13 +2609,20 @@
         "barWidthPercent": 100,
         "note": "세일 최고가 · 추정가 £8–12M",
         "verified": true,
-        "sourceIds": ["DH_OFFICIAL", "SOTHEBYS_L08027", "GUARDIAN_BIMHF", "FT_BIMHF"]
+        "sourceIds": [
+          "DH_OFFICIAL",
+          "SOTHEBYS_L08027",
+          "GUARDIAN_BIMHF",
+          "FT_BIMHF"
+        ]
       },
       {
         "rank": 2,
         "title": "The Kingdom",
         "session": "Evening Sale",
-        "speciesUsed": ["Galeocerdo cuvier"],
+        "speciesUsed": [
+          "Galeocerdo cuvier"
+        ],
         "specimenCount": 1,
         "specimenNote": "호랑이상어 1",
         "hammerPrice": null,
@@ -590,13 +2633,19 @@
         "barWidthPercent": 92.8,
         "note": "추정가 £4–6M · 60% 상회 낙찰",
         "verified": true,
-        "sourceIds": ["DH_OFFICIAL", "SOTHEBYS_L08027", "GUARDIAN_BIMHF"]
+        "sourceIds": [
+          "DH_OFFICIAL",
+          "SOTHEBYS_L08027",
+          "GUARDIAN_BIMHF"
+        ]
       },
       {
         "rank": 3,
         "title": "The Dream",
         "session": "Evening Sale",
-        "speciesUsed": ["Equus ferus caballus"],
+        "speciesUsed": [
+          "Equus ferus caballus"
+        ],
         "specimenCount": 1,
         "specimenNote": "흰 망아지 1 · 유니콘 뿔 보철",
         "hammerPrice": null,
@@ -607,13 +2656,18 @@
         "barWidthPercent": 17.4,
         "note": "추정가 · 1차 lot 페이지 hammer 미확인",
         "verified": true,
-        "sourceIds": ["DH_OFFICIAL", "SOTHEBYS_L08027"]
+        "sourceIds": [
+          "DH_OFFICIAL",
+          "SOTHEBYS_L08027"
+        ]
       },
       {
         "rank": 4,
         "title": "Adam and Eve (Banished)",
         "session": "Evening Sale",
-        "speciesUsed": ["Bos taurus"],
+        "speciesUsed": [
+          "Bos taurus"
+        ],
         "specimenCount": 2,
         "specimenNote": "송아지 2 · 2 vitrines",
         "hammerPrice": null,
@@ -624,7 +2678,10 @@
         "barWidthPercent": 17.4,
         "note": "추정가 · 1차 lot 페이지 hammer 미확인",
         "verified": true,
-        "sourceIds": ["DH_OFFICIAL", "SOTHEBYS_L08027"]
+        "sourceIds": [
+          "DH_OFFICIAL",
+          "SOTHEBYS_L08027"
+        ]
       }
     ],
     "criticalReceptionAtSale": [
@@ -637,106 +2694,290 @@
       }
     ]
   },
-
   "speciesSummary": {
     "tigerShark": {
-      "scientific": ["Galeocerdo cuvier"],
+      "scientific": [
+        "Galeocerdo cuvier"
+      ],
       "artworkCount": 4,
       "individualCount": 5,
       "verified": false,
       "note": "TPID 1991 원본 + 2006 교체분 = 누적 2개체 (작품 1점). Wrath of God / Death Denied / The Kingdom 각 1마리."
     },
     "baskingShark": {
-      "scientific": ["Cetorhinus maximus"],
+      "scientific": [
+        "Cetorhinus maximus"
+      ],
       "artworkCount": 1,
       "individualCount": 1,
       "verified": false,
       "note": "Leviathan (2006)"
     },
     "bovine": {
-      "scientific": ["Bos taurus"],
+      "scientific": [
+        "Bos taurus"
+      ],
       "artworkCount": 7,
       "individualCount": 11,
       "verified": false,
       "note": "MCD(2) + Cain&Abel(2) + Some Comfort Gained(2) + Saint Sebastian(1) + Golden Calf(1) + Adam&Eve(2) + End of an Era(1)"
     },
     "sheep": {
-      "scientific": ["Ovis aries"],
+      "scientific": [
+        "Ovis aries"
+      ],
       "artworkCount": 3,
       "individualCount": 5,
       "verified": false,
       "note": "Away from the Flock(1) + Tranquility of Solitude(3) + Black Sheep(1)"
     },
     "pig": {
-      "scientific": ["Sus scrofa domesticus"],
+      "scientific": [
+        "Sus scrofa domesticus"
+      ],
       "artworkCount": 1,
       "individualCount": 1,
       "verified": false,
       "note": "This Little Piggy (1996), bisected"
     },
     "foal": {
-      "scientific": ["Equus ferus caballus"],
+      "scientific": [
+        "Equus ferus caballus"
+      ],
       "artworkCount": 1,
       "individualCount": 1,
       "verified": true,
       "note": "The Dream (2008), Sotheby's BIMHF"
     },
     "dove": {
-      "scientific": ["Columba livia domestica"],
+      "scientific": [
+        "Columba livia domestica"
+      ],
       "artworkCount": 2,
       "individualCount": 2,
       "verified": false,
       "note": "The Incomplete Truth + Heaven Can Wait"
     },
     "fishAquatic": {
-      "scientific": [null],
+      "scientific": [
+        null
+      ],
       "artworkCount": 2,
       "individualCount": null,
       "verified": false,
       "note": "Isolated Elements (~38) + Lost Love / Love Lost (개체 수 비공개)"
     },
     "humanRemains": {
-      "scientific": ["Homo sapiens"],
+      "scientific": [
+        "Homo sapiens"
+      ],
       "artworkCount": 1,
       "individualCount": 1,
       "verified": true,
       "note": "For the Love of God — 18C 유럽 남성 추정"
     },
     "butterfliesLive": {
-      "scientific": [null],
+      "scientific": [
+        null
+      ],
       "artworkCount": 1,
       "individualCount": 9000,
       "verified": true,
       "note": "In and Out of Love (2012 Tate 재현) — RSPCA / BBC 일치"
     }
   },
-
   "sources": [
-    { "id": "DH_OFFICIAL", "type": "artist", "tier": 1, "title": "Damien Hirst — Artworks", "publisher": "damienhirst.com (Science Ltd / HENI)", "url": "https://www.damienhirst.com/artworks" },
-    { "id": "DH_NATURAL_HISTORY", "type": "artist", "tier": 1, "title": "Natural History series catalogue", "publisher": "Science Ltd", "url": "https://www.damienhirst.com/texts/_/natural-history" },
-    { "id": "SOTHEBYS_L08027", "type": "auction", "tier": 1, "title": "Beautiful Inside My Head Forever, Sale L08027 / L08028", "publisher": "Sotheby's London", "date": "2008-09-15", "url": "https://www.sothebys.com/en/auctions/2008/beautiful-inside-my-head-forever-l08027.html" },
-    { "id": "SOTHEBYS_PRESS_2008", "type": "auction", "tier": 1, "title": "Beautiful Inside My Head Forever totals £111,466,650", "publisher": "Sotheby's Press Release", "date": "2008-09-16" },
-    { "id": "WHITECUBE_FTLOG", "type": "gallery", "tier": 1, "title": "For the Love of God — Beyond Belief", "publisher": "White Cube", "date": "2007-06" },
-    { "id": "TATE_DH_2012", "type": "museum", "tier": 1, "title": "Damien Hirst (Tate Modern, 4 Apr – 9 Sep 2012)", "publisher": "Tate", "url": "https://www.tate.org.uk/whats-on/tate-modern/exhibition/damien-hirst" },
-    { "id": "TATE_MCD", "type": "museum", "tier": 1, "title": "Mother and Child (Divided), Exhibition Copy 1993, 2007 — T12751", "publisher": "Tate" },
-    { "id": "TATE_AWAY_FLOCK", "type": "museum", "tier": 1, "title": "Away from the Flock 1994 — AR00499", "publisher": "Tate" },
-    { "id": "ASTRUP_FEARNLEY", "type": "museum", "tier": 1, "title": "Damien Hirst works in collection", "publisher": "Astrup Fearnley Museet", "url": "https://www.afmuseet.no/" },
-    { "id": "PUNTA_DOGANA_2017", "type": "museum", "tier": 1, "title": "Damien Hirst: Treasures from the Wreck of the Unbelievable", "publisher": "Pinault Collection", "date": "2017-04-09" },
-    { "id": "RSPCA_2012", "type": "ngo", "tier": 1, "title": "RSPCA statement on Damien Hirst's ‘In and Out of Love’ — 9,000 butterflies died", "publisher": "RSPCA", "date": "2012-10" },
-    { "id": "PETA_2017", "type": "ngo", "tier": 1, "title": "PETA statements on Damien Hirst", "publisher": "PETA UK", "url": "https://www.peta.org.uk/" },
-    { "id": "NYT_VOGEL_2007", "type": "press", "tier": 2, "title": "Damien Hirst's Next Act (For the Love of God / £50M skull)", "publisher": "The New York Times", "author": "Carol Vogel", "date": "2007-06-01" },
-    { "id": "NYT_VOGEL_2006", "type": "press", "tier": 2, "title": "Hedge Fund Manager Buys Hirst Shark for $8 million", "publisher": "The New York Times", "author": "Carol Vogel", "date": "2006-10-12" },
-    { "id": "NYT_KENNEDY_2006", "type": "press", "tier": 2, "title": "The Shark Is Still Working", "publisher": "The New York Times", "author": "Randy Kennedy", "date": "2006-10-01" },
-    { "id": "GUARDIAN_BIMHF", "type": "press", "tier": 2, "title": "Hirst's £111m sale defies financial gloom", "publisher": "The Guardian", "date": "2008-09-17" },
-    { "id": "FT_BIMHF", "type": "press", "tier": 2, "title": "Hirst auction raises £111m on day Lehman collapses", "publisher": "Financial Times", "date": "2008-09-16" },
-    { "id": "GUARDIAN_SEARLE_2012", "type": "press", "tier": 2, "title": "Damien Hirst — review (Tate Modern retrospective)", "publisher": "The Guardian", "author": "Adrian Searle", "date": "2012-04-02" },
-    { "id": "GUARDIAN_JONES_2012", "type": "press", "tier": 2, "title": "Damien Hirst is a great artist. Why can't critics see that?", "publisher": "The Guardian", "author": "Jonathan Jones", "date": "2012" },
-    { "id": "GUARDIAN_JONES_2017", "type": "press", "tier": 2, "title": "Damien Hirst: Treasures from the Wreck of the Unbelievable review", "publisher": "The Guardian", "author": "Jonathan Jones", "date": "2017-04-06" },
-    { "id": "GUARDIAN_HUGHES_2008", "type": "press", "tier": 2, "title": "Day of the dead", "publisher": "The Guardian", "author": "Robert Hughes", "date": "2008-09-13" },
-    { "id": "BBC_TATE_BUTTERFLY", "type": "broadcast", "tier": 2, "title": "9,000 butterflies died during Hirst Tate Modern show", "publisher": "BBC News", "date": "2012-10-14" },
-    { "id": "ARTNEWSPAPER_BIMHF", "type": "press", "tier": 2, "title": "How Sotheby's pulled off the Hirst sale", "publisher": "The Art Newspaper", "date": "2008-09" }
+    {
+      "id": "DH_OFFICIAL",
+      "type": "artist",
+      "tier": 1,
+      "title": "Damien Hirst — Artworks",
+      "publisher": "damienhirst.com (Science Ltd / HENI)",
+      "url": "https://www.damienhirst.com/artworks"
+    },
+    {
+      "id": "DH_NATURAL_HISTORY",
+      "type": "artist",
+      "tier": 1,
+      "title": "Natural History series catalogue",
+      "publisher": "Science Ltd",
+      "url": "https://www.damienhirst.com/texts/_/natural-history"
+    },
+    {
+      "id": "SOTHEBYS_L08027",
+      "type": "auction",
+      "tier": 1,
+      "title": "Beautiful Inside My Head Forever, Sale L08027 / L08028",
+      "publisher": "Sotheby's London",
+      "date": "2008-09-15",
+      "url": "https://www.sothebys.com/en/auctions/2008/beautiful-inside-my-head-forever-l08027.html"
+    },
+    {
+      "id": "SOTHEBYS_PRESS_2008",
+      "type": "auction",
+      "tier": 1,
+      "title": "Beautiful Inside My Head Forever totals £111,466,650",
+      "publisher": "Sotheby's Press Release",
+      "date": "2008-09-16"
+    },
+    {
+      "id": "WHITECUBE_FTLOG",
+      "type": "gallery",
+      "tier": 1,
+      "title": "For the Love of God — Beyond Belief",
+      "publisher": "White Cube",
+      "date": "2007-06"
+    },
+    {
+      "id": "TATE_DH_2012",
+      "type": "museum",
+      "tier": 1,
+      "title": "Damien Hirst (Tate Modern, 4 Apr – 9 Sep 2012)",
+      "publisher": "Tate",
+      "url": "https://www.tate.org.uk/whats-on/tate-modern/exhibition/damien-hirst"
+    },
+    {
+      "id": "TATE_MCD",
+      "type": "museum",
+      "tier": 1,
+      "title": "Mother and Child (Divided), Exhibition Copy 1993, 2007 — T12751",
+      "publisher": "Tate"
+    },
+    {
+      "id": "TATE_AWAY_FLOCK",
+      "type": "museum",
+      "tier": 1,
+      "title": "Away from the Flock 1994 — AR00499",
+      "publisher": "Tate"
+    },
+    {
+      "id": "ASTRUP_FEARNLEY",
+      "type": "museum",
+      "tier": 1,
+      "title": "Damien Hirst works in collection",
+      "publisher": "Astrup Fearnley Museet",
+      "url": "https://www.afmuseet.no/"
+    },
+    {
+      "id": "PUNTA_DOGANA_2017",
+      "type": "museum",
+      "tier": 1,
+      "title": "Damien Hirst: Treasures from the Wreck of the Unbelievable",
+      "publisher": "Pinault Collection",
+      "date": "2017-04-09"
+    },
+    {
+      "id": "RSPCA_2012",
+      "type": "ngo",
+      "tier": 1,
+      "title": "RSPCA statement on Damien Hirst's ‘In and Out of Love’ — 9,000 butterflies died",
+      "publisher": "RSPCA",
+      "date": "2012-10"
+    },
+    {
+      "id": "PETA_2017",
+      "type": "ngo",
+      "tier": 1,
+      "title": "PETA statements on Damien Hirst",
+      "publisher": "PETA UK",
+      "url": "https://www.peta.org.uk/"
+    },
+    {
+      "id": "NYT_VOGEL_2007",
+      "type": "press",
+      "tier": 2,
+      "title": "Damien Hirst's Next Act (For the Love of God / £50M skull)",
+      "publisher": "The New York Times",
+      "author": "Carol Vogel",
+      "date": "2007-06-01"
+    },
+    {
+      "id": "NYT_VOGEL_2006",
+      "type": "press",
+      "tier": 2,
+      "title": "Hedge Fund Manager Buys Hirst Shark for $8 million",
+      "publisher": "The New York Times",
+      "author": "Carol Vogel",
+      "date": "2006-10-12"
+    },
+    {
+      "id": "NYT_KENNEDY_2006",
+      "type": "press",
+      "tier": 2,
+      "title": "The Shark Is Still Working",
+      "publisher": "The New York Times",
+      "author": "Randy Kennedy",
+      "date": "2006-10-01"
+    },
+    {
+      "id": "GUARDIAN_BIMHF",
+      "type": "press",
+      "tier": 2,
+      "title": "Hirst's £111m sale defies financial gloom",
+      "publisher": "The Guardian",
+      "date": "2008-09-17"
+    },
+    {
+      "id": "FT_BIMHF",
+      "type": "press",
+      "tier": 2,
+      "title": "Hirst auction raises £111m on day Lehman collapses",
+      "publisher": "Financial Times",
+      "date": "2008-09-16"
+    },
+    {
+      "id": "GUARDIAN_SEARLE_2012",
+      "type": "press",
+      "tier": 2,
+      "title": "Damien Hirst — review (Tate Modern retrospective)",
+      "publisher": "The Guardian",
+      "author": "Adrian Searle",
+      "date": "2012-04-02"
+    },
+    {
+      "id": "GUARDIAN_JONES_2012",
+      "type": "press",
+      "tier": 2,
+      "title": "Damien Hirst is a great artist. Why can't critics see that?",
+      "publisher": "The Guardian",
+      "author": "Jonathan Jones",
+      "date": "2012"
+    },
+    {
+      "id": "GUARDIAN_JONES_2017",
+      "type": "press",
+      "tier": 2,
+      "title": "Damien Hirst: Treasures from the Wreck of the Unbelievable review",
+      "publisher": "The Guardian",
+      "author": "Jonathan Jones",
+      "date": "2017-04-06"
+    },
+    {
+      "id": "GUARDIAN_HUGHES_2008",
+      "type": "press",
+      "tier": 2,
+      "title": "Day of the dead",
+      "publisher": "The Guardian",
+      "author": "Robert Hughes",
+      "date": "2008-09-13"
+    },
+    {
+      "id": "BBC_TATE_BUTTERFLY",
+      "type": "broadcast",
+      "tier": 2,
+      "title": "9,000 butterflies died during Hirst Tate Modern show",
+      "publisher": "BBC News",
+      "date": "2012-10-14"
+    },
+    {
+      "id": "ARTNEWSPAPER_BIMHF",
+      "type": "press",
+      "tier": 2,
+      "title": "How Sotheby's pulled off the Hirst sale",
+      "publisher": "The Art Newspaper",
+      "date": "2008-09"
+    }
   ],
-
   "caveats": {
     "asOfDate": "2026-05-12",
     "noOfficialAggregate": "Damien Hirst / Science Ltd / HENI 어느 쪽도 사용된 생물학적 표본의 종합 통계를 공식 발표한 적이 없음. 본 데이터셋은 공개 1차 자료에서 작품 단위로 역산한 결과.",
@@ -763,7 +3004,6 @@
     ],
     "marketDataLimitations": "Sotheby's BIMHF 223 lots 중 본 데이터셋이 lot 단위로 검증한 것은 headline 4점이며, 나머지 219 lots는 lot 페이지의 hammer/premium 분리치 직접 확인 필요. 사적 거래(Saatchi → Cohen, White Cube 컨소시엄 등)는 1차 공시가 존재하지 않으므로 보도된 추정치만 기재"
   },
-
   "footerInsights": [
     {
       "id": "01",

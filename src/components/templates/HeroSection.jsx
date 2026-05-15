@@ -1,123 +1,177 @@
 import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 import { HeroTypeBlock } from '../typography/HeroTypeBlock.jsx';
-import SharkVitrine from '../shark-modeling/SharkVitrine.jsx';
+import VideoScrubbing from '../scroll/VideoScrubbing.jsx';
+import heroVideoSrc from '../../assets/video/hirst-scrub.mp4';
+import { BRIDGE_SECTIONS } from './bridgeNarrative.js';
+import { BridgeSection } from './BridgeSection.jsx';
 
 /**
- * HeroSection — Landing의 첫 화면. 거대 타이포 sandwich + 중앙 상어 비트린.
+ * HeroSection — Hero 타이포(검정) + 영상 스크럽 + 6 Bridge stories.
  *
- * 외부 section: 200vh (scroll 트랜지션 공간).
- * sticky inner: 100dvh, **사방 동일 padding 6vw** (좌우 = 상하).
- * inner area 내부 3-slot: top 18% / middle 64% / bottom 18% (inner area 기준 %).
+ * 구조:
+ *  ┌─ Sticky video (히어로 콘텐츠가 지나가는 동안 viewport stuck)
+ *  │     viewport 크기 그대로 cover. zoom-in 없음.
+ *  ├─ Hero 타이포 박스 (자기 자리 100vh, **marginTop: -100vh로 sticky video 자리와 공유**)
+ *  │     자연 스크롤 — transform/fade 없음. 사용자가 100vh 스크롤하는 동안 자연스럽게
+ *  │     viewport 위로 흘러나가 사라짐. sticky video는 그대로 stuck.
+ *  └─ 6 BridgeSection (콘텐츠 높이 + 큰 상하 간격) — 자연 스크롤 overlay
  *
- * Scroll phase (opacity fade 없음, 자연 스크롤):
- * - 0.0~0.5: vitrine invisible, 회전만 (상어만 보임)
- * - 0.5~0.9: 수조 + 물 동시 채워짐
- * - 0.9~1.0: page bg 흰→검정 (Timeline 진입)
+ * HeroSection의 단일 scrollYProgress → 영상 currentTime과 타임라인 진입 상태가
+ * 같은 기준으로 움직인다.
  *
  * Props:
- * @param {function} onHeroProgress - hero scroll progress(0~1) motion value 노출 콜백 [Optional]
- * @param {boolean} isPaused - Hero가 화면 밖으로 빠진 뒤 R3F Canvas 렌더 루프를 멈추는 플래그 [Optional, 기본값: false]
- *
- * Example usage:
- * <HeroSection onHeroProgress={ setHeroProgress } isPaused={ isHeroFinished } />
+ * @param {function} onHeroProgress - wrapper scrollYProgress motion value 노출 콜백 [Optional]
  */
-function HeroSection({ onHeroProgress, isPaused = false }) {
+function HeroSection({ onHeroProgress }) {
   const sectionRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end end'],
+  /**
+   * 결정론적 진행도 계산.
+   *
+   * sectionRef = sticky video(100vh) + Hero 타이포(overlap) + PROLOGUE(100vh) = 200vh
+   * 매핑 구간 = sectionRef.top hits viewport.top  →  sectionRef.bottom hits viewport.bottom
+   *           = scrollable distance = height - viewport.height = 100vh
+   *
+   *  - rect.top   = sectionRef의 viewport 기준 top 위치
+   *  - height     = sectionRef.offsetHeight (200vh, layout flow 기준)
+   *  - viewportH  = window.innerHeight (100vh)
+   *  - scrollable = height - viewportH (100vh)
+   *  - progress   = -rect.top / scrollable
+   *
+   * 매핑:
+   *  - sectionRef.top = viewport.top         →  rect.top = 0         →  progress 0
+   *  - sectionRef.bottom = viewport.bottom   →  rect.top = -100vh    →  progress 1
+   *                                              = PROLOGUE가 viewport 정확히 채운 순간
+   *                                              = sticky video 해제 직전
+   *                                              = video 마지막 프레임
+   *
+   * 그 이후 100vh 스크롤 동안 sticky 해제되어 video와 PROLOGUE가 같이 위로 빠져나감.
+   */
+  const { scrollY } = useScroll();
+  const scrollYProgress = useTransform(scrollY, () => {
+    const el = sectionRef.current;
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const height = el.offsetHeight;
+    const viewportH = window.innerHeight;
+    const scrollable = height - viewportH;
+    if (scrollable <= 0) return 0;
+    return Math.max(0, Math.min(1, -rect.top / scrollable));
   });
 
   React.useEffect(() => {
     onHeroProgress?.(scrollYProgress);
   }, [onHeroProgress, scrollYProgress]);
 
-  /** 확대 phase(0.4~0.65) 동안 텍스트가 페이지와 함께 자연 스크롤되어 viewport 밖으로 사라짐.
-      top: 위로 (-50vh), bottom: 아래로 (+50vh). vitrine은 고정 (zoom-in만). */
-  const topTextY = useTransform(scrollYProgress, [0.4, 0.65], ['0vh', '-50vh']);
-  const bottomTextY = useTransform(scrollYProgress, [0.4, 0.65], ['0vh', '50vh']);
-
   return (
     <Box
-      ref={ sectionRef }
+      ref={sectionRef}
       component="section"
-      sx={ {
+      sx={{
         position: 'relative',
-        height: '200vh',
-      } }
+      }}
     >
-      {/* sticky inner — 사방 동일 padding 6vw */}
+      {/* Sticky video — viewport 크기 100vh × 100vw stuck. 히어로 콘텐츠 구간 동안 유지. */}
       <Box
-        sx={ {
+        sx={{
           position: 'sticky',
           top: 0,
-          left: 0,
           width: '100%',
-          height: '100dvh',
-          padding: '3vw',
-          boxSizing: 'border-box',
+          height: '100vh',
+          zIndex: 0,
           overflow: 'hidden',
-        } }
+        }}
       >
-        {/* 상어 비트린 — sticky inner 전체(100vw × 100dvh)를 덮어 clipping 방지.
-            padding을 무시하고 viewport 전체로 확장. cameraPosition.z 보정으로
-            기존 64% 슬롯에서 보이던 시각 크기를 유지 (canvas 1.75x ↑ → z 1.75x ↑). */}
+        <VideoScrubbing
+          src={heroVideoSrc}
+          progress={scrollYProgress}
+          sx={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      </Box>
+
+      {/* Hero 타이포 — 자연 스크롤 (fade/transform 없음).
+          marginTop: -100vh로 sticky video 첫 자리(top 0~100vh)와 자리 공유.
+          사용자가 100vh 스크롤하는 동안 page-flow 따라 위로 자연스럽게 흘러나감.
+          이 후 sticky video는 stuck 유지, BridgeSection이 등장. */}
+      <Box
+        sx={{
+          position: 'relative',
+          height: '100vh',
+          marginTop: '-100vh',
+          zIndex: 1,
+          pointerEvents: 'none',
+        }}
+      >
+        {/* 상단 타이포 — DAMIEN HIRST */}
         <Box
-          sx={ {
+          sx={{
             position: 'absolute',
-            inset: 0,
-            zIndex: 0,
-          } }
+            top: '3vw',
+            left: '3vw',
+            right: '3vw',
+            height: '18%',
+          }}
         >
-          <SharkVitrine
-            background="transparent"
-            height="100%"
-            hasControls={ false }
-            isAutoRotate={ false }
-            isFloating={ false }
-            sharkScale={ 0.5 }
-            cameraPosition={ [0, 0, 19] }
-            cameraFov={ 36 }
-            progress={ scrollYProgress }
-            frameloop={ isPaused ? 'never' : 'always' }
+          <HeroTypeBlock text="DAMIEN HIRST" align="flex-start" color="#000000" padding={0} />
+        </Box>
+
+        {/* 하단 타이포 — 1988 — PRESENT : FAME ALGORITHM */}
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: '3vw',
+            left: '3vw',
+            right: '3vw',
+            height: '18%',
+          }}
+        >
+          <HeroTypeBlock
+            text="1988 — PRESENT : FAME ALGORITHM"
+            align="flex-end"
+            color="#000000"
+            padding={0}
           />
         </Box>
+      </Box>
 
-        {/* inner area — padding 안쪽. 텍스트 슬롯의 % 기준이 됨. 비트린 위에 올림 */}
-        <Box sx={ { position: 'relative', width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' } }>
-          {/* 상단 타이포 — DAMIEN HIRST. 확대 phase 동안 위로 자연 스크롤 */}
-          <Box
-            component={ motion.div }
-            style={ { y: topTextY } }
-            sx={ {
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '18%',
-            } }
-          >
-            <HeroTypeBlock text="DAMIEN HIRST" align="flex-start" color="#000000" padding={ 0 } />
-          </Box>
+      {/* Spacer — 타이틀과 PROLOGUE 사이 100vh 빈 스크롤 공간.
+          이 구간 동안 sticky video만 viewport에 보이며 영상 스크러빙이 진행됨. */}
+      <Box
+        aria-hidden="true"
+        sx={{
+          position: 'relative',
+          zIndex: 1,
+          pointerEvents: 'none',
+          height: '100vh',
+        }}
+      />
 
-          {/* 하단 타이포 — 활동연도 + FAME ALGORITHM. 확대 phase 동안 아래로 자연 스크롤 */}
-          <Box
-            component={ motion.div }
-            style={ { y: bottomTextY } }
-            sx={ {
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '18%',
-            } }
-          >
-            <HeroTypeBlock text="1988 — PRESENT : FAME ALGORITHM" align="flex-end" color="#000000" padding={ 0 } />
-          </Box>
-        </Box>
+      {/* PROLOGUE 컨테이너 — 100vh fixed. 좌측 정렬 + 흰색 타이포.
+          배경 영상 중앙에 Hirst 초상화가 위치하므로 좌측에 배치해 시각 충돌 회피.
+          이 박스가 viewport에 정확히 일치하는 순간(top=top, bottom=bottom)이
+          progress 1 = 영상 마지막 프레임 = sticky 해제 직전. */}
+      <Box
+        sx={{
+          position: 'relative',
+          zIndex: 1,
+          pointerEvents: 'none',
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          px: { xs: '3vw', md: '6vw' },
+        }}
+      >
+        <BridgeSection
+          section={BRIDGE_SECTIONS[0]}
+          color="#FFFFFF"
+          layout="grid"
+        />
       </Box>
     </Box>
   );

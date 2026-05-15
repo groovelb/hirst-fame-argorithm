@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 import { useLocale } from '../../i18n';
-import { PRODUCT, BRAND_LABEL } from './typography.js';
+import { PRODUCT } from './typography.js';
 
 const BAND_IMAGE_SRC = {
   TRANSCENDENCE: '/images/hirst/grotesque-bitmap/transcendence-sacred-heart.png',
