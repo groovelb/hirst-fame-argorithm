@@ -1,5 +1,7 @@
 import { useCallback, useRef, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import { TOKENS } from '../../styles/themes/tokens.js';
 
 /**
  * VideoScrubbing Component
@@ -23,6 +25,38 @@ const VideoScrubbing = ({
 }) => {
   const videoRef = useRef(null);
   const [isInView, setIsInView] = useState(false);
+  /**
+   * isReady = video element가 끊김 없이 재생/스크럽 가능한 상태.
+   * canplaythrough(브라우저 판단 충분 buffer) 또는 buffered range가 duration까지 도달 시 true.
+   * 그 전까지 사이트 배경색 overlay + 로딩 인디케이터 표시 → 끊김 방지.
+   */
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return undefined;
+
+    const markReady = () => setIsReady(true);
+
+    const handleProgress = () => {
+      if (
+        video.duration &&
+        video.buffered.length > 0 &&
+        video.buffered.end(video.buffered.length - 1) >= video.duration - 0.5
+      ) {
+        markReady();
+      }
+    };
+
+    video.addEventListener('canplaythrough', markReady);
+    video.addEventListener('progress', handleProgress);
+    if (video.readyState >= 4) markReady();
+
+    return () => {
+      video.removeEventListener('canplaythrough', markReady);
+      video.removeEventListener('progress', handleProgress);
+    };
+  }, []);
 
   const setVideoProgress = useCallback((nextProgress) => {
     const video = videoRef.current;
@@ -156,7 +190,30 @@ const VideoScrubbing = ({
         height: '100%',
       }}
     >
-      {/* Video */}
+      {/* Loading overlay — 영상 전체 buffer 완료(canplaythrough) 전까지 표시.
+          사이트 배경(TOKENS.bg.page) 위에 작은 인디케이터. isReady true 시 opacity 0으로 fade out. */}
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: TOKENS.bg.page,
+          opacity: isReady ? 0 : 1,
+          transition: 'opacity 600ms ease',
+          pointerEvents: 'none',
+        }}
+      >
+        <CircularProgress
+          size={ 28 }
+          thickness={ 3 }
+          sx={ { color: TOKENS.alpha.onLight(0.45) } }
+        />
+      </Box>
+
+      {/* Video — isReady 전엔 opacity 0 (디코더가 임의 frame 보이지 않게), 이후 fade in */}
       <Box
         component="video"
         ref={videoRef}
@@ -169,6 +226,8 @@ const VideoScrubbing = ({
           display: 'block',
           position: 'relative',
           zIndex: 0,
+          opacity: isReady ? 1 : 0,
+          transition: 'opacity 600ms ease',
           ...sx,
         }}
         {...props}
