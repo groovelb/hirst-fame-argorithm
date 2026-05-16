@@ -93,26 +93,52 @@ function LoadingScreen({ visible, progress = 0 }) {
                   width: '100%',
                   height: '100%',
                   objectFit: 'contain',
-                  filter: 'contrast(1.05)',
+                  /**
+                   * 원본 PNG: 검정 배경 + 흰/회색 실루엣 → invert(1)로 흰 배경 + 검정 실루엣.
+                   * LoadingScreen 흰 배경(TOKENS.bg.page)과 융합되어 검정 실루엣만 남는다.
+                   */
+                  filter: 'invert(1) contrast(1.1)',
                 } }
               />
             </AnimatePresence>
           </Box>
 
-          <Typography
-            component="span"
+          <Box
             sx={ {
-              fontFamily: BRAND_DISPLAY,
-              fontWeight: 700,
-              fontSize: { xs: '0.7rem', md: '0.78rem' },
-              letterSpacing: '0.42em',
-              color: TOKENS.alpha.onLight(0.6),
-              textTransform: 'uppercase',
-              fontVariantNumeric: 'tabular-nums',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: { xs: 1, md: 1.5 },
             } }
           >
-            { `Loading · ${ Math.floor(progress * 100) }%` }
-          </Typography>
+            <Typography
+              component="span"
+              sx={ {
+                fontFamily: BRAND_DISPLAY,
+                fontWeight: 700,
+                fontSize: { xs: '0.62rem', md: '0.72rem' },
+                letterSpacing: '0.42em',
+                color: TOKENS.alpha.onLight(0.5),
+                textTransform: 'uppercase',
+              } }
+            >
+              Loading
+            </Typography>
+            <Typography
+              component="span"
+              sx={ {
+                fontFamily: BRAND_DISPLAY,
+                fontWeight: 900,
+                fontSize: { xs: '2.4rem', sm: '3rem', md: '4rem', lg: '4.8rem' },
+                lineHeight: 1,
+                letterSpacing: '-0.02em',
+                color: TOKENS.text.onLight,
+                fontVariantNumeric: 'tabular-nums',
+              } }
+            >
+              { `${ Math.floor(progress * 100) }%` }
+            </Typography>
+          </Box>
         </motion.div>
       ) }
     </AnimatePresence>
