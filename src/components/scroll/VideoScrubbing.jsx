@@ -2,6 +2,15 @@ import { useCallback, useRef, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 
 /**
+ * iOS in-app WebView 감지 (Threads/Instagram/Facebook/Line).
+ * 이 환경에서는 blob URL → video.src 경로가 WebKit bug 232076 등 다발 이슈로 깨지는
+ * 경우가 많아, fetch+Blob 경로 자체를 우회하고 원본 src를 직접 사용하는 게 안전.
+ */
+const isInAppBrowser =
+  typeof navigator !== 'undefined' &&
+  /FBAN|FBAV|FBIOS|Instagram|Barcelona|Line\//i.test(navigator.userAgent);
+
+/**
  * VideoScrubbing Component
  * 스크롤 위치에 따라 비디오를 프레임 단위로 재생(스크러빙)하는 컴포넌트입니다.
  *
@@ -45,6 +54,13 @@ const VideoScrubbing = ({
   useEffect(() => {
     let cancelled = false;
     let createdBlobUrl = null;
+
+    // 인앱 브라우저: fetch+Blob 경로 자체 우회 → 원본 src 직접 사용
+    if (isInAppBrowser) {
+      setBlobSrc(src);
+      onLoadProgressRef.current?.(1);
+      return () => {};
+    }
 
     const fetchVideo = async () => {
       try {
@@ -93,11 +109,12 @@ const VideoScrubbing = ({
   /**
    * blob URL이 video element에 로드되어 metadata 디코딩 완료 시 ready 신호 발생.
    *
-   * iOS Threads/Instagram 등 인앱 WebView 대응:
+   * iOS Threads/Instagram 등 인앱 WebView 다중 안전망:
    *  1) blob URL set 후 명시적 video.load() 호출 — WebKit이 src 변경 자동 인식 안 하는 경우 대비
-   *  2) loadedmetadata + loadeddata 모두 구독 — 둘 중 먼저 fire되는 시점에 ready
-   *  3) 25초 timeout 안전망 — 어떤 이유로든 두 이벤트가 fire 안 되면 강제 dismiss
-   *     (UX는 약간 깨질 수 있어도 LoadingScreen 영원 stuck보다 낫다)
+   *  2) loadeddata + loadedmetadata + canplay 모두 구독 — 가장 먼저 fire되는 시점에 ready
+   *  3) video error 이벤트 — blob URL 디코딩 실패 시 즉시 원본 src로 fallback
+   *  4) 10초 timeout — 어떤 이벤트도 fire 못하면 (a) blob이면 원본 src fallback,
+   *     (b) 이미 원본 src면 강제 dismiss (LoadingScreen 영원 stuck 방지)
    */
   useEffect(() => {
     if (!blobSrc) return undefined;
@@ -112,24 +129,39 @@ const VideoScrubbing = ({
       onReady?.();
     };
 
+    const isBlobUrl = blobSrc.startsWith('blob:');
+    const fallbackToDirectSrc = () => {
+      if (alreadyReady) return;
+      if (isBlobUrl) {
+        // blob 디코딩 실패 → revoke 후 원본 src 재시도
+        try { URL.revokeObjectURL(blobSrc); } catch (_) { /* noop */ }
+        setBlobSrc(src);
+      } else {
+        // 이미 원본 src도 실패 → ready 강제 dismiss (LoadingScreen 닫기)
+        markReady();
+      }
+    };
+
     video.addEventListener('loadeddata', markReady);
     video.addEventListener('loadedmetadata', markReady);
     video.addEventListener('canplay', markReady);
+    video.addEventListener('error', fallbackToDirectSrc);
     if (video.readyState >= 2) markReady();
 
     // iOS WebKit이 src 변경 자동 인식 안 할 때 강제 load
     try { video.load(); } catch (_) { /* noop */ }
 
-    // 안전망 — 25초 안에 ready 못 잡으면 강제 dismiss
-    const timeoutId = setTimeout(markReady, 25000);
+    // 10초 안전망 — 이벤트 못 잡으면 blob이면 fallback, 아니면 강제 dismiss
+    const timeoutId = setTimeout(fallbackToDirectSrc, 10000);
 
     return () => {
       video.removeEventListener('loadeddata', markReady);
       video.removeEventListener('loadedmetadata', markReady);
       video.removeEventListener('canplay', markReady);
+      video.removeEventListener('error', fallbackToDirectSrc);
       clearTimeout(timeoutId);
     };
-  }, [blobSrc, onReady]);
+  }, [blobSrc, src, onReady]);
 
   const setVideoProgress = useCallback((nextProgress) => {
     const video = videoRef.current;
