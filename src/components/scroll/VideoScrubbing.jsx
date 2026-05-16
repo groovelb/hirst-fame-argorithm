@@ -90,18 +90,45 @@ const VideoScrubbing = ({
     };
   }, [src]);
 
-  /** blob URL이 video element에 로드되어 metadata 디코딩 완료 시 ready 신호 발생 */
+  /**
+   * blob URL이 video element에 로드되어 metadata 디코딩 완료 시 ready 신호 발생.
+   *
+   * iOS Threads/Instagram 등 인앱 WebView 대응:
+   *  1) blob URL set 후 명시적 video.load() 호출 — WebKit이 src 변경 자동 인식 안 하는 경우 대비
+   *  2) loadedmetadata + loadeddata 모두 구독 — 둘 중 먼저 fire되는 시점에 ready
+   *  3) 25초 timeout 안전망 — 어떤 이유로든 두 이벤트가 fire 안 되면 강제 dismiss
+   *     (UX는 약간 깨질 수 있어도 LoadingScreen 영원 stuck보다 낫다)
+   */
   useEffect(() => {
     if (!blobSrc) return undefined;
     const video = videoRef.current;
     if (!video) return undefined;
+
+    let alreadyReady = false;
     const markReady = () => {
+      if (alreadyReady) return;
+      alreadyReady = true;
       setIsReady(true);
       onReady?.();
     };
+
     video.addEventListener('loadeddata', markReady);
+    video.addEventListener('loadedmetadata', markReady);
+    video.addEventListener('canplay', markReady);
     if (video.readyState >= 2) markReady();
-    return () => video.removeEventListener('loadeddata', markReady);
+
+    // iOS WebKit이 src 변경 자동 인식 안 할 때 강제 load
+    try { video.load(); } catch (_) { /* noop */ }
+
+    // 안전망 — 25초 안에 ready 못 잡으면 강제 dismiss
+    const timeoutId = setTimeout(markReady, 25000);
+
+    return () => {
+      video.removeEventListener('loadeddata', markReady);
+      video.removeEventListener('loadedmetadata', markReady);
+      video.removeEventListener('canplay', markReady);
+      clearTimeout(timeoutId);
+    };
   }, [blobSrc, onReady]);
 
   const setVideoProgress = useCallback((nextProgress) => {
