@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { fal } from '@fal-ai/client';
 import { File } from 'node:buffer';
+import { readFileSync } from 'node:fs';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,6 +13,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
+/**
+ * Load the prompt body from a markdown file under scripts/prompts/.
+ * Convention: the prompt body is everything after the `## prompt` heading,
+ * trimmed of surrounding whitespace. Header + meta block above are ignored.
+ */
+function loadPromptFromMarkdown(filename) {
+  const filePath = path.join(__dirname, 'prompts', filename);
+  const text = readFileSync(filePath, 'utf8');
+  const marker = /^##\s+prompt\s*$/m;
+  const match = marker.exec(text);
+  if (!match) {
+    throw new Error(`Prompt marker "## prompt" not found in ${filename}`);
+  }
+  const body = text.slice(match.index + match[0].length);
+  return body.replace(/^\s*\n/, '').replace(/\s+$/, '');
+}
+
 const defaults = {
   start: 'generated-images/hero-keyframes-v2/02_front_shark_no_tank.png',
   mid: 'generated-images/hero-keyframes-v2/03_front_empty_frame_no_water.png',
@@ -22,21 +40,9 @@ const defaults = {
 };
 
 const prompts = {
-  vitrineForms: `Use @Image1 as the exact first frame and @Image2 as the exact last frame.
+  vitrineForms: loadPromptFromMarkdown('kling-vitrine-forms.md'),
 
-Locked-off front-facing clinical museum object shot on a pure white catalogue background. The preserved frontal shark remains fixed in the same pose, scale, anatomy, open mouth, fins, and unsettling taxidermy texture. Do not morph the shark.
-
-The motion is a physical construction transition: transparent glass planes and a thick white portrait-oriented vitrine frame assemble naturally around the shark. The chamber becomes a deep front-end tunnel with side glass planes, angled inner corners, rivet-like round details, a smaller rear rectangle, thick side and top borders, and a heavier bottom plinth.
-
-Keep the camera completely still. No zoom, no rotation, no pan, no gallery floor, no wall, no people, no labels, no text, no watermark. The end frame must remain an empty clear tank with no turquoise liquid yet.`,
-
-  waterFills: `Use @Image1 as the exact first frame and @Image2 as the exact last frame.
-
-Locked-off front-facing clinical museum object shot on a pure white catalogue background. The shark, white vitrine frame, glass tunnel perspective, rivets, angled corners, and rear rectangle remain fixed. Do not morph the shark anatomy, mouth, teeth, fins, frame, or camera.
-
-The motion is a continuous liquid-filling process inside the existing vitrine: blue-green formaldehyde enters from the lower/back chamber and rises through the glass volume until the whole tank is filled. The liquid must look volumetric, not like a flat overlay. As the tank fills, the shark gradually becomes visibly submerged behind the front pane with cyan-green absorption, lower contrast, softened edges, subtle suspended particles, slight haze, glass thickness, and mild refraction distortion.
-
-No splashing outside the tank, no bubbles dominating the image, no new objects, no floor, no wall, no people, no labels, no text, no watermark. The final frame should match the completed turquoise formaldehyde vitrine.`,
+  waterFills: loadPromptFromMarkdown('kling-water-fills.md'),
 
   oneShot: `Use @Image1 as the exact first frame and @Image2 as the exact last frame.
 
@@ -46,13 +52,7 @@ Create one continuous physical transition: first a portrait-oriented Damien Hirs
 
 The water must read as real volume, not a flat blue overlay: cyan-green absorption over the shark, softened contrast, slight haze, subtle suspended particles, glass thickness, and mild refraction. Camera remains completely still. No zoom, no rotation, no pan, no gallery floor, no wall, no people, no labels, no text, no watermark.`,
 
-  mouthToPortrait: `Use @Image1 as the exact first frame and @Image2 as the exact last frame.
-
-Create a smooth cinematic transition from inside the shark's open mouth into a black engraved portrait. The camera pushes forward into the dark hollow of the shark mouth. The teeth and wet gums start large at the frame edges, then slide outward and disappear as the viewer moves deeper into the black throat. The whole screen gradually becomes deep black, not by a hard cut, but through natural darkness inside the mouth.
-
-Inside the darkness, fine white etched lines begin to appear slowly like scratches emerging from black paper. These lines coalesce into the exact monochrome portrait from the final image: centered face, black knit cap, intense eyes, shoulders fading into black. The portrait should emerge from the darkness as if drawn by light, first subtle facial contours and eyes, then the cap texture, skin hatching, beard, and clothing lines.
-
-Keep the motion continuous and atmospheric. Preserve the first frame's shark mouth scale, teeth placement, wet preserved texture, and green-black color at the beginning. Preserve the final frame's centered portrait composition, black background, high-contrast white etched line style, serious expression, knit cap, and shoulders fading into black. No extra faces, no text, no logos, no watermark, no sudden cuts, no camera shake, no cartoon effects. The transition should feel like entering the shark mouth and finding the portrait inside the darkness.`,
+  mouthToPortrait: loadPromptFromMarkdown('kling-mouth-to-portrait.md'),
 };
 
 function resolveProjectPath(value) {

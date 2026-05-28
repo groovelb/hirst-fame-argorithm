@@ -11,7 +11,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "extract-colors": "node scripts/extract-rothko-colors.mjs",
-    "generate:hero-motion": "node scripts/generate-hirst-kling-motion.mjs"
+    "generate:hero-motion": "node scripts/generate-hirst-kling-motion.mjs",
+    "build-asset-manifest": "node scripts/build-asset-manifest.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
