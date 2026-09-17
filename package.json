@@ -5,14 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && SB_STATIC=0 storybook build -o dist/storybook",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "extract-colors": "node scripts/extract-rothko-colors.mjs",
     "generate:hero-motion": "node scripts/generate-hirst-kling-motion.mjs",
-    "build-asset-manifest": "node scripts/build-asset-manifest.mjs"
+    "build-asset-manifest": "node scripts/build-asset-manifest.mjs",
+    "generate-structure": "node scripts/generate-project-structure.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

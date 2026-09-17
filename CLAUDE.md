@@ -12,7 +12,7 @@
 - `.claude/skills/component-work/resources/components.md` — 기존 컴포넌트 목록
 - `.claude/skills/component-work/resources/mui-theme.md` — MUI 테마 설정
 - `.claude/skills/component-work/resources/refactoring-guide.md` — 리팩토링 가이드
-- `.claude/skills/component-work/resources/project-summary.md` — 프로젝트 개요
+- `.claude/skills/component-work/resources/starterkit-overview.md` — 스타터킷 개요
 
 ## Workflow
 
