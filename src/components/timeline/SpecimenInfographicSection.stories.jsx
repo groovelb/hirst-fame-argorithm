@@ -9,7 +9,7 @@ import worksData from '../../data/hirst/hirst_works.json';
  * 카드를 누르면 그 종이 쓰인 작품이 풀스크린으로 열린다.
  */
 export default {
-  title: 'Section/SpecimenInfographicSection',
+  title: 'Custom Component/3. Specimen & Bio/SpecimenInfographicSection',
   component: SpecimenInfographicSection,
   parameters: {
     layout: 'fullscreen',

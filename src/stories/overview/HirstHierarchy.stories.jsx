@@ -14,7 +14,9 @@ import {
   SectionTitle,
   TreeNode,
 } from '../../components/storybookDocumentation';
+import { DocSurface } from '../fixtures/DocSurface.jsx';
 import projectStructure from '../../data/projectStructure.js';
+import { ASSEMBLY_STEPS } from './assemblySteps.js';
 
 export default {
   title: 'Custom Component/0. Hierarchy',
@@ -76,8 +78,23 @@ const UNWIRED = [
 /** 분류별 수. 파일 diff 인벤토리 기준이다. */
 const CLASS_COUNTS = [
   { klass: 'reuse', count: 48, story: 41, title: 'Component/…, Common/…', note: '스타터킷과 내용 동일. 화면 트리에 없다' },
-  { klass: 'modified', count: 3, story: 3, title: 'Custom Component/<폴더>/<이름>', note: '스타터킷 파일을 이어받아 고침' },
-  { klass: 'new', count: 49, story: 5, title: 'Custom Component / Section / Page', note: '이 저장소에만 있는 파일' },
+  { klass: 'modified', count: 3, story: 3, title: 'Custom Component/9. Adapted Starter', note: '스타터킷 파일을 이어받아 고침' },
+  { klass: 'new', count: 49, story: 49, title: 'Custom Component/1~10 · Page', note: '이 저장소에만 있는 파일' },
+];
+
+/** Custom Component 용도별 그룹. 실제 사용처로 묶는다. */
+const GROUPS = [
+  { id: '0. Hierarchy', what: '이 화면. 분류와 위계', wired: '해당 없음' },
+  { id: '1. Hero', what: '도입 구획과 거대 타이포', wired: '랜딩 도달' },
+  { id: '2. Timeline Canvas', what: '좌표계, 축, 곡선, 노드, 미니맵', wired: '랜딩 도달' },
+  { id: '3. Specimen & Bio', what: '표본 집계 구획과 종 상세', wired: '랜딩 도달' },
+  { id: '4. Color Analysis', what: '사상축 도넛과 세그먼트 상세', wired: '표시 플래그 꺼짐' },
+  { id: '5. Bridge & Narrative', what: '서사 장과 그 카피', wired: '랜딩 도달' },
+  { id: '6. Overlays & Modals', what: '작품·정점 상세, 대기 화면, 언어 토글', wired: '랜딩 도달' },
+  { id: '7. Era (미연결)', what: '원문 설계의 연대기 화면 11', wired: '도달 안 함' },
+  { id: '8. Shark 3D (미연결)', what: '비트린과 상어 모델링 11', wired: '도달 안 함' },
+  { id: '9. Adapted Starter', what: '스타터킷을 고쳐 쓴 셋', wired: '랜딩 도달' },
+  { id: '10. Legacy Rothko (미연결)', what: '앞선 코드베이스 원형 둘', wired: '도달 안 함' },
 ];
 
 /** 폴더 경로에서 마지막 조각만 (components/timeline → timeline) */
@@ -207,7 +224,7 @@ export const Default = {
     };
 
     return (
-      <>
+      <DocSurface>
         <DocumentTitle
           title="Hierarchy"
           status="Available"
@@ -259,6 +276,48 @@ export const Default = {
             <Chip label={ `modified ${ inTree.modified }` } size="small" sx={ { mr: 1 } } />
             <Chip label={ `reuse ${ inTree.reuse }` } size="small" />
           </Box>
+
+          <SectionTitle title="용도별 그룹" description="Custom Component 아래 11개 묶음" />
+          <TableContainer sx={ { mb: 4 } }>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={ { fontWeight: 600, width: 230 } }>그룹</TableCell>
+                  <TableCell sx={ { fontWeight: 600 } }>담은 것</TableCell>
+                  <TableCell sx={ { fontWeight: 600, width: 140 } }>랜딩 도달</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                { GROUPS.map((g) => (
+                  <TableRow key={ g.id }>
+                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } }>{ g.id }</TableCell>
+                    <TableCell sx={ { fontSize: 12 } }>{ g.what }</TableCell>
+                    <TableCell sx={ { fontSize: 12, color: 'text.secondary' } }>{ g.wired }</TableCell>
+                  </TableRow>
+                )) }
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <SectionTitle title="조립 순서" description="08 Domain Knowledge & Research 와 같은 목록" />
+          <Stack spacing={ 1 } sx={ { mb: 4 } }>
+            { ASSEMBLY_STEPS.map((step) => (
+              <Stack key={ step.id } direction="row" spacing={ 1 } alignItems="center">
+                <Chip label={ step.order } size="small" />
+                <Typography variant="body2" sx={ { fontWeight: 600, minWidth: 130 } }>
+                  { step.title }
+                </Typography>
+                <Box
+                  component="a"
+                  href={ `?path=/story/${ step.storyId }` }
+                  target="_top"
+                  sx={ { fontSize: 12, color: 'primary.light' } }
+                >
+                  { step.storyLabel }
+                </Box>
+              </Stack>
+            )) }
+          </Stack>
 
           <SectionTitle
             title="화면 위계"
@@ -315,7 +374,7 @@ export const Default = {
             근거와 판정 방법은 02 UX Flow 5절의 &quot;미연결&quot; 행을 본다.
           </Typography>
         </PageContainer>
-      </>
+      </DocSurface>
     );
   },
 };

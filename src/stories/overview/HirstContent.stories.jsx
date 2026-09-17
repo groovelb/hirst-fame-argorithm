@@ -13,6 +13,7 @@ import {
   PageContainer,
   SectionTitle,
 } from '../../components/storybookDocumentation';
+import { DocSurface } from '../fixtures/DocSurface.jsx';
 import { BRIDGE_SECTIONS } from '../../components/templates/bridgeNarrative.js';
 import koContent from '../../i18n/locales/ko/content.js';
 import enContent from '../../i18n/locales/en/content.js';
@@ -106,7 +107,7 @@ function bandRows() {
 /** 서사 장(NarrativeChapter) 6개의 카피와 픽토그램 매핑 */
 export const Default = {
   render: () => (
-    <>
+    <DocSurface>
       <DocumentTitle
         title="Content Data"
         status="Available"
@@ -215,6 +216,6 @@ export const Default = {
           <ChapterBlock key={ s.id } section={ s } index={ i } />
         )) }
       </PageContainer>
-    </>
+    </DocSurface>
   ),
 };

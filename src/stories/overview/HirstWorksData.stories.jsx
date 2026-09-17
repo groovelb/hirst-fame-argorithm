@@ -12,6 +12,7 @@ import {
   PageContainer,
   SectionTitle,
 } from '../../components/storybookDocumentation';
+import { DocSurface } from '../fixtures/DocSurface.jsx';
 import worksData from '../../data/hirst/hirst_works.json';
 import eventsData from '../../data/hirst/hirst_events.json';
 import trendData from '../../../data/hirst-trend-data.json';
@@ -205,7 +206,7 @@ export const Default = {
     const caveats = bioData.caveats || {};
 
     return (
-      <>
+      <DocSurface>
         <DocumentTitle
           title="Works Data"
           status="Available"
@@ -467,7 +468,7 @@ export const Default = {
             06의 i18n 카피 표에 있다.
           </Typography>
         </PageContainer>
-      </>
+      </DocSurface>
     );
   },
 };

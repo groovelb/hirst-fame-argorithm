@@ -1,0 +1,3430 @@
+{
+  "repo": "/Users/ddd/Desktop/interactive/hirst-fame-argorithm",
+  "generatedAt": "2026-09-17T16:23:18.562Z",
+  "total": 380,
+  "ok": 377,
+  "error": 0,
+  "env": 3,
+  "results": [
+    {
+      "file": "../src/common/ui/asset/AssetGrid.stories.jsx",
+      "title": "Common/Asset/AssetGrid",
+      "storyName": "ImagesOnly",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/asset/AssetGrid.stories.jsx",
+      "title": "Common/Asset/AssetGrid",
+      "storyName": "Mixed",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/asset/ImageAssetCard.stories.jsx",
+      "title": "Common/Asset/ImageAssetCard",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/asset/ImageAssetCard.stories.jsx",
+      "title": "Common/Asset/ImageAssetCard",
+      "storyName": "WithoutMeta",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/asset/ModelAssetCard.stories.jsx",
+      "title": "Common/Asset/ModelAssetCard",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/asset/ModelAssetCard.stories.jsx",
+      "title": "Common/Asset/ModelAssetCard",
+      "storyName": "WithoutMeta",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/asset/VideoAssetCard.stories.jsx",
+      "title": "Common/Asset/VideoAssetCard",
+      "storyName": "AutoPlay",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/asset/VideoAssetCard.stories.jsx",
+      "title": "Common/Asset/VideoAssetCard",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/Shark3D.stories.jsx",
+      "title": "Common/Assets/3D Shark + Reference",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/Portrait.stories.jsx",
+      "title": "Common/Assets/Artist Portrait",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/BioGallery.stories.jsx",
+      "title": "Common/Assets/Bio Gallery",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/BridgeMotion.stories.jsx",
+      "title": "Common/Assets/Bridge Motion",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/HeroVideo.stories.jsx",
+      "title": "Common/Assets/Hero Video",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/LoadingMarkers.stories.jsx",
+      "title": "Common/Assets/Loading & Markers",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/RothkoReference.stories.jsx",
+      "title": "Common/Assets/Rothko Reference",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/SpecimenInfographic.stories.jsx",
+      "title": "Common/Assets/Specimen Infographic",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/assets/WorksThumbnails.stories.jsx",
+      "title": "Common/Assets/Works (Hirst 72)",
+      "storyName": "Gallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/storybookDocumentation/EditorialDocument.stories.jsx",
+      "title": "Common/EditorialDocument",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/storybookDocumentation/EditorialDocument.stories.jsx",
+      "title": "Common/EditorialDocument",
+      "storyName": "NarrowColumn",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Indicator.stories.jsx",
+      "title": "Common/Indicator",
+      "storyName": "AllVariants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Indicator.stories.jsx",
+      "title": "Common/Indicator",
+      "storyName": "DarkTheme",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Indicator.stories.jsx",
+      "title": "Common/Indicator",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Indicator.stories.jsx",
+      "title": "Common/Indicator",
+      "storyName": "Interactive",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Indicator.stories.jsx",
+      "title": "Common/Indicator",
+      "storyName": "Sizes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Indicator.stories.jsx",
+      "title": "Common/Indicator",
+      "storyName": "Vertical",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Placeholder.stories.jsx",
+      "title": "Common/Placeholder",
+      "storyName": "AllSubComponents",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Placeholder.stories.jsx",
+      "title": "Common/Placeholder",
+      "storyName": "CardExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Placeholder.stories.jsx",
+      "title": "Common/Placeholder",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/common/ui/Placeholder.stories.jsx",
+      "title": "Common/Placeholder",
+      "storyName": "LayoutExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/HighlightedTypography.stories.jsx",
+      "title": "Component/1. Typography/HighlightedTypography",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/HighlightedTypography.stories.jsx",
+      "title": "Component/1. Typography/HighlightedTypography",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/HighlightedTypography.stories.jsx",
+      "title": "Component/1. Typography/HighlightedTypography",
+      "storyName": "HighlightPlayground",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/InlineTypography.stories.jsx",
+      "title": "Component/1. Typography/InlineTypography",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/InlineTypography.stories.jsx",
+      "title": "Component/1. Typography/InlineTypography",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/QuotedContainer.stories.jsx",
+      "title": "Component/1. Typography/QuotedContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/QuotedContainer.stories.jsx",
+      "title": "Component/1. Typography/QuotedContainer",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/StretchedHeadline.stories.jsx",
+      "title": "Component/1. Typography/StretchedHeadline",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/StretchedHeadline.stories.jsx",
+      "title": "Component/1. Typography/StretchedHeadline",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/StyledParagraph.stories.jsx",
+      "title": "Component/1. Typography/StyledParagraph",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/StyledParagraph.stories.jsx",
+      "title": "Component/1. Typography/StyledParagraph",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/Title.stories.jsx",
+      "title": "Component/1. Typography/Title",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/Title.stories.jsx",
+      "title": "Component/1. Typography/Title",
+      "storyName": "Layouts",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/GNB.stories.jsx",
+      "title": "Component/10. Navigation/GNB",
+      "storyName": "CustomBreakpoint",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/GNB.stories.jsx",
+      "title": "Component/10. Navigation/GNB",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/GNB.stories.jsx",
+      "title": "Component/10. Navigation/GNB",
+      "storyName": "Props",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/GNB.stories.jsx",
+      "title": "Component/10. Navigation/GNB",
+      "storyName": "Transparent",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/GNB.stories.jsx",
+      "title": "Component/10. Navigation/GNB",
+      "storyName": "WithPersistent",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/NavMenu.stories.jsx",
+      "title": "Component/10. Navigation/NavMenu",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/NavMenu.stories.jsx",
+      "title": "Component/10. Navigation/NavMenu",
+      "storyName": "IconOnly",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/NavMenu.stories.jsx",
+      "title": "Component/10. Navigation/NavMenu",
+      "storyName": "Interactive",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/NavMenu.stories.jsx",
+      "title": "Component/10. Navigation/NavMenu",
+      "storyName": "Sizes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/NavMenu.stories.jsx",
+      "title": "Component/10. Navigation/NavMenu",
+      "storyName": "Variants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/NavMenu.stories.jsx",
+      "title": "Component/10. Navigation/NavMenu",
+      "storyName": "Vertical",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/SlidingHighlightMenu.stories.jsx",
+      "title": "Component/10. Navigation/SlidingHighlightMenu",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/SlidingHighlightMenu.stories.jsx",
+      "title": "Component/10. Navigation/SlidingHighlightMenu",
+      "storyName": "ManyItems",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/SlidingHighlightMenu.stories.jsx",
+      "title": "Component/10. Navigation/SlidingHighlightMenu",
+      "storyName": "Underline",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/SlidingHighlightMenu.stories.jsx",
+      "title": "Component/10. Navigation/SlidingHighlightMenu",
+      "storyName": "Vertical",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/SlidingHighlightMenu.stories.jsx",
+      "title": "Component/10. Navigation/SlidingHighlightMenu",
+      "storyName": "VerticalUnderline",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/CarouselContainer.stories.jsx",
+      "title": "Component/2. Container/CarouselContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/CarouselContainer.stories.jsx",
+      "title": "Component/2. Container/CarouselContainer",
+      "storyName": "NoNavigation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/CarouselContainer.stories.jsx",
+      "title": "Component/2. Container/CarouselContainer",
+      "storyName": "OutsideNavigation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/CarouselContainer.stories.jsx",
+      "title": "Component/2. Container/CarouselContainer",
+      "storyName": "Responsive",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/CarouselContainer.stories.jsx",
+      "title": "Component/2. Container/CarouselContainer",
+      "storyName": "StepMovement",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/CarouselContainer.stories.jsx",
+      "title": "Component/2. Container/CarouselContainer",
+      "storyName": "WithDivider",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/CarouselContainer.stories.jsx",
+      "title": "Component/2. Container/CarouselContainer",
+      "storyName": "WithIndexChange",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/RatioContainer.stories.jsx",
+      "title": "Component/2. Container/RatioContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/RatioContainer.stories.jsx",
+      "title": "Component/2. Container/RatioContainer",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/SectionContainer.stories.jsx",
+      "title": "Component/2. Container/SectionContainer",
+      "storyName": "CombinedUsage",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/SectionContainer.stories.jsx",
+      "title": "Component/2. Container/SectionContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/SectionContainer.stories.jsx",
+      "title": "Component/2. Container/SectionContainer",
+      "storyName": "Props",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/SectionContainer.stories.jsx",
+      "title": "Component/2. Container/SectionContainer",
+      "storyName": "ResponsiveSpacing",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/container/SectionContainer.stories.jsx",
+      "title": "Component/2. Container/SectionContainer",
+      "storyName": "StackingSections",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "BlogPostCard",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "CardGrid",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "Interactive",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "Paddings",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "ProductExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "RadiusOptions",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "SelectableOptions",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "Selected",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "StatExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CardContainer.stories.jsx",
+      "title": "Component/3. Card/CardContainer",
+      "storyName": "Variants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "Elevations",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "Outlined",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "ProductCard",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "ProfileCard",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "StatCard",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "WithHeader",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/Card.stories.jsx",
+      "title": "Component/3. Card/Card",
+      "storyName": "WithMedia",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "AutoRatio",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "ContentPaddings",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "Horizontal",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "HorizontalMediaEnd",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "Interactive",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "MediaOnly",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "MediaRatios",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "Overlay",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "WithMediaSlot",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/CustomCard.stories.jsx",
+      "title": "Component/3. Card/CustomCard",
+      "storyName": "WithOverlaySlot",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/ImageCard.stories.jsx",
+      "title": "Component/3. Card/ImageCard",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/ImageCard.stories.jsx",
+      "title": "Component/3. Card/ImageCard",
+      "storyName": "MasonryGrid",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/MoodboardCard.stories.jsx",
+      "title": "Component/3. Card/MoodboardCard",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/MoodboardCard.stories.jsx",
+      "title": "Component/3. Card/MoodboardCard",
+      "storyName": "GridLayout",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/MoodboardCard.stories.jsx",
+      "title": "Component/3. Card/MoodboardCard",
+      "storyName": "HoverTransition",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/MoodboardCard.stories.jsx",
+      "title": "Component/3. Card/MoodboardCard",
+      "storyName": "ItemCounts",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/MoodboardCard.stories.jsx",
+      "title": "Component/3. Card/MoodboardCard",
+      "storyName": "LongText",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/MoodboardCard.stories.jsx",
+      "title": "Component/3. Card/MoodboardCard",
+      "storyName": "MasonryGrid",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/MoodboardCard.stories.jsx",
+      "title": "Component/3. Card/MoodboardCard",
+      "storyName": "ReadOnly",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/AspectMedia.stories.jsx",
+      "title": "Component/4. Media/AspectMedia",
+      "storyName": "AspectRatios",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/AspectMedia.stories.jsx",
+      "title": "Component/4. Media/AspectMedia",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/AspectMedia.stories.jsx",
+      "title": "Component/4. Media/AspectMedia",
+      "storyName": "ImageGallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/AspectMedia.stories.jsx",
+      "title": "Component/4. Media/AspectMedia",
+      "storyName": "ObjectFitOptions",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/AspectMedia.stories.jsx",
+      "title": "Component/4. Media/AspectMedia",
+      "storyName": "Video",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/AspectMedia.stories.jsx",
+      "title": "Component/4. Media/AspectMedia",
+      "storyName": "VideoWithControls",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/ImageCarousel.stories.jsx",
+      "title": "Component/4. Media/ImageCarousel",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/ImageCarousel.stories.jsx",
+      "title": "Component/4. Media/ImageCarousel",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/ImageTransition.stories.jsx",
+      "title": "Component/4. Media/ImageTransition",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/media/ImageTransition.stories.jsx",
+      "title": "Component/4. Media/ImageTransition",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/Table.stories.jsx",
+      "title": "Component/5. Data Display/Table",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/Table.stories.jsx",
+      "title": "Component/5. Data Display/Table",
+      "storyName": "Dense",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/Table.stories.jsx",
+      "title": "Component/5. Data Display/Table",
+      "storyName": "Selectable",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/Table.stories.jsx",
+      "title": "Component/5. Data Display/Table",
+      "storyName": "Sortable",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/Table.stories.jsx",
+      "title": "Component/5. Data Display/Table",
+      "storyName": "StickyHeader",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/Table.stories.jsx",
+      "title": "Component/5. Data Display/Table",
+      "storyName": "Striped",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/Table.stories.jsx",
+      "title": "Component/5. Data Display/Table",
+      "storyName": "UserList",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/Table.stories.jsx",
+      "title": "Component/5. Data Display/Table",
+      "storyName": "WithPagination",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/in-page-navigation/Tabs.stories.jsx",
+      "title": "Component/6. In-page Navigation/Tabs",
+      "storyName": "Centered",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/in-page-navigation/Tabs.stories.jsx",
+      "title": "Component/6. In-page Navigation/Tabs",
+      "storyName": "Colors",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/in-page-navigation/Tabs.stories.jsx",
+      "title": "Component/6. In-page Navigation/Tabs",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/in-page-navigation/Tabs.stories.jsx",
+      "title": "Component/6. In-page Navigation/Tabs",
+      "storyName": "Disabled",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/in-page-navigation/Tabs.stories.jsx",
+      "title": "Component/6. In-page Navigation/Tabs",
+      "storyName": "FullWidth",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/in-page-navigation/Tabs.stories.jsx",
+      "title": "Component/6. In-page Navigation/Tabs",
+      "storyName": "Scrollable",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/in-page-navigation/Tabs.stories.jsx",
+      "title": "Component/6. In-page Navigation/Tabs",
+      "storyName": "Vertical",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Button.stories.jsx",
+      "title": "Component/7. Input & Control/Button",
+      "storyName": "AllVariants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Button.stories.jsx",
+      "title": "Component/7. Input & Control/Button",
+      "storyName": "Colors",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Button.stories.jsx",
+      "title": "Component/7. Input & Control/Button",
+      "storyName": "Contained",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Button.stories.jsx",
+      "title": "Component/7. Input & Control/Button",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Button.stories.jsx",
+      "title": "Component/7. Input & Control/Button",
+      "storyName": "Disabled",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Button.stories.jsx",
+      "title": "Component/7. Input & Control/Button",
+      "storyName": "Outlined",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Button.stories.jsx",
+      "title": "Component/7. Input & Control/Button",
+      "storyName": "Sizes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Button.stories.jsx",
+      "title": "Component/7. Input & Control/Button",
+      "storyName": "Text",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "Colors",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "Disabled",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "Group",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "GroupRow",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "Indeterminate",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "LabelPlacement",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "NotificationSettings",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "Sizes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "WithError",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Checkbox.stories.jsx",
+      "title": "Component/7. Input & Control/Checkbox",
+      "storyName": "WithLabel",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/FileDropzone.stories.jsx",
+      "title": "Component/7. Input & Control/FileDropzone",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/FileDropzone.stories.jsx",
+      "title": "Component/7. Input & Control/FileDropzone",
+      "storyName": "Uploading",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/FileDropzone.stories.jsx",
+      "title": "Component/7. Input & Control/FileDropzone",
+      "storyName": "Variants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/SearchBar.stories.jsx",
+      "title": "Component/7. Input & Control/SearchBar",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/SearchBar.stories.jsx",
+      "title": "Component/7. Input & Control/SearchBar",
+      "storyName": "Variants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/SearchBar.stories.jsx",
+      "title": "Component/7. Input & Control/SearchBar",
+      "storyName": "WithFilter",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "AllVariants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "Disabled",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "DisabledOptions",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "FilterExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "Grouped",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "Multiple",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "Native",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "Sizes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Select.stories.jsx",
+      "title": "Component/7. Input & Control/Select",
+      "storyName": "WithHelperText",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "Colors",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "Disabled",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "Group",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "LabelPlacement",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "SettingsPanel",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "Sizes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "VisibilityToggle",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "WithLabel",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/Switch.stories.jsx",
+      "title": "Component/7. Input & Control/Switch",
+      "storyName": "WithStatusText",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TagInput.stories.jsx",
+      "title": "Component/7. Input & Control/TagInput",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TagInput.stories.jsx",
+      "title": "Component/7. Input & Control/TagInput",
+      "storyName": "WithSuggestions",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "AllVariants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "Colors",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "DisabledAndReadOnly",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "Error",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "FullWidth",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "InputTypes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "LoginForm",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "Multiline",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "Required",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "SignupForm",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "Sizes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/input/TextField.stories.jsx",
+      "title": "Component/7. Input & Control/TextField",
+      "storyName": "WithAdornments",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/AppShell.stories.jsx",
+      "title": "Component/8. Layout/AppShell",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/AppShell.stories.jsx",
+      "title": "Component/8. Layout/AppShell",
+      "storyName": "FullFeatured",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/AppShell.stories.jsx",
+      "title": "Component/8. Layout/AppShell",
+      "storyName": "TransparentHeader",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/BentoGrid.stories.jsx",
+      "title": "Component/8. Layout/BentoGrid",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/BentoGrid.stories.jsx",
+      "title": "Component/8. Layout/BentoGrid",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/FullPageContainer.stories.jsx",
+      "title": "Component/8. Layout/FullPageContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/FullPageContainer.stories.jsx",
+      "title": "Component/8. Layout/FullPageContainer",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/FullPageContainer.stories.jsx",
+      "title": "Component/8. Layout/FullPageContainer",
+      "storyName": "HeroExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/FullPageContainer.stories.jsx",
+      "title": "Component/8. Layout/FullPageContainer",
+      "storyName": "ScrollSnapExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Grid.stories.jsx",
+      "title": "Component/8. Layout/Grid",
+      "storyName": "AutoLayout",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Grid.stories.jsx",
+      "title": "Component/8. Layout/Grid",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Grid.stories.jsx",
+      "title": "Component/8. Layout/Grid",
+      "storyName": "EqualColumns",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Grid.stories.jsx",
+      "title": "Component/8. Layout/Grid",
+      "storyName": "NestedGrid",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Grid.stories.jsx",
+      "title": "Component/8. Layout/Grid",
+      "storyName": "Responsive",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Grid.stories.jsx",
+      "title": "Component/8. Layout/Grid",
+      "storyName": "SpacingComparison",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/LineGrid.stories.jsx",
+      "title": "Component/8. Layout/LineGrid",
+      "storyName": "BorderColorVariants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/LineGrid.stories.jsx",
+      "title": "Component/8. Layout/LineGrid",
+      "storyName": "CustomRowHeights",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/LineGrid.stories.jsx",
+      "title": "Component/8. Layout/LineGrid",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/LineGrid.stories.jsx",
+      "title": "Component/8. Layout/LineGrid",
+      "storyName": "EqualHeight",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/LineGrid.stories.jsx",
+      "title": "Component/8. Layout/LineGrid",
+      "storyName": "Responsive",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/LineGrid.stories.jsx",
+      "title": "Component/8. Layout/LineGrid",
+      "storyName": "StackMode",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Masonry.stories.jsx",
+      "title": "Component/8. Layout/Masonry",
+      "storyName": "ColumnsComparison",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Masonry.stories.jsx",
+      "title": "Component/8. Layout/Masonry",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Masonry.stories.jsx",
+      "title": "Component/8. Layout/Masonry",
+      "storyName": "ImageGallery",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Masonry.stories.jsx",
+      "title": "Component/8. Layout/Masonry",
+      "storyName": "Responsive",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/Masonry.stories.jsx",
+      "title": "Component/8. Layout/Masonry",
+      "storyName": "SpacingComparison",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/PageContainer.stories.jsx",
+      "title": "Component/8. Layout/PageContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/PageContainer.stories.jsx",
+      "title": "Component/8. Layout/PageContainer",
+      "storyName": "MaxWidthOptions",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/PageContainer.stories.jsx",
+      "title": "Component/8. Layout/PageContainer",
+      "storyName": "Props",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/PhiSplit.stories.jsx",
+      "title": "Component/8. Layout/PhiSplit",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/PhiSplit.stories.jsx",
+      "title": "Component/8. Layout/PhiSplit",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/SplitScreen.stories.jsx",
+      "title": "Component/8. Layout/SplitScreen",
+      "storyName": "ComparisonExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/SplitScreen.stories.jsx",
+      "title": "Component/8. Layout/SplitScreen",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/SplitScreen.stories.jsx",
+      "title": "Component/8. Layout/SplitScreen",
+      "storyName": "Documentation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/SplitScreen.stories.jsx",
+      "title": "Component/8. Layout/SplitScreen",
+      "storyName": "LoginPageExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/SplitScreen.stories.jsx",
+      "title": "Component/8. Layout/SplitScreen",
+      "storyName": "StickySectionExample",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/StickyAsideCenterLayout.stories.jsx",
+      "title": "Component/8. Layout/StickyAsideCenterLayout",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/StickyAsideCenterLayout.stories.jsx",
+      "title": "Component/8. Layout/StickyAsideCenterLayout",
+      "storyName": "NarrowCenter",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/StickyAsideCenterLayout.stories.jsx",
+      "title": "Component/8. Layout/StickyAsideCenterLayout",
+      "storyName": "SectionSeries",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "Alert",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "Confirmation",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "CustomHeader",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "FormDialog",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "ListDialog",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "LoginDialog",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "Nested",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "Scrollable",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/Dialog.stories.jsx",
+      "title": "Component/9. Overlay & Feedback/Dialog",
+      "storyName": "Sizes",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/overview/HirstHierarchy.stories.jsx",
+      "title": "Custom Component/0. Hierarchy",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/templates/HeroSection.stories.jsx",
+      "title": "Custom Component/1. Hero/HeroSection",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/HeroTypeBlock.stories.jsx",
+      "title": "Custom Component/1. Hero/HeroTypeBlock",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/HeroTypeBlock.stories.jsx",
+      "title": "Custom Component/1. Hero/HeroTypeBlock",
+      "storyName": "PeriodLine",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/RothkoTimeline.stories.jsx",
+      "title": "Custom Component/10. Legacy Rothko (미연결)/RothkoTimeline",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/TimelineEmotionCurve.stories.jsx",
+      "title": "Custom Component/10. Legacy Rothko (미연결)/TimelineEmotionCurve",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/BandLegend.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/BandLegend",
+      "storyName": "ActiveMortality",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/BandLegend.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/BandLegend",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/TimelineAxis.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/TimelineAxis",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/TimelineCanvas.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/TimelineCanvas",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/TimelineEventItem.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/TimelineEventItem",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/TimelineMinimap.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/TimelineMinimap",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/TimelineTrendBackground.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/TimelineTrendBackground",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/TimelineWorkItem.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/TimelineWorkItem",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/TimelineWorkItem.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/TimelineWorkItem",
+      "storyName": "Dimmed",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/useTimelineLayout.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/useTimelineLayout",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/WorkImage.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/WorkImage",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/WorkImage.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/WorkImage",
+      "storyName": "Placeholder",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/WorldviewTimeline.stories.jsx",
+      "title": "Custom Component/2. Timeline Canvas/WorldviewTimeline",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/SpecimenDetailModal.stories.jsx",
+      "title": "Custom Component/3. Specimen & Bio/SpecimenDetailModal",
+      "storyName": "Butterflies",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/SpecimenDetailModal.stories.jsx",
+      "title": "Custom Component/3. Specimen & Bio/SpecimenDetailModal",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/SpecimenInfographicSection.stories.jsx",
+      "title": "Custom Component/3. Specimen & Bio/SpecimenInfographicSection",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/ColorDetailModal.stories.jsx",
+      "title": "Custom Component/4. Color Analysis/ColorDetailModal",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/ColorDonutChart.stories.jsx",
+      "title": "Custom Component/4. Color Analysis/ColorDonutChart",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/templates/bridgeNarrative.stories.jsx",
+      "title": "Custom Component/5. Bridge & Narrative/bridgeNarrative",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/templates/BridgeSection.stories.jsx",
+      "title": "Custom Component/5. Bridge & Narrative/BridgeSection",
+      "storyName": "CategoryCard",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/templates/BridgeSection.stories.jsx",
+      "title": "Custom Component/5. Bridge & Narrative/BridgeSection",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/templates/BridgeSection.stories.jsx",
+      "title": "Custom Component/5. Bridge & Narrative/BridgeSection",
+      "storyName": "Pivot",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/LanguageToggle.stories.jsx",
+      "title": "Custom Component/6. Overlays & Modals/LanguageToggle",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/LoadingScreen.stories.jsx",
+      "title": "Custom Component/6. Overlays & Modals/LoadingScreen",
+      "storyName": "AlmostDone",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/LoadingScreen.stories.jsx",
+      "title": "Custom Component/6. Overlays & Modals/LoadingScreen",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/PeakHoverOverlay.stories.jsx",
+      "title": "Custom Component/6. Overlays & Modals/PeakHoverOverlay",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/PeakHoverOverlay.stories.jsx",
+      "title": "Custom Component/6. Overlays & Modals/PeakHoverOverlay",
+      "storyName": "TateRetrospective",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/WorkFocusOverlay.stories.jsx",
+      "title": "Custom Component/6. Overlays & Modals/WorkFocusOverlay",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/BestiaryGrid.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/BestiaryGrid",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/CaveatNote.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/CaveatNote",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/EraEventStrip.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/EraEventStrip",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/layout/EraSegment.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/EraSegment",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/EraThesisHeadline.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/EraThesisHeadline",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/EraThesisHeadline.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/EraThesisHeadline",
+      "storyName": "English",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/timeline/HirstWorldviewTimeline.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/HirstWorldviewTimeline",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/SourceChip.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/SourceChip",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/SpeciesStatCard.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/SpeciesStatCard",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/card/SpeciesStatCard.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/SpeciesStatCard",
+      "storyName": "Unverified",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/data-display/SpecimenCountBadge.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/SpecimenCountBadge",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/overlay-feedback/WorkDetailModal.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/WorkDetailModal",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/navigation/WorldviewMiniMap.stories.jsx",
+      "title": "Custom Component/7. Era (미연결)/WorldviewMiniMap",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/tiger-shark/CameraRig.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/CameraRig",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/tiger-shark/CameraRig.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/CameraRig",
+      "storyName": "TopView",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/tiger-shark/ReferencePlanes.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/ReferencePlanes",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/tiger-shark/ReferencePlanes.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/ReferencePlanes",
+      "storyName": "TopView",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/SharkModel.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/SharkModel",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/SharkModel.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/SharkModel",
+      "storyName": "PosedStill",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/SharkVitrine.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/SharkVitrine",
+      "storyName": "Compact",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/SharkVitrine.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/SharkVitrine",
+      "storyName": "DarkRoom",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/SharkVitrine.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/SharkVitrine",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/SharkVitrine.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/SharkVitrine",
+      "storyName": "GalleryView",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/SharkVitrineScene.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/SharkVitrineScene",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/SharkVitrine.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/SharkVitrine",
+      "storyName": "WithCaption",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/tiger-shark/TigerSharkModel.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/TigerSharkModel",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/tiger-shark/TigerSharkModelingLab.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/TigerSharkModelingLab",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/tiger-shark/TigerSharkModel.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/TigerSharkModel",
+      "storyName": "PatternGuides",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/tiger-shark/TigerSharkModel.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/TigerSharkModel",
+      "storyName": "Wireframe",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/VitrineGlass.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/VitrineGlass",
+      "storyName": "CompactTank",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/VitrineGlass.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/VitrineGlass",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/VitrineInterior.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/VitrineInterior",
+      "storyName": "CompactTank",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/VitrineInterior.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/VitrineInterior",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/VitrineLiquid.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/VitrineLiquid",
+      "storyName": "CompactTank",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/VitrineLiquid.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/VitrineLiquid",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/VitrineShell.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/VitrineShell",
+      "storyName": "CompactTank",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/shark-modeling/parts/VitrineShell.stories.jsx",
+      "title": "Custom Component/8. Shark 3D (미연결)/VitrineShell",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/FitText.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/FitText",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/FitText.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/FitText",
+      "storyName": "FontSizeLimits",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/FitText.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/FitText",
+      "storyName": "Headline",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/FitText.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/FitText",
+      "storyName": "HeroSectionUsage",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/FitText.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/FitText",
+      "storyName": "ResponsiveWidths",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/FitText.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/FitText",
+      "storyName": "SpacingOptions",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/typography/FitText.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/FitText",
+      "storyName": "VariantComparison",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/content-transition/HorizontalScrollContainer.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/HorizontalScrollContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/content-transition/HorizontalScrollContainer.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/HorizontalScrollContainer",
+      "storyName": "ManyItems",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/content-transition/HorizontalScrollContainer.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/HorizontalScrollContainer",
+      "storyName": "WideSlides",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/scroll/VideoScrubbing.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/VideoScrubbing",
+      "storyName": "AspectRatios",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/scroll/VideoScrubbing.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/VideoScrubbing",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/scroll/VideoScrubbing.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/VideoScrubbing",
+      "storyName": "WithContainerRef",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/scroll/VideoScrubbing.stories.jsx",
+      "title": "Custom Component/9. Adapted Starter/VideoScrubbing",
+      "storyName": "WithProgressCallback",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/RandomRevealText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/RandomRevealText",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/RandomRevealText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/RandomRevealText",
+      "storyName": "Replay",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/RandomRevealText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/RandomRevealText",
+      "storyName": "Variants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/ScrambleText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/ScrambleText",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/ScrambleText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/ScrambleText",
+      "storyName": "InitialScramble",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/ScrambleText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/ScrambleText",
+      "storyName": "TextSwitch",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/ScrambleText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/ScrambleText",
+      "storyName": "Variants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/ScrollRevealText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/ScrollRevealText",
+      "storyName": "DarkBackground",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/ScrollRevealText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/ScrollRevealText",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/kinetic-typography/ScrollRevealText.stories.jsx",
+      "title": "Interactive/11. KineticTypography/ScrollRevealText",
+      "storyName": "MultipleBlocks",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/scroll/ScrollScaleContainer.stories.jsx",
+      "title": "Interactive/12. Scroll/ScrollScaleContainer",
+      "storyName": "DeepScale",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/scroll/ScrollScaleContainer.stories.jsx",
+      "title": "Interactive/12. Scroll/ScrollScaleContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/scroll/ScrollScaleContainer.stories.jsx",
+      "title": "Interactive/12. Scroll/ScrollScaleContainer",
+      "storyName": "MultipleItems",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/FadeTransition.stories.jsx",
+      "title": "Interactive/14. Motion/FadeTransition",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/FadeTransition.stories.jsx",
+      "title": "Interactive/14. Motion/FadeTransition",
+      "storyName": "Directions",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/FadeTransition.stories.jsx",
+      "title": "Interactive/14. Motion/FadeTransition",
+      "storyName": "StaggeredList",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/FadeTransition.stories.jsx",
+      "title": "Interactive/14. Motion/FadeTransition",
+      "storyName": "Toggle",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/MarqueeContainer.stories.jsx",
+      "title": "Interactive/14. Motion/MarqueeContainer",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/MarqueeContainer.stories.jsx",
+      "title": "Interactive/14. Motion/MarqueeContainer",
+      "storyName": "ScrollScrub",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/MarqueeContainer.stories.jsx",
+      "title": "Interactive/14. Motion/MarqueeContainer",
+      "storyName": "Variants",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/PerspectiveTransition.stories.jsx",
+      "title": "Interactive/14. Motion/PerspectiveTransition",
+      "storyName": "DeepTilt",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/PerspectiveTransition.stories.jsx",
+      "title": "Interactive/14. Motion/PerspectiveTransition",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/PerspectiveTransition.stories.jsx",
+      "title": "Interactive/14. Motion/PerspectiveTransition",
+      "storyName": "TopOrigin",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/motion/PerspectiveTransition.stories.jsx",
+      "title": "Interactive/14. Motion/PerspectiveTransition",
+      "storyName": "TriggerOnView",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/dynamic-color/GradientOverlay.stories.jsx",
+      "title": "Interactive/15. DynamicColor/GradientOverlay",
+      "storyName": "CustomColors",
+      "status": "env",
+      "message": "Error creating WebGL context.",
+      "stack": "Error: Error creating WebGL context.\n    at new WebGLRenderer (file:///Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/three@0.182.0/node_modules/three/build/three.module.js:15921:13)\n    at /Users/ddd/Desktop/interactive/hirst-fame-argorithm/src/components/dynamic-color/GradientOverlay.jsx:153:22\n    at Object.react_stack_bottom_frame (/Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)\n    at runWithFiberInDEV (/Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)",
+      "originFile": "/Users/ddd/Desktop/interactive/hirst-fame-argorithm/src/components/dynamic-color/GradientOverlay.jsx"
+    },
+    {
+      "file": "../src/components/dynamic-color/GradientOverlay.stories.jsx",
+      "title": "Interactive/15. DynamicColor/GradientOverlay",
+      "storyName": "Default",
+      "status": "env",
+      "message": "Error creating WebGL context.",
+      "stack": "Error: Error creating WebGL context.\n    at new WebGLRenderer (file:///Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/three@0.182.0/node_modules/three/build/three.module.js:15921:13)\n    at /Users/ddd/Desktop/interactive/hirst-fame-argorithm/src/components/dynamic-color/GradientOverlay.jsx:153:22\n    at Object.react_stack_bottom_frame (/Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)\n    at runWithFiberInDEV (/Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)",
+      "originFile": "/Users/ddd/Desktop/interactive/hirst-fame-argorithm/src/components/dynamic-color/GradientOverlay.jsx"
+    },
+    {
+      "file": "../src/components/dynamic-color/GradientOverlay.stories.jsx",
+      "title": "Interactive/15. DynamicColor/GradientOverlay",
+      "storyName": "WithOutro",
+      "status": "env",
+      "message": "Error creating WebGL context.",
+      "stack": "Error: Error creating WebGL context.\n    at new WebGLRenderer (file:///Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/three@0.182.0/node_modules/three/build/three.module.js:15921:13)\n    at /Users/ddd/Desktop/interactive/hirst-fame-argorithm/src/components/dynamic-color/GradientOverlay.jsx:153:22\n    at Object.react_stack_bottom_frame (/Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)\n    at runWithFiberInDEV (/Users/ddd/Desktop/interactive/hirst-fame-argorithm/node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)",
+      "originFile": "/Users/ddd/Desktop/interactive/hirst-fame-argorithm/src/components/dynamic-color/GradientOverlay.jsx"
+    },
+    {
+      "file": "../src/stories/overview/HirstProjectStructure.stories.jsx",
+      "title": "Overview/Fame Algorithm/04 Project Structure",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/overview/HirstWorksData.stories.jsx",
+      "title": "Overview/Fame Algorithm/05 Works Data",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/overview/HirstContent.stories.jsx",
+      "title": "Overview/Fame Algorithm/06 Content Data",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/overview/HirstAssets.stories.jsx",
+      "title": "Overview/Fame Algorithm/07 Assets",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/overview/HirstResearch.stories.jsx",
+      "title": "Overview/Fame Algorithm/08 Domain Knowledge & Research",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/overview/ForDesigners.stories.jsx",
+      "title": "Overview/For Designers",
+      "storyName": "Doc",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/overview/Introduction.stories.jsx",
+      "title": "Overview/Introduction",
+      "storyName": "Doc",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/overview/RuleRelationships.stories.jsx",
+      "title": "Overview/Rule Relationships",
+      "storyName": "Doc",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/page/Introduction.stories.jsx",
+      "title": "Page/Introduction",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/components/templates/LandingPage.stories.jsx",
+      "title": "Page/LandingPage",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Colors.stories.jsx",
+      "title": "Style/Colors",
+      "storyName": "Docs",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Colors.stories.jsx",
+      "title": "Style/Colors",
+      "storyName": "Palette",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Colors.stories.jsx",
+      "title": "Style/Colors",
+      "storyName": "SemanticTokens",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Colors.stories.jsx",
+      "title": "Style/Colors",
+      "storyName": "Usage",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/ComponentTokens.stories.jsx",
+      "title": "Style/Component Tokens",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Icons.stories.jsx",
+      "title": "Style/Icons",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Icons.stories.jsx",
+      "title": "Style/Icons",
+      "storyName": "FillUsage",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Overview.stories.jsx",
+      "title": "Style/Overview",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Overview.stories.jsx",
+      "title": "Style/Overview",
+      "storyName": "TableView",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Spacing.stories.jsx",
+      "title": "Style/Spacing",
+      "storyName": "Docs",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/style/Typography.stories.jsx",
+      "title": "Style/Typography",
+      "storyName": "Docs",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/template/Introduction.stories.jsx",
+      "title": "Template/Introduction",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    },
+    {
+      "file": "../src/stories/test-data/TestData.stories.jsx",
+      "title": "Test Data/Pexels Gallery",
+      "storyName": "Default",
+      "status": "ok",
+      "message": null,
+      "stack": null,
+      "originFile": null
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import {
   PageContainer,
   TreeNode,
 } from '../../components/storybookDocumentation';
+import { DocSurface } from '../fixtures/DocSurface.jsx';
 import projectStructure from '../../data/projectStructure.js';
 
 export default {
@@ -96,7 +97,7 @@ export const Default = {
     const tree = nodeToTree(root);
 
     return (
-      <>
+      <DocSurface>
         <DocumentTitle
           title="Project Structure"
           status="Available"
@@ -137,7 +138,7 @@ export const Default = {
             &quot;미연결&quot; 행을 본다.
           </Typography>
         </PageContainer>
-      </>
+      </DocSurface>
     );
   },
 };

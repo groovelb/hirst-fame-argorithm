@@ -11,7 +11,7 @@ import trendData from '../../../data/hirst-trend-data.json';
  * 작품과 사건이 얹힌다. 데이터가 커서 실제 정적 파일을 그대로 넣는다.
  */
 export default {
-  title: 'Section/WorldviewTimeline',
+  title: 'Custom Component/2. Timeline Canvas/WorldviewTimeline',
   component: WorldviewTimeline,
   parameters: {
     layout: 'fullscreen',

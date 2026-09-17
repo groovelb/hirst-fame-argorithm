@@ -14,6 +14,7 @@ import {
   PageContainer,
   SectionTitle,
 } from '../../components/storybookDocumentation';
+import { DocSurface } from '../fixtures/DocSurface.jsx';
 import assetManifest from '../../data/assetManifest.json';
 import assetInventory from '../../data/assetInventory.js';
 
@@ -280,7 +281,7 @@ export const Default = {
     const totalBytes = items.reduce((s, it) => s + (it.bytes || 0), 0);
 
     return (
-      <>
+      <DocSurface>
         <DocumentTitle
           title="Assets"
           status="Available"
@@ -516,7 +517,7 @@ export const Default = {
             </Box>
           )) }
         </PageContainer>
-      </>
+      </DocSurface>
     );
   },
 };

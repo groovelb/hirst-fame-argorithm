@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { FitText } from '.';
 
 export default {
-  title: 'Custom Component/typography/FitText',
+  title: 'Custom Component/9. Adapted Starter/FitText',
   component: FitText,
   tags: ['autodocs'],
   parameters: {

@@ -1,4 +1,5 @@
 import { HeroSection } from './HeroSection.jsx';
+import { StoryStage } from '../../stories/fixtures/StoryStage.jsx';
 
 /**
  * HeroSection 스토리
@@ -7,14 +8,16 @@ import { HeroSection } from './HeroSection.jsx';
  * 재생 위치가 된다. 진행도 콜백 세 개는 부모가 대기 화면과 지면 색에 쓴다.
  */
 export default {
-  title: 'Section/HeroSection',
+  title: 'Custom Component/1. Hero/HeroSection',
   component: HeroSection,
-  parameters: {
-    layout: 'fullscreen',
-  },
+  parameters: { layout: 'fullscreen' },
 };
 
-/** 콜백 없이 기본 동작만 */
+/** 콜백 없이 기본 동작만. 영상을 전부 받은 뒤에야 스크럽이 시작된다 */
 export const Default = {
-  args: {},
+  render: () => (
+    <StoryStage isFlush>
+      <HeroSection />
+    </StoryStage>
+  ),
 };

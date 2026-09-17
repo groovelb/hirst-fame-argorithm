@@ -3,7 +3,7 @@ import Placeholder from '../../common/ui/Placeholder';
 import { HorizontalScrollContainer } from './HorizontalScrollContainer';
 
 export default {
-  title: 'Custom Component/content-transition/HorizontalScrollContainer',
+  title: 'Custom Component/9. Adapted Starter/HorizontalScrollContainer',
   component: HorizontalScrollContainer,
   tags: ['autodocs'],
   argTypes: {
