@@ -16,6 +16,9 @@ import worksData from '../../data/hirst/hirst_works.json';
 import eventsData from '../../data/hirst/hirst_events.json';
 import trendData from '../../../data/hirst-trend-data.json';
 import bioData from '../../data/hirst/hirst-bio-specimen-data.js';
+import erasData from '../../data/hirst/hirst_eras.json';
+import keywordTaxonomy from '../../data/hirst/hirst_keyword_taxonomy.json';
+import workBioMap from '../../data/hirst/hirst_work_bio_map.json';
 
 export default {
   title: 'Overview/Fame Algorithm/05 Works Data',
@@ -49,6 +52,13 @@ const DATA_DICTIONARY = [
   { name: 'WorldviewBand', ko: '세계관 밴드', file: 'components/timeline/useTimelineLayout.js', count: '5' },
   { name: 'NarrativeChapter', ko: '서사 장', file: 'components/templates/bridgeNarrative.js', count: '6' },
   { name: 'SpecimenLedger', ko: '표본 집계', file: 'src/data/hirst/hirst-bio-specimen-data.js', count: '12' },
+];
+
+/** 화면이 읽지 않는 병렬 데이터. 원문 설계의 흔적이라 함께 보여준다. */
+const UNWIRED_FILES = [
+  { file: 'src/data/hirst/hirst_eras.json', role: '연대기 7개의 명제와 축 가중치 평균', reader: '없음 (미연결 화면 전용)' },
+  { file: 'src/data/hirst/hirst_keyword_taxonomy.json', role: '5축 키워드 사전 60개', reader: '없음 (미연결 화면 전용)' },
+  { file: 'src/data/hirst/hirst_work_bio_map.json', role: '작품 id와 표본 작품 id의 수동 매핑', reader: 'SpecimenDetailModal' },
 ];
 
 /**
@@ -127,6 +137,10 @@ export const Default = {
     const peaks = trendData.trendData?.peaks || [];
     const trendEvents = trendData.events || [];
     const species = Object.entries(bioData.speciesSummary || {});
+    const eraCards = erasData.eras || [];
+    const axes = Object.entries(keywordTaxonomy.meta?.axes_overview || {});
+    const keywords = Object.entries(keywordTaxonomy.keywords || {});
+    const bioMap = Object.entries(workBioMap.workToBio || {});
     const sources = bioData.sources || [];
     const caveats = bioData.caveats || {};
 
@@ -163,6 +177,17 @@ export const Default = {
             rowKey={ (r) => r.name }
           />
 
+          <SectionTitle title="병렬 데이터 파일" description="같은 주제를 담았지만 화면 연결이 다른 파일" />
+          <DataTable
+            columns={ [
+              { key: 'file', label: '파일', width: 300, mono: true },
+              { key: 'role', label: '담은 것', width: 260 },
+              { key: 'reader', label: '읽는 곳', dim: true },
+            ] }
+            rows={ UNWIRED_FILES }
+            rowKey={ (r) => r.file }
+          />
+
           <SectionTitle title="Work (작품)" description={ `${ works.length }점 · id, year, title, period, worldview_period, medium, axis_weights` } />
           <DataTable
             columns={ [
@@ -189,6 +214,22 @@ export const Default = {
             rowKey={ (r) => r.id }
           />
 
+          <SectionTitle
+            title="Era · hirst_eras.json"
+            description={ `${ eraCards.length }개 · 같은 7구획의 명제와 요약. 화면은 이 파일을 읽지 않는다` }
+          />
+          <DataTable
+            columns={ [
+              { key: 'id', label: 'id', width: 190, mono: true },
+              { key: 'slug', label: 'slug', width: 110, mono: true },
+              { key: 'years', label: 'years', width: 100, mono: true, render: (r) => `${ r.yearStart } ~ ${ r.yearEnd }` },
+              { key: 'name', label: 'name', width: 130, render: (r) => ko(r.name) },
+              { key: 'thesis', label: 'thesis', render: (r) => ko(r.thesis) },
+            ] }
+            rows={ eraCards }
+            rowKey={ (r) => r.id }
+          />
+
           <SectionTitle title="WorldviewBand (세계관 밴드)" description="5종 · 작품의 worldview_y 값이 들어가는 구간이 세로 위치를 정한다" />
           <DataTable
             columns={ [
@@ -200,6 +241,36 @@ export const Default = {
             rows={ WORLDVIEW_BANDS }
             rowKey={ (r) => r.id }
           />
+
+          <SectionTitle
+            title="사상축 · hirst_keyword_taxonomy.json"
+            description={ `5축 × 키워드 ${ keywords.length }개. 작품의 axis_weights 키와 글자 단위로 맞춘다` }
+          />
+          <DataTable
+            columns={ [
+              { key: 'axis', label: 'axis', width: 120, mono: true, render: (r) => r[0] },
+              { key: 'label', label: 'label', width: 150, render: (r) => ko(r[1].label) },
+              { key: 'polarity', label: 'y_polarity', width: 100, mono: true, render: (r) => r[1].y_polarity },
+              { key: 'color', label: 'signature_color', width: 120, mono: true, render: (r) => r[1].signature_color },
+              { key: 'premise', label: 'premise', dim: true, render: (r) => ko(r[1].premise) },
+            ] }
+            rows={ axes }
+            rowKey={ (r) => r[0] }
+          />
+
+          <SectionTitle title="사상축 키워드" description={ `${ keywords.length }개 · 축별 12개씩` } />
+          <DataTable
+            columns={ [
+              { key: 'key', label: 'key', width: 170, mono: true, render: (r) => r[0] },
+              { key: 'axis', label: 'axis', width: 120, mono: true, render: (r) => r[1].axis },
+              { key: 'label', label: 'label', width: 140, render: (r) => ko(r[1].label) },
+              { key: 'category', label: 'category', width: 90, mono: true, render: (r) => r[1].category },
+              { key: 'definition', label: 'definition', dim: true, render: (r) => ko(r[1].definition) },
+            ] }
+            rows={ keywords.slice(0, PREVIEW_ROWS) }
+            rowKey={ (r) => r[0] }
+          />
+          <TotalCaption shown={ PREVIEW_ROWS } total={ keywords.length } unit="개" />
 
           <SectionTitle title="Event (사건)" description={ `${ events.length }건 · 생애, 전시, 시장 사건. 통람 화면의 축 아래 노드` } />
           <DataTable
@@ -295,8 +366,23 @@ export const Default = {
             rowKey={ (r) => r[0] }
           />
 
+          <SectionTitle
+            title="작품 매핑 · hirst_work_bio_map.json"
+            description={ `${ bioMap.length }건 · 작품 id와 표본 작품 id를 손으로 이었다. ${ workBioMap.meta?.asOfDate ?? '' }` }
+          />
+          <DataTable
+            columns={ [
+              { key: 'workId', label: 'Work.id', width: 120, mono: true, render: (r) => r[0] },
+              { key: 'bioId', label: '표본 작품 id', mono: true, render: (r) => r[1] },
+            ] }
+            rows={ bioMap.slice(0, PREVIEW_ROWS) }
+            rowKey={ (r) => r[0] }
+          />
+          <TotalCaption shown={ PREVIEW_ROWS } total={ bioMap.length } unit="건" />
+
           <Typography variant="body2" color="text.secondary">
-            NarrativeChapter(서사 장)는 06 Content Data에서 다룬다.
+            NarrativeChapter(서사 장)는 06 Content Data에서 다룬다. 세계관 밴드의 긴 해설은
+            06의 i18n 카피 표에 있다.
           </Typography>
         </PageContainer>
       </>

@@ -19,7 +19,7 @@
 | 6. 다음 문서로 넘기는 것 | 확정 | |
 
 문서 상태: 잠정 승인 (하드 게이트 충족)
-개정: 2026-09-17 v3 · 변경: 새 포맷으로 재구성 후 검증 결함 반영 (교육 예제)
+개정: 2026-09-17 v4 · 변경: 새 포맷으로 재구성, 검증 결함과 원문 토큰 누락 반영 (교육 예제)
 
 비고:
 
@@ -27,7 +27,8 @@
 - **3.1절 근거**: 01 4.2절의 확정 7행을 그대로 받았다. 영속성은 `src/data/hirst/`, `data/hirst-trend-data.json`, `src/components/templates/bridgeNarrative.js`로 확인했다.
 - **4절 잠정**: 원칙 자체는 원문에 없었다. 구현된 스크롤과 오버레이 동작에서 역추출했다 (Q3).
 - **5절 근거**: 스타터킷 `src/components`와 파일 단위 diff. 공유 176파일 중 9개가 다르고 60개가 이 저장소에만 있다.
-- **분량**: 264줄(권장 250). 1절 시나리오 비고를 부록으로 분리하면 줄일 수 있다.
+- **부록**: 구현 디테일은 `appendix-landing-implementation.md`와 `appendix-screen-component-map.md`에 있다. 두 부록은 원문 시점 그대로 두었다.
+- **분량**: 268줄(권장 250). 1절 시나리오 비고를 부록으로 분리하면 줄일 수 있다.
 
 ---
 
@@ -50,6 +51,7 @@ R 읽기 · W 생성 · D 갱신/삭제.
 
 비고:
 
+- 단계 1: 위쪽 줄은 DAMIEN HIRST, 아래쪽 줄은 활동 기간과 FAME ALGORITHM이다.
 - 단계 2: 영상은 내려받아 메모리에 올린 뒤에야 스크럽된다. 그 전까지가 단계 0의 대기 화면이다.
 - 단계 4: 네 장은 나란한 두 줄이 아니라 서로 다른 높이에서 서로 다른 속도로 지나간다.
 
@@ -174,7 +176,9 @@ Landing (/)
 
 - 영속성 값은 정적 / 휘발 / 세션 / 브라우저 / 서버다. 이 프로젝트는 전부 정적이다.
 - 사건은 두 갈래 출처를 합쳐 쓴다. 축 아래 노드는 연대기 데이터의 사건이고, 정점 상세는 트렌드 데이터의 사건 해설이다.
-- 작품의 사상축 가중치는 다섯 키를 갖는다. 별도 대상이 아니라 작품의 속성이다.
+- 작품의 사상축 가중치는 다섯 키를 갖는다. 별도 대상이 아니라 작품의 속성이다. 축별 키워드 사전은 `hirst_keyword_taxonomy.json`에 따로 있다.
+- 작품에는 앞선 코드베이스가 쓰던 `color_blocks` 필드가 남아 있다. 색 기반 표현을 버린 뒤로는 읽지 않는다.
+- 표본 집계의 원천은 `src/data/hirst/hirst-bio-specimen-data.js`다. 저장소 루트의 `data/hirst-bio-specimen-data.js`는 갱신 전 사본이고 화면이 읽지 않는다.
 - 스크롤 위치, 상세 열림 여부, 언어 선택은 화면 상태이지 다루는 대상이 아니다.
 
 ### 3.2 데이터 모델 활용 (이름 사전)
@@ -192,7 +196,7 @@ Landing (/)
 비고:
 
 - 서버 데이터가 없는 프로젝트다. `/supabase-integration`을 부르게 되면 이 표부터 다시 정한다.
-- 원문이 검증해 둔 예상 테이블명(`works`, `events`, `sources` 등 8종)은 서버 도입 시의 계약 후보다. 2026-05-07 기준으로 예약어 충돌이 없음을 확인해 두었다.
+- 원문이 검증해 둔 예상 테이블명(`works`, `events`, `sources` 등 8종)은 서버 도입 시의 계약 후보다. 2026-05-07 기준으로 예약어 충돌이 없음을 확인해 두었다. `user`, `order`, `group`, `references` 같은 흔한 충돌어를 쓰지 않는다.
 
 ---
 
@@ -248,10 +252,10 @@ Landing (/)
 
 - **합계**: 재활용 0 · 수정 3 · 신규 23 (행 기준, 한 행에 묶인 파일은 한 건). 파일 단위로는 공유 176개 중 재활용 107, 수정 9, 신규 60이다.
 - **구분 근거**: 스타터킷 `src/components`와 같은 상대 경로의 파일을 내용까지 비교했다. 내용이 다른 3개(VideoScrubbing, FitText, HorizontalScrollContainer)가 수정, 이 저장소에만 있는 파일이 신규다. 나머지 수정 6개는 barrel 5개와 스토리 파일 1개라 표에 넣지 않았다.
-- **재활용 제외**: 스타터킷 컴포넌트를 화면에 쓴 곳이 없다. 이 프로젝트는 고정 영상, 가로 좌표계, 정량 카드처럼 기성 컴포넌트가 없는 화면으로 이뤄져 있다. 단, 세 개의 수정 항목은 스타터킷 파일을 이어받아 고친 것이다.
+- **재활용 제외**: 스타터킷 컴포넌트를 화면에 쓴 곳이 없다. 이 프로젝트는 고정 영상, 가로 좌표계, 정량 카드처럼 기성 컴포넌트가 없는 화면으로 이뤄져 있다. 단, 세 개의 수정 항목은 스타터킷 파일을 이어받아 고친 것이다. 원문 03이 표본 그리드 후보로 들었던 `BentoGrid`와 `LineGrid`도 쓰지 않았다.
 - **미연결 표기**: 화면 진입점에서 도달하지 않는 컴포넌트다. 원문 설계의 연대기 화면 11개는 코드로 남았지만 어느 화면도 부르지 않는다. 상어 3D 묶음은 도입부의 3D 비트린 계획이 사전 렌더 영상으로 바뀌면서 남은 것이다.
 - **카테고리**: timeline, shark-modeling, tiger-shark는 이 프로젝트가 추가한 폴더다 (`directory-structure.md` 목록 밖).
-- **묶음 구성**: Era 화면 묶음 = HirstWorldviewTimeline, EraSegment, EraThesisHeadline, EraEventStrip, WorldviewMiniMap, BestiaryGrid, SpeciesStatCard, SpecimenCountBadge, SourceChip, CaveatNote, WorkDetailModal (timeline, layout, card, typography, data-display, navigation, overlay-feedback 7개 폴더에 흩어져 있다). 상어 3D 묶음 = shark-modeling 7 + tiger-shark 8 (컴포넌트 기준, barrel과 스토리와 헬퍼 제외).
+- **묶음 구성**: Era 화면 묶음 = HirstWorldviewTimeline, EraSegment, EraThesisHeadline, EraEventStrip, WorldviewMiniMap, BestiaryGrid, SpeciesStatCard, SpecimenCountBadge, SourceChip, CaveatNote, WorkDetailModal (timeline, layout, card, typography, data-display, navigation, overlay-feedback 7개 폴더에 흩어져 있다). 상어 3D 묶음 = shark-modeling 7(`SharkVitrine` 외) + tiger-shark 8 (컴포넌트 기준, barrel과 스토리와 헬퍼 제외).
 
 ---
 

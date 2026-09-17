@@ -20,16 +20,16 @@
 | 6. 다음 문서로 넘기는 것 | 확정 | |
 
 문서 상태: 잠정 승인 (하드 게이트 충족)
-개정: 2026-09-17 v3 · 변경: 새 포맷으로 재구성 후 검증 결함 반영 (교육 예제)
+개정: 2026-09-17 v4 · 변경: 새 포맷으로 재구성, 검증 결함과 원문 토큰 누락 반영 (교육 예제)
 
 비고:
 
 - **2절 잠정**: 아키타입 id는 `src/data/layoutTaxonomyData.js` 목록에서 골랐고, 페이지별 배정은 화면 구성에서 추론했다 (Q4).
 - **3절 값 출처**: `src/styles/themes/default.js`(palette, typography, shape, shadows, breakpoints), `src/styles/themes/tokens.js`(2단 색 토큰), `src/components/timeline/typography.js`(서체 토큰), `src/App.jsx`(관성 스크롤).
-- **5절 현재값 출처**: 스타터킷 `src/styles/themes/default.js`. 이 저장소 테마와 파일 단위로 비교해 채웠다.
+- **5절 현재값 출처**: 스타터킷 `src/styles/themes/default.js`. 이 저장소 테마와 파일 단위로 비교해 채웠다. 원문 03은 `mui-theme.md`를 현재값 출처로 삼았으나 여기서는 테마 파일을 직접 대조했다.
 - **결정 보류 항목 처리**: 원문 03의 2026-05-07 보류 3건 중 헤딩 서체는 확정(Georgia 유지), 사상축 색 검증은 미정(Q5), 이미지 자산은 실제 수집으로 해소돼 4절로 옮겼다.
 - **폐기된 방향**: 원문 03이 제안한 본 화이트 지면(`#F4F1EA`)과 포름알데히드 잉크(`#0F1A1F`)는 채택되지 않았다. 지면은 흰색과 차가운 잉크 검정 두 상태로 갈라졌다. 원문이 제안한 타이포 변경 4건(h1 3.25rem, h1 자간 -0.03em, overline 자간 0.16em, overline 웨이트 700)도 적용되지 않아 5절에서 뺐다.
-- **분량**: 220줄(권장 200). 4절 에셋별 방향을 부록으로 분리하면 줄일 수 있다.
+- **분량**: 228줄(권장 200). 4절 에셋별 방향을 부록으로 분리하면 줄일 수 있다.
 
 ---
 
@@ -64,7 +64,7 @@
 | 전역 오버레이 | airy | long / dominant / few / two-tier |
 
 - 공간 모델: 유동 / 고정 / 혼합. 아키타입: `src/data/layoutTaxonomyData.js`의 id. 구분 언어: 선 / 면 / 여백.
-- 전역 리듬: 세로 간격은 뷰포트 비례다. 서사 구역의 상하 여백은 좁은 화면 12vh, md 이상 28vh로 두 배 이상 벌어진다. 좌우 여백도 4vw에서 8vw로 단계적으로 넓힌다. 높이 단위는 `vh`가 아니라 `dvh`를 쓴다. 모바일 주소창이 접히고 펼쳐질 때 고정 영역이 튀지 않게 하려는 선택이다.
+- 전역 리듬: 세로 간격은 뷰포트 비례다. 서사 구역의 상하 여백은 좁은 화면 12vh, md 이상 28vh로 두 배 이상 벌어진다. 좌우 여백도 4vw에서 8vw로 단계적으로 넓힌다. 높이 단위는 `vh`가 아니라 `dvh`를 쓴다. 모바일 주소창이 접히고 펼쳐질 때 고정 영역이 튀지 않게 하려는 선택이다. 도입 구역은 약 200vh 스크롤 거리를 쓴다(고정 영상 한 화면 + 도입 선언 한 화면).
 - 주 분기는 md(900)이고, 통람 화면만 sm·md·lg 3단계로 더 나뉜다. md 아래에서는 서사 카드의 패럴럭스를 끄고 정적으로 쌓으며, 통람 화면의 연도당 폭과 노드 크기를 단계적으로 줄인다.
 
 ---
@@ -92,6 +92,7 @@
 - 지면 배경과 영상 배경을 같은 값으로 두어야 혼합 모드가 쌓임 맥락 안에서도 정확히 맞는다. 도입 영상의 검정 픽셀도 같은 값으로 그레이딩해 두었다.
 - 사상축 다섯 색(`#3F4A5B`, `#9C8B5C`, `#A36C3F`, `#5B7878`, `#BDB6A2`)은 하단 패널 전용이고 현재 표시 플래그가 꺼져 있다. 색각 검증은 하지 않았다 (미정, Q5).
 - 시기 구획의 띠 색은 연대기 데이터가 직접 갖고 있다. 테마 토큰이 아니다.
+- 원문이 제안한 시각화 토큰 `customAxes`와 `customTaxa`는 테마에 없다. 미연결 화면만 이 이름을 참조한다.
 
 ### 3.2 타이포
 
@@ -102,8 +103,9 @@
 | 브랜드 본문 | IM Fell English | 상세 본문. 정의만 되어 있고 미적용 | (없음) |
 | 프로덕트 본문 | Inter | 400, 0.92~1rem, 행간 1.75 | (컴포넌트 직접) |
 | 테마 본문 | Pretendard Variable | 400, 1rem·0.875rem, 행간 1.6 | body1, body2 |
-| 테마 디스플레이 | Georgia 계열 세리프 | 900~600, 2.5~1.125rem, 자간 -0.02em | h1~h6 |
+| 테마 디스플레이 | Georgia 계열 세리프 | 900~600, h1 2.5rem h2 2rem, 자간 -0.02em | h1~h6 |
 | 라벨 | Pretendard Variable | 600, 0.75rem, 자간 0.08em, 대문자 | overline |
+| 캡션 | Pretendard Variable | 400, 0.75rem, 자간 0.02em | caption |
 | 버튼 | Pretendard Variable | 600, 0.875rem, 자연 케이스 | button |
 
 비고:
@@ -127,7 +129,8 @@
 
 비고:
 
-- 그림자는 offset 없이 blur만 쓴다. 다크 지면이라 스타터킷보다 투명도를 네 배 이상 올렸다.
+- 그림자는 offset 없이 blur만 쓴다. 다크 지면이라 스타터킷보다 투명도를 네 배 이상 올렸다. 단계는 none, sm, md, lg, xl 다섯이다.
+- 브레이크포인트 lg는 1200px, xl은 1536px이고 기준 글자 크기는 16px이다. 원문이 제안한 고정 좌우 여백(lg 96px, md 64px)은 vw 기반 값으로 바뀌었다.
 - 긴 전환은 스크롤이 맡는다. 도입 영상의 재생 위치, 서사 카드의 패럴럭스, 통람의 가로 이동이 전부 스크롤 값에 묶여 있다. 그래서 시간 기반 전환은 짧게 끊는다.
 - 서사 카드의 세로 시작 위치는 0, 5, -3, 7vh로 어긋나 있고 추가 이동 거리는 10, 50, 22, 65vh다. 균등 정렬을 의도적으로 깬 값이다.
 
@@ -156,7 +159,7 @@
   - SUBJECT: 네 장의 주제(죽음, 가격, 격자, 소각)를 각각 한 도상으로
   - 하지 않는 것: 사각 테두리, 흰 배경, 읽히는 글자
 - **작품 도판**
-  - FORMAT: 원본 비율 그대로. 공개 백과와 공용 저장소에서 제목으로 조회해 받는다
+  - FORMAT: 원본 비율 그대로. 공개 백과와 공용 저장소에서 제목으로 조회해 `public/images/hirst/`에 받는다
   - LOOK: archival artwork photo. 보정하지 않는다
   - SUBJECT: 작품 한 점당 한 장. 파일 이름은 작품 식별자, 연도, 제목 순
   - 하지 않는 것: 작가 초상으로의 대체, 알려진 자리표시 이미지 (해시 목록으로 거른다)
@@ -187,8 +190,9 @@
 | `palette.primary.main` | `#0000FF` | `#6666FF` | 악센트, 진행률 |
 | `palette.primary.light` | `#6666FF` | `#9999FF` | 상태 변화 |
 | `palette.primary.dark` | `#0000B2` | `#0000FF` | 깊이 강조 |
-| `palette.secondary.*` | blueGrey 700/900 | blueGrey 200/100/400 | 보조 텍스트 |
-| `palette.text.*` | 검정 87/60/38% | 흰색 92/64/38% | 본문 위계 |
+| `palette.secondary.main` | blueGrey[900] `#263238` | blueGrey[100] | 보조 텍스트 |
+| `palette.secondary.light` / `.dark` | blueGrey 700 / 커스텀 | blueGrey 200 / 400 | 보조 톤 |
+| `palette.text.primary` 외 | 검정 87/60/38% | 흰색 92/64/38% | 본문 위계 |
 | `palette.background.default` | `#FFFFFF` | `#FFFFFF` (유지) | 도입 구간 지면 |
 | `palette.background.paper` | `#FFFFFF` | `#141414` | 카드와 패널 |
 | `palette.divider` | 검정 12% | 흰색 14% | 구분선 |
@@ -197,8 +201,12 @@
 | `typography.headingFontFamily` | 산세리프 | Georgia 계열 세리프 | 헤딩 전체 |
 | `typography.h1~h6.fontFamily` | 산세리프 | Georgia 계열 세리프 | 디스플레이 |
 | `typography.fontFamily` | Pretendard Variable | (유지) | 본문 |
+| `typography.h1.fontSize` | `2.5rem` | `2.5rem` (유지) | 히어로 헤드라인 |
+| `typography.h1.letterSpacing` | `-0.02em` | `-0.02em` (유지) | 히어로 헤드라인 |
+| `typography.overline.letterSpacing` | `0.08em` | `0.08em` (유지) | 라벨 |
+| `typography.overline.fontWeight` | `600` | `600` (유지) | 라벨 |
 | `shape.borderRadius` | `0` | `0` (유지) | 전 컴포넌트 |
-| `customShadows.sm~xl` | 투명도 0.06~0.12 | 투명도 0.48~0.72 | Paper, 카드 |
+| `customShadows.sm/md/lg/xl` | 투명도 0.06~0.12 | 투명도 0.48~0.72 | Paper, 카드 |
 | `spacing` | `8` | `8` (유지) | 전역 |
 | `breakpoints.values` | 0/600/900/1200/1536 | (유지) | 전역 |
 | `transitions` | 기본 7단계 | (유지) | 전역 |

@@ -4,7 +4,7 @@
  * 수동 편집 금지. 재생성: pnpm generate-structure
  */
 export default {
-  "generatedAt": "2026-09-17T06:45:39.183Z",
+  "generatedAt": "2026-09-17T09:16:36.394Z",
   "root": {
     "name": "App",
     "kind": "component",
@@ -13,6 +13,17 @@ export default {
     "storyTitle": null,
     "storyId": null,
     "children": [
+      {
+        "name": "LocaleProvider",
+        "kind": "component",
+        "category": "i18n",
+        "file": "i18n/LocaleProvider.jsx",
+        "storyTitle": null,
+        "storyId": null,
+        "children": [],
+        "hooks": [],
+        "data": []
+      },
       {
         "name": "LandingPage",
         "kind": "component",
@@ -29,7 +40,316 @@ export default {
             "storyTitle": null,
             "storyId": null,
             "children": [],
-            "hooks": [],
+            "hooks": [
+              {
+                "name": "useLocale",
+                "file": "i18n/useLocale.js",
+                "category": "i18n"
+              }
+            ],
+            "data": []
+          },
+          {
+            "name": "WorldviewTimeline",
+            "kind": "component",
+            "category": "components/timeline",
+            "file": "components/timeline/WorldviewTimeline.jsx",
+            "storyTitle": null,
+            "storyId": null,
+            "children": [
+              {
+                "name": "HorizontalScrollContainer",
+                "kind": "component",
+                "category": "components/content-transition",
+                "file": "components/content-transition/HorizontalScrollContainer.jsx",
+                "storyTitle": "Interactive/13. ContentTransition/HorizontalScrollContainer",
+                "storyId": "interactive-13-contenttransition-horizontalscrollcontainer",
+                "children": [],
+                "hooks": [],
+                "data": []
+              },
+              {
+                "name": "BandLegend",
+                "kind": "component",
+                "category": "components/timeline",
+                "file": "components/timeline/BandLegend.jsx",
+                "storyTitle": null,
+                "storyId": null,
+                "children": [],
+                "hooks": [],
+                "data": []
+              },
+              {
+                "name": "PeakHoverOverlay",
+                "kind": "component",
+                "category": "components/timeline",
+                "file": "components/timeline/PeakHoverOverlay.jsx",
+                "storyTitle": null,
+                "storyId": null,
+                "children": [
+                  {
+                    "name": "WorkImage",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/WorkImage.jsx",
+                    "storyTitle": null,
+                    "storyId": null,
+                    "children": [],
+                    "hooks": [],
+                    "data": []
+                  }
+                ],
+                "hooks": [
+                  {
+                    "name": "useLocale",
+                    "file": "i18n/useLocale.js",
+                    "category": "i18n"
+                  }
+                ],
+                "data": []
+              },
+              {
+                "name": "SpecimenInfographicSection",
+                "kind": "component",
+                "category": "components/timeline",
+                "file": "components/timeline/SpecimenInfographicSection.jsx",
+                "storyTitle": null,
+                "storyId": null,
+                "children": [
+                  {
+                    "name": "SpecimenDetailModal",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/SpecimenDetailModal.jsx",
+                    "storyTitle": null,
+                    "storyId": null,
+                    "children": [
+                      {
+                        "name": "WorkImage",
+                        "kind": "component",
+                        "category": "components/timeline",
+                        "file": "components/timeline/WorkImage.jsx",
+                        "ref": true,
+                        "children": [],
+                        "hooks": [],
+                        "data": []
+                      }
+                    ],
+                    "hooks": [
+                      {
+                        "name": "useLocale",
+                        "file": "i18n/useLocale.js",
+                        "category": "i18n"
+                      }
+                    ],
+                    "data": [
+                      {
+                        "name": "hirst_work_bio_map",
+                        "file": "data/hirst/hirst_work_bio_map.json"
+                      },
+                      {
+                        "name": "hirst_bio_artwork_images",
+                        "file": "data/hirst/hirst_bio_artwork_images.json"
+                      }
+                    ]
+                  }
+                ],
+                "hooks": [
+                  {
+                    "name": "useLocale",
+                    "file": "i18n/useLocale.js",
+                    "category": "i18n"
+                  }
+                ],
+                "data": []
+              },
+              {
+                "name": "TimelineCanvas",
+                "kind": "component",
+                "category": "components/timeline",
+                "file": "components/timeline/TimelineCanvas.jsx",
+                "storyTitle": null,
+                "storyId": null,
+                "children": [
+                  {
+                    "name": "ColorDonutChart",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/ColorDonutChart.jsx",
+                    "storyTitle": null,
+                    "storyId": null,
+                    "children": [],
+                    "hooks": [
+                      {
+                        "name": "useLocale",
+                        "file": "i18n/useLocale.js",
+                        "category": "i18n"
+                      }
+                    ],
+                    "data": []
+                  },
+                  {
+                    "name": "ColorDetailModal",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/ColorDetailModal.jsx",
+                    "storyTitle": null,
+                    "storyId": null,
+                    "children": [
+                      {
+                        "name": "WorkImage",
+                        "kind": "component",
+                        "category": "components/timeline",
+                        "file": "components/timeline/WorkImage.jsx",
+                        "ref": true,
+                        "children": [],
+                        "hooks": [],
+                        "data": []
+                      }
+                    ],
+                    "hooks": [
+                      {
+                        "name": "useLocale",
+                        "file": "i18n/useLocale.js",
+                        "category": "i18n"
+                      }
+                    ],
+                    "data": []
+                  },
+                  {
+                    "name": "TimelineAxis",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/TimelineAxis.jsx",
+                    "storyTitle": null,
+                    "storyId": null,
+                    "children": [],
+                    "hooks": [
+                      {
+                        "name": "useLocale",
+                        "file": "i18n/useLocale.js",
+                        "category": "i18n"
+                      }
+                    ],
+                    "data": []
+                  },
+                  {
+                    "name": "TimelineEventItem",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/TimelineEventItem.jsx",
+                    "storyTitle": null,
+                    "storyId": null,
+                    "children": [],
+                    "hooks": [
+                      {
+                        "name": "useLocale",
+                        "file": "i18n/useLocale.js",
+                        "category": "i18n"
+                      }
+                    ],
+                    "data": []
+                  },
+                  {
+                    "name": "TimelineWorkItem",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/TimelineWorkItem.jsx",
+                    "storyTitle": null,
+                    "storyId": null,
+                    "children": [
+                      {
+                        "name": "WorkImage",
+                        "kind": "component",
+                        "category": "components/timeline",
+                        "file": "components/timeline/WorkImage.jsx",
+                        "ref": true,
+                        "children": [],
+                        "hooks": [],
+                        "data": []
+                      }
+                    ],
+                    "hooks": [],
+                    "data": []
+                  },
+                  {
+                    "name": "TimelineTrendBackground",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/TimelineTrendBackground.jsx",
+                    "storyTitle": null,
+                    "storyId": null,
+                    "children": [],
+                    "hooks": [],
+                    "data": []
+                  },
+                  {
+                    "name": "WorkImage",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/WorkImage.jsx",
+                    "ref": true,
+                    "children": [],
+                    "hooks": [],
+                    "data": []
+                  }
+                ],
+                "hooks": [
+                  {
+                    "name": "useLocale",
+                    "file": "i18n/useLocale.js",
+                    "category": "i18n"
+                  }
+                ],
+                "data": []
+              },
+              {
+                "name": "TimelineMinimap",
+                "kind": "component",
+                "category": "components/timeline",
+                "file": "components/timeline/TimelineMinimap.jsx",
+                "storyTitle": null,
+                "storyId": null,
+                "children": [],
+                "hooks": [],
+                "data": []
+              },
+              {
+                "name": "WorkFocusOverlay",
+                "kind": "component",
+                "category": "components/timeline",
+                "file": "components/timeline/WorkFocusOverlay.jsx",
+                "storyTitle": null,
+                "storyId": null,
+                "children": [
+                  {
+                    "name": "WorkImage",
+                    "kind": "component",
+                    "category": "components/timeline",
+                    "file": "components/timeline/WorkImage.jsx",
+                    "ref": true,
+                    "children": [],
+                    "hooks": [],
+                    "data": []
+                  }
+                ],
+                "hooks": [
+                  {
+                    "name": "useLocale",
+                    "file": "i18n/useLocale.js",
+                    "category": "i18n"
+                  }
+                ],
+                "data": []
+              }
+            ],
+            "hooks": [
+              {
+                "name": "useTimelineLayout",
+                "file": "components/timeline/useTimelineLayout.js",
+                "category": "components/timeline"
+              }
+            ],
             "data": []
           },
           {
@@ -82,7 +402,13 @@ export default {
                 "storyTitle": null,
                 "storyId": null,
                 "children": [],
-                "hooks": [],
+                "hooks": [
+                  {
+                    "name": "useLocale",
+                    "file": "i18n/useLocale.js",
+                    "category": "i18n"
+                  }
+                ],
                 "data": []
               }
             ],
@@ -94,8 +420,7 @@ export default {
             "kind": "component",
             "category": "components/templates",
             "file": "components/templates/BridgeSection.jsx",
-            "storyTitle": null,
-            "storyId": null,
+            "ref": true,
             "children": [],
             "hooks": [],
             "data": []

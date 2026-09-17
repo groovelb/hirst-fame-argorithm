@@ -50,6 +50,12 @@ const DIRECTORY_STATS = [
   { path: 'public/ (루트 glb)', files: 2, size: '1.8MB', note: '상어 3D 모델 2점' },
 ];
 
+/** public 루트의 3D 모델 2개. 매니페스트 shark-3d 카테고리와 같은 파일이다. */
+const MODEL_FILES = [
+  { path: 'public/crysis_shark.glb', size: '923KB', inUse: false, basis: 'SharkVitrine.jsx 전용. App 미도달' },
+  { path: 'public/shark_hirst_pose.glb', size: '832KB', inUse: false, basis: 'Blender 포즈 결과물. SharkVitrine.jsx 전용' },
+];
+
 /** 5MB 를 넘는 파일. 번들에 import 하지 않고 경로만 적는다. */
 const LARGE_FILES = [
   { path: 'src/assets/video/hirst-scrub.mp4', size: '33MB', registered: false },
@@ -327,6 +333,30 @@ export const Default = {
                     <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">{ d.files }</TableCell>
                     <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">{ d.size }</TableCell>
                     <TableCell sx={ { fontSize: 12, color: 'text.secondary' } }>{ d.note }</TableCell>
+                  </TableRow>
+                )) }
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <SectionTitle title="3D 모델" description={ `${ MODEL_FILES.length }개 · public 루트에 놓여 경로 문자열로 불린다` } />
+          <TableContainer sx={ { mb: 4 } }>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={ { fontWeight: 600, width: 280 } }>path</TableCell>
+                  <TableCell sx={ { fontWeight: 600, width: 80 } } align="right">size</TableCell>
+                  <TableCell sx={ { fontWeight: 600, width: 90 } }>판정</TableCell>
+                  <TableCell sx={ { fontWeight: 600 } }>판정 근거</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                { MODEL_FILES.map((m) => (
+                  <TableRow key={ m.path }>
+                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } }>{ m.path }</TableCell>
+                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">{ m.size }</TableCell>
+                    <TableCell sx={ { fontSize: 12 } }>{ m.inUse ? 'In Use' : 'Unused' }</TableCell>
+                    <TableCell sx={ { fontSize: 12, color: 'text.secondary' } }>{ m.basis }</TableCell>
                   </TableRow>
                 )) }
               </TableBody>

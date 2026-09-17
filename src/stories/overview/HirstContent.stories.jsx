@@ -14,6 +14,8 @@ import {
   SectionTitle,
 } from '../../components/storybookDocumentation';
 import { BRIDGE_SECTIONS } from '../../components/templates/bridgeNarrative.js';
+import koContent from '../../i18n/locales/ko/content.js';
+import enContent from '../../i18n/locales/en/content.js';
 
 export default {
   title: 'Overview/Fame Algorithm/06 Content Data',
@@ -94,6 +96,13 @@ function ChapterBlock({ section, index }) {
   );
 }
 
+/** 세계관 밴드 해설을 한국어와 영어 한 쌍으로 펼친다 */
+function bandRows() {
+  const ko = koContent.bandDesc || {};
+  const en = enContent.bandDesc || {};
+  return Object.keys(ko).map((key) => ({ key, ko: ko[key], en: en[key] ?? '' }));
+}
+
 /** 서사 장(NarrativeChapter) 6개의 카피와 픽토그램 매핑 */
 export const Default = {
   render: () => (
@@ -170,6 +179,36 @@ export const Default = {
             </TableBody>
           </Table>
         </TableContainer>
+
+        <SectionTitle
+          title="bandDesc (i18n)"
+          description={ `${ bandRows().length }개 · src/i18n/locales/{ko,en}/content.js. 세계관 밴드(WorldviewBand) 해설의 실제 원천` }
+        />
+        { bandRows().map((r) => (
+          <Box
+            key={ r.key }
+            sx={ {
+              mb: 3,
+              p: 2.5,
+              border: '1px solid',
+              borderColor: 'divider',
+              borderRadius: 1,
+            } }
+          >
+            <Chip label={ r.key } size="small" sx={ { fontFamily: 'monospace', mb: 1.5 } } />
+            <Typography variant="body2" sx={ { mb: 1.5, lineHeight: 1.8 } }>
+              { r.ko }
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={ { lineHeight: 1.8 } }>
+              { r.en }
+            </Typography>
+          </Box>
+        )) }
+
+        <Typography variant="body2" color="text.secondary" sx={ { mb: 4 } }>
+          로케일 파일은 <code>content.js</code>(콘텐츠 카피)와 <code>ui.js</code>(버튼과 라벨) 두 벌이다.
+          위 표는 content.js 전량이다.
+        </Typography>
 
         <SectionTitle title="장별 전문" description="큰 글자, 한국어 해설, 영어 해설, 픽토그램 경로" />
         { BRIDGE_SECTIONS.map((s, i) => (

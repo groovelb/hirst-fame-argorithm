@@ -20,9 +20,13 @@ export default {
  */
 const DESCRIPTIONS = {
   // Data
-  hirst_works: 'Data · 작품(Work) 72점. 연도·매체·사상축 가중치',
+  hirst_works: 'Data · 작품(Work) 72점. 연도, 매체, 사상축 가중치',
   hirst_events: 'Data · 사건(Event) 52건 + 연대기(Era) 7구획',
-  'hirst-bio-specimen-data': 'Data · 표본 집계(SpecimenLedger) 12종',
+  'hirst-bio-specimen-data': 'Data · 표본 집계(SpecimenLedger) 12종 + 출처 21건',
+  hirst_work_bio_map: 'Data · 작품 id와 표본 작품 id의 수동 1:1 매핑',
+  hirst_bio_artwork_images: 'Data · 표본 작품 id와 도판 경로 매핑 9건',
+  hirst_eras: 'Data · 연대기 7개의 명제와 축 가중치 평균 (미연결)',
+  hirst_keyword_taxonomy: 'Data · 5축 키워드 사전 60개 (미연결)',
   'hirst-trend-data': 'Data · 검색 트렌드(SearchTrend) 월별 266포인트',
   bridgeNarrative: 'Data · 서사 장(NarrativeChapter) 6개 카피',
   assetManifest: 'Data · 에셋 카탈로그 9카테고리 171건',
@@ -32,12 +36,12 @@ const DESCRIPTIONS = {
   layoutTaxonomyData: 'Data · 레이아웃 아키타입 택소노미',
 
   // Context / Provider
-  LocaleProvider: 'Provider · 한국어와 영어 로케일 제공',
+  LocaleProvider: 'Provider · 한국어와 영어 로케일 제공. 트리 최상단',
 
   // Hooks
-  useLenisScroll: 'Hook · 관성 스크롤 초기화 (duration 1.1)',
   useLocale: 'Hook · 현재 로케일과 localized() 소비',
   useTimelineLayout: 'Hook · 연도와 밴드를 캔버스 좌표로 변환',
+  useLenisScroll: 'Hook · 관성 스크롤 초기화 (duration 1.1)',
 };
 
 /** Context/Provider 이름 패턴 */
@@ -46,6 +50,7 @@ const isContextName = (name) => /Context$|Provider$/.test(name);
 /**
  * 트리 노드를 TreeNode 가 받을 수 있는 중첩 객체로 변환.
  * - 컴포넌트: 중첩 객체 (자식 컴포넌트 포함)
+ * - ref: true 노드: 이미 펼친 같은 컴포넌트를 가리키는 참조. 리프로 표시
  * - Context/Provider: 자식 유무와 상관없이 리프(설명 문자열)로 표시
  * - Hooks/Data: 리프(설명 문자열)
  */
@@ -54,6 +59,11 @@ function nodeToTree(node) {
   const nameCount = {};
 
   for (const child of node.children || []) {
+    // 같은 컴포넌트가 여러 부모에 매달린 경우. 앞서 펼친 노드를 가리킨다.
+    if (child.ref) {
+      out[`${ child.name } (참조)`] = '참조 · 위에서 펼친 같은 컴포넌트';
+      continue;
+    }
     if (isContextName(child.name)) {
       out[child.name] = DESCRIPTIONS[child.name] || 'Context/Provider';
       continue;
@@ -116,9 +126,15 @@ export const Default = {
           </Box>
 
           <Typography variant="body2" color="text.secondary" sx={ { mt: 3 } }>
-            트리가 LandingPage의 Hero와 Bridge 갈래에서 멈춘다. 통람 화면은 별칭 import로
-            연결되어 있어 생성기가 따라가지 못한 구간이다. 그 갈래의 구성은
-            02 UX Flow 문서의 2.2절 계층 트리와 5절 컴포넌트 리스트를 본다.
+            App 아래에 LocaleProvider와 LandingPage가 있고, LandingPage가 통람 화면(WorldviewTimeline),
+            도입 화면(HeroSection), 서사 장(BridgeSection), 대기 화면(LoadingScreen)을 거느린다.
+            통람 화면은 barrel 별칭(WorldviewTimeline as HirstTimeline)으로 연결되어 있어 구조 스크립트가
+            이제 그 갈래까지 따라간다.
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={ { mt: 1 } }>
+            (참조)로 끝나는 노드는 같은 컴포넌트가 여러 부모에 매달린 경우이고, 앞서 펼친 노드와 같다.
+            트리에 없는 컴포넌트는 화면에서 도달하지 않는 것들이다. 그 목록은 02 UX Flow 5절의
+            &quot;미연결&quot; 행을 본다.
           </Typography>
         </PageContainer>
       </>
