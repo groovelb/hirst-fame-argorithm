@@ -19,6 +19,8 @@ import bioData from '../../data/hirst/hirst-bio-specimen-data.js';
 import erasData from '../../data/hirst/hirst_eras.json';
 import keywordTaxonomy from '../../data/hirst/hirst_keyword_taxonomy.json';
 import workBioMap from '../../data/hirst/hirst_work_bio_map.json';
+import bioArtworkImages from '../../data/hirst/hirst_bio_artwork_images.json';
+import assetInventory from '../../data/assetInventory.js';
 
 export default {
   title: 'Overview/Fame Algorithm/05 Works Data',
@@ -29,6 +31,63 @@ export default {
 
 /** 표에 한 번에 노출하는 최대 행 수. 넘으면 상위 N행만 보이고 총계를 캡션에 적는다. */
 const PREVIEW_ROWS = 20;
+
+/** 작품 id 로 도판 경로를 찾는다. 파일명이 `W001_1986_...` 꼴이다. */
+const WORK_IMAGE_BY_ID = Object.fromEntries(
+  (assetInventory.items || [])
+    .filter((it) => it.folder === 'images/hirst' && /^W\d{3}_/.test(it.name))
+    .map((it) => [it.name.slice(0, 4), it.url]),
+);
+
+/** 종 키와 표본 인포그래픽 도판. SpecimenInfographicSection 의 SPECIES_ROWS 와 같은 짝이다. */
+const SPECIMEN_IMAGE = {
+  butterfly_live_2012: 'specimen-butterfly-reliquary.png',
+  butterfly_paintings_cumulative: 'specimen-butterfly-reliquary.png',
+  shark: 'specimen-shark-vitrine.png',
+  sheep: 'specimen-ruminant-plate.png',
+  bovine: 'specimen-ruminant-plate.png',
+  pig: 'specimen-pig.png',
+  zebra: 'specimen-zebra.png',
+  dove: 'specimen-dove.png',
+  cockerel: 'specimen-cockerel.png',
+  fly_maggot: 'specimen-uncounted-cycle.png',
+  fish_live: 'specimen-uncounted-cycle.png',
+  human_remains: 'specimen-minor-animals-strip.png',
+};
+
+/**
+ * 표 안의 작은 썸네일. 없으면 자리만 비운다.
+ *
+ * Props:
+ * @param {string} src - 이미지 경로 [Optional]
+ * @param {string} alt - 대체 텍스트 [Required]
+ *
+ * Example usage:
+ * <RowThumb src={ WORK_IMAGE_BY_ID.W001 } alt="W001" />
+ */
+function RowThumb({ src, alt }) {
+  return (
+    <Box
+      sx={ {
+        width: 56,
+        height: 56,
+        backgroundColor: 'grey.100',
+        overflow: 'hidden',
+        lineHeight: 0,
+      } }
+    >
+      { src && (
+        <Box
+          component="img"
+          src={ src }
+          alt={ alt }
+          loading="lazy"
+          sx={ { width: '100%', height: '100%', objectFit: 'cover', display: 'block' } }
+        />
+      ) }
+    </Box>
+  );
+}
 
 /**
  * 세계관 밴드(WorldviewBand) 5종.
@@ -141,6 +200,7 @@ export const Default = {
     const axes = Object.entries(keywordTaxonomy.meta?.axes_overview || {});
     const keywords = Object.entries(keywordTaxonomy.keywords || {});
     const bioMap = Object.entries(workBioMap.workToBio || {});
+    const bioImageRows = Object.entries(bioArtworkImages.images || {});
     const sources = bioData.sources || [];
     const caveats = bioData.caveats || {};
 
@@ -191,10 +251,11 @@ export const Default = {
           <SectionTitle title="Work (작품)" description={ `${ works.length }점 · id, year, title, period, worldview_period, medium, axis_weights` } />
           <DataTable
             columns={ [
+              { key: 'thumb', label: '도판', width: 70, render: (r) => <RowThumb src={ WORK_IMAGE_BY_ID[r.id] } alt={ r.id } /> },
               { key: 'id', label: 'id', width: 60, mono: true },
               { key: 'year', label: 'year', width: 55, mono: true },
-              { key: 'title', label: 'title', width: 240 },
-              { key: 'worldview_period', label: 'worldview_period', width: 180, mono: true },
+              { key: 'title', label: 'title', width: 220 },
+              { key: 'worldview_period', label: 'worldview_period', width: 170, mono: true },
               { key: 'medium', label: 'medium', dim: true },
             ] }
             rows={ works.slice(0, PREVIEW_ROWS) }
@@ -332,8 +393,14 @@ export const Default = {
           <SectionTitle title="SpecimenLedger (표본 집계)" description={ `${ species.length }키 · 화면 카드는 이 가운데 8종. 기준일 ${ caveats.asOfDate ?? '' }` } />
           <DataTable
             columns={ [
-              { key: 'key', label: 'key', width: 200, mono: true, render: (r) => r[0] },
-              { key: 'species', label: 'species', width: 190, render: (r) => (r[1].species || []).join(', ') },
+              { key: 'thumb', label: '도판', width: 70, render: (r) => (
+                <RowThumb
+                  src={ SPECIMEN_IMAGE[r[0]] ? `/images/hirst/specimen-infographic/${ SPECIMEN_IMAGE[r[0]] }` : null }
+                  alt={ r[0] }
+                />
+              ) },
+              { key: 'key', label: 'key', width: 180, mono: true, render: (r) => r[0] },
+              { key: 'species', label: 'species', width: 170, render: (r) => (r[1].species || []).join(', ') },
               { key: 'artworkCount', label: '작품 수', width: 70, mono: true, render: (r) => String(r[1].artworkCount ?? '미공개') },
               { key: 'individualCount', label: '개체 수', width: 70, mono: true, render: (r) => String(r[1].individualCount ?? '미공개') },
               { key: 'verified', label: 'verified', width: 70, mono: true, render: (r) => String(r[1].verified) },
@@ -372,13 +439,28 @@ export const Default = {
           />
           <DataTable
             columns={ [
-              { key: 'workId', label: 'Work.id', width: 120, mono: true, render: (r) => r[0] },
+              { key: 'workThumb', label: '작품', width: 70, render: (r) => <RowThumb src={ WORK_IMAGE_BY_ID[r[0]] } alt={ r[0] } /> },
+              { key: 'workId', label: 'Work.id', width: 110, mono: true, render: (r) => r[0] },
               { key: 'bioId', label: '표본 작품 id', mono: true, render: (r) => r[1] },
             ] }
             rows={ bioMap.slice(0, PREVIEW_ROWS) }
             rowKey={ (r) => r[0] }
           />
           <TotalCaption shown={ PREVIEW_ROWS } total={ bioMap.length } unit="건" />
+
+          <SectionTitle
+            title="표본 작품 보조 도판 · hirst_bio_artwork_images.json"
+            description={ `${ bioImageRows.length }건 · 위 매핑에 없는 표본 작품의 도판. ${ bioArtworkImages.meta?.asOfDate ?? '' }` }
+          />
+          <DataTable
+            columns={ [
+              { key: 'thumb', label: '도판', width: 70, render: (r) => <RowThumb src={ r[1] } alt={ r[0] } /> },
+              { key: 'bioId', label: '표본 작품 id', width: 230, mono: true, render: (r) => r[0] },
+              { key: 'path', label: 'path', mono: true, dim: true, render: (r) => r[1] },
+            ] }
+            rows={ bioImageRows }
+            rowKey={ (r) => r[0] }
+          />
 
           <Typography variant="body2" color="text.secondary">
             NarrativeChapter(서사 장)는 06 Content Data에서 다룬다. 세계관 밴드의 긴 해설은

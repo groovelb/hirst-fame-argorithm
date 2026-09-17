@@ -6,7 +6,7 @@ import { AssetGrid } from '../../common/ui/asset';
 const category = assetManifest.categories.find((c) => c.id === 'rothko-reference');
 
 export default {
-  title: 'Assets/Rothko Reference',
+  title: 'Common/Assets/Rothko Reference',
   parameters: { layout: 'padded' },
 };
 

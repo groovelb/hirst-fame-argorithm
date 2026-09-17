@@ -6,7 +6,7 @@ import { AssetGrid } from '../../common/ui/asset';
 const category = assetManifest.categories.find((c) => c.id === 'loading-markers');
 
 export default {
-  title: 'Assets/Loading & Markers',
+  title: 'Common/Assets/Loading & Markers',
   parameters: { layout: 'padded' },
 };
 

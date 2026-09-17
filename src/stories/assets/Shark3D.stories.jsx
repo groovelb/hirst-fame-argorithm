@@ -6,7 +6,7 @@ import { AssetGrid } from '../../common/ui/asset';
 const category = assetManifest.categories.find((c) => c.id === 'shark-3d');
 
 export default {
-  title: 'Assets/3D Shark + Reference',
+  title: 'Common/Assets/3D Shark + Reference',
   parameters: { layout: 'padded' },
 };
 

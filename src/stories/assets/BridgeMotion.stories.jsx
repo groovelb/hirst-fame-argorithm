@@ -6,7 +6,7 @@ import { AssetGrid } from '../../common/ui/asset';
 const category = assetManifest.categories.find((c) => c.id === 'bridge-motion');
 
 export default {
-  title: 'Assets/Bridge Motion',
+  title: 'Common/Assets/Bridge Motion',
   parameters: { layout: 'padded' },
 };
 

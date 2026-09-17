@@ -21,7 +21,7 @@ const resolvedItems = category.items.map((item) => {
 });
 
 export default {
-  title: 'Assets/Hero Video',
+  title: 'Common/Assets/Hero Video',
   parameters: { layout: 'padded' },
 };
 

@@ -15,6 +15,7 @@ import {
   SectionTitle,
 } from '../../components/storybookDocumentation';
 import assetManifest from '../../data/assetManifest.json';
+import assetInventory from '../../data/assetInventory.js';
 
 export default {
   title: 'Overview/Fame Algorithm/07 Assets',
@@ -22,6 +23,18 @@ export default {
     layout: 'padded',
   },
 };
+
+/**
+ * src/assets 아래 파일의 번들 URL 맵.
+ * public/ 은 url 필드를 그대로 쓰고, src/assets 는 이 맵으로 실제 경로를 얻는다.
+ */
+const SRC_ASSET_URLS = import.meta.glob(
+  '../../assets/**/*.{png,jpg,jpeg,webp,gif,svg,avif,mp4,webm,mp3,wav,woff,woff2}',
+  { eager: true, query: '?url', import: 'default' },
+);
+
+/** 이 크기를 넘는 영상은 메타데이터도 미리 받지 않는다 */
+const HEAVY_VIDEO_BYTES = 5 * 1024 * 1024;
 
 /**
  * 카테고리별 사용 판정.
@@ -42,29 +55,23 @@ const CATEGORY_USAGE = {
   'rothko-reference': { inUse: false, basis: '앞선 코드베이스 잔존. 색 추출 스크립트 전용' },
 };
 
-/** 디렉터리 실측 (du, find 기준. 2026-09-17) */
-const DIRECTORY_STATS = [
-  { path: 'public/images/hirst/', files: 118, size: '88MB', note: '작품 도판, 표본 도판, 서사 픽토그램, 마커' },
-  { path: 'public/images/rothko/', files: 61, size: '14MB', note: '앞선 코드베이스 잔존 도판' },
-  { path: 'src/assets/video/', files: 5, size: '112MB', note: '도입 스크럽 영상과 중간 렌더본' },
-  { path: 'public/ (루트 glb)', files: 2, size: '1.8MB', note: '상어 3D 모델 2점' },
-];
-
-/** public 루트의 3D 모델 2개. 매니페스트 shark-3d 카테고리와 같은 파일이다. */
-const MODEL_FILES = [
-  { path: 'public/crysis_shark.glb', size: '923KB', inUse: false, basis: 'SharkVitrine.jsx 전용. App 미도달' },
-  { path: 'public/shark_hirst_pose.glb', size: '832KB', inUse: false, basis: 'Blender 포즈 결과물. SharkVitrine.jsx 전용' },
-];
-
-/** 5MB 를 넘는 파일. 번들에 import 하지 않고 경로만 적는다. */
-const LARGE_FILES = [
-  { path: 'src/assets/video/hirst-scrub.mp4', size: '33MB', registered: false },
-  { path: 'src/assets/video/hirst-scrub-graded.mp4', size: '31MB', registered: true },
-  { path: 'src/assets/video/hirst-30fps.mp4', size: '22MB', registered: false },
-  { path: 'src/assets/video/hirst.mp4', size: '20MB', registered: false },
-  { path: 'src/assets/video/hirst-scrub-mobile.mp4', size: '5.9MB', registered: true },
-  { path: 'public/images/rothko/W001_1929_untitled-reclining-nude.jpg', size: '5.9MB', registered: true },
-];
+/** 인벤토리 폴더별 한 줄 설명. 키는 summary 의 폴더 키. */
+const FOLDER_NOTES = {
+  'public/(root)': '상어 3D 모델 2점과 파비콘',
+  'public/images/hirst': '작품 도판 72점과 작가 초상',
+  'public/images/hirst/bio': '표본 작품 도판 9점',
+  'public/images/hirst/grotesque-bitmap': '대기 화면과 축 마커 4점',
+  'public/images/hirst/grotesque-bitmap-rgb-background-backup': '마커 리타이닝 기준 원본',
+  'public/images/hirst/grotesque-bitmap-warm-original': '마커 리타이닝 전 따뜻한 원본',
+  'public/images/hirst/grotesque-motion': '서사 장 픽토그램 영상 4점',
+  'public/images/hirst/specimen-infographic': '표본 인포그래픽 도판 9점',
+  'public/images/hirst/specimen-infographic/_warm-original': '표본 도판 리타이닝 전 원본',
+  'public/images/rothko': '앞선 코드베이스 잔존 도판',
+  'public/reference/galeocerdo-cuvier': '상어 모델링 참고 사진',
+  'src/assets/(root)': '기본 로고',
+  'src/assets/reference': '모델링 참고 이미지',
+  'src/assets/video': '도입 스크럽 영상과 중간 렌더본',
+};
 
 /** 07 안으로 옮겨온 자산 생성 파이프라인 6종 (이전 Overview/Asset Pipelines) */
 const PIPELINES = [
@@ -152,37 +159,48 @@ function formatBytes(n) {
   return `${ Math.round(n / 1024) }KB`;
 }
 
-/** public/ 아래 경로만 스토리북에서 바로 그릴 수 있다 */
-const isPublicPath = (path) => path.startsWith('/') && !path.startsWith('/src/');
+/** 인벤토리 항목에서 실제로 불러올 수 있는 주소를 얻는다 */
+function srcOf(item) {
+  if (item.url) {
+    return item.url;
+  }
+  return SRC_ASSET_URLS[item.importKey] ?? null;
+}
+
+/** 폴더 키를 만든다. summary 키와 같은 규칙. */
+const folderKey = (item) => `${ item.root }/${ item.folder || '(root)' }`;
 
 /**
- * 경로 문자열로 이미지 한 장을 그린다. 번들 import 를 쓰지 않는다.
+ * 이미지 한 장. 원본 비율을 보존하되 격자 높이를 맞춘다.
  *
  * Props:
- * @param {string} path - public 기준 절대 경로 [Required]
- * @param {string} label - 캡션 [Required]
+ * @param {Object} item - assetInventory 항목 [Required]
  *
  * Example usage:
- * <PathThumb path="/images/hirst/hirst-portrait.jpg" label="hirst-portrait" />
+ * <ImageCell item={ item } />
  */
-function PathThumb({ path, label }) {
+function ImageCell({ item }) {
+  const src = srcOf(item);
   return (
-    <Stack spacing={ 0.75 }>
+    <Stack spacing={ 0.5 }>
       <Box
         sx={ {
           width: '100%',
+          aspectRatio: '1 / 1',
           backgroundColor: 'grey.100',
           overflow: 'hidden',
           lineHeight: 0,
         } }
       >
-        <Box
-          component="img"
-          src={ path }
-          alt={ label }
-          loading="lazy"
-          sx={ { width: '100%', height: 'auto', display: 'block' } }
-        />
+        { src && (
+          <Box
+            component="img"
+            src={ src }
+            alt={ item.name }
+            loading="lazy"
+            sx={ { width: '100%', height: '100%', objectFit: 'contain', display: 'block' } }
+          />
+        ) }
       </Box>
       <Typography
         variant="caption"
@@ -195,30 +213,78 @@ function PathThumb({ path, label }) {
           whiteSpace: 'nowrap',
         } }
       >
-        { label }
+        { item.name }
+      </Typography>
+      <Typography variant="caption" sx={ { fontSize: 9, color: 'text.disabled' } }>
+        { formatBytes(item.bytes) }
       </Typography>
     </Stack>
   );
 }
 
-/** 에셋 매니페스트, 디렉터리 실측, 생성 파이프라인 */
+/**
+ * 영상 한 편. 용량이 큰 것은 메타데이터도 미리 받지 않는다.
+ *
+ * Props:
+ * @param {Object} item - assetInventory 항목 [Required]
+ *
+ * Example usage:
+ * <VideoCell item={ item } />
+ */
+function VideoCell({ item }) {
+  const src = srcOf(item);
+  const heavy = item.bytes > HEAVY_VIDEO_BYTES;
+  return (
+    <Stack spacing={ 0.5 }>
+      <Box sx={ { width: '100%', backgroundColor: 'grey.900', lineHeight: 0 } }>
+        { src && (
+          <Box
+            component="video"
+            src={ src }
+            controls
+            muted
+            playsInline
+            preload={ heavy ? 'none' : 'metadata' }
+            sx={ { width: '100%', height: 'auto', display: 'block' } }
+          />
+        ) }
+      </Box>
+      <Typography
+        variant="caption"
+        sx={ { fontFamily: 'monospace', fontSize: 10, color: 'text.secondary' } }
+      >
+        { item.name }
+      </Typography>
+      <Typography variant="caption" sx={ { fontSize: 9, color: heavy ? 'warning.main' : 'text.disabled' } }>
+        { formatBytes(item.bytes) }{ heavy ? ' · preload none' : '' }
+      </Typography>
+    </Stack>
+  );
+}
+
+/** 에셋 매니페스트, 인벤토리 전량 갤러리, 생성 파이프라인 */
 export const Default = {
   render: () => {
     const categories = assetManifest.categories || [];
     const inUse = categories.filter((c) => CATEGORY_USAGE[c.id]?.inUse);
     const unused = categories.filter((c) => !CATEGORY_USAGE[c.id]?.inUse);
 
-    /** 썸네일은 public 경로를 가진 카테고리에서 앞의 몇 장만 */
-    const thumbs = inUse
-      .flatMap((c) => c.items.filter((it) => isPublicPath(it.path) && it.kind === 'image').slice(0, 2))
-      .slice(0, 10);
+    const items = assetInventory.items || [];
+    const folders = Object.keys(assetInventory.summary || {});
+    const byFolder = folders.map((key) => ({
+      key,
+      stat: assetInventory.summary[key],
+      items: items.filter((it) => folderKey(it) === key),
+    }));
+    const models = items.filter((it) => it.kind === 'model');
+    const totalBytes = items.reduce((s, it) => s + (it.bytes || 0), 0);
 
     return (
       <>
         <DocumentTitle
           title="Assets"
           status="Available"
-          note="매니페스트 9카테고리, 디렉터리 실측, 생성 파이프라인 6종"
+          note="인벤토리 전량 갤러리, 사용 판정, 생성 파이프라인"
           brandName="Design System"
           systemName="Fame Algorithm"
           version="1.0"
@@ -228,22 +294,83 @@ export const Default = {
             Assets
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={ { mb: 2 } }>
-            <code>src/data/assetManifest.json</code> · 재생성: <code>pnpm build-asset-manifest</code>
+            <code>src/data/assetInventory.js</code> (재생성 <code>pnpm generate-assets</code>) ·
+            <code>src/data/assetManifest.json</code> (재생성 <code>pnpm build-asset-manifest</code>)
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={ { mb: 3 } }>
-            에셋 전체 용량이 200MB를 넘어 갤러리를 모두 그리지 않는다. 카테고리 표와 용량 표를 먼저 두고,
-            public 경로를 가진 이미지 몇 장만 경로 문자열로 미리 본다. 5MB를 넘는 파일은 번들에 import 하지 않는다.
+            폴더별로 모든 이미지와 영상을 그린다. public 은 경로 문자열, src/assets 는 번들 URL 맵으로 부른다.
+            이미지는 지연 로드하고, 5MB를 넘는 영상은 메타데이터도 미리 받지 않는다.
           </Typography>
 
           <Box sx={ { mb: 4 } }>
-            <Chip label={ `version ${ assetManifest.version }` } size="small" sx={ { mr: 1 } } />
-            <Chip label={ `${ assetManifest.totals.categoryCount } categories` } size="small" sx={ { mr: 1 } } />
-            <Chip label={ `${ assetManifest.totals.itemCount } items` } size="small" sx={ { mr: 1 } } />
-            <Chip label={ `image ${ assetManifest.totals.byKind.image }` } size="small" sx={ { mr: 1 } } />
-            <Chip label={ `video ${ assetManifest.totals.byKind.video }` } size="small" sx={ { mr: 1 } } />
-            <Chip label={ `model ${ assetManifest.totals.byKind.model }` } size="small" sx={ { mr: 1 } } />
-            <Chip label={ `generated ${ assetManifest.generatedAt.slice(0, 10) }` } size="small" />
+            <Chip label={ `files ${ items.length }` } size="small" sx={ { mr: 1 } } />
+            <Chip label={ `folders ${ folders.length }` } size="small" sx={ { mr: 1 } } />
+            <Chip label={ formatBytes(totalBytes) } size="small" sx={ { mr: 1 } } />
+            <Chip label={ `image ${ items.filter((i) => i.kind === 'image').length }` } size="small" sx={ { mr: 1 } } />
+            <Chip label={ `video ${ items.filter((i) => i.kind === 'video').length }` } size="small" sx={ { mr: 1 } } />
+            <Chip label={ `model ${ models.length }` } size="small" sx={ { mr: 1 } } />
+            <Chip label={ `generated ${ String(assetInventory.generatedAt).slice(0, 10) }` } size="small" />
           </Box>
+
+          { byFolder.map(({ key, stat, items: list }) => {
+            const images = list.filter((it) => it.kind === 'image');
+            const videos = list.filter((it) => it.kind === 'video');
+            const others = list.filter((it) => it.kind !== 'image' && it.kind !== 'video');
+            return (
+              <Box key={ key } sx={ { mb: 6 } }>
+                <SectionTitle
+                  title={ key }
+                  description={ `${ stat.files }개 · ${ formatBytes(stat.bytes) }${ FOLDER_NOTES[key] ? ` · ${ FOLDER_NOTES[key] }` : '' }` }
+                />
+                { images.length > 0 && (
+                  <Grid container spacing={ 1.5 } sx={ { mb: videos.length ? 3 : 0 } }>
+                    { images.map((it) => (
+                      <Grid key={ it.path } size={ { xs: 4, sm: 3, md: 2 } }>
+                        <ImageCell item={ it } />
+                      </Grid>
+                    )) }
+                  </Grid>
+                ) }
+                { videos.length > 0 && (
+                  <Grid container spacing={ 2 }>
+                    { videos.map((it) => (
+                      <Grid key={ it.path } size={ { xs: 12, sm: 6, md: 4 } }>
+                        <VideoCell item={ it } />
+                      </Grid>
+                    )) }
+                  </Grid>
+                ) }
+                { others.length > 0 && (
+                  <TableContainer>
+                    <Table size="small">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell sx={ { fontWeight: 600, width: 280 } }>path</TableCell>
+                          <TableCell sx={ { fontWeight: 600, width: 80 } }>kind</TableCell>
+                          <TableCell sx={ { fontWeight: 600, width: 90 } } align="right">size</TableCell>
+                          <TableCell sx={ { fontWeight: 600 } }>url</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        { others.map((it) => (
+                          <TableRow key={ it.path }>
+                            <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } }>{ it.path }</TableCell>
+                            <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } }>{ it.kind }</TableCell>
+                            <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">
+                              { formatBytes(it.bytes) }
+                            </TableCell>
+                            <TableCell sx={ { fontFamily: 'monospace', fontSize: 12, color: 'text.secondary' } }>
+                              { it.url ?? '(번들 import)' }
+                            </TableCell>
+                          </TableRow>
+                        )) }
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                ) }
+              </Box>
+            );
+          }) }
 
           <SectionTitle
             title="In Use"
@@ -315,96 +442,33 @@ export const Default = {
             </Table>
           </TableContainer>
 
-          <SectionTitle title="디렉터리 용량" description="find 와 du 실측. 매니페스트에 없는 파일도 포함한다" />
-          <TableContainer sx={ { mb: 4 } }>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={ { fontWeight: 600, width: 260 } }>path</TableCell>
-                  <TableCell sx={ { fontWeight: 600, width: 80 } } align="right">files</TableCell>
-                  <TableCell sx={ { fontWeight: 600, width: 80 } } align="right">size</TableCell>
-                  <TableCell sx={ { fontWeight: 600 } }>비고</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                { DIRECTORY_STATS.map((d) => (
-                  <TableRow key={ d.path }>
-                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } }>{ d.path }</TableCell>
-                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">{ d.files }</TableCell>
-                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">{ d.size }</TableCell>
-                    <TableCell sx={ { fontSize: 12, color: 'text.secondary' } }>{ d.note }</TableCell>
-                  </TableRow>
-                )) }
-              </TableBody>
-            </Table>
-          </TableContainer>
-
-          <SectionTitle title="3D 모델" description={ `${ MODEL_FILES.length }개 · public 루트에 놓여 경로 문자열로 불린다` } />
+          <SectionTitle title="3D 모델" description={ `${ models.length }개 · 미리보기 대신 표로 적는다` } />
           <TableContainer sx={ { mb: 4 } }>
             <Table size="small">
               <TableHead>
                 <TableRow>
                   <TableCell sx={ { fontWeight: 600, width: 280 } }>path</TableCell>
-                  <TableCell sx={ { fontWeight: 600, width: 80 } } align="right">size</TableCell>
+                  <TableCell sx={ { fontWeight: 600, width: 90 } } align="right">size</TableCell>
                   <TableCell sx={ { fontWeight: 600, width: 90 } }>판정</TableCell>
                   <TableCell sx={ { fontWeight: 600 } }>판정 근거</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                { MODEL_FILES.map((m) => (
+                { models.map((m) => (
                   <TableRow key={ m.path }>
                     <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } }>{ m.path }</TableCell>
-                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">{ m.size }</TableCell>
-                    <TableCell sx={ { fontSize: 12 } }>{ m.inUse ? 'In Use' : 'Unused' }</TableCell>
-                    <TableCell sx={ { fontSize: 12, color: 'text.secondary' } }>{ m.basis }</TableCell>
-                  </TableRow>
-                )) }
-              </TableBody>
-            </Table>
-          </TableContainer>
-
-          <SectionTitle
-            title="5MB 초과 파일"
-            description={ `${ LARGE_FILES.length }개 · 이 스토리는 경로 문자열만 적고 번들에 넣지 않는다` }
-          />
-          <TableContainer sx={ { mb: 4 } }>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={ { fontWeight: 600 } }>path</TableCell>
-                  <TableCell sx={ { fontWeight: 600, width: 80 } } align="right">size</TableCell>
-                  <TableCell sx={ { fontWeight: 600, width: 130 } }>manifest 등록</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                { LARGE_FILES.map((f) => (
-                  <TableRow key={ f.path }>
-                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } }>{ f.path }</TableCell>
-                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">{ f.size }</TableCell>
-                    <TableCell sx={ { fontSize: 12, color: f.registered ? 'text.secondary' : 'warning.main' } }>
-                      { f.registered ? '등록됨' : '미등록 (중간 렌더본)' }
+                    <TableCell sx={ { fontFamily: 'monospace', fontSize: 12 } } align="right">
+                      { formatBytes(m.bytes) }
+                    </TableCell>
+                    <TableCell sx={ { fontSize: 12 } }>Unused</TableCell>
+                    <TableCell sx={ { fontSize: 12, color: 'text.secondary' } }>
+                      SharkVitrine.jsx 전용. App 에서 도달하지 않는다
                     </TableCell>
                   </TableRow>
                 )) }
               </TableBody>
             </Table>
           </TableContainer>
-
-          <SectionTitle
-            title="미리보기"
-            description={ `${ thumbs.length }장 · public 경로를 가진 이미지만 경로 문자열로 그린다` }
-          />
-          <Grid container spacing={ 2 } sx={ { mb: 4 } }>
-            { thumbs.map((it) => (
-              <Grid key={ it.id } size={ { xs: 6, sm: 4, md: 3 } }>
-                <PathThumb path={ it.path } label={ it.path } />
-              </Grid>
-            )) }
-          </Grid>
-          <Typography variant="body2" color="text.secondary" sx={ { mb: 4 } }>
-            도입 스크럽 영상과 서사 픽토그램 영상은 용량 때문에 여기서 재생하지 않는다.
-            경로는 위 표에 있고, 생성 경로는 아래 파이프라인 절에 있다.
-          </Typography>
 
           <SectionTitle title="파이프라인" description={ `${ PIPELINES.length }종 · 정적 자산이 만들어지는 경로` } />
           { PIPELINES.map((p) => (

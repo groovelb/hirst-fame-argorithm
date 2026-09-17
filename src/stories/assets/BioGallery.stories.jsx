@@ -6,7 +6,7 @@ import { AssetGrid } from '../../common/ui/asset';
 const category = assetManifest.categories.find((c) => c.id === 'bio');
 
 export default {
-  title: 'Assets/Bio Gallery',
+  title: 'Common/Assets/Bio Gallery',
   parameters: { layout: 'padded' },
 };
 

@@ -16,7 +16,7 @@ import testVideo from '../../assets/video/hirst.mp4';
 const TEST_VIDEO_URL = testVideo;
 
 export default {
-  title: 'Interactive/12. Scroll/VideoScrubbing',
+  title: 'Custom Component/scroll/VideoScrubbing',
   component: VideoScrubbing,
   tags: ['autodocs'],
   parameters: {

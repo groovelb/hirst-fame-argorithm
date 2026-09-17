@@ -4,7 +4,7 @@
  * 수동 편집 금지. 재생성: pnpm generate-structure
  */
 export default {
-  "generatedAt": "2026-09-17T09:16:36.394Z",
+  "generatedAt": "2026-09-17T09:51:35.198Z",
   "root": {
     "name": "App",
     "kind": "component",
@@ -29,8 +29,8 @@ export default {
         "kind": "component",
         "category": "components/templates",
         "file": "components/templates/LandingPage.jsx",
-        "storyTitle": null,
-        "storyId": null,
+        "storyTitle": "Page/LandingPage",
+        "storyId": "page-landingpage",
         "children": [
           {
             "name": "LanguageToggle",
@@ -54,16 +54,16 @@ export default {
             "kind": "component",
             "category": "components/timeline",
             "file": "components/timeline/WorldviewTimeline.jsx",
-            "storyTitle": null,
-            "storyId": null,
+            "storyTitle": "Section/WorldviewTimeline",
+            "storyId": "section-worldviewtimeline",
             "children": [
               {
                 "name": "HorizontalScrollContainer",
                 "kind": "component",
                 "category": "components/content-transition",
                 "file": "components/content-transition/HorizontalScrollContainer.jsx",
-                "storyTitle": "Interactive/13. ContentTransition/HorizontalScrollContainer",
-                "storyId": "interactive-13-contenttransition-horizontalscrollcontainer",
+                "storyTitle": "Custom Component/content-transition/HorizontalScrollContainer",
+                "storyId": "custom-component-content-transition-horizontalscrollcontainer",
                 "children": [],
                 "hooks": [],
                 "data": []
@@ -113,8 +113,8 @@ export default {
                 "kind": "component",
                 "category": "components/timeline",
                 "file": "components/timeline/SpecimenInfographicSection.jsx",
-                "storyTitle": null,
-                "storyId": null,
+                "storyTitle": "Section/SpecimenInfographicSection",
+                "storyId": "section-specimeninfographicsection",
                 "children": [
                   {
                     "name": "SpecimenDetailModal",
@@ -357,8 +357,8 @@ export default {
             "kind": "component",
             "category": "components/templates",
             "file": "components/templates/HeroSection.jsx",
-            "storyTitle": null,
-            "storyId": null,
+            "storyTitle": "Section/HeroSection",
+            "storyId": "section-herosection",
             "children": [
               {
                 "name": "HeroTypeBlock",
@@ -373,8 +373,8 @@ export default {
                     "kind": "component",
                     "category": "components/typography",
                     "file": "components/typography/FitText.jsx",
-                    "storyTitle": "Component/1. Typography/FitText",
-                    "storyId": "component-1-typography-fittext",
+                    "storyTitle": "Custom Component/typography/FitText",
+                    "storyId": "custom-component-typography-fittext",
                     "children": [],
                     "hooks": [],
                     "data": []
@@ -388,8 +388,8 @@ export default {
                 "kind": "component",
                 "category": "components/scroll",
                 "file": "components/scroll/VideoScrubbing.jsx",
-                "storyTitle": "Interactive/12. Scroll/VideoScrubbing",
-                "storyId": "interactive-12-scroll-videoscrubbing",
+                "storyTitle": "Custom Component/scroll/VideoScrubbing",
+                "storyId": "custom-component-scroll-videoscrubbing",
                 "children": [],
                 "hooks": [],
                 "data": []
@@ -399,8 +399,8 @@ export default {
                 "kind": "component",
                 "category": "components/templates",
                 "file": "components/templates/BridgeSection.jsx",
-                "storyTitle": null,
-                "storyId": null,
+                "storyTitle": "Section/BridgeSection",
+                "storyId": "section-bridgesection",
                 "children": [],
                 "hooks": [
                   {

@@ -6,7 +6,7 @@ import { AssetGrid } from '../../common/ui/asset';
 const category = assetManifest.categories.find((c) => c.id === 'works');
 
 export default {
-  title: 'Assets/Works (Hirst 72)',
+  title: 'Common/Assets/Works (Hirst 72)',
   parameters: { layout: 'padded' },
 };
 

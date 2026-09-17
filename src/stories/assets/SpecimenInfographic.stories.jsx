@@ -6,7 +6,7 @@ import { AssetGrid } from '../../common/ui/asset';
 const category = assetManifest.categories.find((c) => c.id === 'specimen-infographic');
 
 export default {
-  title: 'Assets/Specimen Infographic',
+  title: 'Common/Assets/Specimen Infographic',
   parameters: { layout: 'padded' },
 };
 

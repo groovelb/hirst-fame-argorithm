@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import SharkVitrine from './SharkVitrine';
 
 export default {
-  title: 'Component/Shark Modeling/SharkVitrine',
+  title: 'Custom Component/shark-modeling/SharkVitrine',
   component: SharkVitrine,
   tags: ['autodocs'],
   parameters: {

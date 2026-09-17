@@ -13,7 +13,8 @@
     "extract-colors": "node scripts/extract-rothko-colors.mjs",
     "generate:hero-motion": "node scripts/generate-hirst-kling-motion.mjs",
     "build-asset-manifest": "node scripts/build-asset-manifest.mjs",
-    "generate-structure": "node scripts/generate-project-structure.js"
+    "generate-structure": "node scripts/generate-project-structure.js",
+    "generate-assets": "node scripts/generate-asset-inventory.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
