@@ -2,6 +2,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import { defaultTheme } from '../src/styles/themes';
+import { LocaleProvider } from '../src/i18n/LocaleProvider';
 
 // Google Fonts 로드 (Material Symbols + 기본 폰트)
 const googleFonts = [
@@ -67,9 +68,12 @@ const preview = {
       return (
         <ThemeProvider theme={defaultTheme}>
           <CssBaseline />
-          <div style={ { width: '100%', paddingTop: isFullscreen ? '0px' : '40px' } }>
-            <Story />
-          </div>
+          {/* 타임라인·브리지 컴포넌트가 useLocale 을 쓰므로 스토리 전역에 로케일을 공급한다 */}
+          <LocaleProvider>
+            <div style={ { width: '100%', paddingTop: isFullscreen ? '0px' : '40px' } }>
+              <Story />
+            </div>
+          </LocaleProvider>
         </ThemeProvider>
       );
     },
