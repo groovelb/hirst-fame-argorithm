@@ -87,7 +87,7 @@ const FLOW_ROWS = [
   },
 ];
 
-/** C-5 증거 항목. status 는 '있음' | '파생' | '없음'. */
+/** C-5 증거 항목. status 는 '있음' | '파생' | '없음'. story 는 원문을 보여 주는 Appendix docs id (있을 때만). */
 const EVIDENCE_ROWS = [
   {
     id: 'E1',
@@ -116,6 +116,7 @@ const EVIDENCE_ROWS = [
     source: 'docs/hirst/specimen-infographic-image-plan.md (공유 아트 디렉션, 공유 네거티브, 전문 프롬프트)',
     status: '있음',
     note: '생성에 쓴 모델이나 서비스 이름은 이 문서에 없다',
+    story: 'overview-fame-algorithm-appendix-specimen-image-plan--docs',
   },
   {
     id: 'E5',
@@ -499,7 +500,22 @@ export const Default = {
                   <Chip label={ r.status } size="small" color={ STATUS_COLOR[r.status] } />
                 ),
               },
-              { key: 'note', label: '비고', dim: true },
+              {
+                key: 'note',
+                label: '비고',
+                dim: true,
+                render: (r) => (
+                  <>
+                    { r.note }
+                    { r.story && (
+                      <>
+                        { r.note ? ' ' : '' }
+                        <StoryLink id={ r.story }>원문 보기</StoryLink>
+                      </>
+                    ) }
+                  </>
+                ),
+              },
             ] }
             rows={ EVIDENCE_ROWS }
             rowKey={ (r) => r.id }
@@ -581,7 +597,11 @@ export const Default = {
             <StoryLink id="common-assets-specimen-infographic--gallery">
               Common / Assets / Specimen Infographic
             </StoryLink>
-            { ' ' }에 결과가 있다.
+            { ' ' }에 결과가 있다. 계획 문서 원문은{ ' ' }
+            <StoryLink id="overview-fame-algorithm-appendix-specimen-image-plan--docs">
+              Appendix / Specimen Image Plan
+            </StoryLink>
+            { ' ' }에서 그대로 볼 수 있다.
           </Typography>
 
           <SectionTitle title="없는 것" description="저장소에서 확인하지 못한 항목" />
