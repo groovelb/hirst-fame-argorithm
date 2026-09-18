@@ -1,5 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import { themes } from 'storybook/theming';
 
 import { defaultTheme } from '../src/styles/themes';
 import { LocaleProvider } from '../src/i18n/LocaleProvider';
@@ -24,6 +26,8 @@ googleFonts.forEach((font) => {
 /** @type { import('@storybook/react-vite').Preview } */
 const preview = {
   parameters: {
+    // 제품 테마가 다크(흰 글자)라 문서 페이지도 다크로 맞춘다. 밝은 docs 테마 위에서는 흰 글자가 묻힌다
+    docs: { theme: themes.dark },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -70,9 +74,10 @@ const preview = {
           <CssBaseline />
           {/* 타임라인·브리지 컴포넌트가 useLocale 을 쓰므로 스토리 전역에 로케일을 공급한다 */}
           <LocaleProvider>
-            <div style={ { width: '100%', paddingTop: isFullscreen ? '0px' : '40px' } }>
+            {/* 테마 background.default 는 영상 매칭용 흰색이라 흰 글자와 충돌한다. 캔버스 표면은 paper(#141414) */}
+            <Box sx={ { bgcolor: 'background.paper', color: 'text.primary', minHeight: '100vh', width: '100%', pt: isFullscreen ? 0 : 5 } }>
               <Story />
-            </div>
+            </Box>
           </LocaleProvider>
         </ThemeProvider>
       );
